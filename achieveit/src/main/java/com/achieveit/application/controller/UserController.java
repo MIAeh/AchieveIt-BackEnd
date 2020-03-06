@@ -1,5 +1,6 @@
 package com.achieveit.application.controller;
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.domain.Result;
 import com.achieveit.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,27 +9,31 @@ import org.springframework.web.bind.annotation.*;
  * Title:  UserController
  * Description: 接收请求并处理 用户
  *
- * @Author: quanningzhen
- * @Date: 2018/4/16 上午10:54
- * @Version: 1.0
  **/
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
-    //根据 uid 获得用户信息
-    @Logged({"id"})
-    @GetMapping("/info")
-    public BaseJson getUserMeg(@RequestParam("id") int id) {
-        BaseJson baseJson =  userService.getUserMsg( id );
-        return baseJson;
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
-    //注册用户
-    @Logged({"userName", "password", "phone"})
-    @PostMapping("/register")
-    public BaseJson userRegister(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("phone") String phone) {
-        return userService.signUpUserMsg( userName, password, phone );
+
+    /**
+     *
+     * @param userName
+     * @param password
+     * @return Result
+     * {
+     *   "errorCode": 0,
+     *   "token": "xxxxxxxxx"
+     * }
+     */
+    @Logged({"userID", "password"})
+    @PostMapping("/loginByID")
+    public Result userLoginByID(@RequestParam("userID") String userName, @RequestParam("password") String password) {
+        return userService.userLoginByID();
     }
 
     //验证码

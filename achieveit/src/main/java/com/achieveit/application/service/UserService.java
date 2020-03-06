@@ -21,10 +21,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     /**
      * 根据用户ID获取用户信息
