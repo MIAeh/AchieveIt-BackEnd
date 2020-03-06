@@ -1,5 +1,4 @@
 package com.achieveit.application.controller;
-import com.achieveit.application.utils.BaseJson;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

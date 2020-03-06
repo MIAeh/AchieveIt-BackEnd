@@ -15,7 +15,7 @@ import java.util.List;
  **/
 
 @Mapper
-public interface UserInfoMapper {
+public interface UserMapper {
 
     /**
      * @Description: 获取表中全部数据

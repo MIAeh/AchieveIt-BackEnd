@@ -2,7 +2,6 @@ package com.achieveit.application.service;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.enums.UserStatus;
-import com.achieveit.application.utils.BaseJson;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
@@ -12,7 +11,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.achieveit.application.entity.UserInfo;
-import com.achieveit.application.mapper.UserInfoMapper;
+import com.achieveit.application.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private UserInfoMapper userInfoMapper;
+    private UserMapper userMapper;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
@@ -37,7 +36,7 @@ public class UserService {
     @Logged({"id"})
     public BaseJson getUserMsg(int id) {
 
-        BaseJson baseJson = new BaseJson().setObject(userInfoMapper.getOne(id));
+        BaseJson baseJson = new BaseJson().setObject(userMapper.getOne(id));
 
         if (baseJson.getObject() == null)
             return baseJson.setErrorCode("1001");
@@ -60,16 +59,16 @@ public class UserService {
 
         BaseJson baseJson = new BaseJson();
 
-        baseJson.setObject(userInfoMapper.getOneByUserName(userName));
+        baseJson.setObject(userMapper.getOneByUserName(userName));
         if (baseJson.getObject() != null)
             return baseJson.setObject(null).setErrorCode("1002");
 
         //用户名不能为某个手机号码
-        baseJson.setObject(userInfoMapper.getOneByUserName(phone));
+        baseJson.setObject(userMapper.getOneByUserName(phone));
         if (baseJson.getObject() != null)
             return baseJson.setObject(null).setErrorCode("1002");
 
-        baseJson.setObject(userInfoMapper.getOneByPhone(phone));
+        baseJson.setObject(userMapper.getOneByPhone(phone));
         if (baseJson.getObject() != null)
             return baseJson.setObject(null).setErrorCode("1003");
 
@@ -79,7 +78,7 @@ public class UserService {
         userInfo.setUserName(userName);
         userInfo.setUserStatus(UserStatus.NORMAL);
 
-        int id = userInfoMapper.insert(userInfo);
+        int id = userMapper.insert(userInfo);
 
         return baseJson.setObject(id).setErrorCode("0000");
     }
@@ -98,11 +97,11 @@ public class UserService {
 
         BaseJson baseJson = new BaseJson();
 
-        baseJson.setObject(userInfoMapper.getOneByUserNameAndPassword(account, password));
+        baseJson.setObject(userMapper.getOneByUserNameAndPassword(account, password));
         if (baseJson.getObject() != null)
             return baseJson.setErrorCode("0000");
 
-        baseJson.setObject(userInfoMapper.getOneByPhoneAndPassword(account, password));
+        baseJson.setObject(userMapper.getOneByPhoneAndPassword(account, password));
         if (baseJson.getObject() != null)
             return baseJson.setErrorCode("0000");
 
@@ -123,11 +122,11 @@ public class UserService {
 
         BaseJson baseJson = new BaseJson();
 
-        baseJson.setObject(userInfoMapper.getOneByUserIDAndPassword(userID, oldPassword));
+        baseJson.setObject(userMapper.getOneByUserIDAndPassword(userID, oldPassword));
         if (baseJson.getObject() == null)
             return baseJson.setErrorCode("1005");
 
-        userInfoMapper.updatePassword(userID, newPassword);
+        userMapper.updatePassword(userID, newPassword);
 
         return baseJson.setObject(null).setErrorCode("0000");
     }
@@ -201,7 +200,7 @@ public class UserService {
         if (baseJson.getErrorCode().equals("1001"))
             return baseJson;
 
-        userInfoMapper.updateEmailByUserId(userId, email);
+        userMapper.updateEmailByUserId(userId, email);
 
         return baseJson.setErrorCode("0000");
     }
