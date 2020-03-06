@@ -1,95 +1,82 @@
 package com.achieveit.application.mapper;
 
-import com.achieveit.application.entity.MyUserInfo;
-import com.achieveit.application.entity.UserInfo;
+import com.achieveit.application.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
+import java.util.ArrayList;
 
-import java.util.List;
+import static org.apache.ibatis.type.JdbcType.VARCHAR;
 
 /**
- * @Title: UserInfoMapper
- * @Description: UserInfo表和myUserInfo视图的数据库表资源映射
- * @Author: Felix
- * @Date: 6/1/2018 0:19
- * @Version: 1.0
- **/
-
+ * Mapper for UserEntity
+ * @author Alevery, Felix
+ */
 @Mapper
 public interface UserMapper {
+    /**
+     * 根据userID来获取用户信息
+     * @param userId 所要获取的用户的userID
+     * @return User
+     */
+    @Select("select * from \"users\" where userid =#{userId}::uuid")
+    @Results({
+            @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
+            @Result(property = "userMail", column = "usermail"),
+            @Result(property = "userName", column = "username"),
+            @Result(property = "userPhone", column = "userphone"),
+            @Result(property = "userPassword", column = "userpassword"),
+            @Result(property = "userDepartment", column = "userdepartment"),
+            @Result(property = "userPhone", column = "userphone")
+    })
+    UserEntity getUserInfoById(@Param("userId") String userId);
 
     /**
-     * @Description: 获取表中全部数据
-     * @return userinfoArray
+     * 根据userPhone来获取用户信息
+     * @param userPhone 所要获取的用户的userPhone
+     * @return User
      */
-    @Select("SELECT * FROM \"userInfo\" where \"isDelete\"=false")
-    List<UserInfo> getAll();
+    @Select("select * from \"users\" where userphone = #{userPhone}")
+    @Results({
+            @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
+            @Result(property = "userMail", column = "usermail"),
+            @Result(property = "userName", column = "username"),
+            @Result(property = "userPhone", column = "userphone"),
+            @Result(property = "userPassword", column = "userpassword"),
+            @Result(property = "userDepartment", column = "userdepartment"),
+            @Result(property = "userPhone", column = "userphone")
+    })
+    UserEntity getUserInfoByPhone(@Param("userPhone") String userPhone);
 
     /**
-     * @Description: 按userID来获取表中的一条数据
-     * @param userID
-     * @return userInfo
+     * 根据userMail来获取用户信息
+     * @param userMail 所要获取的用户的userMail
+     * @return User
      */
-    @Select("SELECT * FROM \"userInfo\" WHERE \"userID\" = #{userID} and \"isDelete\"=false")
-    UserInfo getOne(@Param("userID") Integer userID);
+    @Select("select * from \"users\" where usermail = #{userMail}")
+    @Results({
+            @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
+            @Result(property = "userMail", column = "usermail"),
+            @Result(property = "userName", column = "username"),
+            @Result(property = "userPhone", column = "userphone"),
+            @Result(property = "userPassword", column = "userpassword"),
+            @Result(property = "userDepartment", column = "userdepartment"),
+            @Result(property = "userPhone", column = "userphone")
+    })
+    UserEntity getUserInfoByMail(@Param("userMail") String userMail);
 
     /**
-     * @Description: 按userID来获取视图中的一条数据
-     * @param userID
-     * @return myUserInfo
+     * 插入（注册）一位新的用户
+     * @param userEntity 所要注册的user
+     * @return affectedRows
      */
-    @Select("SELECT * FROM \"myUserInfo\" WHERE \"userID\" = #{userID} and \"isDelete\"=false")
-    MyUserInfo getOneFromView(@Param("userID") Integer userID);
+    @Insert("insert into \"user\"(userid,usermail,username,userpassword,userdepartment,userrole)" +
+            " values(#{userId}::uuid, #{userMail},#{userName},#{userPassword},#{userDepartment},#{userRole})")
+    int insertUser(UserEntity userEntity);
 
     /**
-     * @Description: 按userName来获取表中的一条数据
-     * @param userName
-     * @return userInfo
+     * 根据Role获取所有用户
+     * @param userRole 所要获取的users
+     * @return affectedRows
      */
-    @Select("SELECT * FROM \"userInfo\" WHERE \"userName\" = #{userName} and \"isDelete\"=false")
-    UserInfo getOneByUserName(@Param("userName") String userName);
-
-    /**
-     * @Description: 按phone来获取表中的一条数据
-     * @param phone
-     * @return userInfo
-     */
-    @Select("SELECT * FROM \"userInfo\" WHERE phone = #{phone} and \"isDelete\"=false")
-    UserInfo getOneByPhone(@Param("phone") String phone);
-
-    /**
-     * @Description: 按email来获取表中的一条数据
-     * @param email
-     * @return userInfo
-     */
-    @Select("SELECT * FROM \"userInfo\" WHERE email = #{email} and \"isDelete\"=false")
-    UserInfo getOneByEmail(@Param("email") String email);
-
-    /**
-     * @Description: 向表中插入一条数据
-     * @param userInfo
-     */
-    @Insert({"INSERT INTO \"userInfo\" (\"userName\", password, phone, email, \"userStatus\") VALUES (#{userName}, #{password}, #{phone}, #{email}, CAST (#{userStatus} AS \"enum_userStatus\"))"})
-    int insert(UserInfo userInfo);
-
-    /**
-     * @Description: 修改表中一条数据的password
-     * @param userID, newPassword
-     */
-    @Update("UPDATE \"userInfo\" SET password = #{newPassword} WHERE \"userID\" =#{userID}")
-    int updatePassword(@Param("userID") Integer userID, @Param("newPassword") String newPassword);
-
-    /**
-     * @Description: 删除表中的一条数据
-     * @param userID
-     */
-    @Delete("update \"userInfo\" set \"isDelete\"=true WHERE \"userID\" =#{userID}")
-    int delete(@Param("userID") Integer userID);
-
-    UserInfo getOneByUserNameAndPassword(String userName, String oldPassword);
-
-    UserInfo getOneByPhoneAndPassword(String account, String password);
-
-    UserInfo getOneByUserIDAndPassword(int userID, String oldPassword);
-
-    int updateEmailByUserId(int userId, String email);
+    @Select("select * from \"users\" where userrole = #{userRole}")
+    ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
 }

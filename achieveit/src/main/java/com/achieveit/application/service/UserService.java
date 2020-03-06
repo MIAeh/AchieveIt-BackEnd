@@ -1,211 +1,143 @@
 package com.achieveit.application.service;
 
-import com.achieveit.application.annotation.Logged;
-import com.achieveit.application.enums.UserStatus;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
-import com.achieveit.application.entity.UserInfo;
+import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
+import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Service
 public class UserService {
 
+    /**
+     * Mapper for user
+     */
     private final UserMapper userMapper;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    /**
+     * Logger
+     */
+    private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    @Autowired
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
     /**
-     * 根据用户ID获取用户信息
-     * errorCode - 0000(成功)/1001(未找到);
-     * object - UserInfo;
-     *
-     * @return
+     * Avoid using magic value
      */
-    @Logged({"id"})
-    public BaseJson getUserMsg(int id) {
-
-        BaseJson baseJson = new BaseJson().setObject(userMapper.getOne(id));
-
-        if (baseJson.getObject() == null)
-            return baseJson.setErrorCode("1001");
-
-        return baseJson.setErrorCode("0000");
-    }
+    private static final String IS_LOGIN = "isLogin";
+    private static final String INNER_ERROR = "Inner Error!";
 
     /**
-     * 注册用户
-     * errorCode - 0000(成功)/1002(用户名已被他人注册)/1003(此手机号已注册);
-     * object - Integer - id;
-     *
-     * @param userName
-     * @param password
-     * @param phone
-     * @return
+     * 用户注册
+     * @param userMail 邮箱
+     * @param userName 用户名
+     * @param userPassword 密码
+     * @return 是否成功注册的Response消息
      */
-    @Logged({"userName", "password", "phone"})
-    public BaseJson signUpUserMsg(String userName, String password, String phone) {
-
-        BaseJson baseJson = new BaseJson();
-
-        baseJson.setObject(userMapper.getOneByUserName(userName));
-        if (baseJson.getObject() != null)
-            return baseJson.setObject(null).setErrorCode("1002");
-
-        //用户名不能为某个手机号码
-        baseJson.setObject(userMapper.getOneByUserName(phone));
-        if (baseJson.getObject() != null)
-            return baseJson.setObject(null).setErrorCode("1002");
-
-        baseJson.setObject(userMapper.getOneByPhone(phone));
-        if (baseJson.getObject() != null)
-            return baseJson.setObject(null).setErrorCode("1003");
-
-        UserInfo userInfo = new UserInfo();
-        userInfo.setPhone(phone);
-        userInfo.setPassword(password);
-        userInfo.setUserName(userName);
-        userInfo.setUserStatus(UserStatus.NORMAL);
-
-        int id = userMapper.insert(userInfo);
-
-        return baseJson.setObject(id).setErrorCode("0000");
-    }
-
-    /**
-     * 登录用户
-     * errorCode - 0000(成功)/1004(用户名或密码错误);
-     * object - UserInfo;
-     *
-     * @param account
-     * @param password
-     * @return
-     */
-    @Logged({"account", "password"})
-    public BaseJson userLogin(String account, String password) {
-
-        BaseJson baseJson = new BaseJson();
-
-        baseJson.setObject(userMapper.getOneByUserNameAndPassword(account, password));
-        if (baseJson.getObject() != null)
-            return baseJson.setErrorCode("0000");
-
-        baseJson.setObject(userMapper.getOneByPhoneAndPassword(account, password));
-        if (baseJson.getObject() != null)
-            return baseJson.setErrorCode("0000");
-
-        return baseJson.setErrorCode("1004");
-    }
-
-    /**
-     * 更新密码
-     * errorCode - 0000(成功)/1005(旧密码错误);
-     * object - null;
-     *
-     * @param userID
-     * @param oldPassword
-     * @param newPassword
-     * @return
-     */
-    public BaseJson updateUserPassword(int userID, String oldPassword, String newPassword) {
-
-        BaseJson baseJson = new BaseJson();
-
-        baseJson.setObject(userMapper.getOneByUserIDAndPassword(userID, oldPassword));
-        if (baseJson.getObject() == null)
-            return baseJson.setErrorCode("1005");
-
-        userMapper.updatePassword(userID, newPassword);
-
-        return baseJson.setObject(null).setErrorCode("0000");
-    }
-
-    /**
-     * 验证手机号
-     * errorCode - 0000(成功)/1006(发送失败);
-     * object - String - validateCode(验证码);
-     *
-     * @param phone
-     * @return
-     */
-    public BaseJson validatePhone(String phone) {
-
-        BaseJson baseJson = new BaseJson();
-
-        String validateCode = (int) (Math.random() * 10000) + "";
-        if (validateCode.length() < 4)
-            for (int i = 0; i < 4 - validateCode.length(); i++)
-                validateCode = "0" + validateCode;
-        baseJson.setObject(validateCode);
-
-        System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
-        System.setProperty("sun.net.client.defaultReadTimeout", "10000");
-        final String product = "Dysmsapi";
-        final String domain = "dysmsapi.aliyuncs.com";
-        final String accessKeyId = "LTAIsFHjJXTp7q8J";
-        final String accessKeySecret = "bJVaXVAzgCOYPE3nYZ7f5ZaAhWvdC4";
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
-                accessKeySecret);
-        try {
-            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
-        } catch (ClientException e) {
-            e.printStackTrace();
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Integer> register(String userMail, String userName, String userPassword) {
+        UserEntity userEntity = userMapper.getUserInfoByMail(userMail);
+        if (userEntity != null) {
+            return ResultGenerator.error("account has existed!");
         }
-
-        IAcsClient acsClient = new DefaultAcsClient(profile);
-        SendSmsRequest request = new SendSmsRequest();
-        request.setMethod(MethodType.POST);
-        request.setPhoneNumbers(phone);
-        request.setSignName("achieveit");
-        request.setTemplateCode("SMS_126345224");
-        request.setTemplateParam("{\"code\":\"" + validateCode + "\"}");
-        request.setOutId("yourOutId");
-        SendSmsResponse sendSmsResponse = null;
-
-        try {
-            sendSmsResponse = acsClient.getAcsResponse(request);
-        } catch (ClientException e) {
-            e.printStackTrace();
+        userEntity = new UserEntity(userMail, userName, userPassword);
+        int result = userMapper.insertUser(userEntity);
+        if (result == 1) {
+            logger.info(userEntity.getUserId() + " login !");
+            return ResultGenerator.success();
+        } else {
+            return ResultGenerator.error(INNER_ERROR);
         }
-
-        if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) baseJson.setErrorCode("0000");
-        else baseJson.setErrorCode("1006");
-        return baseJson;
     }
 
     /**
-     * 绑定邮箱
-     * errorCode - 0000(成功)/1001(未找到);
-     * object - null;
-     *
-     * @param userId
-     * @param email
-     * @return
+     * 用户邮箱登录
+     * @param userMail 邮箱
+     * @param userPassword 密码
+     * @param session http会话
+     * @return 是否成功登录的Response消息
      */
-    public BaseJson setUserEmail(int userId, String email) {
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<UserEntity> loginByMail(String userMail, String userPassword, HttpSession session) {
+        UserEntity userEntity = userMapper.getUserInfoByMail(userMail);
+        return getUserEntityResponseResult(userPassword, session, userEntity);
+    }
 
-        BaseJson baseJson = getUserMsg(userId);
+    /**
+     * 用户手机登录
+     * @param userPhone 邮箱
+     * @param userPassword 密码
+     * @param session http会话
+     * @return 是否成功登录的Response消息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<UserEntity> loginByPhone(String userPhone, String userPassword, HttpSession session) {
+        UserEntity userEntity = userMapper.getUserInfoByPhone(userPhone);
+        return getUserEntityResponseResult(userPassword, session, userEntity);
+    }
 
-        if (baseJson.getErrorCode().equals("1001"))
-            return baseJson;
+    private ResponseResult<UserEntity> getUserEntityResponseResult(String userPassword, HttpSession session, UserEntity userEntity) {
+        if (userEntity == null) {
+            return ResultGenerator.error(400, "no account!");
+        }
+        if (!userEntity.getUserPassword().equals(userPassword)) {
+            return ResultGenerator.error(400, "password wrong!");
+        }
+        session.setAttribute(IS_LOGIN, true);
+        session.setAttribute("userName", userEntity.getUserName());
+        session.setAttribute("userId", userEntity.getUserId());
 
-        userMapper.updateEmailByUserId(userId, email);
+        return ResultGenerator.success(userEntity);
+    }
 
-        return baseJson.setErrorCode("0000");
+    /**
+     * 用户注销
+     * @param session http会话
+     * @return 是否成功注销的Response消息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Integer> logout(HttpSession session) {
+        Boolean isUserLogin = (Boolean) session.getAttribute(IS_LOGIN);
+        if (isUserLogin == null) {
+            return ResultGenerator.error("illegal operation!");
+        }
+        session.setAttribute(IS_LOGIN, false);
+        return ResultGenerator.success();
+    }
+
+    /**
+     * 检查用户是否处于登录状态
+     * @param session http会话
+     * @return 用户是否处于登录状态的Response消息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Integer> isLogin(HttpSession session) {
+        if (session.getAttribute(IS_LOGIN) != null && (Boolean) session.getAttribute(IS_LOGIN)) {
+            return ResultGenerator.success();
+        } else {
+            return ResultGenerator.error("not login!");
+        }
+    }
+
+    /**
+     * 返回所有特定用户角色的用户
+     * @param userRole 用户角色
+     * @return 所有这一用户角色的用户
+     */
+    public ResponseResult<ArrayList<UserEntity>> getUsersByRole(int userRole,HttpSession session){
+        ArrayList<UserEntity> res=userMapper.getUsesByRole(userRole);
+        return ResultGenerator.success(res);
     }
 
 }
