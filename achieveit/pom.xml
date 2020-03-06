@@ -43,6 +43,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!--Redis-->
+		<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+		<version>2.1.0</version>
+		</dependency>
 		<!--包含 spring-aop 和 AspectJ 来支持面向切面编程（AOP）。-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
