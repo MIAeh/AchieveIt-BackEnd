@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 /**
  * @Title: Result
- * @Description: 自定义的Http请求返回的结果
+ * @description: 自定义的Http请求返回的结果
  * @Author: Felix
  * @Date: 5/31/2018 14:22
- * @Version: 1.0
+ * @version: 1.0
  **/
 
 public class Result implements Serializable {

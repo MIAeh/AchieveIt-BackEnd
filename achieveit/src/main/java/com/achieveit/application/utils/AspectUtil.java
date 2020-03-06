@@ -16,7 +16,7 @@ public class AspectUtil {
 
     private static final Logger logger = LoggerFactory.getLogger("com.gwon.aspect.HttpAspect");
 
-    @Pointcut("execution(public * com.tripin.application.controller.*.*(..))")
+    @Pointcut("execution(public * com.achieveit.application.controller.*.*(..))")
     public void log() {
     }
 

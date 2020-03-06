@@ -1,5 +1,6 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.enums.UserStatus;
 import com.achieveit.application.utils.BaseJson;
 import com.aliyuncs.DefaultAcsClient;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserService extends BaseService {
+public class UserService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
@@ -33,6 +34,7 @@ public class UserService extends BaseService {
      *
      * @return
      */
+    @Logged({"id"})
     public BaseJson getUserMsg(int id) {
 
         BaseJson baseJson = new BaseJson().setObject(userInfoMapper.getOne(id));
@@ -53,6 +55,7 @@ public class UserService extends BaseService {
      * @param phone
      * @return
      */
+    @Logged({"userName", "password", "phone"})
     public BaseJson signUpUserMsg(String userName, String password, String phone) {
 
         BaseJson baseJson = new BaseJson();
@@ -90,6 +93,7 @@ public class UserService extends BaseService {
      * @param password
      * @return
      */
+    @Logged({"account", "password"})
     public BaseJson userLogin(String account, String password) {
 
         BaseJson baseJson = new BaseJson();
@@ -164,7 +168,7 @@ public class UserService extends BaseService {
         SendSmsRequest request = new SendSmsRequest();
         request.setMethod(MethodType.POST);
         request.setPhoneNumbers(phone);
-        request.setSignName("Tripin");
+        request.setSignName("achieveit");
         request.setTemplateCode("SMS_126345224");
         request.setTemplateParam("{\"code\":\"" + validateCode + "\"}");
         request.setOutId("yourOutId");

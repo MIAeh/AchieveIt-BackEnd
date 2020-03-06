@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@MapperScan("com.tripin.application.mapper")
+@MapperScan("com.achieveit.application.mapper")
 public class ApplicationTests {
 
 	@Test

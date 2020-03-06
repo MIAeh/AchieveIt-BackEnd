@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class HttpRequestAspect {
 
-    private final static Logger logger = LoggerFactory.getLogger("com.tripin.application.aspect.HttpRequestAspect");
+    private final static Logger logger = LoggerFactory.getLogger("com.achieveit.application.aspect.HttpRequestAspect");
 
-    @Pointcut("within(com.tripin.application.controller..*))")
+    @Pointcut("within(com.achieveit.application.controller..*))")
     public void pointcut() {
     }
 

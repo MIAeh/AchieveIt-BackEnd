@@ -1,9 +1,18 @@
 package com.achieveit.application.aspect;
 
+import com.achieveit.application.domain.Token;
+import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.exception.AchieveitException;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
 
 /**
  * @Title: AuthorizationAspect
@@ -21,40 +30,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthorizationAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger("com.tripin.application.aspect.AuthorizationAspect");
+    private static final Logger logger = LoggerFactory.getLogger("com.achieveit.application.aspect.AuthorizationAspect");
 
-//    private final UserInfoService userInfoService;
-//
-//    @Autowired
-//    public AuthorizationAspect(UserInfoService userInfoService) {
-//        this.userInfoService = userInfoService;
-//    }
+    @Autowired
+    public AuthorizationAspect() {
+    }
 
-//    @Pointcut("within(com.tripin.application.service..*))")
-//    public void pointcut() {
-//    }
-//
-//    @Before("pointcut() && @annotation(com.tripin.application.annotation.Authorized)")
-//    public void authorize(JoinPoint joinPoint) {
-//        Token token = null;
-//        Object[] objects = joinPoint.getArgs();
-//        for (Object object : objects) {
-//            if (object instanceof Token) {
-//                token = (Token) object;
-//                break;
-//            }
-//        }
+    @Pointcut("within(com.achieveit.application.service..*))")
+    public void pointcut() {
+    }
+
+    @Before("pointcut() && @annotation(com.achieveit.application.annotation.Authorized)")
+    public void authorize(JoinPoint joinPoint) {
+        Token token = null;
+        Object[] objects = joinPoint.getArgs();
+        for (Object object : objects) {
+            if (object instanceof Token) {
+                token = (Token) object;
+                break;
+            }
+        }
+
 //        HashMap tokenHashMap = userInfoService.getTokenHashMap();
 //
 //        // 验证Token
 //        if(null == token || !tokenHashMap.containsKey(token.getToken()) || !token.equals(tokenHashMap.get(token.getToken()))) {
 //            logger.info("Failed to Authorize.");
 //            logger.info("");
-//            throw new TripinException(ErrorCode.UNAUTHORIZED);
+//            try {
+//                throw new AchieveitException(ErrorCode.UNAUTHORIZED);
+//            } catch (AchieveitException e) {
+//                e.printStackTrace();
+//            }
 //        }
 //        else {
 //            logger.info("Successfully Authorize.");
 //            logger.info("");
 //        }
-//    }
+    }
 }

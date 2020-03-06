@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
-@MapperScan("com.tripin.application.mapper")
+@MapperScan("com.achieveit.application.mapper")
 public class Application {
 
 	public static void main(String[] args) {

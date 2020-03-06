@@ -21,13 +21,13 @@ import java.util.Arrays;
 @Component
 public class LoggerAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger("com.tripin.application.aspect.LoggerAspect");
+    private static final Logger logger = LoggerFactory.getLogger("com.achieveit.application.aspect.LoggerAspect");
 
-    @Pointcut("within(com.tripin.application.service..*))")
+    @Pointcut("within(com.achieveit.application.service..*))")
     public void servicePointcut() {
     }
 
-    @Pointcut("within(com.tripin.application.controller..*))")
+    @Pointcut("within(com.achieveit.application.controller..*))")
     public void controllerPointcut() {
     }
 
