@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * Client Mapper
  */
+@Mapper
 public interface ClientMapper {
 
     /**
