@@ -12,6 +12,7 @@ import static org.apache.ibatis.type.JdbcType.VARCHAR;
  */
 @Mapper
 public interface UserMapper {
+
     /**
      * 根据userID来获取用户信息
      * @param userId 所要获取的用户的userID
@@ -79,4 +80,5 @@ public interface UserMapper {
      */
     @Select("select * from \"users\" where userrole = #{userRole}")
     ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
+
 }

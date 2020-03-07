@@ -1,5 +1,6 @@
 package com.achieveit.application.wrapper;
 
+import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.wrapper.ResponseResult;
 /**
  * 用于构造ResponseResult
@@ -82,4 +83,15 @@ public class ResultGenerator {
     public static <T> ResponseResult<T> error(int errorCode) {
         return new ResponseResult<>(false, errorCode, "error!");
     }
+
+    /**
+     * construct error Response Result with error code
+     * @param errorCode 错误码
+     * @param <T> 任意类型
+     * @return 类型为T的Response消息
+     */
+    public static <T> ResponseResult<T> error(ErrorCode errorCode) {
+        return new ResponseResult<>(false, errorCode.getCode(), errorCode.getMsg());
+    }
+
 }
