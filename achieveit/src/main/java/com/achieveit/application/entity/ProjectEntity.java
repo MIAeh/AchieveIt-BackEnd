@@ -71,7 +71,7 @@ public class ProjectEntity implements Serializable {
         this.projectFrameworks = projectFrameworks;
         try {
             this.projectLanguages = (ArrayList<String>)SerializeUtil.unserialize(unserializedProjectLanguages);
-            this.projectMilestones = (ArrayList<Milestone>)SerializeUtil.unserialize(unserializedprojectMilestones);
+            this.projectMilestones = (ArrayList<Milestone>)SerializeUtil.unserialize(unserializedProjectMilestones);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
