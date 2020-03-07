@@ -18,7 +18,11 @@ public class ProjectEntity implements Serializable {
 
     private String projectManegerID;
 
+    private String projectManegerName;
+
     private String projectMonitorID;
+
+    private String projectMonitorName;
 
     private String projectClientID;
 
@@ -34,18 +38,26 @@ public class ProjectEntity implements Serializable {
 
     private String projectFrameworks;
 
-    private ArrayList<String> projectLanguages;
+    /**
+     * Serialized projectLanguages list
+     */
+    private String projectLanguages;
 
-    private ArrayList<Milestone> projectMilestones;
+    /**
+     * Serialized projectMilestones list
+     */
+    private String projectMilestones;
 
     public ProjectEntity() {
     }
 
-    public ProjectEntity(String projectID, String projectName, String projectManegerID, String projectMonitorID, String projectClientID, String projectClientContactName, String projectClientCompany, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, ArrayList<String> projectLanguages, ArrayList<Milestone> projectMilestones) {
+    public ProjectEntity(String projectID, String projectName, String projectManegerID, String projectManegerName, String projectMonitorID, String projectMonitorName, String projectClientID, String projectClientContactName, String projectClientCompany, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones) {
         this.projectID = projectID;
         this.projectName = projectName;
         this.projectManegerID = projectManegerID;
+        this.projectManegerName = projectManegerName;
         this.projectMonitorID = projectMonitorID;
+        this.projectMonitorName = projectMonitorName;
         this.projectClientID = projectClientID;
         this.projectClientContactName = projectClientContactName;
         this.projectClientCompany = projectClientCompany;
@@ -57,24 +69,18 @@ public class ProjectEntity implements Serializable {
         this.projectMilestones = projectMilestones;
     }
 
-    public ProjectEntity(String projectID, String projectName, String projectManegerID, String projectMonitorID, String projectClientID, String projectClientContactName, String projectClientCompany, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String unserializedProjectLanguages, String unserializedProjectMilestones) {
+    public ProjectEntity(String projectID, String projectName, String projectManegerID, String projectMonitorID, String projectClientID, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones) {
         this.projectID = projectID;
         this.projectName = projectName;
         this.projectManegerID = projectManegerID;
         this.projectMonitorID = projectMonitorID;
         this.projectClientID = projectClientID;
-        this.projectClientContactName = projectClientContactName;
-        this.projectClientCompany = projectClientCompany;
         this.projectStatus = projectStatus;
         this.projectStartDate = projectStartDate;
         this.projectEndDate = projectEndDate;
         this.projectFrameworks = projectFrameworks;
-        try {
-            this.projectLanguages = (ArrayList<String>)SerializeUtil.unserialize(unserializedProjectLanguages);
-            this.projectMilestones = (ArrayList<Milestone>)SerializeUtil.unserialize(unserializedProjectMilestones);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.projectLanguages = projectLanguages;
+        this.projectMilestones = projectMilestones;
     }
 
     public static long getSerialVersionUID() {
@@ -111,6 +117,22 @@ public class ProjectEntity implements Serializable {
 
     public void setProjectMonitorID(String projectMonitorID) {
         this.projectMonitorID = projectMonitorID;
+    }
+
+    public String getProjectManegerName() {
+        return projectManegerName;
+    }
+
+    public void setProjectManegerName(String projectManegerName) {
+        this.projectManegerName = projectManegerName;
+    }
+
+    public String getProjectMonitorName() {
+        return projectMonitorName;
+    }
+
+    public void setProjectMonitorName(String projectMonitorName) {
+        this.projectMonitorName = projectMonitorName;
     }
 
     public String getProjectClientID() {
@@ -169,37 +191,19 @@ public class ProjectEntity implements Serializable {
         this.projectFrameworks = projectFrameworks;
     }
 
-    public ArrayList<String> getProjectLanguages() {
+    public String getProjectLanguages() {
         return projectLanguages;
     }
 
-    public String getSerializedProjectLanguages() {
-        try {
-            return SerializeUtil.serialize(projectLanguages);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    public void setProjectLanguages(ArrayList<String> projectLanguages) {
+    public void setProjectLanguages(String projectLanguages) {
         this.projectLanguages = projectLanguages;
     }
 
-    public ArrayList<Milestone> getProjectMilestones() {
+    public String getProjectMilestones() {
         return projectMilestones;
     }
 
-    public String getSerializedProjectMilestones() {
-        try {
-            return SerializeUtil.serialize(projectMilestones);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    public void setProjectMilestones(ArrayList<Milestone> projectMilestones) {
+    public void setProjectMilestones(String projectMilestones) {
         this.projectMilestones = projectMilestones;
     }
 
@@ -211,7 +215,9 @@ public class ProjectEntity implements Serializable {
         return Objects.equals(projectID, that.projectID) &&
                 Objects.equals(projectName, that.projectName) &&
                 Objects.equals(projectManegerID, that.projectManegerID) &&
+                Objects.equals(projectManegerName, that.projectManegerName) &&
                 Objects.equals(projectMonitorID, that.projectMonitorID) &&
+                Objects.equals(projectMonitorName, that.projectMonitorName) &&
                 Objects.equals(projectClientID, that.projectClientID) &&
                 Objects.equals(projectClientContactName, that.projectClientContactName) &&
                 Objects.equals(projectClientCompany, that.projectClientCompany) &&
@@ -225,7 +231,7 @@ public class ProjectEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, projectName, projectManegerID, projectMonitorID, projectClientID, projectClientContactName, projectClientCompany, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones);
+        return Objects.hash(projectID, projectName, projectManegerID, projectManegerName, projectMonitorID, projectMonitorName, projectClientID, projectClientContactName, projectClientCompany, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones);
     }
 
     @Override
@@ -234,7 +240,9 @@ public class ProjectEntity implements Serializable {
                 "projectID='" + projectID + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", projectManegerID='" + projectManegerID + '\'' +
+                ", projectManegerName='" + projectManegerName + '\'' +
                 ", projectMonitorID='" + projectMonitorID + '\'' +
+                ", projectMonitorName='" + projectMonitorName + '\'' +
                 ", projectClientID='" + projectClientID + '\'' +
                 ", projectClientContactName='" + projectClientContactName + '\'' +
                 ", projectClientCompany='" + projectClientCompany + '\'' +
@@ -242,8 +250,15 @@ public class ProjectEntity implements Serializable {
                 ", projectStartDate=" + projectStartDate +
                 ", projectEndDate=" + projectEndDate +
                 ", projectFrameworks='" + projectFrameworks + '\'' +
-                ", projectLanguages=" + projectLanguages +
-                ", projectMilestones=" + projectMilestones +
+                ", projectLanguages='" + projectLanguages + '\'' +
+                ", projectMilestones='" + projectMilestones + '\'' +
                 '}';
+    }
+
+    public boolean isMatch(String searchCondition, Integer projectStatus) {
+        return ((this.projectStatus.equals(projectStatus)) &&
+                (this.projectManegerName.contains(searchCondition) ||
+                        this.projectMonitorName.contains(searchCondition) ||
+                        this.projectClientContactName.contains(searchCondition)));
     }
 }
