@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -23,6 +24,15 @@ public class SerializeUtilTest {
         Assert.assertNotNull(serializedClientInfo);
         ClientInfo unserializedClientInfo = (ClientInfo)SerializeUtil.unserialize(serializedClientInfo);
         Assert.assertEquals(clientInfo, unserializedClientInfo);
+
+        ArrayList<ClientInfo> clientInfoArrayList = new ArrayList<>();
+        clientInfoArrayList.add(clientInfo);
+        String serializedClientInfoArrayList = SerializeUtil.serialize(clientInfoArrayList);
+        LOGGER.info(serializedClientInfoArrayList);
+        Assert.assertNotNull(serializedClientInfoArrayList);
+        ArrayList<ClientInfo> unserializedClientInfoArrayList = (ArrayList<ClientInfo>)SerializeUtil.unserialize(serializedClientInfoArrayList);
+        Assert.assertEquals(clientInfoArrayList, unserializedClientInfoArrayList);
+
     }
 
 }
