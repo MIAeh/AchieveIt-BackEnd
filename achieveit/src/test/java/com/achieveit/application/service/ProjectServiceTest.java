@@ -1,5 +1,6 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.ProjectInfo;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.junit.Assert;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,6 +29,13 @@ public class ProjectServiceTest {
     @Test
     public void getProjectIDListTest() {
         ResponseResult<ArrayList<String>> responseResult = projectService.getProjectIDList();
+        LOGGER.info(responseResult.toString());
+        Assert.assertNotNull(responseResult);
+    }
+
+    @Test
+    public void getProjectListTest() {
+        ResponseResult<List<ProjectInfo>> responseResult = projectService.getProjectList("project", 0);
         LOGGER.info(responseResult.toString());
         Assert.assertNotNull(responseResult);
     }
