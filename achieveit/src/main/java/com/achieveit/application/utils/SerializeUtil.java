@@ -14,8 +14,7 @@ public class SerializeUtil {
         ObjectOutputStream objectOutputStream;
         objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(obj);
-        String string = byteArrayOutputStream.toString("ISO-8859-1");
-        objectOutputStream.close();
+        String string = byteArrayOutputStream.toString(String.valueOf(StandardCharsets.ISO_8859_1));
         objectOutputStream.close();
         byteArrayOutputStream.close();
         return string;
