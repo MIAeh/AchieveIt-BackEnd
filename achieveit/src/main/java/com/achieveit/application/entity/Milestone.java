@@ -8,29 +8,32 @@ public class Milestone implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Date MilestoneDate;
+    private Date milestoneDate;
 
-    private String MilestoneContent;
+    private String milestoneContent;
+
+    public Milestone() {
+    }
 
     public Milestone(Date milestoneDate, String milestoneContent) {
-        MilestoneDate = milestoneDate;
-        MilestoneContent = milestoneContent;
+        this.milestoneDate = milestoneDate;
+        this.milestoneContent = milestoneContent;
     }
 
     public Date getMilestoneDate() {
-        return MilestoneDate;
+        return milestoneDate;
     }
 
     public void setMilestoneDate(Date milestoneDate) {
-        MilestoneDate = milestoneDate;
+        milestoneDate = milestoneDate;
     }
 
     public String getMilestoneContent() {
-        return MilestoneContent;
+        return milestoneContent;
     }
 
     public void setMilestoneContent(String milestoneContent) {
-        MilestoneContent = milestoneContent;
+        milestoneContent = milestoneContent;
     }
 
     @Override
@@ -38,20 +41,20 @@ public class Milestone implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Milestone milestone = (Milestone) o;
-        return Objects.equals(MilestoneDate, milestone.MilestoneDate) &&
-                Objects.equals(MilestoneContent, milestone.MilestoneContent);
+        return Objects.equals(milestoneDate, milestone.milestoneDate) &&
+                Objects.equals(milestoneContent, milestone.milestoneContent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(MilestoneDate, MilestoneContent);
+        return Objects.hash(milestoneDate, milestoneContent);
     }
 
     @Override
     public String toString() {
         return "Milestone{" +
-                "MilestoneDate=" + MilestoneDate +
-                ", MilestoneContent='" + MilestoneContent + '\'' +
+                "milestoneDate=" + milestoneDate +
+                ", milestoneContent='" + milestoneContent + '\'' +
                 '}';
     }
 }

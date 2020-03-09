@@ -12,7 +12,7 @@ public class ProjectInfo implements Serializable {
 
     private Integer projectStatus;
 
-    private String projectManegerName;
+    private String projectManagerName;
 
     private String projectMonitorName;
 
@@ -28,20 +28,80 @@ public class ProjectInfo implements Serializable {
     public ProjectInfo(ProjectEntity projectEntity) {
         this.projectName = projectEntity.getProjectName();
         this.projectStatus = projectEntity.getProjectStatus();
-        this.projectManegerName = projectEntity.getProjectManegerName();
+        this.projectManagerName = projectEntity.getProjectManagerName();
         this.projectMonitorName = projectEntity.getProjectMonitorName();
         this.projectClientContactName = projectEntity.getProjectClientContactName();
         this.projectStartDate = projectEntity.getProjectStartDate();
         this.projectEndDate = projectEntity.getProjectEndDate();
     }
 
-    public ProjectInfo(String projectName, Integer projectStatus, String projectManegerName, String projectMonitorName, String projectClientContactName, Date projectStartDate, Date projectEndDate) {
+    public ProjectInfo(String projectName, Integer projectStatus, String projectManagerName, String projectMonitorName, String projectClientContactName, Date projectStartDate, Date projectEndDate) {
         this.projectName = projectName;
         this.projectStatus = projectStatus;
-        this.projectManegerName = projectManegerName;
+        this.projectManagerName = projectManagerName;
         this.projectMonitorName = projectMonitorName;
         this.projectClientContactName = projectClientContactName;
         this.projectStartDate = projectStartDate;
+        this.projectEndDate = projectEndDate;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public Integer getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(Integer projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public String getProjectManagerName() {
+        return projectManagerName;
+    }
+
+    public void setProjectManagerName(String projectManagerName) {
+        this.projectManagerName = projectManagerName;
+    }
+
+    public String getProjectMonitorName() {
+        return projectMonitorName;
+    }
+
+    public void setProjectMonitorName(String projectMonitorName) {
+        this.projectMonitorName = projectMonitorName;
+    }
+
+    public String getProjectClientContactName() {
+        return projectClientContactName;
+    }
+
+    public void setProjectClientContactName(String projectClientContactName) {
+        this.projectClientContactName = projectClientContactName;
+    }
+
+    public Date getProjectStartDate() {
+        return projectStartDate;
+    }
+
+    public void setProjectStartDate(Date projectStartDate) {
+        this.projectStartDate = projectStartDate;
+    }
+
+    public Date getProjectEndDate() {
+        return projectEndDate;
+    }
+
+    public void setProjectEndDate(Date projectEndDate) {
         this.projectEndDate = projectEndDate;
     }
 
@@ -52,7 +112,7 @@ public class ProjectInfo implements Serializable {
         ProjectInfo that = (ProjectInfo) o;
         return Objects.equals(projectName, that.projectName) &&
                 Objects.equals(projectStatus, that.projectStatus) &&
-                Objects.equals(projectManegerName, that.projectManegerName) &&
+                Objects.equals(projectManagerName, that.projectManagerName) &&
                 Objects.equals(projectMonitorName, that.projectMonitorName) &&
                 Objects.equals(projectClientContactName, that.projectClientContactName) &&
                 Objects.equals(projectStartDate, that.projectStartDate) &&
@@ -61,7 +121,7 @@ public class ProjectInfo implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectName, projectStatus, projectManegerName, projectMonitorName, projectClientContactName, projectStartDate, projectEndDate);
+        return Objects.hash(projectName, projectStatus, projectManagerName, projectMonitorName, projectClientContactName, projectStartDate, projectEndDate);
     }
 
     @Override
@@ -69,7 +129,7 @@ public class ProjectInfo implements Serializable {
         return "ProjectInfo{" +
                 "projectName='" + projectName + '\'' +
                 ", projectStatus=" + projectStatus +
-                ", projectManegerName='" + projectManegerName + '\'' +
+                ", projectManegerName='" + projectManagerName + '\'' +
                 ", projectMonitorName='" + projectMonitorName + '\'' +
                 ", projectClientContactName='" + projectClientContactName + '\'' +
                 ", projectStartDate=" + projectStartDate +

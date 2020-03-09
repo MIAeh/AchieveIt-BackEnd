@@ -5,16 +5,16 @@ import com.achieveit.application.entity.Milestone;
 import com.achieveit.application.entity.ProjectEntity;
 import com.achieveit.application.entity.ProjectInfo;
 import com.achieveit.application.mapper.ProjectMapper;
-import com.achieveit.application.utils.SerializeUtil;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
+import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.text.html.parser.Entity;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Client Service
@@ -27,6 +27,11 @@ public class ProjectService {
     public ProjectService(ProjectMapper projectMapper) {
         this.projectMapper = projectMapper;
     }
+
+    /**
+     * Logger
+     */
+    private final Logger logger = LoggerFactory.getLogger(ProjectService.class);
 
     /**
      * 获取项目ID列表
@@ -43,15 +48,18 @@ public class ProjectService {
      * @return Result
      */
     @Logged({"searchCondition", "projectStatus"})
-    public ResponseResult<ArrayList<ProjectInfo>> getProjectList(String searchCondition, Integer projectStatus) {
+    public ResponseResult<List<ProjectInfo>> getProjectList(String searchCondition, Integer projectStatus) {
         ArrayList<ProjectEntity> projectEntities = projectMapper.getProjectList();
-        ArrayList<ProjectInfo> projectInfos = new ArrayList<>();
+        List<ProjectInfo> projectInfoList = new ArrayList<>();
         for (ProjectEntity entity : projectEntities) {
             if(entity.isMatch(searchCondition, projectStatus)) {
-                projectInfos.add(new ProjectInfo(entity));
+                ProjectInfo projectInfo = new ProjectInfo(entity);
+                projectInfoList.add(projectInfo);
+                logger.info("ProjectInfo: " + projectInfo);
             }
         }
-        return ResultGenerator.success(projectInfos);
+        logger.info("ProjectInfoList: " + projectInfoList);
+        return ResultGenerator.success(projectInfoList);
     }
 
     @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStatus",
@@ -65,18 +73,15 @@ public class ProjectService {
                                             Date projectStartDate,
                                             Date projectEndDate,
                                             String projectFrameworks,
-                                            ArrayList<String> projectLanguages,
-                                            ArrayList<Milestone> projectMilestones) {
+                                            List<String> projectLanguages,
+                                            List<Milestone> projectMilestones) {
 
-        try {
-            ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
-                    projectStatus, projectStartDate, projectEndDate, projectFrameworks,
-                    SerializeUtil.serialize(projectLanguages), SerializeUtil.serialize(projectMilestones));
-            int affectedRows = projectMapper.createProjectByID(projectEntity);
-            assert affectedRows == 1;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
+                projectStatus, projectStartDate, projectEndDate, projectFrameworks,
+                JSONObject.toJSONString(projectLanguages, true), JSONObject.toJSONString(projectMilestones, true));
+        logger.info("ProjectEntity: " + projectEntity.toString());
+        int affectedRows = projectMapper.createProjectByID(projectEntity);
+        assert affectedRows == 1;
         return ResultGenerator.success();
     }
 
