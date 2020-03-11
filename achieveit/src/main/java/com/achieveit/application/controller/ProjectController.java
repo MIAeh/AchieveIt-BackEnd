@@ -27,18 +27,32 @@ public class ProjectController {
      * 获取项目ID列表
      * @return 项目ID列表
      */
+    @CrossOrigin
     @Logged
     @GetMapping("/getProjectIDList")
     public ResponseResult<ArrayList<String>> getProjectIDList() {
         return projectService.getProjectIDList();
     }
 
+    /**
+     * 获取项目列表
+     * @param searchCondition 搜索条件（项目名字、客户名字、项目经理名字、项目上级名字）
+     * @param projectStatus 项目状态
+     * @return 项目列表
+     */
+    @CrossOrigin
     @Logged({"searchCondition", "projectStatus"})
     @GetMapping("/getProjectList")
     public ResponseResult<List<ProjectInfo>>  getProjectList(@RequestParam("searchCondition") String searchCondition, @RequestParam("projectStatus") Integer projectStatus) {
         return projectService.getProjectList(searchCondition, projectStatus);
     }
 
+    /**
+     * 根据项目ID创建项目
+     * @param jsonObject 通过Body获取的JsonObject
+     * @return Result
+     */
+    @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/createProjectByID")
     public ResponseResult createProjectByID(@RequestBody JSONObject jsonObject) {

@@ -16,6 +16,12 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    /**
+     * 根据客户ID获取客户信息
+     * @param clientID 客户ID
+     * @return Result
+     */
+    @CrossOrigin
     @Logged({"clientID"})
     @GetMapping("/getClientInfoByID")
     public ResponseResult<ClientInfo> getClientInfoByID(@RequestParam("clientID") String clientID) {

@@ -36,6 +36,7 @@ public class UserController {
      * @param session http会话
      * @return 是否成功注册的Response消息
      */
+    @CrossOrigin
     @PostMapping("register")
     public ResponseResult<Integer> register(@RequestParam(name = "usermail") String userMail, @RequestParam(name = "username") String userName,
                                             @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
@@ -49,6 +50,7 @@ public class UserController {
      * @param session http会话
      * @return 是否成功登录的Response消息
      */
+    @CrossOrigin
     @PostMapping("login")
     public ResponseResult<UserEntity> login(@RequestParam(name = "usermail") String userMail,
                                             @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
@@ -60,6 +62,7 @@ public class UserController {
      * @param session http会话
      * @return 是否成功注销的Response消息
      */
+    @CrossOrigin
     @PostMapping("logout")
     public ResponseResult<Integer> logout(HttpSession session) {
         return this.userService.logout(session);
@@ -71,6 +74,7 @@ public class UserController {
      * @param session http会话
      * @return 用户是否处于登录状态的Response消息
      */
+    @CrossOrigin
     @GetMapping("islogin")
     public ResponseResult<Integer> isLogin(HttpSession session) {
         return this.userService.isLogin(session);
@@ -81,6 +85,7 @@ public class UserController {
      * @param userRole 用户角色
      * @return 所有这一用户角色的用户
      */
+    @CrossOrigin
     @PostMapping("getUsersByRole")
     public ResponseResult<ArrayList<UserEntity>> getUsersByRole(@RequestParam(name = "userrole") int userRole,HttpSession session){
         return userService.getUsersByRole(userRole,session);
