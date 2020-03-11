@@ -18,7 +18,7 @@ public interface UserMapper {
      * @param userId 所要获取的用户的userID
      * @return User
      */
-    @Select("select * from \"users\" where userid =#{userId}::uuid")
+    @Select("select * from \"users\" where userid =#{userId}")
     @Results({
             @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
             @Result(property = "userMail", column = "usermail"),

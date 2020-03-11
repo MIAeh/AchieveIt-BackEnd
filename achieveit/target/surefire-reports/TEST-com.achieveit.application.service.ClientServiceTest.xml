@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.achieveit.application.service.ClientServiceTest" time="31.392" tests="1" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="C:\AchieveIt-BackEnd\achieveit\target\test-classes;C:\AchieveIt-BackEnd\achieveit\target\classes;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-devtools\2.0.2.RELEASE\spring-boot-devtools-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot\2.0.2.RELEASE\spring-boot-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.0.2.RELEASE\spring-boot-autoconfigure-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter\1.3.2\mybatis-spring-boot-starter-1.3.2.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter\2.0.2.RELEASE\spring-boot-starter-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.0.2.RELEASE\spring-boot-starter-logging-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\one_h\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\one_h\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.10.0\log4j-to-slf4j-2.10.0.jar;C:\Users\one_h\.m2\repository\org\apache\logging\log4j\log4j-api\2.10.0\log4j-api-2.10.0.jar;C:\Users\one_h\.m2\repository\org\slf4j\jul-to-slf4j\1.7.25\jul-to-slf4j-1.7.25.jar;C:\Users\one_h\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\one_h\.m2\repository\org\yaml\snakeyaml\1.19\snakeyaml-1.19.jar;C:\Users\one_h\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure\1.3.2\mybatis-spring-boot-autoconfigure-1.3.2.jar;C:\Users\one_h\.m2\repository\org\mybatis\mybatis\3.4.6\mybatis-3.4.6.jar;C:\Users\one_h\.m2\repository\org\mybatis\mybatis-spring\1.3.2\mybatis-spring-1.3.2.jar;C:\Users\one_h\.m2\repository\redis\clients\jedis\2.1.0\jedis-2.1.0.jar;C:\Users\one_h\.m2\repository\commons-pool\commons-pool\1.6\commons-pool-1.6.jar;C:\Users\one_h\.m2\repository\com\alibaba\fastjson\1.2.4\fastjson-1.2.4.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.0.2.RELEASE\spring-boot-starter-aop-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-aop\5.0.6.RELEASE\spring-aop-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-beans\5.0.6.RELEASE\spring-beans-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\aspectj\aspectjweaver\1.8.13\aspectjweaver-1.8.13.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-mail\2.0.2.RELEASE\spring-boot-starter-mail-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-context\5.0.6.RELEASE\spring-context-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-expression\5.0.6.RELEASE\spring-expression-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-context-support\5.0.6.RELEASE\spring-context-support-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\com\sun\mail\javax.mail\1.6.1\javax.mail-1.6.1.jar;C:\Users\one_h\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.0.2.RELEASE\spring-boot-starter-web-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.0.2.RELEASE\spring-boot-starter-json-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.9.5\jackson-datatype-jdk8-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.9.5\jackson-datatype-jsr310-2.9.5.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.0.2.RELEASE\spring-boot-starter-tomcat-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.31\tomcat-embed-core-8.5.31.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.31\tomcat-embed-el-8.5.31.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.31\tomcat-embed-websocket-8.5.31.jar;C:\Users\one_h\.m2\repository\org\hibernate\validator\hibernate-validator\6.0.9.Final\hibernate-validator-6.0.9.Final.jar;C:\Users\one_h\.m2\repository\javax\validation\validation-api\2.0.1.Final\validation-api-2.0.1.Final.jar;C:\Users\one_h\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\one_h\.m2\repository\com\fasterxml\classmate\1.3.4\classmate-1.3.4.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-web\5.0.6.RELEASE\spring-web-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-webmvc\5.0.6.RELEASE\spring-webmvc-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.0.2.RELEASE\spring-boot-starter-thymeleaf-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.9.RELEASE\thymeleaf-spring5-3.0.9.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\thymeleaf\3.0.9.RELEASE\thymeleaf-3.0.9.RELEASE.jar;C:\Users\one_h\.m2\repository\org\attoparser\attoparser\2.0.4.RELEASE\attoparser-2.0.4.RELEASE.jar;C:\Users\one_h\.m2\repository\org\unbescape\unbescape\1.1.5.RELEASE\unbescape-1.1.5.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.1.RELEASE\thymeleaf-extras-java8time-3.0.1.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\kafka\spring-kafka\2.1.6.RELEASE\spring-kafka-2.1.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-messaging\5.0.6.RELEASE\spring-messaging-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-tx\5.0.6.RELEASE\spring-tx-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\retry\spring-retry\1.2.2.RELEASE\spring-retry-1.2.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\apache\kafka\kafka-clients\1.0.1\kafka-clients-1.0.1.jar;C:\Users\one_h\.m2\repository\org\lz4\lz4-java\1.4\lz4-java-1.4.jar;C:\Users\one_h\.m2\repository\org\xerial\snappy\snappy-java\1.1.4\snappy-java-1.1.4.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.0.2.RELEASE\spring-boot-starter-jdbc-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-jdbc\5.0.6.RELEASE\spring-jdbc-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\postgresql\postgresql\42.2.2\postgresql-42.2.2.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.0.2.RELEASE\spring-boot-starter-test-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-test\2.0.2.RELEASE\spring-boot-test-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.0.2.RELEASE\spring-boot-test-autoconfigure-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\com\jayway\jsonpath\json-path\2.4.0\json-path-2.4.0.jar;C:\Users\one_h\.m2\repository\net\minidev\json-smart\2.3\json-smart-2.3.jar;C:\Users\one_h\.m2\repository\net\minidev\accessors-smart\1.2\accessors-smart-1.2.jar;C:\Users\one_h\.m2\repository\org\ow2\asm\asm\5.0.4\asm-5.0.4.jar;C:\Users\one_h\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\one_h\.m2\repository\org\assertj\assertj-core\3.9.1\assertj-core-3.9.1.jar;C:\Users\one_h\.m2\repository\org\mockito\mockito-core\2.15.0\mockito-core-2.15.0.jar;C:\Users\one_h\.m2\repository\net\bytebuddy\byte-buddy\1.7.11\byte-buddy-1.7.11.jar;C:\Users\one_h\.m2\repository\net\bytebuddy\byte-buddy-agent\1.7.11\byte-buddy-agent-1.7.11.jar;C:\Users\one_h\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\one_h\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\one_h\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\one_h\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\one_h\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-core\5.0.6.RELEASE\spring-core-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-jcl\5.0.6.RELEASE\spring-jcl-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-test\5.0.6.RELEASE\spring-test-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\xmlunit\xmlunit-core\2.5.1\xmlunit-core-2.5.1.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.5\jackson-core-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.5\jackson-databind-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-joda\2.9.5\jackson-datatype-joda-2.9.5.jar;C:\Users\one_h\.m2\repository\joda-time\joda-time\2.9.9\joda-time-2.9.9.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.9.5\jackson-module-parameter-names-2.9.5.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper-spring-boot-starter\1.2.3\pagehelper-spring-boot-starter-1.2.3.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper-spring-boot-autoconfigure\1.2.3\pagehelper-spring-boot-autoconfigure-1.2.3.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper\5.1.2\pagehelper-5.1.2.jar;C:\Users\one_h\.m2\repository\com\github\jsqlparser\jsqlparser\1.0\jsqlparser-1.0.jar;C:\Users\one_h\.m2\repository\com\zaxxer\HikariCP\2.7.9\HikariCP-2.7.9.jar;C:\Users\one_h\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\one_h\.m2\repository\com\aliyun\aliyun-java-sdk-core\3.3.1\aliyun-java-sdk-core-3.3.1.jar;C:\Users\one_h\.m2\repository\org\json\json\20170516\json-20170516.jar;C:\Users\one_h\.m2\repository\com\aliyun\aliyun-java-sdk-dysmsapi\1.0.0\aliyun-java-sdk-dysmsapi-1.0.0.jar;C:\Users\one_h\.m2\repository\com\jgoodies\looks\2.1.4\looks-2.1.4.jar;C:\Users\one_h\.m2\repository\net\sourceforge\collections\collections-generic\4.01\collections-generic-4.01.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\one_h\AppData\Local\Temp\surefire6784008384726176100\surefirebooter8533092060696437972.jar C:\Users\one_h\AppData\Local\Temp\surefire6784008384726176100 2020-03-11T23-51-42_058-jvmRun1 surefire7608270736111707834tmp surefire_03984410922423230541tmp"/>
+    <property name="surefire.test.class.path" value="C:\AchieveIt-BackEnd\achieveit\target\test-classes;C:\AchieveIt-BackEnd\achieveit\target\classes;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-devtools\2.0.2.RELEASE\spring-boot-devtools-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot\2.0.2.RELEASE\spring-boot-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.0.2.RELEASE\spring-boot-autoconfigure-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter\1.3.2\mybatis-spring-boot-starter-1.3.2.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter\2.0.2.RELEASE\spring-boot-starter-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.0.2.RELEASE\spring-boot-starter-logging-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\one_h\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\one_h\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.10.0\log4j-to-slf4j-2.10.0.jar;C:\Users\one_h\.m2\repository\org\apache\logging\log4j\log4j-api\2.10.0\log4j-api-2.10.0.jar;C:\Users\one_h\.m2\repository\org\slf4j\jul-to-slf4j\1.7.25\jul-to-slf4j-1.7.25.jar;C:\Users\one_h\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\one_h\.m2\repository\org\yaml\snakeyaml\1.19\snakeyaml-1.19.jar;C:\Users\one_h\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure\1.3.2\mybatis-spring-boot-autoconfigure-1.3.2.jar;C:\Users\one_h\.m2\repository\org\mybatis\mybatis\3.4.6\mybatis-3.4.6.jar;C:\Users\one_h\.m2\repository\org\mybatis\mybatis-spring\1.3.2\mybatis-spring-1.3.2.jar;C:\Users\one_h\.m2\repository\redis\clients\jedis\2.1.0\jedis-2.1.0.jar;C:\Users\one_h\.m2\repository\commons-pool\commons-pool\1.6\commons-pool-1.6.jar;C:\Users\one_h\.m2\repository\com\alibaba\fastjson\1.2.4\fastjson-1.2.4.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.0.2.RELEASE\spring-boot-starter-aop-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-aop\5.0.6.RELEASE\spring-aop-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-beans\5.0.6.RELEASE\spring-beans-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\aspectj\aspectjweaver\1.8.13\aspectjweaver-1.8.13.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-mail\2.0.2.RELEASE\spring-boot-starter-mail-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-context\5.0.6.RELEASE\spring-context-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-expression\5.0.6.RELEASE\spring-expression-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-context-support\5.0.6.RELEASE\spring-context-support-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\com\sun\mail\javax.mail\1.6.1\javax.mail-1.6.1.jar;C:\Users\one_h\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.0.2.RELEASE\spring-boot-starter-web-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.0.2.RELEASE\spring-boot-starter-json-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.9.5\jackson-datatype-jdk8-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.9.5\jackson-datatype-jsr310-2.9.5.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.0.2.RELEASE\spring-boot-starter-tomcat-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.31\tomcat-embed-core-8.5.31.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.31\tomcat-embed-el-8.5.31.jar;C:\Users\one_h\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.31\tomcat-embed-websocket-8.5.31.jar;C:\Users\one_h\.m2\repository\org\hibernate\validator\hibernate-validator\6.0.9.Final\hibernate-validator-6.0.9.Final.jar;C:\Users\one_h\.m2\repository\javax\validation\validation-api\2.0.1.Final\validation-api-2.0.1.Final.jar;C:\Users\one_h\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\one_h\.m2\repository\com\fasterxml\classmate\1.3.4\classmate-1.3.4.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-web\5.0.6.RELEASE\spring-web-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-webmvc\5.0.6.RELEASE\spring-webmvc-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.0.2.RELEASE\spring-boot-starter-thymeleaf-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.9.RELEASE\thymeleaf-spring5-3.0.9.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\thymeleaf\3.0.9.RELEASE\thymeleaf-3.0.9.RELEASE.jar;C:\Users\one_h\.m2\repository\org\attoparser\attoparser\2.0.4.RELEASE\attoparser-2.0.4.RELEASE.jar;C:\Users\one_h\.m2\repository\org\unbescape\unbescape\1.1.5.RELEASE\unbescape-1.1.5.RELEASE.jar;C:\Users\one_h\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.1.RELEASE\thymeleaf-extras-java8time-3.0.1.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\kafka\spring-kafka\2.1.6.RELEASE\spring-kafka-2.1.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-messaging\5.0.6.RELEASE\spring-messaging-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-tx\5.0.6.RELEASE\spring-tx-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\retry\spring-retry\1.2.2.RELEASE\spring-retry-1.2.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\apache\kafka\kafka-clients\1.0.1\kafka-clients-1.0.1.jar;C:\Users\one_h\.m2\repository\org\lz4\lz4-java\1.4\lz4-java-1.4.jar;C:\Users\one_h\.m2\repository\org\xerial\snappy\snappy-java\1.1.4\snappy-java-1.1.4.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.0.2.RELEASE\spring-boot-starter-jdbc-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-jdbc\5.0.6.RELEASE\spring-jdbc-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\postgresql\postgresql\42.2.2\postgresql-42.2.2.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.0.2.RELEASE\spring-boot-starter-test-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-test\2.0.2.RELEASE\spring-boot-test-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.0.2.RELEASE\spring-boot-test-autoconfigure-2.0.2.RELEASE.jar;C:\Users\one_h\.m2\repository\com\jayway\jsonpath\json-path\2.4.0\json-path-2.4.0.jar;C:\Users\one_h\.m2\repository\net\minidev\json-smart\2.3\json-smart-2.3.jar;C:\Users\one_h\.m2\repository\net\minidev\accessors-smart\1.2\accessors-smart-1.2.jar;C:\Users\one_h\.m2\repository\org\ow2\asm\asm\5.0.4\asm-5.0.4.jar;C:\Users\one_h\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\one_h\.m2\repository\org\assertj\assertj-core\3.9.1\assertj-core-3.9.1.jar;C:\Users\one_h\.m2\repository\org\mockito\mockito-core\2.15.0\mockito-core-2.15.0.jar;C:\Users\one_h\.m2\repository\net\bytebuddy\byte-buddy\1.7.11\byte-buddy-1.7.11.jar;C:\Users\one_h\.m2\repository\net\bytebuddy\byte-buddy-agent\1.7.11\byte-buddy-agent-1.7.11.jar;C:\Users\one_h\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\one_h\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\one_h\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\one_h\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\one_h\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-core\5.0.6.RELEASE\spring-core-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-jcl\5.0.6.RELEASE\spring-jcl-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\springframework\spring-test\5.0.6.RELEASE\spring-test-5.0.6.RELEASE.jar;C:\Users\one_h\.m2\repository\org\xmlunit\xmlunit-core\2.5.1\xmlunit-core-2.5.1.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.5\jackson-core-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.5\jackson-databind-2.9.5.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-joda\2.9.5\jackson-datatype-joda-2.9.5.jar;C:\Users\one_h\.m2\repository\joda-time\joda-time\2.9.9\joda-time-2.9.9.jar;C:\Users\one_h\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.9.5\jackson-module-parameter-names-2.9.5.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper-spring-boot-starter\1.2.3\pagehelper-spring-boot-starter-1.2.3.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper-spring-boot-autoconfigure\1.2.3\pagehelper-spring-boot-autoconfigure-1.2.3.jar;C:\Users\one_h\.m2\repository\com\github\pagehelper\pagehelper\5.1.2\pagehelper-5.1.2.jar;C:\Users\one_h\.m2\repository\com\github\jsqlparser\jsqlparser\1.0\jsqlparser-1.0.jar;C:\Users\one_h\.m2\repository\com\zaxxer\HikariCP\2.7.9\HikariCP-2.7.9.jar;C:\Users\one_h\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\one_h\.m2\repository\com\aliyun\aliyun-java-sdk-core\3.3.1\aliyun-java-sdk-core-3.3.1.jar;C:\Users\one_h\.m2\repository\org\json\json\20170516\json-20170516.jar;C:\Users\one_h\.m2\repository\com\aliyun\aliyun-java-sdk-dysmsapi\1.0.0\aliyun-java-sdk-dysmsapi-1.0.0.jar;C:\Users\one_h\.m2\repository\com\jgoodies\looks\2.1.4\looks-2.1.4.jar;C:\Users\one_h\.m2\repository\net\sourceforge\collections\collections-generic\4.01\collections-generic-4.01.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\one_h"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_202\jre"/>
+    <property name="basedir" value="C:\AchieveIt-BackEnd\achieveit"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\one_h\AppData\Local\Temp\surefire6784008384726176100\surefirebooter8533092060696437972.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_202-b08"/>
+    <property name="user.name" value="Alevery"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\one_h\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\one_h\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_202"/>
+    <property name="user.dir" value="C:\AchieveIt-BackEnd\achieveit"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="idea.version2019.3.3" value="true"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NetSarang\Xftp 6\;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Users\one_h\.cargo\bin;C:\Users\one_h\AppData\Local\Microsoft\WindowsApps;C:\Users\one_h\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\one_h\AppData\Local\GitHubDesktop\bin;C:\Program Files (x86)\CMake\bin;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.202-b08"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="getClientInfoByIDTest" classname="com.achieveit.application.service.ClientServiceTest" time="31.264">
+    <error message="nested exception is org.apache.ibatis.exceptions.PersistenceException: &#10;### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。&#10;### The error may exist in com/achieveit/application/mapper/ClientMapper.java (best guess)&#10;### The error may involve com.achieveit.application.mapper.ClientMapper.getClientInfoByID&#10;### The error occurred while executing a query&#10;### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。" type="org.mybatis.spring.MyBatisSystemException">org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+### The error may exist in com/achieveit/application/mapper/ClientMapper.java (best guess)
+### The error may involve com.achieveit.application.mapper.ClientMapper.getClientInfoByID
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+### The error may exist in com/achieveit/application/mapper/ClientMapper.java (best guess)
+### The error may involve com.achieveit.application.mapper.ClientMapper.getClientInfoByID
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29)
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29)
+Caused by: org.postgresql.util.PSQLException: 尝试连线已失败。
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29)
+Caused by: java.io.EOFException
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29)
+</error>
+    <system-out><![CDATA[2020-03-11 23:52:02.954  INFO 4248 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.achieveit.application.service.ClientServiceTest], using SpringBootContextLoader
+2020-03-11 23:52:02.957  INFO 4248 --- [           main] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.achieveit.application.service.ClientServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-03-11 23:52:02.957  INFO 4248 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.achieveit.application.service.ClientServiceTest]: ClientServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-03-11 23:52:03.086  INFO 4248 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.achieveit.application.Application for test class com.achieveit.application.service.ClientServiceTest
+2020-03-11 23:52:03.092  INFO 4248 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2020-03-11 23:52:03.093  INFO 4248 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@d70f722, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1e1eeedd, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@798256c5, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@7ec95456, org.springframework.test.context.support.DirtiesContextTestExecutionListener@748a654a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1d8b0500, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@76544c0a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@428bdd72, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@650c405c, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@20eaeaf8, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@748ac6f3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@68f6e55d]
+2020-03-11 23:52:03.184  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : ==== Before Execute ====
+2020-03-11 23:52:03.184  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : Method Signature: public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.service.ClientService.getClientInfoByID(java.lang.String)
+2020-03-11 23:52:03.185  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : Parameter names and value(s): [clientID] [b5d51193-891c-45cc-91eb-1e449fbebbdd]
+2020-03-11 23:52:03.186  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : ========================
+2020-03-11 23:52:03.187  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : 
+2020-03-11 23:52:03.370  INFO 4248 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-11 23:52:33.362  WARN 4248 --- [           main] unknown.jul.logger                       : IOException occurred while connecting to 101.37.205.16:5432
+
+java.io.EOFException: null
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:295) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:453) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:534) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) [HikariCP-2.7.9.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:151) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:82) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:68) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:338) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:84) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) [mybatis-3.4.6.jar:3.4.6]
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:143) [pagehelper-5.1.2.jar:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy115.query(Unknown Source) [na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77) [mybatis-3.4.6.jar:3.4.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433) [mybatis-spring-1.3.2.jar:1.3.2]
+	at com.sun.proxy.$Proxy90.selectOne(Unknown Source) [na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy93.getClientInfoByID(Unknown Source) [na:na]
+	at com.achieveit.application.service.ClientService.getClientInfoByID(ClientService.java:30) [classes/:na]
+	at com.achieveit.application.service.ClientService$$FastClassBySpringCGLIB$$ae164b94.invoke(<generated>) [classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) [spring-core-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterAdvice.invoke(AspectJAfterAdvice.java:47) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor.invoke(AfterReturningAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at com.achieveit.application.service.ClientService$$EnhancerBySpringCGLIB$$1b58a43d.getClientInfoByID(<generated>) [classes/:na]
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29) [test-classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413) [surefire-booter-2.21.0.jar:2.21.0]
+
+2020-03-11 23:52:33.376 ERROR 4248 --- [           main] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: 尝试连线已失败。
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:257) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:534) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) [HikariCP-2.7.9.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:151) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:82) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:68) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:338) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:84) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) [mybatis-3.4.6.jar:3.4.6]
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:143) [pagehelper-5.1.2.jar:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy115.query(Unknown Source) [na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77) [mybatis-3.4.6.jar:3.4.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433) [mybatis-spring-1.3.2.jar:1.3.2]
+	at com.sun.proxy.$Proxy90.selectOne(Unknown Source) [na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy93.getClientInfoByID(Unknown Source) [na:na]
+	at com.achieveit.application.service.ClientService.getClientInfoByID(ClientService.java:30) [classes/:na]
+	at com.achieveit.application.service.ClientService$$FastClassBySpringCGLIB$$ae164b94.invoke(<generated>) [classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) [spring-core-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterAdvice.invoke(AspectJAfterAdvice.java:47) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor.invoke(AfterReturningAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at com.achieveit.application.service.ClientService$$EnhancerBySpringCGLIB$$1b58a43d.getClientInfoByID(<generated>) [classes/:na]
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29) [test-classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413) [surefire-booter-2.21.0.jar:2.21.0]
+Caused by: java.io.EOFException: null
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:295) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:453) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	... 90 common frames omitted
+
+2020-03-11 23:52:34.416 ERROR 4248 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+org.postgresql.util.PSQLException: 尝试连线已失败。
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:257) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:534) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) [HikariCP-2.7.9.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:151) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) [spring-jdbc-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:82) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:68) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:338) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:84) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) [mybatis-3.4.6.jar:3.4.6]
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:143) [pagehelper-5.1.2.jar:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy115.query(Unknown Source) [na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77) [mybatis-3.4.6.jar:3.4.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433) [mybatis-spring-1.3.2.jar:1.3.2]
+	at com.sun.proxy.$Proxy90.selectOne(Unknown Source) [na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy93.getClientInfoByID(Unknown Source) [na:na]
+	at com.achieveit.application.service.ClientService.getClientInfoByID(ClientService.java:30) [classes/:na]
+	at com.achieveit.application.service.ClientService$$FastClassBySpringCGLIB$$ae164b94.invoke(<generated>) [classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) [spring-core-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterAdvice.invoke(AspectJAfterAdvice.java:47) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor.invoke(AfterReturningAdviceInterceptor.java:52) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688) [spring-aop-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at com.achieveit.application.service.ClientService$$EnhancerBySpringCGLIB$$1b58a43d.getClientInfoByID(<generated>) [classes/:na]
+	at com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29) [test-classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.6.RELEASE.jar:5.0.6.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159) [surefire-junit4-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125) [surefire-booter-2.21.0.jar:2.21.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413) [surefire-booter-2.21.0.jar:2.21.0]
+Caused by: java.io.EOFException: null
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:295) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:453) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	... 90 common frames omitted
+
+2020-03-11 23:52:34.440  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : ==== After  Execute ====
+2020-03-11 23:52:34.440  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : Method Signature: public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.service.ClientService.getClientInfoByID(java.lang.String)
+2020-03-11 23:52:34.440 ERROR 4248 --- [           main] c.a.application.aspect.LoggerAspect      : Exception Message: org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+### The error may exist in com/achieveit/application/mapper/ClientMapper.java (best guess)
+### The error may involve com.achieveit.application.mapper.ClientMapper.getClientInfoByID
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.postgresql.util.PSQLException: 尝试连线已失败。
+2020-03-11 23:52:34.442 ERROR 4248 --- [           main] c.a.application.aspect.LoggerAspect      : Exception Stack Trace: [org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:77), org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:446), com.sun.proxy.$Proxy90.selectOne(Unknown Source), org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166), org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83), org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59), com.sun.proxy.$Proxy93.getClientInfoByID(Unknown Source), com.achieveit.application.service.ClientService.getClientInfoByID(ClientService.java:30), com.achieveit.application.service.ClientService$$FastClassBySpringCGLIB$$ae164b94.invoke(<generated>), org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163), org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:52), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174), org.springframework.aop.aspectj.AspectJAfterAdvice.invoke(AspectJAfterAdvice.java:47), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174), org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor.invoke(AfterReturningAdviceInterceptor.java:52), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174), org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174), org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185), org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688), com.achieveit.application.service.ClientService$$EnhancerBySpringCGLIB$$1b58a43d.getClientInfoByID(<generated>), com.achieveit.application.service.ClientServiceTest.getClientInfoByIDTest(ClientServiceTest.java:29), sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method), sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62), sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43), java.lang.reflect.Method.invoke(Method.java:498), org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50), org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12), org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47), org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17), org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73), org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83), org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75), org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86), org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84), org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325), org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251), org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97), org.junit.runners.ParentRunner$3.run(ParentRunner.java:290), org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71), org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288), org.junit.runners.ParentRunner.access$000(ParentRunner.java:58), org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268), org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61), org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70), org.junit.runners.ParentRunner.run(ParentRunner.java:363), org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190), org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365), org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273), org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238), org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159), org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379), org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340), org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125), org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)]
+2020-03-11 23:52:34.443  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : ==== Execute Failed ====
+2020-03-11 23:52:34.443  INFO 4248 --- [           main] c.a.application.aspect.LoggerAspect      : 
+]]></system-out>
+  </testcase>
+</testsuite>
