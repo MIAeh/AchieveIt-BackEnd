@@ -62,6 +62,19 @@ public class UserService {
     }
 
     /**
+     * 用户ID登录
+     * @param userId ID
+     * @param userPassword 密码
+     * @param session http会话
+     * @return 是否成功登录的Response消息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<UserEntity> loginByUserId(String userId, String userPassword, HttpSession session) {
+        UserEntity userEntity = userMapper.getUserInfoById(userId);
+        return getUserEntityResponseResult(userPassword, session, userEntity);
+    }
+
+    /**
      * 用户邮箱登录
      * @param userMail 邮箱
      * @param userPassword 密码

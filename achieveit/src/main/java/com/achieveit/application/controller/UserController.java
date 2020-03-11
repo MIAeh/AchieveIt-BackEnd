@@ -45,6 +45,19 @@ public class UserController {
 
     /**
      * 用户登录
+     * @param userId ID
+     * @param userPassword 密码
+     * @param session http会话
+     * @return 是否成功登录的Response消息
+     */
+    @PostMapping("userLoginByID")
+    public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userID") String userId,
+                                                    @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
+        return this.userService.loginByUserId(userId, userPassword, session);
+    }
+
+    /**
+     * 用户登录
      * @param userMail 邮箱
      * @param userPassword 密码
      * @param session http会话
