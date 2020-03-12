@@ -50,8 +50,8 @@ public class UserController {
      * @param session http会话
      * @return 是否成功登录的Response消息
      */
-    @PostMapping("userLoginByID")
-    public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userID") String userId,
+    @PostMapping("userLoginById")
+    public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userid") String userId,
                                                     @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
         return this.userService.loginByUserId(userId, userPassword, session);
     }
@@ -64,10 +64,24 @@ public class UserController {
      * @return 是否成功登录的Response消息
      */
     @CrossOrigin
-    @PostMapping("login")
-    public ResponseResult<UserEntity> login(@RequestParam(name = "usermail") String userMail,
+    @PostMapping("userLoginByMail")
+    public ResponseResult<UserEntity> userLoginByMail(@RequestParam(name = "usermail") String userMail,
                                             @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
         return this.userService.loginByMail(userMail, userPassword, session);
+    }
+
+    /**
+     * 用户登录
+     * @param userPhone 手机
+     * @param userPassword 密码
+     * @param session http会话
+     * @return 是否成功登录的Response消息
+     */
+    @CrossOrigin
+    @PostMapping("userLoginByPhone")
+    public ResponseResult<UserEntity> userLoginByPhone(@RequestParam(name = "userphone") String userPhone,
+                                            @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
+        return this.userService.loginByPhone(userPhone, userPassword, session);
     }
 
     /**
@@ -88,7 +102,7 @@ public class UserController {
      * @return 用户是否处于登录状态的Response消息
      */
     @CrossOrigin
-    @GetMapping("islogin")
+    @GetMapping("isLogin")
     public ResponseResult<Integer> isLogin(HttpSession session) {
         return this.userService.isLogin(session);
     }
