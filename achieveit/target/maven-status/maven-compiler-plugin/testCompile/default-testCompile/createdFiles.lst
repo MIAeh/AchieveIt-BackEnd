@@ -1,0 +1,4 @@
+com\achieveit\application\ApplicationTests.class
+com\achieveit\application\service\ClientServiceTest.class
+com\achieveit\application\utils\SerializeUtilTest.class
+com\achieveit\application\service\ProjectServiceTest.class

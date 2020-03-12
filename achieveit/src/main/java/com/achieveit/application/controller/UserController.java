@@ -95,7 +95,6 @@ public class UserController {
         return this.userService.logout(session);
     }
 
-
     /**
      * 检查用户是否处于登录状态
      * @param session http会话
