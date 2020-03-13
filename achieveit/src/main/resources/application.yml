@@ -18,7 +18,8 @@ spring:
     default-property-inclusion: ALWAYS
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-
+loging:
+  file: backend.log
 mybatis:
   ## Mybatis 配置
   # 配置为 com.pancm.bean 指向实体类包路径。
