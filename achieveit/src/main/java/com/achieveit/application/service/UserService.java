@@ -52,13 +52,9 @@ public class UserService {
             return ResultGenerator.error("account has existed!");
         }
         userEntity = new UserEntity(userMail, userName, userPassword);
-        int result = userMapper.insertUser(userEntity);
-        if (result == 1) {
-            logger.info(userEntity.getUserId() + " login !");
-            return ResultGenerator.success();
-        } else {
-            return ResultGenerator.error(INNER_ERROR);
-        }
+        userMapper.insertUser(userEntity);
+        logger.info(userEntity.getUserId() + " login !");
+        return ResultGenerator.success();
     }
 
     /**

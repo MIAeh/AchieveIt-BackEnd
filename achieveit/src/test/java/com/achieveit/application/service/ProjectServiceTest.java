@@ -1,8 +1,7 @@
 package com.achieveit.application.service;
 
-import com.achieveit.application.entity.ProjectInfo;
+import com.achieveit.application.entity.ProjectListItem;
 import com.achieveit.application.wrapper.ResponseResult;
-import com.achieveit.application.wrapper.ResultGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +34,7 @@ public class ProjectServiceTest {
 
     @Test
     public void getProjectListTest() {
-        ResponseResult<List<ProjectInfo>> responseResult = projectService.getProjectList("project", 0);
+        ResponseResult<List<ProjectListItem>> responseResult = projectService.getProjectList("project", 0);
         LOGGER.info(responseResult.toString());
         Assert.assertNotNull(responseResult);
     }

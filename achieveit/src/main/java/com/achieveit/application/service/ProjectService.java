@@ -4,6 +4,7 @@ import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.Milestone;
 import com.achieveit.application.entity.ProjectEntity;
 import com.achieveit.application.entity.ProjectInfo;
+import com.achieveit.application.entity.ProjectListItem;
 import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -48,18 +49,18 @@ public class ProjectService {
      * @return Result
      */
     @Logged({"searchCondition", "projectStatus"})
-    public ResponseResult<List<ProjectInfo>> getProjectList(String searchCondition, Integer projectStatus) {
+    public ResponseResult<List<ProjectListItem>> getProjectList(String searchCondition, Integer projectStatus) {
         ArrayList<ProjectEntity> projectEntities = projectMapper.getProjectList();
-        List<ProjectInfo> projectInfoList = new ArrayList<>();
+        List<ProjectListItem> projectListItemList = new ArrayList<>();
         for (ProjectEntity entity : projectEntities) {
             if(entity.isMatch(searchCondition, projectStatus)) {
-                ProjectInfo projectInfo = new ProjectInfo(entity);
-                projectInfoList.add(projectInfo);
-                logger.info("ProjectInfo: " + projectInfo);
+                ProjectListItem projectListItem = new ProjectListItem(entity);
+                projectListItemList.add(projectListItem);
+                logger.info("ProjectListItem: " + projectListItem);
             }
         }
-        logger.info("ProjectInfoList: " + projectInfoList);
-        return ResultGenerator.success(projectInfoList);
+        logger.info("ProjectInfoList: " + projectListItemList);
+        return ResultGenerator.success(projectListItemList);
     }
 
     @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStatus",
@@ -78,10 +79,42 @@ public class ProjectService {
 
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
                 projectStatus, projectStartDate, projectEndDate, projectFrameworks,
-                JSONObject.toJSONString(projectLanguages, true), JSONObject.toJSONString(projectMilestones, true));
+                JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
         logger.info("ProjectEntity: " + projectEntity.toString());
-        int affectedRows = projectMapper.createProjectByID(projectEntity);
-        assert affectedRows == 1;
+        projectMapper.createProjectByID(projectEntity);
+        Integer defaultDomain = 0;
+        projectMapper.createDomainByProjectID(projectID, defaultDomain);
+        return ResultGenerator.success();
+    }
+
+    @Logged({"projectID"})
+    public ResponseResult<ProjectInfo> getProjectByID(String projectID) {
+        ProjectEntity projectEntity = projectMapper.getProjectByID(projectID);
+        Integer domain = projectMapper.getDomainByProjectID(projectID);
+        projectEntity.setDomain(domain);
+        logger.info("ProjectEntity: " + projectEntity);
+        ProjectInfo projectInfo = new ProjectInfo(projectEntity);
+        logger.info("Cast to ProjectInfo: " + projectInfo);
+        return ResultGenerator.success(projectInfo);
+    }
+
+    @Logged({"projectID", "projectName", "projectStartDate", "projectEndDate", "projectFrameworks",
+            "projectLanguages", "projectMilestones", "projectStatus"})
+    public ResponseResult updateProjectByID(String projectID,
+                                            String projectName,
+                                            Date projectStartDate,
+                                            Date projectEndDate,
+                                            String projectFrameworks,
+                                            List<String> projectLanguages,
+                                            List<Milestone> projectMilestones,
+                                            Integer projectStatus,
+                                            Integer domain) {
+
+        ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectStatus, projectStartDate, projectEndDate,
+                projectFrameworks, JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
+        logger.info("ProjectEntity: " + projectEntity.toString());
+        projectMapper.updateProjectByID(projectEntity);
+        projectMapper.updateDomainByProjectID(projectID, domain);
         return ResultGenerator.success();
     }
 

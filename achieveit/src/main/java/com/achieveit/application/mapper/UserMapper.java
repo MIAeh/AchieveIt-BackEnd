@@ -67,11 +67,10 @@ public interface UserMapper {
     /**
      * 插入（注册）一位新的用户
      * @param userEntity 所要注册的user
-     * @return affectedRows
      */
     @Insert("insert into \"user\"(userid,usermail,username,userpassword,userdepartment,userrole)" +
             " values(#{userId}::uuid, #{userMail},#{userName},#{userPassword},#{userDepartment},#{userRole})")
-    int insertUser(UserEntity userEntity);
+    void insertUser(UserEntity userEntity);
 
     /**
      * 根据Role获取所有用户

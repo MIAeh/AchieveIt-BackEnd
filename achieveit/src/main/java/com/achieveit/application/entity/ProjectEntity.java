@@ -44,10 +44,12 @@ public class ProjectEntity implements Serializable {
      */
     private String projectMilestones;
 
+    private Integer domain;
+
     public ProjectEntity() {
     }
 
-    public ProjectEntity(String projectID, String projectName, String projectManagerID, String projectManagerName, String projectMonitorID, String projectMonitorName, String projectClientID, String projectClientContactName, String projectClientCompany, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones) {
+    public ProjectEntity(String projectID, String projectName, String projectManagerID, String projectManagerName, String projectMonitorID, String projectMonitorName, String projectClientID, String projectClientContactName, String projectClientCompany, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones, Integer domain) {
         this.projectID = projectID;
         this.projectName = projectName;
         this.projectManagerID = projectManagerID;
@@ -63,6 +65,7 @@ public class ProjectEntity implements Serializable {
         this.projectFrameworks = projectFrameworks;
         this.projectLanguages = projectLanguages;
         this.projectMilestones = projectMilestones;
+        this.domain = domain;
     }
 
     public ProjectEntity(String projectID, String projectName, String projectManagerID, String projectMonitorID, String projectClientID, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones) {
@@ -77,6 +80,17 @@ public class ProjectEntity implements Serializable {
         this.projectFrameworks = projectFrameworks;
         this.projectLanguages = projectLanguages;
         this.projectMilestones = projectMilestones;
+    }
+
+    public ProjectEntity(String projectID, String projectName, Integer projectStatus, Date projectStartDate, Date projectEndDate, String projectFrameworks, String projectLanguages, String projectMilestones) {
+        this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectStartDate = projectStartDate;
+        this.projectEndDate = projectEndDate;
+        this.projectFrameworks = projectFrameworks;
+        this.projectLanguages = projectLanguages;
+        this.projectMilestones = projectMilestones;
+        this.projectStatus = projectStatus;
     }
 
     public static long getSerialVersionUID() {
@@ -203,6 +217,14 @@ public class ProjectEntity implements Serializable {
         this.projectMilestones = projectMilestones;
     }
 
+    public Integer getDomain() {
+        return domain;
+    }
+
+    public void setDomain(Integer domain) {
+        this.domain = domain;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -222,12 +244,13 @@ public class ProjectEntity implements Serializable {
                 Objects.equals(projectEndDate, that.projectEndDate) &&
                 Objects.equals(projectFrameworks, that.projectFrameworks) &&
                 Objects.equals(projectLanguages, that.projectLanguages) &&
-                Objects.equals(projectMilestones, that.projectMilestones);
+                Objects.equals(projectMilestones, that.projectMilestones) &&
+                Objects.equals(domain, that.domain);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, projectName, projectManagerID, projectManagerName, projectMonitorID, projectMonitorName, projectClientID, projectClientContactName, projectClientCompany, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones);
+        return Objects.hash(projectID, projectName, projectManagerID, projectManagerName, projectMonitorID, projectMonitorName, projectClientID, projectClientContactName, projectClientCompany, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
     }
 
     @Override
@@ -248,6 +271,7 @@ public class ProjectEntity implements Serializable {
                 ", projectFrameworks='" + projectFrameworks + '\'' +
                 ", projectLanguages='" + projectLanguages + '\'' +
                 ", projectMilestones='" + projectMilestones + '\'' +
+                ", domain=" + domain +
                 '}';
     }
 

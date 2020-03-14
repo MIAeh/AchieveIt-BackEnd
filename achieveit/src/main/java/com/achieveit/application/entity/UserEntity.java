@@ -121,4 +121,16 @@ public class UserEntity {
         return Objects.hash(userId, userName, userMail, userPhone, userDepartment, userRole, userPassword);
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userMail='" + userMail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userDepartment=" + userDepartment +
+                ", userRole=" + userRole +
+                ", userPassword='" + userPassword + '\'' +
+                '}';
+    }
 }
