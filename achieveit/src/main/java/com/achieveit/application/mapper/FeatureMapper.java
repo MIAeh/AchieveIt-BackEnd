@@ -18,10 +18,10 @@ public interface FeatureMapper {
     @Select("select * from featurelist where featurelevel = 0")
     ArrayList<FeatureEntity> getAllTopFeatures();
 
-    @Select("select * from featurelist where fatherid == #{fatherId}")
+    @Select("select * from featurelist where fatherid = #{fatherId}")
     ArrayList<FeatureEntity> getChildrenByFatherId(@Param("fatherId") String fatherId);
 
-    @Select("select * from featurelist where featureid=#{featureId}")
+    @Select("select * from featurelist where featureid = #{featureId}")
     FeatureEntity getFeatureById(@Param("featureId") String fatherId);
 
     @Insert("insert into featurelist(featureid,featurelevel,fatherid,projectid,featurename)"+

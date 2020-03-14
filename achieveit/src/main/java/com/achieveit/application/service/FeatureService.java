@@ -8,12 +8,14 @@ import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@Service
 public class FeatureService {
     /**
      * Mapper for feature
@@ -70,7 +72,10 @@ public class FeatureService {
     public ResponseResult<Boolean> insertSubFeature(String featureName, String projectId, String fatherId,HttpSession session){
         FeatureEntity fatherEntity=featureMapper.getFeatureById(fatherId);
         if(fatherEntity==null) return ResultGenerator.error("no father");
-        int myLevel=fatherEntity.getFeatureLevel()-1;
+        if(fatherEntity.getFeatureLevel()==2){
+            return ResultGenerator.error("can't has more child");
+        }
+        int myLevel=fatherEntity.getFeatureLevel()+1;
         FeatureEntity myEntity=new FeatureEntity(myLevel,fatherId,projectId,featureName);
         int res=featureMapper.insertFeatures(myEntity);
         if(res==0)
