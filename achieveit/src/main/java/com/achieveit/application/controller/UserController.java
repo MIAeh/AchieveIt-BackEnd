@@ -1,5 +1,4 @@
 package com.achieveit.application.controller;
-import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.service.UserService;
 import com.achieveit.application.wrapper.ResponseResult;
