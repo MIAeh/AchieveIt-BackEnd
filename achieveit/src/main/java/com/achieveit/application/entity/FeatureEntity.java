@@ -6,7 +6,7 @@ import java.util.UUID;
 public class FeatureEntity {
     private String featureId;
 
-    private int level;
+    private int featureLevel;
 
     private String fatherId;
 
@@ -18,8 +18,8 @@ public class FeatureEntity {
         return featureId;
     }
 
-    public int getLevel() {
-        return level;
+    public int getFeatureLevel() {
+        return featureLevel;
     }
 
     public String getFatherId() {
@@ -38,8 +38,8 @@ public class FeatureEntity {
         this.featureId = featureId;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setFeatureLevel(int featureLevel) {
+        this.featureLevel = featureLevel;
     }
 
     public void setFatherId(String fatherId) {
@@ -58,16 +58,16 @@ public class FeatureEntity {
         this.featureId= UUID.randomUUID().toString();
     }
 
-    public FeatureEntity(int level, String projectId, String featureName) {
+    public FeatureEntity(int featureLevel, String projectId, String featureName) {
         this.featureId= UUID.randomUUID().toString();
-        this.level = level;
+        this.featureLevel = featureLevel;
         this.projectId = projectId;
         this.featureName = featureName;
     }
 
-    public FeatureEntity(int level, String fatherId, String projectId, String featureName) {
+    public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName) {
         this.featureId= UUID.randomUUID().toString();
-        this.level = level;
+        this.featureLevel = featureLevel;
         this.fatherId = fatherId;
         this.projectId = projectId;
         this.featureName = featureName;
@@ -78,7 +78,7 @@ public class FeatureEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FeatureEntity that = (FeatureEntity) o;
-        return level == that.level &&
+        return featureLevel == that.featureLevel &&
                 Objects.equals(featureId, that.featureId) &&
                 Objects.equals(fatherId, that.fatherId) &&
                 Objects.equals(projectId, that.projectId) &&
@@ -87,14 +87,14 @@ public class FeatureEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(featureId, level, fatherId, projectId, featureName);
+        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName);
     }
 
     @Override
     public String toString() {
         return "FeatureEntity{" +
                 "featureId='" + featureId + '\'' +
-                ", level=" + level +
+                ", level=" + featureLevel +
                 ", fatherId='" + fatherId + '\'' +
                 ", projectId='" + projectId + '\'' +
                 ", featureName='" + featureName + '\'' +
