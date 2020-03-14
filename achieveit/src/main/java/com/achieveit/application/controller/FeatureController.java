@@ -5,10 +5,7 @@ import com.achieveit.application.service.FeatureService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public class FeatureController {
         this.featureService=featureService;
     }
 
-    @PostMapping("getFeaturesInfo")
+    @GetMapping("getFeaturesInfo")
     public ResponseResult<ArrayList<FeatureEntity>> getFeatureInfo(HttpSession session){
         return featureService.getFeaturesInfo(session);
     }

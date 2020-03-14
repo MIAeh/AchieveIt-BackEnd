@@ -62,14 +62,14 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> insertTopFeature(String featureName, String projectId, HttpSession session){
+    public ResponseResult<String> insertTopFeature(String featureName, String projectId, HttpSession session){
         FeatureEntity entity=new FeatureEntity(0,projectId,featureName);
         featureMapper.insertFeatures(entity);
-        return ResultGenerator.success();
+        return ResultGenerator.success(entity.getFatherId());
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> insertSubFeature(String featureName, String projectId, String fatherId,HttpSession session){
+    public ResponseResult<String> insertSubFeature(String featureName, String projectId, String fatherId,HttpSession session){
         FeatureEntity fatherEntity=featureMapper.getFeatureById(fatherId);
         if(fatherEntity==null) return ResultGenerator.error("no father");
         if(fatherEntity.getFeatureLevel()==2){
@@ -81,6 +81,6 @@ public class FeatureService {
         if(res==0)
             return ResultGenerator.error("insert failed!");
         else
-            return ResultGenerator.success();
+            return ResultGenerator.success(myEntity.getFeatureId());
     }
 }
