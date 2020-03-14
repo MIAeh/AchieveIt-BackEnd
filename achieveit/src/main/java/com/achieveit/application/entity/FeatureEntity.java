@@ -1,5 +1,6 @@
 package com.achieveit.application.entity;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,6 +14,8 @@ public class FeatureEntity {
     private String projectId;
 
     private String featureName;
+
+    private ArrayList<FeatureEntity> allChildren;
 
     public String getFeatureId() {
         return featureId;
@@ -56,6 +59,14 @@ public class FeatureEntity {
 
     public FeatureEntity() {
         this.featureId= UUID.randomUUID().toString();
+    }
+
+    public ArrayList<FeatureEntity> getAllChildren() {
+        return allChildren;
+    }
+
+    public void setAllChildren(ArrayList<FeatureEntity> allChildren) {
+        this.allChildren = allChildren;
     }
 
     public FeatureEntity(int featureLevel, String projectId, String featureName) {
