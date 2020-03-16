@@ -13,21 +13,28 @@ public class MemberEntity implements Serializable {
 
     private String superiorID = "";
 
-    private String superiorName = "";
-
     private String memberName = "";
+
+    private String superiorName = "";
 
     private Integer memberRole = 0;
 
     public MemberEntity() {
     }
 
-    public MemberEntity(String projectID, String memberID, String superiorID, String superiorName, String memberName, Integer memberRole) {
+    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, Integer memberRole) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.superiorID = superiorID;
-        this.superiorName = superiorName;
         this.memberName = memberName;
+        this.superiorName = superiorName;
+        this.memberRole = memberRole;
+    }
+
+    public MemberEntity(String projectID, String memberID, String superiorID, Integer memberRole) {
+        this.projectID = projectID;
+        this.memberID = memberID;
+        this.superiorID = superiorID;
         this.memberRole = memberRole;
     }
 
