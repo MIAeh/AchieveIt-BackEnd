@@ -1,10 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
-import com.achieveit.application.entity.Milestone;
-import com.achieveit.application.entity.ProjectEntity;
-import com.achieveit.application.entity.ProjectInfo;
-import com.achieveit.application.entity.ProjectListItem;
+import com.achieveit.application.entity.*;
 import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.alibaba.fastjson.JSONArray;
@@ -84,7 +81,7 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getProjectByID")
-    public ResponseResult<ProjectInfo>  getProjectByID(@RequestParam("projectID") String projectID) {
+    public ResponseResult<ProjectInfo> getProjectByID(@RequestParam("projectID") String projectID) {
         return projectService.getProjectByID(projectID);
     }
 
@@ -110,6 +107,27 @@ public class ProjectController {
         Integer domain = jsonObject.getInteger("domain");
 
         return projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @GetMapping("/getMembersByID")
+    public ResponseResult<List<MemberEntity>> getMembersByID(@RequestParam("projectID") String projectID) {
+        return projectService.getMembersByID(projectID);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    @PostMapping("/addMemberByID")
+    public ResponseResult addMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID, @RequestParam("memberRole") Integer memberRole) {
+        return projectService.addMemberByID(projectID, memberID, superiorID, memberRole);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    @PostMapping("/updateMemberByID")
+    public ResponseResult updateMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID, @RequestParam("memberRole") Integer memberRole) {
+        return projectService.updateMemberByID(projectID, memberID, superiorID, memberRole);
     }
 
 }

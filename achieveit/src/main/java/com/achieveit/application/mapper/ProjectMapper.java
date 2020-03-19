@@ -1,5 +1,6 @@
 package com.achieveit.application.mapper;
 
+import com.achieveit.application.entity.MemberEntity;
 import com.achieveit.application.entity.ProjectEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -43,4 +44,13 @@ public interface ProjectMapper {
 
     @Update("UPDATE project SET projectid=#{projectID}, projectname=#{projectName}, projectstatus=#{projectStatus}, projectstartdate=#{projectStartDate}, projectenddate=#{projectEndDate}, projectframeworks=#{projectFrameworks}, projectlanguages=#{projectLanguages}, projectmilestones=#{projectMilestones}")
     void updateProjectByID(ProjectEntity projectEntity);
+
+    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid);")
+    ArrayList<MemberEntity> getMembersByID(String projectID);
+
+    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole) VALUES (#{projectID}, #{memberID}, #{superiorID}, #{memberRole});")
+    void addMemberByID(MemberEntity memberEntity);
+
+    @Update("UPDATE members SET superiorid=#{superiorID}, memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID});")
+    void updateMemberByID(MemberEntity memberEntity);
 }

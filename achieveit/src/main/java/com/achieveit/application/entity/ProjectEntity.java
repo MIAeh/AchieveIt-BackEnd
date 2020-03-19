@@ -276,6 +276,10 @@ public class ProjectEntity implements Serializable {
     }
 
     public boolean isMatch(String searchCondition, Integer projectStatus) {
-        return this.projectStatus.equals(projectStatus) && (searchCondition.isEmpty() || this.projectName.contains(searchCondition) || this.projectManagerName.contains(searchCondition) || this.projectMonitorName.contains(searchCondition) || this.projectClientContactName.contains(searchCondition));
+        if (projectStatus == -1) {
+            return (searchCondition.isEmpty() || this.projectName.contains(searchCondition) || this.projectManagerName.contains(searchCondition) || this.projectMonitorName.contains(searchCondition) || this.projectClientContactName.contains(searchCondition));
+        } else {
+            return this.projectStatus.equals(projectStatus) && (searchCondition.isEmpty() || this.projectName.contains(searchCondition) || this.projectManagerName.contains(searchCondition) || this.projectMonitorName.contains(searchCondition) || this.projectClientContactName.contains(searchCondition));
+        }
     }
 }
