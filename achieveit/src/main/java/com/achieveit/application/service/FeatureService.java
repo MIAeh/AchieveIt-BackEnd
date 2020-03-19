@@ -62,21 +62,21 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<String> insertTopFeature(String featureName, String projectId, HttpSession session){
-        FeatureEntity entity=new FeatureEntity(0,projectId,featureName);
+    public ResponseResult<String> insertTopFeature(String featureName, String projectId,String featureDescription, HttpSession session){
+        FeatureEntity entity=new FeatureEntity(0,projectId,featureName,featureDescription);
         featureMapper.insertFeatures(entity);
         return ResultGenerator.success(entity.getFatherId());
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<String> insertSubFeature(String featureName, String projectId, String fatherId,HttpSession session){
+    public ResponseResult<String> insertSubFeature(String featureName, String projectId, String fatherId,String featureDescription,HttpSession session){
         FeatureEntity fatherEntity=featureMapper.getFeatureById(fatherId);
         if(fatherEntity==null) return ResultGenerator.error("no father");
         if(fatherEntity.getFeatureLevel()==2){
             return ResultGenerator.error("can't has more child");
         }
         int myLevel=fatherEntity.getFeatureLevel()+1;
-        FeatureEntity myEntity=new FeatureEntity(myLevel,fatherId,projectId,featureName);
+        FeatureEntity myEntity=new FeatureEntity(myLevel,fatherId,projectId,featureName,featureDescription);
         int res=featureMapper.insertFeatures(myEntity);
         if(res==0)
             return ResultGenerator.error("insert failed!");

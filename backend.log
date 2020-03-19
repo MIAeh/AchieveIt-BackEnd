@@ -747,3 +747,421 @@ org.postgresql.util.PSQLException: ERROR: operator does not exist: character var
 2020-03-14 13:54:26.488  INFO 440 --- [http-nio-8080-exec-4] c.a.a.aspect.HttpRequestAspect           : Method Signature: public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.controller.FeatureController.getFeatureInfo(javax.servlet.http.HttpSession)
 2020-03-14 13:54:26.488  INFO 440 --- [http-nio-8080-exec-4] c.a.a.aspect.HttpRequestAspect           : ==============================
 2020-03-14 13:54:26.489  INFO 440 --- [http-nio-8080-exec-4] c.a.a.aspect.HttpRequestAspect           : 
+2020-03-14 14:16:04.400  INFO 13812 --- [restartedMain] com.achieveit.application.Application    : Starting Application on DESKTOP-A4Q1EVA with PID 13812 (C:\AchieveIt-BackEnd\achieveit\target\classes started by Alevery in C:\AchieveIt-BackEnd)
+2020-03-14 14:16:04.402  INFO 13812 --- [restartedMain] com.achieveit.application.Application    : The following profiles are active: dev
+2020-03-14 14:16:04.554  INFO 13812 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4f057dee: startup date [Sat Mar 14 14:16:04 CST 2020]; root of context hierarchy
+2020-03-14 14:16:08.834  INFO 13812 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$26f52258] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-03-14 14:16:09.857  INFO 13812 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-14 14:16:09.866  INFO 13812 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-14 14:16:09.866  INFO 13812 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2020-03-14 14:16:09.866  INFO 13812 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_202\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NetSarang\Xftp 6\;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Users\one_h\.cargo\bin;C:\Users\one_h\AppData\Local\Microsoft\WindowsApps;C:\Users\one_h\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\one_h\AppData\Local\GitHubDesktop\bin;C:\Program Files (x86)\CMake\bin;.]
+2020-03-14 14:16:10.126  INFO 13812 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-14 14:16:10.127  INFO 13812 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5573 ms
+2020-03-14 14:16:10.334  INFO 13812 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2020-03-14 14:16:10.341  INFO 13812 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2020-03-14 14:16:10.342  INFO 13812 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2020-03-14 14:16:10.342  INFO 13812 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2020-03-14 14:16:10.343  INFO 13812 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2020-03-14 14:16:11.117  INFO 13812 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-03-14 14:16:11.510  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4f057dee: startup date [Sat Mar 14 14:16:04 CST 2020]; root of context hierarchy
+2020-03-14 14:16:11.637  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/client/getClientInfoByID],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<com.achieveit.application.entity.ClientInfo> com.achieveit.application.controller.ClientController.getClientInfoByID(java.lang.String)
+2020-03-14 14:16:11.643  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/feature/addTopFeature],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<java.lang.String> com.achieveit.application.controller.FeatureController.addTopFeature(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.644  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/feature/getFeaturesInfo],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<java.util.ArrayList<com.achieveit.application.entity.FeatureEntity>> com.achieveit.application.controller.FeatureController.getFeatureInfo(javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.646  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/feature/addSubFeature],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<java.lang.String> com.achieveit.application.controller.FeatureController.addSubFeature(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.648  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/project/getProjectIDList],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<java.util.ArrayList<java.lang.String>> com.achieveit.application.controller.ProjectController.getProjectIDList()
+2020-03-14 14:16:11.649  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/project/getProjectList],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<java.util.List<com.achieveit.application.entity.ProjectListItem>> com.achieveit.application.controller.ProjectController.getProjectList(java.lang.String,java.lang.Integer)
+2020-03-14 14:16:11.650  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/project/getProjectByID],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<com.achieveit.application.entity.ProjectInfo> com.achieveit.application.controller.ProjectController.getProjectByID(java.lang.String)
+2020-03-14 14:16:11.652  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/project/createProjectByID],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.controller.ProjectController.createProjectByID(com.alibaba.fastjson.JSONObject)
+2020-03-14 14:16:11.653  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/project/updateProjectByID],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.controller.ProjectController.updateProjectByID(com.alibaba.fastjson.JSONObject)
+2020-03-14 14:16:11.656  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/register],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<java.lang.Integer> com.achieveit.application.controller.UserController.register(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.657  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/userLoginByMail],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<com.achieveit.application.entity.UserEntity> com.achieveit.application.controller.UserController.userLoginByMail(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.658  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/userLoginByPhone],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<com.achieveit.application.entity.UserEntity> com.achieveit.application.controller.UserController.userLoginByPhone(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.658  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/logout],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<java.lang.Integer> com.achieveit.application.controller.UserController.logout(javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.659  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/isLogin],methods=[GET]}" onto public com.achieveit.application.wrapper.ResponseResult<java.lang.Integer> com.achieveit.application.controller.UserController.isLogin(javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.660  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/getUsersByRole],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<java.util.ArrayList<com.achieveit.application.entity.UserEntity>> com.achieveit.application.controller.UserController.getUsersByRole(int,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.661  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/userLoginById],methods=[POST]}" onto public com.achieveit.application.wrapper.ResponseResult<com.achieveit.application.entity.UserEntity> com.achieveit.application.controller.UserController.userLoginById(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:11.664  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2020-03-14 14:16:11.665  INFO 13812 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2020-03-14 14:16:11.735  INFO 13812 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-03-14 14:16:11.735  INFO 13812 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-03-14 14:16:11.849  WARN 13812 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-03-14 14:16:12.887  INFO 13812 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-03-14 14:16:12.942  INFO 13812 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2020-03-14 14:16:12.947  INFO 13812 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2020-03-14 14:16:12.957  INFO 13812 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2020-03-14 14:16:12.968  INFO 13812 --- [restartedMain] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483547
+2020-03-14 14:16:13.037  INFO 13812 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-14 14:16:13.052  INFO 13812 --- [restartedMain] com.achieveit.application.Application    : Started Application in 10.2 seconds (JVM running for 13.081)
+2020-03-14 14:16:13.150  INFO 13812 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2020-03-14 14:16:13.151  INFO 13812 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2020-03-14 14:16:13.202  INFO 13812 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 51 ms
+2020-03-14 14:16:13.231  WARN 13812 --- [http-nio-8080-exec-1] o.s.web.servlet.PageNotFound             : Request method 'POST' not supported
+2020-03-14 14:16:13.232  WARN 13812 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported
+2020-03-14 14:16:22.458  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : ==== Receive Http Request ====
+2020-03-14 14:16:22.460  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : Request URL: http://localhost:8080/feature/getFeaturesInfo
+2020-03-14 14:16:22.461  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : Request Method: GET
+2020-03-14 14:16:22.461  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : Request IP: 127.0.0.1
+2020-03-14 14:16:22.462  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : Method Signature: public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.controller.FeatureController.getFeatureInfo(javax.servlet.http.HttpSession)
+2020-03-14 14:16:22.463  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : ==============================
+2020-03-14 14:16:22.464  INFO 13812 --- [http-nio-8080-exec-2] c.a.a.aspect.HttpRequestAspect           : 
+2020-03-14 14:16:22.484  INFO 13812 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-14 14:16:22.750  INFO 13812 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-14 14:16:22.906  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:22.907 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:23.198  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:23.198 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:23.626  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:23.627 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:24.239  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:24.239 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:25.124  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:25.125 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:26.435  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:26.436 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:27.395  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : ==== Receive Http Request ====
+2020-03-14 14:16:27.397  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : Request URL: http://localhost:8080/feature/addSubFeature
+2020-03-14 14:16:27.397  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : Request Method: POST
+2020-03-14 14:16:27.401  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : Request IP: 127.0.0.1
+2020-03-14 14:16:27.402  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : Method Signature: public com.achieveit.application.wrapper.ResponseResult com.achieveit.application.controller.FeatureController.addSubFeature(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2020-03-14 14:16:27.403  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : ==============================
+2020-03-14 14:16:27.406  INFO 13812 --- [http-nio-8080-exec-3] c.a.a.aspect.HttpRequestAspect           : 
+2020-03-14 14:16:28.389  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:28.390 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:31.281  WARN 13812 --- [HikariPool-1 connection adder] unknown.jul.logger                       : SQLException occurred while connecting to 101.37.205.16:5432
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) [postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) [postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2020-03-14 14:16:31.282 ERROR 13812 --- [HikariPool-1 connection adder] org.postgresql.Driver                    : Connection error: 
+
+org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:473) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:205) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.makeConnection(Driver.java:452) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.Driver.connect(Driver.java:254) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:117) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:123) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:365) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:194) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:460) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:699) [HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:685) [HikariCP-2.7.9.jar:na]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+

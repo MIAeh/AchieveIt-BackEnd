@@ -80,4 +80,7 @@ public interface UserMapper {
     @Select("select * from \"users\" where userrole = #{userRole}")
     ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
 
+    @Update("update users set userrole=#{userRole} where userid=#{userId}")
+    int setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
+
 }

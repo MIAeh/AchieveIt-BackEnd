@@ -31,13 +31,14 @@ public class FeatureController {
     }
 
     @PostMapping("addTopFeature")
-    public ResponseResult<String> addTopFeature(@RequestParam(name = "featurename")String featureName,@RequestParam(name = "projectid") String projectId, HttpSession session){
-        return featureService.insertTopFeature(featureName,projectId,session);
+    public ResponseResult<String> addTopFeature(@RequestParam(name = "featurename")String featureName,@RequestParam(name = "projectid") String projectId,
+                                                @RequestParam(name = "featuredescription")String featureDescription, HttpSession session){
+        return featureService.insertTopFeature(featureName,projectId,featureDescription,session);
     }
 
     @PostMapping("addSubFeature")
     public ResponseResult<String> addSubFeature(@RequestParam(name = "featurename")String featureName,@RequestParam(name = "projectid")String projectId,
-                                                 @RequestParam(name = "fatherid")String fatherId,HttpSession session){
-        return featureService.insertSubFeature(featureName,projectId,fatherId,session);
+                                                 @RequestParam(name = "fatherid")String fatherId,@RequestParam(name = "featuredescription")String featureDescription,HttpSession session){
+        return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
     }
 }

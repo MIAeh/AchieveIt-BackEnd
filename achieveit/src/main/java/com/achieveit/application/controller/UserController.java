@@ -111,9 +111,15 @@ public class UserController {
      * @return 所有这一用户角色的用户
      */
     @CrossOrigin
-    @PostMapping("getUsersByRole")
+    @GetMapping("getUsersByRole")
     public ResponseResult<ArrayList<UserEntity>> getUsersByRole(@RequestParam(name = "userrole") int userRole,HttpSession session){
         return userService.getUsersByRole(userRole,session);
+    }
+
+    @CrossOrigin
+    @GetMapping("setUserRoleById")
+    public ResponseResult<Boolean> setUserRoleById(@RequestParam(name = "userid")String userId,@RequestParam(name = "userrole") int userRole,HttpSession session) {
+        return userService.setUserRoleById(userId,userRole, session);
     }
 
 }

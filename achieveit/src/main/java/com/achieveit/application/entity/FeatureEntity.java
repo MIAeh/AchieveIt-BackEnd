@@ -15,6 +15,8 @@ public class FeatureEntity {
 
     private String featureName;
 
+    private String featureDescription;
+
     private ArrayList<FeatureEntity> allChildren;
 
     public String getFeatureId() {
@@ -69,19 +71,29 @@ public class FeatureEntity {
         this.allChildren = allChildren;
     }
 
-    public FeatureEntity(int featureLevel, String projectId, String featureName) {
+    public String getFeatureDescription() {
+        return featureDescription;
+    }
+
+    public void setFeatureDescription(String featureDescription) {
+        this.featureDescription = featureDescription;
+    }
+
+    public FeatureEntity(int featureLevel, String projectId, String featureName,String featureDescription) {
         this.featureId= UUID.randomUUID().toString();
         this.featureLevel = featureLevel;
         this.projectId = projectId;
         this.featureName = featureName;
+        this.featureDescription=featureDescription;
     }
 
-    public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName) {
+    public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName,String featureDescription) {
         this.featureId= UUID.randomUUID().toString();
         this.featureLevel = featureLevel;
         this.fatherId = fatherId;
         this.projectId = projectId;
         this.featureName = featureName;
+        this.featureDescription=featureDescription;
     }
 
     @Override
@@ -98,17 +110,19 @@ public class FeatureEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName);
+        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName, featureDescription, allChildren);
     }
 
     @Override
     public String toString() {
         return "FeatureEntity{" +
                 "featureId='" + featureId + '\'' +
-                ", level=" + featureLevel +
+                ", featureLevel=" + featureLevel +
                 ", fatherId='" + fatherId + '\'' +
                 ", projectId='" + projectId + '\'' +
                 ", featureName='" + featureName + '\'' +
+                ", featureDescription='" + featureDescription + '\'' +
+                ", allChildren=" + allChildren +
                 '}';
     }
 }
