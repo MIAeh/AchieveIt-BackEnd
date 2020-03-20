@@ -43,7 +43,7 @@ public class ProjectController {
     @Logged({"searchCondition", "projectStatus"})
     @GetMapping("/getProjectList")
     public ResponseResult<List<ProjectListItem>>  getProjectList(@RequestParam("searchCondition") String searchCondition, @RequestParam("projectStatus") Integer projectStatus) {
-        return projectService.getProjectList(searchCondition, projectStatus);
+            return projectService.getProjectList(searchCondition, projectStatus);
     }
 
     /**
@@ -130,4 +130,17 @@ public class ProjectController {
         return projectService.updateMemberByID(projectID, memberID, superiorID, memberRole);
     }
 
+    @CrossOrigin
+    @Logged({"projectID"})
+    @GetMapping("/getGitRepoByID")
+    public ResponseResult<String> getGitRepoByID(@RequestParam("projectID") String projectID) {
+        return projectService.getGitRepoByID(projectID);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID", "gitRepo"})
+    @GetMapping("/updateGitRepoByID")
+    public ResponseResult updateGitRepoByID(@RequestParam("projectID") String projectID, @RequestParam("gitRepo") String gitRepo) {
+        return projectService.updateGitRepoByID(projectID, gitRepo);
+    }
 }

@@ -53,4 +53,14 @@ public interface ProjectMapper {
 
     @Update("UPDATE members SET superiorid=#{superiorID}, memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID});")
     void updateMemberByID(MemberEntity memberEntity);
+
+    @Insert("INSERT INTO gitrepos(projectid, gitrepo) VALUES (#{projectID}, #{gitRepo});")
+    void addGitRepoByID(String projectID, String gitRepo);
+
+    @Update("UPDATE gitrepos SET gitrepo=#{gitRepo} WHERE (projectid = #{projectID});")
+    void updateGitRepoByID(String projectID, String gitRepo);
+
+    @Select("SELECT gitrepo FROM gitrepos WHERE (projectid = #{projectID});")
+    String getGitRepoByID(String projectID);
+
 }

@@ -84,6 +84,7 @@ public class ProjectService {
         Integer defaultDomain = 0;
         projectMapper.createDomainByProjectID(projectID, defaultDomain);
         projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, 0));
+        projectMapper.addGitRepoByID(projectID, "null");
         return ResultGenerator.success();
     }
 
@@ -126,15 +127,27 @@ public class ProjectService {
         return ResultGenerator.success(memberEntityList);
     }
 
-    @Logged({"projectID"})
+    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
     public ResponseResult addMemberByID(String projectID, String memberID, String superiorID, Integer memberRole) {
-        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, 0));
+        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, memberRole));
+        return ResultGenerator.success();
+    }
+
+    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    public ResponseResult updateMemberByID(String projectID, String memberID, String superiorID, Integer memberRole) {
+        projectMapper.updateMemberByID(new MemberEntity(projectID, memberID, superiorID, memberRole));
         return ResultGenerator.success();
     }
 
     @Logged({"projectID"})
-    public ResponseResult updateMemberByID(String projectID, String memberID, String superiorID, Integer memberRole) {
-        projectMapper.updateMemberByID(new MemberEntity(projectID, memberID, superiorID, 0));
+    public ResponseResult<String> getGitRepoByID(String projectID) {
+        String gitRepo = projectMapper.getGitRepoByID(projectID);
+        return ResultGenerator.success(gitRepo);
+    }
+
+    @Logged({"projectID", "gitRepo"})
+    public ResponseResult updateGitRepoByID(String projectID, String gitRepo) {
+        projectMapper.updateGitRepoByID(projectID, gitRepo);
         return ResultGenerator.success();
     }
 
