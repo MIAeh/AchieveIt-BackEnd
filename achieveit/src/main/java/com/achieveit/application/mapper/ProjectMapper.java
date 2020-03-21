@@ -5,6 +5,7 @@ import com.achieveit.application.entity.ProjectEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Client Mapper
@@ -45,14 +46,17 @@ public interface ProjectMapper {
     @Update("UPDATE project SET projectid=#{projectID}, projectname=#{projectName}, projectstatus=#{projectStatus}, projectstartdate=#{projectStartDate}, projectenddate=#{projectEndDate}, projectframeworks=#{projectFrameworks}, projectlanguages=#{projectLanguages}, projectmilestones=#{projectMilestones}")
     void updateProjectByID(ProjectEntity projectEntity);
 
-    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid);")
+    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
     ArrayList<MemberEntity> getMembersByID(String projectID);
 
-    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole) VALUES (#{projectID}, #{memberID}, #{superiorID}, #{memberRole});")
+    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime, deleted) VALUES (#{projectID}, #{memberID}, #{superiorID}, #{memberRole}, current_date, false);")
     void addMemberByID(MemberEntity memberEntity);
 
-    @Update("UPDATE members SET superiorid=#{superiorID}, memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID});")
+    @Update("UPDATE members SET superiorid=#{superiorID}, memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
     void updateMemberByID(MemberEntity memberEntity);
+
+    @Update("UPDATE members SET deleted=true WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    void deleteMemberByID(String projectID, String memberID);
 
     @Insert("INSERT INTO gitrepos(projectid, gitrepo) VALUES (#{projectID}, #{gitRepo});")
     void addGitRepoByID(String projectID, String gitRepo);
