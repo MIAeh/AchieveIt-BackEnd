@@ -153,4 +153,12 @@ public class UserService {
         int res=userMapper.setUserRoleById(userId,userRole);
         return ResultGenerator.success();
     }
+
+    public ResponseResult<UserEntity> getUserInfoById(String userId,HttpSession session){
+        UserEntity entity=userMapper.getUserInfoById(userId);
+        if(entity==null)
+            return ResultGenerator.error("no such id");
+        else
+            return ResultGenerator.success(entity);
+    }
 }

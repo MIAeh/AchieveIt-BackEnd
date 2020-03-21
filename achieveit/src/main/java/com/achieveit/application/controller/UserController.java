@@ -122,4 +122,9 @@ public class UserController {
         return userService.setUserRoleById(userId,userRole, session);
     }
 
+    @CrossOrigin
+    @GetMapping("getUserInfoById")
+    public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userid")String userId,HttpSession session) {
+        return userService.getUserInfoById(userId,session);
+    }
 }
