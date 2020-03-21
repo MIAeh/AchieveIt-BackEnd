@@ -8,6 +8,8 @@ public class ProjectListItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String projectID;
+
     private String projectName;
 
     private Integer projectStatus;
@@ -26,6 +28,7 @@ public class ProjectListItem implements Serializable {
     }
 
     public ProjectListItem(ProjectEntity projectEntity) {
+        this.projectID = projectEntity.getProjectID();
         this.projectName = projectEntity.getProjectName();
         this.projectStatus = projectEntity.getProjectStatus();
         this.projectManagerName = projectEntity.getProjectManagerName();
@@ -35,7 +38,8 @@ public class ProjectListItem implements Serializable {
         this.projectEndDate = projectEntity.getProjectEndDate();
     }
 
-    public ProjectListItem(String projectName, Integer projectStatus, String projectManagerName, String projectMonitorName, String projectClientContactName, Date projectStartDate, Date projectEndDate) {
+    public ProjectListItem(String projectID, String projectName, Integer projectStatus, String projectManagerName, String projectMonitorName, String projectClientContactName, Date projectStartDate, Date projectEndDate) {
+        this.projectID = projectID;
         this.projectName = projectName;
         this.projectStatus = projectStatus;
         this.projectManagerName = projectManagerName;
@@ -43,6 +47,14 @@ public class ProjectListItem implements Serializable {
         this.projectClientContactName = projectClientContactName;
         this.projectStartDate = projectStartDate;
         this.projectEndDate = projectEndDate;
+    }
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
     }
 
     public static long getSerialVersionUID() {
@@ -110,7 +122,8 @@ public class ProjectListItem implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectListItem that = (ProjectListItem) o;
-        return Objects.equals(projectName, that.projectName) &&
+        return Objects.equals(projectID, that.projectID) &&
+                Objects.equals(projectName, that.projectName) &&
                 Objects.equals(projectStatus, that.projectStatus) &&
                 Objects.equals(projectManagerName, that.projectManagerName) &&
                 Objects.equals(projectMonitorName, that.projectMonitorName) &&
@@ -121,15 +134,16 @@ public class ProjectListItem implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectName, projectStatus, projectManagerName, projectMonitorName, projectClientContactName, projectStartDate, projectEndDate);
+        return Objects.hash(projectID, projectName, projectStatus, projectManagerName, projectMonitorName, projectClientContactName, projectStartDate, projectEndDate);
     }
 
     @Override
     public String toString() {
         return "ProjectListItem{" +
-                "projectName='" + projectName + '\'' +
+                "projectID='" + projectID + '\'' +
+                ", projectName='" + projectName + '\'' +
                 ", projectStatus=" + projectStatus +
-                ", projectManegerName='" + projectManagerName + '\'' +
+                ", projectManagerName='" + projectManagerName + '\'' +
                 ", projectMonitorName='" + projectMonitorName + '\'' +
                 ", projectClientContactName='" + projectClientContactName + '\'' +
                 ", projectStartDate=" + projectStartDate +
