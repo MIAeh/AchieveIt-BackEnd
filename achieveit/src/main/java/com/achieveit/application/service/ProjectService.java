@@ -86,6 +86,7 @@ public class ProjectService {
         projectMapper.createDomainByProjectID(projectID, defaultDomain);
         projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, "[0]"));
         projectMapper.addGitRepoByID(projectID, "null");
+        projectMapper.deleteProjectIDFromProjectIDList(projectID);
         return ResultGenerator.success();
     }
 

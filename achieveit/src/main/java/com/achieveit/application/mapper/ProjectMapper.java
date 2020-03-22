@@ -27,6 +27,9 @@ public interface ProjectMapper {
     @Select("SELECT project.*, manager.username AS projectmanagername, monitor.username AS projectmonitorname, client.clientcontactname AS projectclientcontactname, client,clientcompany AS projectclientcompany FROM project, users manager, users monitor, client WHERE (manager.userid = project.projectmanagerid AND monitor.userid = project.projectmonitorid AND client.clientid = project.projectclientid);")
     ArrayList<ProjectEntity> getProjectList();
 
+    @Delete("DELETE FROM projectidlist WHERE projectid = #{projectID}")
+    void deleteProjectIDFromProjectIDList(String projectID);
+
     @Insert("INSERT INTO project(projectid,projectname,projectmanagerid,projectmonitorid,projectclientid,projectstatus,projectstartdate,projectenddate,projectframeworks,projectlanguages,projectmilestones)" +
             " values(#{projectID},#{projectName},#{projectManagerID},#{projectMonitorID},#{projectClientID},#{projectStatus},#{projectStartDate},#{projectEndDate},#{projectFrameworks},#{projectLanguages},#{projectMilestones})")
     void createProjectByID(ProjectEntity projectEntity);
