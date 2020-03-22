@@ -1,6 +1,7 @@
 package com.achieveit.application.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class MemberEntity implements Serializable {
@@ -19,6 +20,10 @@ public class MemberEntity implements Serializable {
 
     private String memberRole = "";
 
+    private Date createTime;
+
+    private Date deleteTime;
+
     public MemberEntity() {
     }
 
@@ -29,6 +34,17 @@ public class MemberEntity implements Serializable {
         this.memberName = memberName;
         this.superiorName = superiorName;
         this.memberRole = memberRole;
+    }
+
+    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole, Date createTime, Date deleteTime) {
+        this.projectID = projectID;
+        this.memberID = memberID;
+        this.superiorID = superiorID;
+        this.memberName = memberName;
+        this.superiorName = superiorName;
+        this.memberRole = memberRole;
+        this.createTime = createTime;
+        this.deleteTime = deleteTime;
     }
 
     public MemberEntity(String projectID, String memberID, String superiorID, String memberRole) {
@@ -86,6 +102,22 @@ public class MemberEntity implements Serializable {
         this.memberRole = memberRole;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(Date deleteTime) {
+        this.deleteTime = deleteTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,14 +126,16 @@ public class MemberEntity implements Serializable {
         return Objects.equals(projectID, that.projectID) &&
                 Objects.equals(memberID, that.memberID) &&
                 Objects.equals(superiorID, that.superiorID) &&
-                Objects.equals(superiorName, that.superiorName) &&
                 Objects.equals(memberName, that.memberName) &&
-                Objects.equals(memberRole, that.memberRole);
+                Objects.equals(superiorName, that.superiorName) &&
+                Objects.equals(memberRole, that.memberRole) &&
+                Objects.equals(createTime, that.createTime) &&
+                Objects.equals(deleteTime, that.deleteTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, memberID, superiorID, superiorName, memberName, memberRole);
+        return Objects.hash(projectID, memberID, superiorID, memberName, superiorName, memberRole, createTime, deleteTime);
     }
 
     @Override
@@ -110,9 +144,11 @@ public class MemberEntity implements Serializable {
                 "projectID='" + projectID + '\'' +
                 ", memberID='" + memberID + '\'' +
                 ", superiorID='" + superiorID + '\'' +
-                ", superiorName='" + superiorName + '\'' +
                 ", memberName='" + memberName + '\'' +
-                ", memberRole=" + memberRole +
+                ", superiorName='" + superiorName + '\'' +
+                ", memberRole='" + memberRole + '\'' +
+                ", createTime=" + createTime +
+                ", deleteTime=" + deleteTime +
                 '}';
     }
 }

@@ -1,7 +1,10 @@
 package com.achieveit.application.entity;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class AuthorityEntity implements Serializable {
@@ -12,7 +15,9 @@ public class AuthorityEntity implements Serializable {
 
     private String memberID = "";
 
-    private Integer memberRole = 0;
+    private List<Integer> memberRole;
+
+    private String memberName = "";
 
     private Date enterProjectTime;
 
@@ -21,16 +26,22 @@ public class AuthorityEntity implements Serializable {
     public AuthorityEntity() {
     }
 
-    public AuthorityEntity(String projectID, String memberID, Integer memberRole, Date enterProjectTime, Date exitProjectTime) {
+    public AuthorityEntity(String projectID, String memberID, List<Integer> memberRole, String memberName, Date enterProjectTime, Date exitProjectTime) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.memberRole = memberRole;
+        this.memberName = memberName;
         this.enterProjectTime = enterProjectTime;
         this.exitProjectTime = exitProjectTime;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public AuthorityEntity(MemberEntity memberEntity) {
+        this.projectID = memberEntity.getProjectID();
+        this.memberID = memberEntity.getMemberID();
+        this.memberName = memberEntity.getMemberName();
+        this.memberRole = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
+        this.enterProjectTime = memberEntity.getCreateTime();
+        this.exitProjectTime = memberEntity.getDeleteTime();
     }
 
     public String getProjectID() {
@@ -49,12 +60,20 @@ public class AuthorityEntity implements Serializable {
         this.memberID = memberID;
     }
 
-    public Integer getMemberRole() {
+    public List<Integer> getMemberRole() {
         return memberRole;
     }
 
-    public void setMemberRole(Integer memberRole) {
+    public void setMemberRole(List<Integer> memberRole) {
         this.memberRole = memberRole;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
     public Date getEnterProjectTime() {
@@ -81,13 +100,14 @@ public class AuthorityEntity implements Serializable {
         return Objects.equals(projectID, that.projectID) &&
                 Objects.equals(memberID, that.memberID) &&
                 Objects.equals(memberRole, that.memberRole) &&
+                Objects.equals(memberName, that.memberName) &&
                 Objects.equals(enterProjectTime, that.enterProjectTime) &&
                 Objects.equals(exitProjectTime, that.exitProjectTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, memberID, memberRole, enterProjectTime, exitProjectTime);
+        return Objects.hash(projectID, memberID, memberRole, memberName, enterProjectTime, exitProjectTime);
     }
 
     @Override
@@ -96,6 +116,7 @@ public class AuthorityEntity implements Serializable {
                 "projectID='" + projectID + '\'' +
                 ", memberID='" + memberID + '\'' +
                 ", memberRole=" + memberRole +
+                ", memberName='" + memberName + '\'' +
                 ", enterProjectTime=" + enterProjectTime +
                 ", exitProjectTime=" + exitProjectTime +
                 '}';
