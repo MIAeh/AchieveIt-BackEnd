@@ -129,14 +129,14 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/addMemberRoleByID")
-        public ResponseResult addMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") Integer memberRole) {
+        public ResponseResult addMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
         return projectService.addMemberRoleByID(projectID, memberID, memberRole);
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/removeMemberRoleByID")
-    public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") Integer memberRole) {
+    public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
         return projectService.removeMemberRoleByID(projectID, memberID, memberRole);
     }
 
