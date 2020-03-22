@@ -123,19 +123,23 @@ public class ProjectController {
         String projectID = jsonObject.getString("projectID");
         String memberID = jsonObject.getString("memberID");
         String superiorID = jsonObject.getString("superiorID");
-        List<Integer> memberRoles = JSONObject.parseArray(jsonObject.getJSONArray("memberRole").toJSONString(), Integer.class);
-        return projectService.addMemberByID(projectID, memberID, superiorID, memberRoles);
+        return projectService.addMemberByID(projectID, memberID, superiorID);
     }
 
     @CrossOrigin
-    @Logged({"jsonObject"})
-    @PostMapping("/updateMemberRoleByID")
-    public ResponseResult updateMemberRoleByID(@RequestBody JSONObject jsonObject) {
-        String projectID = jsonObject.getString("projectID");
-        String memberID = jsonObject.getString("memberID");
-        List<Integer> memberRoles = JSONObject.parseArray(jsonObject.getJSONArray("memberRole").toJSONString(), Integer.class);
-        return projectService.updateMemberRoleByID(projectID, memberID, memberRoles);
+    @Logged({"projectID", "memberID", "memberRole"})
+    @PostMapping("/addMemberRoleByID")
+    public ResponseResult addMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") Integer memberRole) {
+        return projectService.addMemberRoleByID(projectID, memberID, memberRole);
     }
+
+    @CrossOrigin
+    @Logged({"projectID", "memberID", "memberRole"})
+    @PostMapping("/removeMemberRoleByID")
+    public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") Integer memberRole) {
+        return projectService.removeMemberRoleByID(projectID, memberID, memberRole);
+    }
+
 
     @CrossOrigin
     @Logged({"projectID", "memberID", "superiorID"})

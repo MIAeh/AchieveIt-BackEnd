@@ -49,7 +49,10 @@ public interface ProjectMapper {
     @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
     ArrayList<MemberEntity> getMembersByID(String projectID);
 
-    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime, deleted) VALUES (#{projectID}, #{memberID}, #{superiorID}, #{memberRole}, current_date, false);")
+    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.memberid = #{memberID} AND members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
+    MemberEntity getMemberByID(String projectID, String memberID);
+
+    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime, deleted) VALUES (#{projectID}, #{memberID}, #{superiorID}, '[]', current_date, false);")
     void addMemberByID(MemberEntity memberEntity);
 
     @Update("UPDATE members SET memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")

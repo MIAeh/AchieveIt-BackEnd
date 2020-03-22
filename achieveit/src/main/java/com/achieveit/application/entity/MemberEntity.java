@@ -54,6 +54,12 @@ public class MemberEntity implements Serializable {
         this.memberRole = memberRole;
     }
 
+    public MemberEntity(String projectID, String memberID, String superiorID) {
+        this.projectID = projectID;
+        this.memberID = memberID;
+        this.superiorID = superiorID;
+    }
+
     public String getProjectID() {
         return projectID;
     }

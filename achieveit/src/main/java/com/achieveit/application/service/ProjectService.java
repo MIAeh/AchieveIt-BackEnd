@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -138,19 +139,38 @@ public class ProjectService {
         return ResultGenerator.success(memberInfoList);
     }
 
-    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
-    public ResponseResult addMemberByID(String projectID, String memberID, String superiorID, List<Integer> memberRoles) {
-        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, JSONObject.toJSONString(memberRoles)));
+    @Logged({"projectID", "memberID", "superiorID"})
+    public ResponseResult addMemberByID(String projectID, String memberID, String superiorID) {
+        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID));
         return ResultGenerator.success();
     }
 
-    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
-    public ResponseResult updateMemberRoleByID(String projectID, String memberID, List<Integer> memberRoles) {
-        projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
+    @Transactional
+    @Logged({"projectID", "memberID", "memberRole"})
+    public ResponseResult addMemberRoleByID(String projectID, String memberID, Integer memberRole) {
+        MemberEntity memberEntity = projectMapper.getMemberByID(projectID, memberID);
+        List<Integer> memberRoles = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
+        if (!memberRoles.contains(memberRole)) {
+            memberRoles.add(memberRole);
+            Collections.sort(memberRoles);
+            projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
+        }
         return ResultGenerator.success();
     }
 
-    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    @Transactional
+    @Logged({"projectID", "memberID", "memberRole"})
+    public ResponseResult removeMemberRoleByID(String projectID, String memberID, Integer memberRole) {
+        MemberEntity memberEntity = projectMapper.getMemberByID(projectID, memberID);
+        List<Integer> memberRoles = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
+        if (memberRoles.contains(memberRole)) {
+            memberRoles.remove(memberRole);
+            projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
+        }
+        return ResultGenerator.success();
+    }
+
+    @Logged({"projectID", "memberID", "superiorID"})
     public ResponseResult updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
         projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, ""));
         return ResultGenerator.success();
