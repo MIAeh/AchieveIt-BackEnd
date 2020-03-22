@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/authority")
 public class AuthorityController {
 
     private final AuthorityService authorityService;
@@ -48,9 +48,9 @@ public class AuthorityController {
 
     @CrossOrigin
     @Logged({"projectID"})
-    @GetMapping("/getGitMembersByID")
+    @GetMapping("/getMailMembersByID")
     public ResponseResult<List<AuthorityEntity>> getMailMembersByID(@RequestParam("projectID") String projectID) {
-        return authorityService.getGitMembersByID(projectID);
+        return authorityService.getMailMembersByID(projectID);
     }
 
     @CrossOrigin

@@ -48,7 +48,7 @@ public class AuthorityService {
     public ResponseResult addGitMembersByID(String projectID, List<String> memberIDs) {
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getGitMemberByID(projectID, memberID)));
+            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
             authorityMapper.addGitMemberByID(projectID, memberID);
         }
         // call git trigger use authorityEntityList
@@ -57,7 +57,7 @@ public class AuthorityService {
 
     @Logged({"projectID", "memberID"})
     public ResponseResult deleteGitMemberByID(String projectID, String memberID) {
-        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getGitMemberByID(projectID, memberID));
+        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID));
         authorityMapper.deleteGitMemberByID(projectID, memberID);
         // call git trigger use authorityEntity
         return ResultGenerator.success();
@@ -77,7 +77,7 @@ public class AuthorityService {
     public ResponseResult addMailMembersByID(String projectID, List<String> memberIDs) {
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMailMemberByID(projectID, memberID)));
+            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
             authorityMapper.addMailMemberByID(projectID, memberID);
         }
         // call mail trigger use authorityEntityList
@@ -86,7 +86,7 @@ public class AuthorityService {
 
     @Logged({"projectID", "memberID"})
     public ResponseResult deleteMailMemberByID(String projectID, String memberID) {
-        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getMailMemberByID(projectID, memberID));
+        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID));
         authorityMapper.deleteMailMemberByID(projectID, memberID);
         // call mail trigger use authorityEntity
         return ResultGenerator.success();
@@ -106,7 +106,7 @@ public class AuthorityService {
     public ResponseResult addFileMembersByID(String projectID, List<String> memberIDs) {
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getFileMemberByID(projectID, memberID)));
+            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
             authorityMapper.addFileMemberByID(projectID, memberID);
         }
         // call file trigger use authorityEntityList
@@ -115,7 +115,7 @@ public class AuthorityService {
 
     @Logged({"projectID", "memberID"})
     public ResponseResult deleteFileMemberByID(String projectID, String memberID) {
-        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getFileMemberByID(projectID, memberID));
+        AuthorityEntity authorityEntity = new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID));
         authorityMapper.deleteFileMemberByID(projectID, memberID);
         // call file trigger use authorityEntity
         return ResultGenerator.success();

@@ -12,39 +12,33 @@ import java.util.ArrayList;
 @Mapper
 public interface AuthorityMapper {
 
-    @Select("SELECT members.* FROM members, gitpermission WHERE (members.projectid = #{projectID} AND members.deleted=false);")
-    ArrayList<MemberEntity> getGitMembersByID(String projectID);
+    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
+    MemberEntity getMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, gitpermission WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND members.deleted=false);")
-    MemberEntity getGitMemberByID(String projectID, String memberID);
+    @Select("SELECT members.* FROM members, gitpermission WHERE (members.memberid = gitpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
+    ArrayList<MemberEntity> getGitMembersByID(String projectID);
 
     @Insert("INSERT INTO gitpermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
     void addGitMemberByID(String projectID, String memberID);
 
-    @Delete("DELETE FROM gitpermission WHERE (projectid = #{projectID}, memberid = #{memberID})")
+    @Delete("DELETE FROM gitpermission WHERE (projectid = #{projectID} AND memberid = #{memberID});")
     void deleteGitMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, mailpermission WHERE (members.projectid = #{projectID} AND members.deleted=false);")
+    @Select("SELECT members.* FROM members, mailpermission WHERE (members.memberid = mailpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getMailMembersByID(String projectID);
-
-    @Select("SELECT members.* FROM members, mailpermission WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND members.deleted=false);")
-    MemberEntity getMailMemberByID(String projectID, String memberID);
 
     @Insert("INSERT INTO mailpermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
     void addMailMemberByID(String projectID, String memberID);
 
-    @Delete("DELETE FROM mailpermission WHERE (projectid = #{projectID}, memberid = #{memberID})")
+    @Delete("DELETE FROM mailpermission WHERE (projectid = #{projectID} AND memberid = #{memberID});")
     void deleteMailMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, filepermission WHERE (members.projectid = #{projectID} AND members.deleted=false);")
+    @Select("SELECT members.* FROM members, filepermission WHERE (members.memberid = filepermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getFileMembersByID(String projectID);
-
-    @Select("SELECT members.* FROM members, mailpermission WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND members.deleted=false);")
-    MemberEntity getFileMemberByID(String projectID, String memberID);
 
     @Insert("INSERT INTO filepermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
     void addFileMemberByID(String projectID, String memberID);
 
-    @Delete("DELETE FROM filepermission WHERE (projectid = #{projectID}, memberid = #{memberID})")
+    @Delete("DELETE FROM filepermission WHERE (projectid = #{projectID} AND memberid = #{memberID});")
     void deleteFileMemberByID(String projectID, String memberID);
 }
