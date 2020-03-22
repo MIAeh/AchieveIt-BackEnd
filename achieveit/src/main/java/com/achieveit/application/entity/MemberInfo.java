@@ -1,9 +1,12 @@
 package com.achieveit.application.entity;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
-public class MemberEntity implements Serializable {
+public class MemberInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,12 +20,12 @@ public class MemberEntity implements Serializable {
 
     private String superiorName = "";
 
-    private String memberRole = "";
+    private List<Integer> memberRole;
 
-    public MemberEntity() {
+    public MemberInfo() {
     }
 
-    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole) {
+    public MemberInfo(String projectID, String memberID, String superiorID, String memberName, String superiorName, List<Integer> memberRole) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.superiorID = superiorID;
@@ -31,11 +34,13 @@ public class MemberEntity implements Serializable {
         this.memberRole = memberRole;
     }
 
-    public MemberEntity(String projectID, String memberID, String superiorID, String memberRole) {
-        this.projectID = projectID;
-        this.memberID = memberID;
-        this.superiorID = superiorID;
-        this.memberRole = memberRole;
+    public MemberInfo(MemberEntity memberEntity) {
+        this.projectID = memberEntity.getProjectID();
+        this.memberID = memberEntity.getMemberID();
+        this.superiorID = memberEntity.getSuperiorID();
+        this.memberName = memberEntity.getMemberName();
+        this.superiorName = memberEntity.getSuperiorName();
+        this.memberRole = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
     }
 
     public String getProjectID() {
@@ -78,11 +83,11 @@ public class MemberEntity implements Serializable {
         this.memberName = memberName;
     }
 
-    public String getMemberRole() {
+    public List<Integer> getMemberRole() {
         return memberRole;
     }
 
-    public void setMemberRole(String memberRole) {
+    public void setMemberRole(List<Integer> memberRole) {
         this.memberRole = memberRole;
     }
 
@@ -90,7 +95,7 @@ public class MemberEntity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MemberEntity that = (MemberEntity) o;
+        MemberInfo that = (MemberInfo) o;
         return Objects.equals(projectID, that.projectID) &&
                 Objects.equals(memberID, that.memberID) &&
                 Objects.equals(superiorID, that.superiorID) &&

@@ -83,7 +83,7 @@ public class ProjectService {
         projectMapper.createProjectByID(projectEntity);
         Integer defaultDomain = 0;
         projectMapper.createDomainByProjectID(projectID, defaultDomain);
-        projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, 0));
+        projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, "[0]"));
         projectMapper.addGitRepoByID(projectID, "null");
         return ResultGenerator.success();
     }
@@ -122,20 +122,37 @@ public class ProjectService {
     }
 
     @Logged({"projectID"})
-    public ResponseResult<List<MemberEntity>> getMembersByID(String projectID) {
+    public ResponseResult<List<MemberInfo>> getMembersByID(String projectID, Integer memberRole) {
         List<MemberEntity> memberEntityList = projectMapper.getMembersByID(projectID);
-        return ResultGenerator.success(memberEntityList);
+        List<MemberInfo> memberInfoList = new ArrayList<>();
+        for (MemberEntity memberEntity: memberEntityList) {
+            if (memberRole == -1) {
+                memberInfoList.add(new MemberInfo(memberEntity));
+            }
+            else {
+                if (memberEntity.getMemberRole().contains(memberRole.toString())) {
+                    memberInfoList.add(new MemberInfo(memberEntity));
+                }
+            }
+        }
+        return ResultGenerator.success(memberInfoList);
     }
 
     @Logged({"projectID", "memberID", "superiorID", "memberRole"})
-    public ResponseResult addMemberByID(String projectID, String memberID, String superiorID, Integer memberRole) {
-        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, memberRole));
+    public ResponseResult addMemberByID(String projectID, String memberID, String superiorID, List<Integer> memberRoles) {
+        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, JSONObject.toJSONString(memberRoles)));
         return ResultGenerator.success();
     }
 
     @Logged({"projectID", "memberID", "superiorID", "memberRole"})
-    public ResponseResult updateMemberByID(String projectID, String memberID, String superiorID, Integer memberRole) {
-        projectMapper.updateMemberByID(new MemberEntity(projectID, memberID, superiorID, memberRole));
+    public ResponseResult updateMemberRoleByID(String projectID, String memberID, List<Integer> memberRoles) {
+        projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
+        return ResultGenerator.success();
+    }
+
+    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    public ResponseResult updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
+        projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, ""));
         return ResultGenerator.success();
     }
 
@@ -150,5 +167,4 @@ public class ProjectService {
         projectMapper.updateGitRepoByID(projectID, gitRepo);
         return ResultGenerator.success();
     }
-
 }

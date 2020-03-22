@@ -52,8 +52,11 @@ public interface ProjectMapper {
     @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime, deleted) VALUES (#{projectID}, #{memberID}, #{superiorID}, #{memberRole}, current_date, false);")
     void addMemberByID(MemberEntity memberEntity);
 
-    @Update("UPDATE members SET superiorid=#{superiorID}, memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
-    void updateMemberByID(MemberEntity memberEntity);
+    @Update("UPDATE members SET memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    void updateMemberRoleByID(MemberEntity memberEntity);
+
+    @Update("UPDATE members SET superiorid=#{superiorID} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    void updateMemberSuperiorByID(MemberEntity memberEntity);
 
     @Update("UPDATE members SET deleted=true WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
     void deleteMemberByID(String projectID, String memberID);

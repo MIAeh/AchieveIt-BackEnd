@@ -110,24 +110,38 @@ public class ProjectController {
     }
 
     @CrossOrigin
-    @Logged({"projectID"})
+    @Logged({"projectID", "memberRole"})
     @GetMapping("/getMembersByID")
-    public ResponseResult<List<MemberEntity>> getMembersByID(@RequestParam("projectID") String projectID) {
-        return projectService.getMembersByID(projectID);
+    public ResponseResult<List<MemberInfo>> getMembersByID(@RequestParam("projectID") String projectID, @RequestParam("memberRole") Integer memberRole) {
+        return projectService.getMembersByID(projectID, memberRole);
     }
 
     @CrossOrigin
-    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
+    @Logged({"jsonObject"})
     @PostMapping("/addMemberByID")
-    public ResponseResult addMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID, @RequestParam("memberRole") Integer memberRole) {
-        return projectService.addMemberByID(projectID, memberID, superiorID, memberRole);
+    public ResponseResult addMemberByID(@RequestBody JSONObject jsonObject) {
+        String projectID = jsonObject.getString("projectID");
+        String memberID = jsonObject.getString("memberID");
+        String superiorID = jsonObject.getString("superiorID");
+        List<Integer> memberRoles = JSONObject.parseArray(jsonObject.getJSONArray("memberRole").toJSONString(), Integer.class);
+        return projectService.addMemberByID(projectID, memberID, superiorID, memberRoles);
     }
 
     @CrossOrigin
-    @Logged({"projectID", "memberID", "superiorID", "memberRole"})
-    @PostMapping("/updateMemberByID")
-    public ResponseResult updateMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID, @RequestParam("memberRole") Integer memberRole) {
-        return projectService.updateMemberByID(projectID, memberID, superiorID, memberRole);
+    @Logged({"jsonObject"})
+    @PostMapping("/updateMemberRoleByID")
+    public ResponseResult updateMemberRoleByID(@RequestBody JSONObject jsonObject) {
+        String projectID = jsonObject.getString("projectID");
+        String memberID = jsonObject.getString("memberID");
+        List<Integer> memberRoles = JSONObject.parseArray(jsonObject.getJSONArray("memberRole").toJSONString(), Integer.class);
+        return projectService.updateMemberRoleByID(projectID, memberID, memberRoles);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID", "memberID", "superiorID"})
+    @PostMapping("/updateMemberSuperiorByID")
+    public ResponseResult updateMemberSuperiorByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID) {
+        return projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);
     }
 
     @CrossOrigin
