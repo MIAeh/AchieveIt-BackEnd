@@ -153,7 +153,7 @@ public class ProjectController {
 
     @CrossOrigin
     @Logged({"projectID", "gitRepo"})
-    @GetMapping("/updateGitRepoByID")
+    @PostMapping("/updateGitRepoByID")
     public ResponseResult updateGitRepoByID(@RequestParam("projectID") String projectID, @RequestParam("gitRepo") String gitRepo) {
         return projectService.updateGitRepoByID(projectID, gitRepo);
     }
