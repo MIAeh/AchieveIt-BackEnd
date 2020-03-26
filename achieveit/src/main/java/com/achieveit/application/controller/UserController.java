@@ -127,4 +127,10 @@ public class UserController {
     public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userid")String userId,HttpSession session) {
         return userService.getUserInfoById(userId,session);
     }
+
+    @CrossOrigin
+    @GetMapping("getAllUserInfo")
+    public ResponseResult<ArrayList<UserEntity>> getAllUserInfo(HttpSession session){
+        return userService.getAllUserInfo();
+    }
 }

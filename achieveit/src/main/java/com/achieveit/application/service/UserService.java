@@ -161,4 +161,9 @@ public class UserService {
         else
             return ResultGenerator.success(entity);
     }
+
+    public ResponseResult<ArrayList<UserEntity>> getAllUserInfo(){
+        ArrayList<UserEntity> allEntities=userMapper.getAllUserInfo();
+        return ResultGenerator.success(allEntities);
+    }
 }
