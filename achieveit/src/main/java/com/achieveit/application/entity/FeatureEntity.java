@@ -3,6 +3,7 @@ package com.achieveit.application.entity;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
+import java.sql.Date;
 
 public class FeatureEntity {
     private String featureId;
@@ -18,6 +19,8 @@ public class FeatureEntity {
     private String featureDescription;
 
     private ArrayList<FeatureEntity> allChildren;
+
+    private Date createTime;
 
     public String getFeatureId() {
         return featureId;
@@ -79,12 +82,21 @@ public class FeatureEntity {
         this.featureDescription = featureDescription;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public FeatureEntity(int featureLevel, String projectId, String featureName,String featureDescription) {
         this.featureId= UUID.randomUUID().toString();
         this.featureLevel = featureLevel;
         this.projectId = projectId;
         this.featureName = featureName;
         this.featureDescription=featureDescription;
+        this.createTime=new Date(System.currentTimeMillis());
     }
 
     public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName,String featureDescription) {
@@ -105,12 +117,13 @@ public class FeatureEntity {
                 Objects.equals(featureId, that.featureId) &&
                 Objects.equals(fatherId, that.fatherId) &&
                 Objects.equals(projectId, that.projectId) &&
-                Objects.equals(featureName, that.featureName);
+                Objects.equals(featureName, that.featureName)&&
+                Objects.equals(createTime,that.createTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName, featureDescription, allChildren);
+        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName, featureDescription, allChildren,createTime);
     }
 
     @Override
@@ -123,6 +136,7 @@ public class FeatureEntity {
                 ", featureName='" + featureName + '\'' +
                 ", featureDescription='" + featureDescription + '\'' +
                 ", allChildren=" + allChildren +
+                ", createTime="+createTime+
                 '}';
     }
 }

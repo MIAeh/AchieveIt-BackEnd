@@ -30,15 +30,25 @@ public class FeatureController {
         return featureService.getFeaturesInfo(session);
     }
 
+    @GetMapping("getFeaturesByProjectID")
+    public ResponseResult<ArrayList<FeatureEntity>> getFeaturesByProjectID(@RequestParam("projectID")String projectId,HttpSession session){
+        return featureService.getFeatureByProjectID(projectId);
+    }
+
+    @GetMapping("deleteFeatureByFeatureID")
+    public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam("featureID")String featureId,HttpSession session){
+        return featureService.deleteFeatureByFeatureID(featureId);
+    }
+
     @PostMapping("addTopFeature")
-    public ResponseResult<String> addTopFeature(@RequestParam(name = "featurename")String featureName,@RequestParam(name = "projectid") String projectId,
-                                                @RequestParam(name = "featuredescription")String featureDescription, HttpSession session){
+    public ResponseResult<String> addTopFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID") String projectId,
+                                                @RequestParam(name = "featureDescription")String featureDescription, HttpSession session){
         return featureService.insertTopFeature(featureName,projectId,featureDescription,session);
     }
 
     @PostMapping("addSubFeature")
-    public ResponseResult<String> addSubFeature(@RequestParam(name = "featurename")String featureName,@RequestParam(name = "projectid")String projectId,
-                                                 @RequestParam(name = "fatherid")String fatherId,@RequestParam(name = "featuredescription")String featureDescription,HttpSession session){
+    public ResponseResult<String> addSubFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID")String projectId,
+                                                 @RequestParam(name = "fatherID")String fatherId,@RequestParam(name = "featureDescription")String featureDescription,HttpSession session){
         return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
     }
 }

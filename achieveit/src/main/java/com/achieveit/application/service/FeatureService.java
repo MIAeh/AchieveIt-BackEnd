@@ -83,4 +83,21 @@ public class FeatureService {
         else
             return ResultGenerator.success(myEntity.getFeatureId());
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<ArrayList<FeatureEntity>> getFeatureByProjectID(String projectID){
+        ArrayList<FeatureEntity> entities=featureMapper.getFeatureByProjectId(projectID);
+        if(entities==null){
+            return ResultGenerator.error("no feature by this project id!");
+        }else{
+            return ResultGenerator.success(entities);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Boolean> deleteFeatureByFeatureID(String featureId){
+        featureMapper.deleteFeatureByFeatureId(featureId);
+        return ResultGenerator.success();
+    }
+
 }
