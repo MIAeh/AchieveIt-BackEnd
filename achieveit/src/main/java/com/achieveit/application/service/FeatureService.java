@@ -85,9 +85,11 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<ArrayList<FeatureEntity>> getFeatureByProjectID(String projectID){
+    public ResponseResult<ArrayList<FeatureEntity>> getFeaturesByProjectID(String projectID){
         ArrayList<FeatureEntity> entities=featureMapper.getFeatureByProjectId(projectID);
         if(entities==null){
+            return ResultGenerator.error("no feature by this project id!");
+        }else if(entities.size()==0){
             return ResultGenerator.error("no feature by this project id!");
         }else{
             return ResultGenerator.success(entities);

@@ -33,7 +33,7 @@ public class FeatureController {
     @CrossOrigin
     @GetMapping("getFeaturesByProjectID")
     public ResponseResult<ArrayList<FeatureEntity>> getFeaturesByProjectID(@RequestParam("projectID")String projectId,HttpSession session){
-        return featureService.getFeatureByProjectID(projectId);
+        return featureService.getFeaturesByProjectID(projectId);
     }
 
     @CrossOrigin
