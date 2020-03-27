@@ -92,6 +92,24 @@ public class FeatureService {
         }else if(entities.size()==0){
             return ResultGenerator.error("no feature by this project id!");
         }else{
+            FeatureEntity topEntity=new FeatureEntity();
+            ArrayList<FeatureEntity> subEntities=new ArrayList<>();
+            for(FeatureEntity entity:entities)
+                if(entity.getFeatureLevel()==0)
+                    topEntity=entity;
+            for(FeatureEntity entity:entities) {
+                if (entity.getFeatureLevel() == 1) {
+                    subEntities.add(entity);
+                    ArrayList<FeatureEntity> subSubEntities = new ArrayList<>();
+                    for (FeatureEntity entity1 : entities) {
+                        if (entity1.getFeatureLevel() == 2 && entity1.getFatherId().equals(entity.getFeatureId())) {
+                            subSubEntities.add(entity1);
+                        }
+                    }
+                    entity.setAllChildren(subSubEntities);
+                }
+            }
+            topEntity.setAllChildren(subEntities);
             return ResultGenerator.success(entities);
         }
     }
