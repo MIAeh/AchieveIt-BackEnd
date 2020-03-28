@@ -21,6 +21,12 @@ spring:
     default-property-inclusion: ALWAYS
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  mail:
+    host: smtp.163.com
+    username: no_reply_achieveit@163.com
+    password: OSMKFYCCOVEHKUOK
+    default-encoding: utf-8
+
 mybatis:
   ## Mybatis 配置
   # 配置为 com.pancm.bean 指向实体类包路径。
