@@ -73,9 +73,10 @@ public class ProjectController {
             Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
             projectMilestones.add(milestone);
         }
+        Integer domain = jsonObject.getInteger("domain");
 
         return projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
-                projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones);
+                projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
     }
 
     @CrossOrigin

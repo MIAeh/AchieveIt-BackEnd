@@ -64,7 +64,7 @@ public class ProjectService {
 
     @Transactional
     @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStatus",
-            "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones"})
+            "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones", "domain"})
     public ResponseResult createProjectByID(String projectID,
                                             String projectName,
                                             String projectManagerID,
@@ -75,15 +75,15 @@ public class ProjectService {
                                             Date projectEndDate,
                                             String projectFrameworks,
                                             List<String> projectLanguages,
-                                            List<Milestone> projectMilestones) {
+                                            List<Milestone> projectMilestones,
+                                            Integer domain) {
 
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
                 projectStatus, projectStartDate, projectEndDate, projectFrameworks,
                 JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
         logger.info("ProjectEntity: " + projectEntity.toString());
         projectMapper.createProjectByID(projectEntity);
-        Integer defaultDomain = 0;
-        projectMapper.createDomainByProjectID(projectID, defaultDomain);
+        projectMapper.createDomainByProjectID(projectID, domain);
         projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, "[0]"));
         projectMapper.addGitRepoByID(projectID, "null");
         projectMapper.deleteProjectIDFromProjectIDList(projectID);
