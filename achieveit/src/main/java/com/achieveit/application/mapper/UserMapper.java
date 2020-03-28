@@ -70,8 +70,8 @@ public interface UserMapper {
      * 插入（注册）一位新的用户
      * @param userEntity 所要注册的user
      */
-    @Insert("insert into \"user\"(userid,usermail,username,userpassword,userdepartment,userrole)" +
-            " values(#{userId}::uuid, #{userMail},#{userName},#{userPassword},#{userDepartment},#{userRole})")
+    @Insert("insert into \"users\"(userid,usermail,username,userpassword,userdepartment,userrole)" +
+            " values(#{userId}, #{userMail},#{userName},#{userPassword},#{userDepartment},#{userRole})")
     void insertUser(UserEntity userEntity);
 
     /**
