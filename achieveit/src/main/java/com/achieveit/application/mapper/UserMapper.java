@@ -83,7 +83,7 @@ public interface UserMapper {
     ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
 
     @Update("update users set userrole=#{userRole} where userid=#{userId}")
-    int setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
+    void setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
 
     @Select("select * from \"users\" ")
     ArrayList<UserEntity> getAllUserInfo();
