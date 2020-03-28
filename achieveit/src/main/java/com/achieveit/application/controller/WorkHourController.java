@@ -5,16 +5,13 @@ import com.achieveit.application.service.WorkHourService;
 import com.achieveit.application.wrapper.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/workhour/")
+@RequestMapping("/workHour/")
 public class WorkHourController {
 
     private final WorkHourService workHourService;
@@ -26,7 +23,7 @@ public class WorkHourController {
 
     @CrossOrigin
     @PostMapping("applyWorkHour")
-    ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerId") String applyerId,
+    ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID") String applyerId,
                                                  @RequestParam(name="featureName")String featureName,
                                                  @RequestParam(name="activityName")String activityName,
                                                  @RequestParam(name="startTime") String startTime,
@@ -37,15 +34,15 @@ public class WorkHourController {
     }
 
     @CrossOrigin
-    @PostMapping("getWorkHoursByStatus")
+    @GetMapping("getWorkHoursByStatus")
     ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatus(@RequestParam(name = "status")int status){
         return workHourService.getWorkHourByStatus(status);
     }
 
     @CrossOrigin
     @PostMapping("approveWorkHour")
-    ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourId")String workHourId,
-                                            @RequestParam(name="approverId")String approverId){
+    ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
+                                            @RequestParam(name="approverID")String approverId){
         return workHourService.approveWordHour(workHourId,approverId);
     }
 
