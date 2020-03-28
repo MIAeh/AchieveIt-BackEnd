@@ -3,17 +3,14 @@ package com.achieveit.application.service;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.mapper.AuthorityMapper;
-import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
-import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,12 +64,23 @@ public class AuthorityService {
     @Transactional
     @Logged({"projectID", "memberIDs"})
     public ResponseResult addGitMembersByID(String projectID, List<String> memberIDs) {
+        logger.info("projectID: " + projectID);
+        logger.info("memberIDs: " + memberIDs.toString());
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
+            MemberEntity memberEntity = authorityMapper.getMemberByID(projectID, memberID);
+            if (memberEntity == null) {
+                return ResultGenerator.error("Null member.");
+            }
+            logger.info("Get Member By Project ID " + projectID + " and Member ID " + memberID + ": " + memberEntity.toString());
+            AuthorityEntity authorityEntity = new AuthorityEntity(memberEntity);
+            logger.info("Authority Entity: " + authorityEntity.toString());
+            authorityEntityList.add(authorityEntity);
             authorityMapper.addGitMemberByID(projectID, memberID);
+            logger.info("Added member By Project ID " + projectID + " and Member ID " + memberID);
         }
         // call git trigger use authorityEntityList
+        logger.info("Authority Entity List: " + authorityEntityList.toString());
         return ResultGenerator.success();
     }
 
@@ -94,14 +102,26 @@ public class AuthorityService {
         return ResultGenerator.success(authorityEntities);
     }
 
+    @Transactional
     @Logged({"projectID", "memberIDs"})
     public ResponseResult addMailMembersByID(String projectID, List<String> memberIDs) {
+        logger.info("projectID: " + projectID);
+        logger.info("memberIDs: " + memberIDs.toString());
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
+            MemberEntity memberEntity = authorityMapper.getMemberByID(projectID, memberID);
+            if (memberEntity == null) {
+                return ResultGenerator.error("Null member.");
+            }
+            logger.info("Get Member By Project ID " + projectID + " and Member ID " + memberID + ": " + memberEntity.toString());
+            AuthorityEntity authorityEntity = new AuthorityEntity(memberEntity);
+            logger.info("Authority Entity: " + authorityEntity.toString());
+            authorityEntityList.add(authorityEntity);
             authorityMapper.addMailMemberByID(projectID, memberID);
+            logger.info("Added member By Project ID " + projectID + " and Member ID " + memberID);
         }
         // call mail trigger use authorityEntityList
+        logger.info("Authority Entity List: " + authorityEntityList.toString());
         return ResultGenerator.success();
     }
 
@@ -123,14 +143,26 @@ public class AuthorityService {
         return ResultGenerator.success(authorityEntities);
     }
 
+    @Transactional
     @Logged({"projectID", "memberIDs"})
     public ResponseResult addFileMembersByID(String projectID, List<String> memberIDs) {
+        logger.info("projectID: " + projectID);
+        logger.info("memberIDs: " + memberIDs.toString());
         List<AuthorityEntity> authorityEntityList = new ArrayList<>();
         for (String memberID: memberIDs) {
-            authorityEntityList.add(new AuthorityEntity(authorityMapper.getMemberByID(projectID, memberID)));
+            MemberEntity memberEntity = authorityMapper.getMemberByID(projectID, memberID);
+            if (memberEntity == null) {
+                return ResultGenerator.error("Null member.");
+            }
+            logger.info("Get Member By Project ID " + projectID + " and Member ID " + memberID + ": " + memberEntity.toString());
+            AuthorityEntity authorityEntity = new AuthorityEntity(memberEntity);
+            logger.info("Authority Entity: " + authorityEntity.toString());
+            authorityEntityList.add(authorityEntity);
             authorityMapper.addFileMemberByID(projectID, memberID);
+            logger.info("Added member By Project ID " + projectID + " and Member ID " + memberID);
         }
         // call file trigger use authorityEntityList
+        logger.info("Authority Entity List: " + authorityEntityList.toString());
         return ResultGenerator.success();
     }
 
