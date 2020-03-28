@@ -3,3 +3,4 @@
 *.iml
 backend.log*
 achieveit/target
+achieveit/logs/*
