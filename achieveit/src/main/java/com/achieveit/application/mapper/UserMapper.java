@@ -2,6 +2,8 @@ package com.achieveit.application.mapper;
 
 import com.achieveit.application.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 
 import static org.apache.ibatis.type.JdbcType.VARCHAR;
@@ -83,4 +85,6 @@ public interface UserMapper {
     @Update("update users set userrole=#{userRole} where userid=#{userId}")
     int setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
 
+    @Select("select * from \"users\" ")
+    ArrayList<UserEntity> getAllUserInfo();
 }

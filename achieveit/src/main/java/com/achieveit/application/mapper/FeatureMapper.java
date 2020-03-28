@@ -1,10 +1,7 @@
 package com.achieveit.application.mapper;
 
 import com.achieveit.application.entity.FeatureEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import java.util.ArrayList;
  * Mapper for FeatureEntity
  * @author Alevery, Felix
  */
+
 @Mapper
 public interface FeatureMapper {
     @Select("select * from featurelist where featurelevel = 0")
@@ -24,7 +22,13 @@ public interface FeatureMapper {
     @Select("select * from featurelist where featureid = #{featureId}")
     FeatureEntity getFeatureById(@Param("featureId") String fatherId);
 
-    @Insert("insert into featurelist(featureid,featurelevel,fatherid,projectid,featurename,featuredescription)"+
-    "values(#{featureId},#{featureLevel},#{fatherId},#{projectId},#{featureName},#{featureDescription})")
+    @Select("select * from featurelist where projectid = #{projectId}")
+    ArrayList<FeatureEntity> getFeatureByProjectId(@Param("projectId") String projectId);
+
+    @Insert("insert into featurelist(featureid,featurelevel,fatherid,projectid,featurename,featuredescription,createtime)"+
+    "values(#{featureId},#{featureLevel},#{fatherId},#{projectId},#{featureName},#{featureDescription},#{createTime})")
     Integer insertFeatures(FeatureEntity featureEntity);
+
+    @Delete("delete from featurelist where featureid=#{featureId}")
+    Integer deleteFeatureByFeatureId(@Param("featureId")String featureId);
 }
