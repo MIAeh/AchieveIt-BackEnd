@@ -150,7 +150,7 @@ public class UserService {
     }
 
     public ResponseResult<Boolean> setUserRoleById(String userId,int userRole,HttpSession session){
-        int res=userMapper.setUserRoleById(userId,userRole);
+        userMapper.setUserRoleById(userId,userRole);
         return ResultGenerator.success();
     }
 
