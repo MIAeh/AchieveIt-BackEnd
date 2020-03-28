@@ -117,13 +117,10 @@ public class ProjectController {
     }
 
     @CrossOrigin
-    @Logged({"jsonObject"})
+    @Logged({"projectID", "memberID"})
     @PostMapping("/addMemberByID")
-    public ResponseResult addMemberByID(@RequestBody JSONObject jsonObject) {
-        String projectID = jsonObject.getString("projectID");
-        String memberID = jsonObject.getString("memberID");
-        String superiorID = jsonObject.getString("superiorID");
-        return projectService.addMemberByID(projectID, memberID, superiorID);
+    public ResponseResult addMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) {
+        return projectService.addMemberByID(projectID, memberID);
     }
 
     @CrossOrigin

@@ -140,8 +140,10 @@ public class ProjectService {
         return ResultGenerator.success(memberInfoList);
     }
 
-    @Logged({"projectID", "memberID", "superiorID"})
-    public ResponseResult addMemberByID(String projectID, String memberID, String superiorID) {
+    @Transactional
+    @Logged({"projectID", "memberID"})
+    public ResponseResult addMemberByID(String projectID, String memberID) {
+        String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
         projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID));
         return ResultGenerator.success();
     }
