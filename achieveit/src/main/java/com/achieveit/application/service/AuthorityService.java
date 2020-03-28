@@ -34,6 +34,27 @@ public class AuthorityService {
     private final Logger logger = LoggerFactory.getLogger(AuthorityService.class);
 
     @Logged({"projectID"})
+    public ResponseResult<AuthorityList> getAllMembersByID(String projectID) {
+        List<MemberEntity> gitMemberEntityList = authorityMapper.getGitMembersByID(projectID);
+        List<AuthorityEntity> gitAuthorityEntities = new ArrayList<>();
+        for (MemberEntity memberEntity: gitMemberEntityList) {
+            gitAuthorityEntities.add(new AuthorityEntity(memberEntity));
+        }
+        List<MemberEntity> mailMemberEntityList = authorityMapper.getMailMembersByID(projectID);
+        List<AuthorityEntity> mailAuthorityEntities = new ArrayList<>();
+        for (MemberEntity memberEntity: mailMemberEntityList) {
+            mailAuthorityEntities.add(new AuthorityEntity(memberEntity));
+        }
+        List<MemberEntity> fileMemberEntityList = authorityMapper.getMailMembersByID(projectID);
+        List<AuthorityEntity> fileAuthorityEntities = new ArrayList<>();
+        for (MemberEntity memberEntity: fileMemberEntityList) {
+            fileAuthorityEntities.add(new AuthorityEntity(memberEntity));
+        }
+        AuthorityList authorityList = new AuthorityList(gitAuthorityEntities, mailAuthorityEntities, fileAuthorityEntities);
+        return ResultGenerator.success(authorityList);
+    }
+
+    @Logged({"projectID"})
     public ResponseResult<List<AuthorityEntity>> getGitMembersByID(String projectID) {
         List<MemberEntity> memberEntityList = authorityMapper.getGitMembersByID(projectID);
         List<AuthorityEntity> authorityEntities = new ArrayList<>();

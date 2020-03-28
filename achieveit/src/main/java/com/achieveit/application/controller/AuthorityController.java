@@ -25,6 +25,13 @@ public class AuthorityController {
 
     @CrossOrigin
     @Logged({"projectID"})
+    @GetMapping("/getAllMembersByID")
+    public ResponseResult<AuthorityList> getAllMembersByID(@RequestParam("projectID") String projectID) {
+        return authorityService.getAllMembersByID(projectID);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
     @GetMapping("/getGitMembersByID")
     public ResponseResult<List<AuthorityEntity>> getGitMembersByID(@RequestParam("projectID") String projectID) {
         return authorityService.getGitMembersByID(projectID);
