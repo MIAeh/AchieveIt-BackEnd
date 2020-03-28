@@ -144,7 +144,7 @@ public class ProjectService {
     @Logged({"projectID", "memberID"})
     public ResponseResult addMemberByID(String projectID, String memberID) {
         String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
-        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID));
+        projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[]"));
         return ResultGenerator.success();
     }
 

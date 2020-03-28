@@ -20,18 +20,21 @@ public class MemberInfo implements Serializable {
 
     private String superiorName = "";
 
+    private String memberMail = "";
+
     private List<Integer> memberRole;
 
     public MemberInfo() {
     }
 
-    public MemberInfo(String projectID, String memberID, String superiorID, String memberName, String superiorName, List<Integer> memberRole) {
+    public MemberInfo(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberMail, List<Integer> memberRole) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.superiorID = superiorID;
         this.memberName = memberName;
         this.superiorName = superiorName;
         this.memberRole = memberRole;
+        this.memberMail = memberMail;
     }
 
     public MemberInfo(MemberEntity memberEntity) {
@@ -40,6 +43,7 @@ public class MemberInfo implements Serializable {
         this.superiorID = memberEntity.getSuperiorID();
         this.memberName = memberEntity.getMemberName();
         this.superiorName = memberEntity.getSuperiorName();
+        this.memberMail = memberEntity.getMemberMail();
         this.memberRole = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
     }
 
@@ -91,6 +95,14 @@ public class MemberInfo implements Serializable {
         this.memberRole = memberRole;
     }
 
+    public String getMemberMail() {
+        return memberMail;
+    }
+
+    public void setMemberMail(String memberMail) {
+        this.memberMail = memberMail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,24 +111,26 @@ public class MemberInfo implements Serializable {
         return Objects.equals(projectID, that.projectID) &&
                 Objects.equals(memberID, that.memberID) &&
                 Objects.equals(superiorID, that.superiorID) &&
-                Objects.equals(superiorName, that.superiorName) &&
                 Objects.equals(memberName, that.memberName) &&
+                Objects.equals(superiorName, that.superiorName) &&
+                Objects.equals(memberMail, that.memberMail) &&
                 Objects.equals(memberRole, that.memberRole);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, memberID, superiorID, superiorName, memberName, memberRole);
+        return Objects.hash(projectID, memberID, superiorID, memberName, superiorName, memberMail, memberRole);
     }
 
     @Override
     public String toString() {
-        return "MemberEntity{" +
+        return "MemberInfo{" +
                 "projectID='" + projectID + '\'' +
                 ", memberID='" + memberID + '\'' +
                 ", superiorID='" + superiorID + '\'' +
-                ", superiorName='" + superiorName + '\'' +
                 ", memberName='" + memberName + '\'' +
+                ", superiorName='" + superiorName + '\'' +
+                ", memberMail='" + memberMail + '\'' +
                 ", memberRole=" + memberRole +
                 '}';
     }

@@ -12,10 +12,10 @@ import java.util.ArrayList;
 @Mapper
 public interface AuthorityMapper {
 
-    @Select("SELECT members.*, users.username AS membername, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
+    @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND members.memberid = #{memberID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
     MemberEntity getMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, gitpermission WHERE (members.memberid = gitpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
+    @Select("SELECT members.*, users.usermail AS membermail FROM members, users, gitpermission WHERE (members.memberid = gitpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getGitMembersByID(String projectID);
 
     @Insert("INSERT INTO gitpermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
@@ -24,7 +24,7 @@ public interface AuthorityMapper {
     @Delete("DELETE FROM gitpermission WHERE (projectid = #{projectID} AND memberid = #{memberID});")
     void deleteGitMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, mailpermission WHERE (members.memberid = mailpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
+    @Select("SELECT members.*, users.usermail AS membermail FROM members, users, mailpermission WHERE (members.memberid = mailpermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getMailMembersByID(String projectID);
 
     @Insert("INSERT INTO mailpermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
@@ -33,7 +33,7 @@ public interface AuthorityMapper {
     @Delete("DELETE FROM mailpermission WHERE (projectid = #{projectID} AND memberid = #{memberID});")
     void deleteMailMemberByID(String projectID, String memberID);
 
-    @Select("SELECT members.* FROM members, filepermission WHERE (members.memberid = filepermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
+    @Select("SELECT members.*, users.usermail AS membermail FROM members, users, filepermission WHERE (members.memberid = filepermission.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getFileMembersByID(String projectID);
 
     @Insert("INSERT INTO filepermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")

@@ -19,6 +19,8 @@ public class AuthorityEntity implements Serializable {
 
     private String memberName = "";
 
+    private String memberMail = "";
+
     private Date enterProjectTime;
 
     private Date exitProjectTime;
@@ -26,11 +28,12 @@ public class AuthorityEntity implements Serializable {
     public AuthorityEntity() {
     }
 
-    public AuthorityEntity(String projectID, String memberID, List<Integer> memberRole, String memberName, Date enterProjectTime, Date exitProjectTime) {
+    public AuthorityEntity(String projectID, String memberID, List<Integer> memberRole, String memberName, String memberMail, Date enterProjectTime, Date exitProjectTime) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.memberRole = memberRole;
         this.memberName = memberName;
+        this.memberMail = memberMail;
         this.enterProjectTime = enterProjectTime;
         this.exitProjectTime = exitProjectTime;
     }
@@ -40,6 +43,7 @@ public class AuthorityEntity implements Serializable {
         this.memberID = memberEntity.getMemberID();
         this.memberName = memberEntity.getMemberName();
         this.memberRole = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
+        this.memberMail = memberEntity.getMemberMail();
         this.enterProjectTime = memberEntity.getCreateTime();
         this.exitProjectTime = memberEntity.getDeleteTime();
     }
@@ -92,6 +96,14 @@ public class AuthorityEntity implements Serializable {
         this.exitProjectTime = exitProjectTime;
     }
 
+    public String getMemberMail() {
+        return memberMail;
+    }
+
+    public void setMemberMail(String memberMail) {
+        this.memberMail = memberMail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,13 +113,14 @@ public class AuthorityEntity implements Serializable {
                 Objects.equals(memberID, that.memberID) &&
                 Objects.equals(memberRole, that.memberRole) &&
                 Objects.equals(memberName, that.memberName) &&
+                Objects.equals(memberMail, that.memberMail) &&
                 Objects.equals(enterProjectTime, that.enterProjectTime) &&
                 Objects.equals(exitProjectTime, that.exitProjectTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, memberID, memberRole, memberName, enterProjectTime, exitProjectTime);
+        return Objects.hash(projectID, memberID, memberRole, memberName, memberMail, enterProjectTime, exitProjectTime);
     }
 
     @Override
@@ -117,6 +130,7 @@ public class AuthorityEntity implements Serializable {
                 ", memberID='" + memberID + '\'' +
                 ", memberRole=" + memberRole +
                 ", memberName='" + memberName + '\'' +
+                ", memberMail='" + memberMail + '\'' +
                 ", enterProjectTime=" + enterProjectTime +
                 ", exitProjectTime=" + exitProjectTime +
                 '}';

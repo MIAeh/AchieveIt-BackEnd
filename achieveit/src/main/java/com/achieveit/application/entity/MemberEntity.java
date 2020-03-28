@@ -20,6 +20,8 @@ public class MemberEntity implements Serializable {
 
     private String memberRole = "";
 
+    private String memberMail= "";
+
     private Date createTime;
 
     private Date deleteTime;
@@ -27,16 +29,17 @@ public class MemberEntity implements Serializable {
     public MemberEntity() {
     }
 
-    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole) {
+    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole, String memberMail) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.superiorID = superiorID;
         this.memberName = memberName;
         this.superiorName = superiorName;
         this.memberRole = memberRole;
+        this.memberMail = memberMail;
     }
 
-    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole, Date createTime, Date deleteTime) {
+    public MemberEntity(String projectID, String memberID, String superiorID, String memberName, String superiorName, String memberRole, Date createTime, Date deleteTime, String memberMail) {
         this.projectID = projectID;
         this.memberID = memberID;
         this.superiorID = superiorID;
@@ -45,6 +48,7 @@ public class MemberEntity implements Serializable {
         this.memberRole = memberRole;
         this.createTime = createTime;
         this.deleteTime = deleteTime;
+        this.memberMail = memberMail;
     }
 
     public MemberEntity(String projectID, String memberID, String superiorID, String memberRole) {
@@ -52,12 +56,6 @@ public class MemberEntity implements Serializable {
         this.memberID = memberID;
         this.superiorID = superiorID;
         this.memberRole = memberRole;
-    }
-
-    public MemberEntity(String projectID, String memberID, String superiorID) {
-        this.projectID = projectID;
-        this.memberID = memberID;
-        this.superiorID = superiorID;
     }
 
     public String getProjectID() {
@@ -124,6 +122,14 @@ public class MemberEntity implements Serializable {
         this.deleteTime = deleteTime;
     }
 
+    public String getMemberMail() {
+        return memberMail;
+    }
+
+    public void setMemberMail(String memberMail) {
+        this.memberMail = memberMail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -135,13 +141,14 @@ public class MemberEntity implements Serializable {
                 Objects.equals(memberName, that.memberName) &&
                 Objects.equals(superiorName, that.superiorName) &&
                 Objects.equals(memberRole, that.memberRole) &&
+                Objects.equals(memberMail, that.memberMail) &&
                 Objects.equals(createTime, that.createTime) &&
                 Objects.equals(deleteTime, that.deleteTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, memberID, superiorID, memberName, superiorName, memberRole, createTime, deleteTime);
+        return Objects.hash(projectID, memberID, superiorID, memberName, superiorName, memberRole, memberMail, createTime, deleteTime);
     }
 
     @Override
@@ -153,6 +160,7 @@ public class MemberEntity implements Serializable {
                 ", memberName='" + memberName + '\'' +
                 ", superiorName='" + superiorName + '\'' +
                 ", memberRole='" + memberRole + '\'' +
+                ", memberMail='" + memberMail + '\'' +
                 ", createTime=" + createTime +
                 ", deleteTime=" + deleteTime +
                 '}';
