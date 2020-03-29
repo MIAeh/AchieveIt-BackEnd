@@ -1,18 +1,26 @@
 package com.achieveit.application.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.achieveit.application.entity.DeviceEntity;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-/**
- * Client Mapper
- */
 @Mapper
 public interface DeviceMapper {
 
     @Select("SELECT deviceid FROM deviceidlist WHERE occupied=false")
     ArrayList<String> getDeviceIDList();
 
+    @Update("UPDATE deviceidlist SET occupied=#{occupied} WHERE (deviceid=#{deviceID});")
+    void updateDeviceIDList(String deviceID, Boolean occupied);
+
+    @Select("SELECT devices.*, users.username FROM devices, users WHERE (devices.projectid=#{projectID} AND devices.userid=users.userid)")
+    ArrayList<DeviceEntity> getDeviceList(String projectID);
+
+    @Insert("INSERT INTO devices(deviceid, userid, projectid, duedate, returned) VALUES (#{deviceID}, #{userID}, #{projectID}, #{dueDate}, false);")
+    void registerDevice(String projectID, String userID, String deviceID, Date dueDate);
+
+    @Update("UPDATE devices SET returned=true WHERE (deviceid=#{deviceID} AND projectid=#{projectID} AND userid=#{userID});")
+    void returnDevice(String projectID, String userID, String deviceID);
 }
