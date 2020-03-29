@@ -4,3 +4,4 @@
 backend.log*
 achieveit/target
 achieveit/logs/*
+logs/*
