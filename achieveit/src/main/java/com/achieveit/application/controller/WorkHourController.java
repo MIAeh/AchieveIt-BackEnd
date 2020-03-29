@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
-@Controller
+@RestController
 @RequestMapping("/workHour/")
 public class WorkHourController {
 

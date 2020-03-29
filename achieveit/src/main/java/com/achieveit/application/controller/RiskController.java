@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
-@Controller
+@RestController
 @RequestMapping("/risk/")
 public class RiskController {
     private final RiskService riskService;
@@ -32,7 +32,8 @@ public class RiskController {
     public ResponseResult<RiskEntity> addRisk(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType") int riskType,
                                     @RequestParam("riskCharger") String riskCharger,@RequestParam("riskLevel") int riskLevel,
                                     @RequestParam("riskInfluence")int riskInfluence,@RequestParam("riskFrequency")int riskFrequency,
-                                              @RequestParam("riskStrategy")String riskStrategy,@RequestParam("riskStatus") int riskStatus, HttpSession session){
+                                              @RequestParam(value="riskStrategy",defaultValue = "",required = false)String riskStrategy,
+                                              @RequestParam(value = "riskStatus",required = false,defaultValue = "0") int riskStatus, HttpSession session){
         return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,session);
     }
 

@@ -21,6 +21,10 @@ public class RiskEntity {
 
     int riskStatus;
 
+    public RiskEntity(){
+
+    }
+
     public RiskEntity(String riskDescription, int riskType, String riskCharger, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;

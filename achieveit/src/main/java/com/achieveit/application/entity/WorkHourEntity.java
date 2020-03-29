@@ -14,6 +14,10 @@ public class WorkHourEntity {
     private Date endTime;
     int status;
 
+    public WorkHourEntity(){
+
+    }
+
     public WorkHourEntity(String applyerId, String featureName, String activityName, Date startTime, Date endTime) {
         this.workHourId= UUID.randomUUID().toString();
         this.applyTime=new Date(System.currentTimeMillis());
