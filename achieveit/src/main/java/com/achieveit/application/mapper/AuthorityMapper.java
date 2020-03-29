@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
-/**
- * Client Mapper
- */
 @Mapper
 public interface AuthorityMapper {
 
