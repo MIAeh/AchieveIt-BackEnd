@@ -25,7 +25,7 @@ public class FeatureService {
     /**
      * Logger
      */
-    private final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final Logger logger = LoggerFactory.getLogger(FeatureService.class);
 
     @Autowired
     public FeatureService(FeatureMapper featureMapper) {
