@@ -50,13 +50,13 @@ public class RiskController {
     }
 
     @CrossOrigin
-    @GetMapping("getRiskHoldersByRiskId")
+    @GetMapping("getRiskHoldersByRiskID")
     public ResponseResult<ArrayList<String>> getRiskHoldersByRiskId(@RequestParam("riskID")int riskId){
         return riskService.getRiskHoldersByRiskId(riskId);
     }
 
     @CrossOrigin
-    @PostMapping("addRiskHoldersByRiskId")
+    @PostMapping("addRiskHoldersByRiskID")
     public ResponseResult<Boolean> addRiskHoldersByRiskId(@RequestParam("riskID")int riskId,@RequestParam("riskHolder")String riskHolder){
         return riskService.addRiskHoldersByRiskId(riskId,riskHolder);
     }
