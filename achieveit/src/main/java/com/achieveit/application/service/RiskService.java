@@ -26,11 +26,11 @@ public class RiskService {
     private final Logger logger = LoggerFactory.getLogger(RiskService.class);
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> addRisk(String riskDescription,int riskType,String riskCharger,
-                                           int riskLevel,int riskInfluence,int riskStatus,HttpSession session){
-        RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskStatus);
+    public ResponseResult<RiskEntity> addRisk(String riskDescription,int riskType,String riskCharger,
+                                           int riskLevel,int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,HttpSession session){
+        RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus);
         int res=riskMapper.insertRisk(riskEntity);
-        return ResultGenerator.success();
+        return ResultGenerator.success(riskEntity);
     }
 
     @Transactional(rollbackFor = Exception.class)

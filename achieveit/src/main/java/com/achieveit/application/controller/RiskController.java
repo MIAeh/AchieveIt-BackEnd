@@ -29,10 +29,11 @@ public class RiskController {
 
     @CrossOrigin
     @PostMapping("addRisk")
-    public ResponseResult<Boolean> addRisk(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType") int riskType,
+    public ResponseResult<RiskEntity> addRisk(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType") int riskType,
                                     @RequestParam("riskCharger") String riskCharger,@RequestParam("riskLevel") int riskLevel,
-                                    @RequestParam("riskInfluence")int riskInfluence,@RequestParam("riskStatus") int riskStatus, HttpSession session){
-        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskStatus,session);
+                                    @RequestParam("riskInfluence")int riskInfluence,@RequestParam("riskFrequency")int riskFrequency,
+                                              @RequestParam("riskStrategy")String riskStrategy,@RequestParam("riskStatus") int riskStatus, HttpSession session){
+        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,session);
     }
 
     @CrossOrigin
@@ -48,7 +49,7 @@ public class RiskController {
     }
 
     @CrossOrigin
-    @PostMapping("getRiskHoldersByRiskId")
+    @GetMapping("getRiskHoldersByRiskId")
     public ResponseResult<ArrayList<String>> getRiskHoldersByRiskId(@RequestParam("riskID")int riskId){
         return riskService.getRiskHoldersByRiskId(riskId);
     }

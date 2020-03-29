@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 @Mapper
 public interface RiskMapper {
-    @Insert("insert into risklist(riskdescription,risktype,riskcharger,risklevel,riskinfluence,riskstatus) values"
-    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskLevel},#{riskInfluence},#{riskStatus})")
+    @Insert("insert into risklist(riskdescription,risktype,riskcharger,risklevel,riskinfluence,riskfrequency,riskstrategy,riskstatus) values"
+    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus})")
     int insertRisk(RiskEntity risk);
 
     @Select("select * from risklist order by riskid")
