@@ -45,4 +45,29 @@ public class RiskService {
         return ResultGenerator.success(riskEntities);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Boolean> changeRiskStatus(int riskId,String riskCharger){
+        RiskEntity riskEntity=riskMapper.getRiskByRiskId(riskId);
+        if(riskEntity==null||!riskEntity.getRiskCharger().equals(riskCharger)){
+            return ResultGenerator.error("unknown error in getRisk");
+        }
+        if(riskEntity.getRiskStatus()==1){
+            return ResultGenerator.success("Has changed already!");
+        }
+        riskMapper.changeRiskStatus(riskId,1);
+        return ResultGenerator.success();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<ArrayList<String>> getRiskHoldersByRiskId(int riskId){
+        ArrayList<String> riskHolders=riskMapper.getAllRiskHolderByRiskId(riskId);
+        return ResultGenerator.success(riskHolders);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Boolean> addRiskHoldersByRiskId(int riskId,String riskHolder){
+        int res=riskMapper.addRiskHolder(riskId,riskHolder);
+        return ResultGenerator.success();
+    }
+
 }

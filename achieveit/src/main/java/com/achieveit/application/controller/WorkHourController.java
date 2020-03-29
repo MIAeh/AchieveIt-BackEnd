@@ -23,7 +23,7 @@ public class WorkHourController {
 
     @CrossOrigin
     @PostMapping("applyWorkHour")
-    ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID") String applyerId,
+    public ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID") String applyerId,
                                                  @RequestParam(name="featureName")String featureName,
                                                  @RequestParam(name="activityName")String activityName,
                                                  @RequestParam(name="startTime") String startTime,
@@ -35,15 +35,14 @@ public class WorkHourController {
 
     @CrossOrigin
     @GetMapping("getWorkHoursByStatus")
-    ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatus(@RequestParam(name = "status")int status){
+    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatus(@RequestParam(name = "status")int status){
         return workHourService.getWorkHourByStatus(status);
     }
 
     @CrossOrigin
     @PostMapping("approveWorkHour")
-    ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
+    public ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
                                             @RequestParam(name="approverID")String approverId){
         return workHourService.approveWordHour(workHourId,approverId);
     }
-
 }
