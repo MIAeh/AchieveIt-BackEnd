@@ -4,6 +4,7 @@ import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,9 @@ public class ProjectController {
     @CrossOrigin
     @Logged
     @GetMapping("/getProjectIDList")
-    public ResponseResult<ArrayList<String>> getProjectIDList() {
-        return projectService.getProjectIDList();
+    public ResponseResult<List<String>> getProjectIDList() {
+        List<String> projectIDs = projectService.getProjectIDList();
+        return ResultGenerator.success(projectIDs);
     }
 
     /**
@@ -42,8 +44,9 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"searchCondition", "projectStatus"})
     @GetMapping("/getProjectList")
-    public ResponseResult<List<ProjectListItem>>  getProjectList(@RequestParam("searchCondition") String searchCondition, @RequestParam("projectStatus") Integer projectStatus) {
-            return projectService.getProjectList(searchCondition, projectStatus);
+    public ResponseResult<List<ProjectListItem>> getProjectList(@RequestParam("searchCondition") String searchCondition, @RequestParam("projectStatus") Integer projectStatus) {
+        List<ProjectListItem> projectListItemList = projectService.getProjectList(searchCondition, projectStatus);
+        return ResultGenerator.success(projectListItemList);
     }
 
     /**
@@ -75,15 +78,16 @@ public class ProjectController {
         }
         Integer domain = jsonObject.getInteger("domain");
 
-        return projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
-                projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getProjectByID")
     public ResponseResult<ProjectInfo> getProjectByID(@RequestParam("projectID") String projectID) {
-        return projectService.getProjectByID(projectID);
+        ProjectInfo projectInfo = projectService.getProjectByID(projectID);
+        return ResultGenerator.success(projectInfo);
     }
 
     @CrossOrigin
@@ -107,35 +111,40 @@ public class ProjectController {
         Integer projectStatus = jsonObject.getInteger("projectStatus");
         Integer domain = jsonObject.getInteger("domain");
 
-        return projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberRole"})
     @GetMapping("/getMembersByID")
     public ResponseResult<List<MemberInfo>> getMembersByID(@RequestParam("projectID") String projectID, @RequestParam("memberRole") Integer memberRole) {
-        return projectService.getMembersByID(projectID, memberRole);
+        List<MemberInfo> memberInfos = projectService.getMembersByID(projectID, memberRole);
+        return ResultGenerator.success(memberInfos);
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/addMemberByID")
     public ResponseResult addMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) {
-        return projectService.addMemberByID(projectID, memberID);
+        projectService.addMemberByID(projectID, memberID);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/addMemberRoleByID")
         public ResponseResult addMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
-        return projectService.addMemberRoleByID(projectID, memberID, memberRole);
+        projectService.addMemberRoleByID(projectID, memberID, memberRole);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/removeMemberRoleByID")
     public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
-        return projectService.removeMemberRoleByID(projectID, memberID, memberRole);
+        projectService.removeMemberRoleByID(projectID, memberID, memberRole);
+        return ResultGenerator.success();
     }
 
 
@@ -143,20 +152,23 @@ public class ProjectController {
     @Logged({"projectID", "memberID", "superiorID"})
     @PostMapping("/updateMemberSuperiorByID")
     public ResponseResult updateMemberSuperiorByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID) {
-        return projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);
+        projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getGitRepoByID")
     public ResponseResult<String> getGitRepoByID(@RequestParam("projectID") String projectID) {
-        return projectService.getGitRepoByID(projectID);
+        String gitRepo = projectService.getGitRepoByID(projectID);
+        return ResultGenerator.success(gitRepo);
     }
 
     @CrossOrigin
     @Logged({"projectID", "gitRepo"})
     @PostMapping("/updateGitRepoByID")
     public ResponseResult updateGitRepoByID(@RequestParam("projectID") String projectID, @RequestParam("gitRepo") String gitRepo) {
-        return projectService.updateGitRepoByID(projectID, gitRepo);
+        projectService.updateGitRepoByID(projectID, gitRepo);
+        return ResultGenerator.success();
     }
 }

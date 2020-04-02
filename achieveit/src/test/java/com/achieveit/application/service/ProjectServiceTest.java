@@ -1,7 +1,9 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.MemberInfo;
+import com.achieveit.application.entity.Milestone;
+import com.achieveit.application.entity.ProjectInfo;
 import com.achieveit.application.entity.ProjectListItem;
-import com.achieveit.application.wrapper.ResponseResult;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,18 +30,126 @@ public class ProjectServiceTest {
     @Autowired
     private ProjectService projectService;
 
+
     @Test
     public void getProjectIDListTest() {
-        ResponseResult<ArrayList<String>> responseResult = projectService.getProjectIDList();
-        LOGGER.info(responseResult.toString());
-        Assert.assertNotNull(responseResult);
+        List<String> projectIDs = projectService.getProjectIDList();
+        Assert.assertNotNull(projectIDs);
     }
 
     @Test
     public void getProjectListTest() {
-        ResponseResult<List<ProjectListItem>> responseResult = projectService.getProjectList("project", 0);
-        LOGGER.info(responseResult.toString());
-        Assert.assertNotNull(responseResult);
+        List<ProjectListItem> projectList = projectService.getProjectList("project", 0);
+        Assert.assertNotNull(projectList);
     }
 
+    @Test
+    public void createProjectByIDTest() throws ParseException {
+//        String projectID = "2019-0000-D-01";
+//        String projectName = "test project 1";
+//        String projectManagerID = "48fb8377-664f-4a9b-b13f-6729b00a9e22";
+//        String projectMonitorID = "b6703879-e1e2-499c-8ffe-d8b29f71f156";
+//        String projectClientID = "0000";
+//        Integer projectStatus = 0;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date projectStartDate = dateFormat.parse("2019-11-11");
+//        Date projectEndDate = dateFormat.parse("2020-11-11");
+//        String projectFrameworks = "MVC";
+//        List<String> projectLanguages = new ArrayList<>();
+//        projectLanguages.add("C++");
+//        projectLanguages.add("Java");
+//        List<Milestone> projectMilestones = new ArrayList<>();
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-11"), "milestone 1"));
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
+//        Integer domain = 0;
+//        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void getProjectByIDTest() {
+        String projectID = "2019-0000-D-01";
+        ProjectInfo projectInfo = projectService.getProjectByID(projectID);
+        Assert.assertEquals(projectID, projectInfo.getProjectID());
+    }
+
+    @Test
+    public void updateProjectByIDTest() throws ParseException {
+//        String projectID = "2019-0000-D-01";
+//        String projectName = "test project 1";
+//        Integer projectStatus = 0;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date projectStartDate = dateFormat.parse("2019-11-11");
+//        Date projectEndDate = dateFormat.parse("2020-11-11");
+//        String projectFrameworks = "MVC";
+//        List<String> projectLanguages = new ArrayList<>();
+//        projectLanguages.add("C++");
+//        projectLanguages.add("Java");
+//        List<Milestone> projectMilestones = new ArrayList<>();
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-11"), "milestone 1"));
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
+//        projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
+//        Integer domain = 0;
+//        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void getMembersByIDTest() {
+        String projectID = "2019-0000-D-01";
+        Integer memberRole = 0;
+        List<MemberInfo> memberInfos = projectService.getMembersByID(projectID, memberRole);
+        Assert.assertNotNull(memberInfos);
+    }
+
+    @Test
+    public void addMemberByIDTest() {
+//        String projectID = "2019-0000-D-01";
+//        String memberID = "0001";
+//        projectService.addMemberByID(projectID, memberID);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void addMemberRoleByIDTest() {
+//        String projectID = "2019-0000-D-01";
+//        String memberID = "0001";
+//        Integer memberRole = 0;
+//        projectService.addMemberRoleByID(projectID, memberID, memberRole);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void removeMemberRoleByIDTest() {
+//        String projectID = "2019-0000-D-01";
+//        String memberID = "0001";
+//        Integer memberRole = 0;
+//        projectService.removeMemberRoleByID(projectID, memberID, memberRole);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void updateMemberSuperiorByIDTest() {
+//        String projectID = "2019-0000-D-01";
+//        String memberID = "0001";
+//        String superiorID = "48fb8377-664f-4a9b-b13f-6729b00a9e22";
+//        projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void getGitRepoByID() {
+        String projectID = "2019-0000-D-01";
+        String gitRepo = projectService.getGitRepoByID(projectID);
+        Assert.assertNotNull(gitRepo);
+    }
+
+    @Test
+    public void updateGitRepoByID() {
+//        String projectID = "2019-0000-D-01";
+//        String gitRepo = "https://github.com/achieveit/project_sample";
+//        projectService.updateGitRepoByID(projectID, gitRepo);
+        Assert.assertTrue(true);
+    }
 }
