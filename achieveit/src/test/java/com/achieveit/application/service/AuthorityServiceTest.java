@@ -2,10 +2,6 @@ package com.achieveit.application.service;
 
 import com.achieveit.application.entity.AuthorityEntity;
 import com.achieveit.application.entity.AuthorityList;
-import com.achieveit.application.entity.ClientInfo;
-import com.achieveit.application.exception.AchieveitException;
-import com.achieveit.application.wrapper.ResponseResult;
-import com.achieveit.application.wrapper.ResultGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
