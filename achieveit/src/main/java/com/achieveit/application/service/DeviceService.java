@@ -27,35 +27,32 @@ public class DeviceService {
     }
 
     @Logged
-    public ResponseResult<List<String>> getDeviceIDList() {
-        List<String> deviceIDs = deviceMapper.getDeviceIDList();
-        return ResultGenerator.success(deviceIDs);
+    public List<String> getDeviceIDList() {
+        return deviceMapper.getDeviceIDList();
     }
 
     @Logged({"projectID"})
-    public ResponseResult<List<DeviceInfo>> getDeviceList(String projectID) {
+    public List<DeviceInfo> getDeviceList(String projectID) {
         List<DeviceEntity> deviceEntities = deviceMapper.getDeviceList(projectID);
         List<DeviceInfo> deviceInfos = new ArrayList<>();
         for (DeviceEntity deviceEntity : deviceEntities) {
             DeviceInfo deviceInfo = new DeviceInfo(deviceEntity);
             deviceInfos.add(deviceInfo);
         }
-        return ResultGenerator.success(deviceInfos);
+        return deviceInfos;
     }
 
     @Transactional
     @Logged({"projectID", "userID", "deviceID"})
-    public ResponseResult registerDevice(String projectID, String userID, String deviceID, Date dueDate) {
+    public void registerDevice(String projectID, String userID, String deviceID, Date dueDate) {
         deviceMapper.updateDeviceIDList(deviceID, true);
         deviceMapper.registerDevice(projectID, userID, deviceID, dueDate);
-        return ResultGenerator.success();
     }
 
     @Logged({"projectID", "userID", "deviceID"})
-    public ResponseResult returnDevice(String projectID, String userID, String deviceID) {
+    public void returnDevice(String projectID, String userID, String deviceID) {
         deviceMapper.updateDeviceIDList(deviceID, false);
         deviceMapper.returnDevice(projectID, userID, deviceID);
-        return ResultGenerator.success();
     }
 
 }

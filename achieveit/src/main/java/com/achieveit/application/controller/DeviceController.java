@@ -29,14 +29,16 @@ public class DeviceController {
     @Logged
     @GetMapping("/getDeviceIDList")
     public ResponseResult<List<String>> getDeviceIDList() {
-        return deviceService.getDeviceIDList();
+        List<String> deviceIDs = deviceService.getDeviceIDList();
+        return ResultGenerator.success(deviceIDs);
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getDeviceList")
     public ResponseResult<List<DeviceInfo>> getDeviceList(@RequestParam("projectID") String projectID) {
-        return deviceService.getDeviceList(projectID);
+        List<DeviceInfo> deviceInfos = deviceService.getDeviceList(projectID);
+        return ResultGenerator.success(deviceInfos);
     }
 
     @CrossOrigin
@@ -45,7 +47,8 @@ public class DeviceController {
     public ResponseResult registerDevice(@RequestParam("projectID") String projectID, @RequestParam("userID") String userID, @RequestParam("deviceID") String deviceID, @RequestParam("dueDate") String dueDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            return deviceService.registerDevice(projectID, userID, deviceID, dateFormat.parse(dueDate));
+            deviceService.registerDevice(projectID, userID, deviceID, dateFormat.parse(dueDate));
+            return ResultGenerator.success();
         } catch (ParseException e) {
             e.printStackTrace();
             return ResultGenerator.error(e.getMessage());
@@ -56,6 +59,7 @@ public class DeviceController {
     @Logged({"projectID", "userID", "deviceID"})
     @PostMapping("/returnDevice")
     public ResponseResult returnDevice(@RequestParam("projectID") String projectID, @RequestParam("userID") String userID, @RequestParam("deviceID") String deviceID) {
-        return deviceService.returnDevice(projectID, userID, deviceID);
+        deviceService.returnDevice(projectID, userID, deviceID);
+        return ResultGenerator.success();
     }
 }
