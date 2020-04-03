@@ -26,8 +26,8 @@ public class ClientService {
      * @return Result
      */
     @Logged({"clientID"})
-    public ResponseResult<ClientInfo> getClientInfoByID(String clientID) {
+    public ClientInfo getClientInfoByID(String clientID) {
         ClientInfo clientInfo = clientMapper.getClientInfoByID(clientID);
-        return ResultGenerator.success(clientInfo);
+        return clientInfo;
     }
 }

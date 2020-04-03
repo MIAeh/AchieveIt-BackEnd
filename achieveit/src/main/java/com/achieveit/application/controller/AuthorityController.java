@@ -2,9 +2,11 @@ package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
+import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.AuthorityService;
 import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +29,16 @@ public class AuthorityController {
     @Logged({"projectID"})
     @GetMapping("/getAllMembersByID")
     public ResponseResult<AuthorityList> getAllMembersByID(@RequestParam("projectID") String projectID) {
-        return authorityService.getAllMembersByID(projectID);
+        AuthorityList authorityList = authorityService.getAllMembersByID(projectID);
+        return ResultGenerator.success(authorityList);
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getGitMembersByID")
     public ResponseResult<List<AuthorityEntity>> getGitMembersByID(@RequestParam("projectID") String projectID) {
-        return authorityService.getGitMembersByID(projectID);
+        List<AuthorityEntity> gitMembers = authorityService.getGitMembersByID(projectID);
+        return ResultGenerator.success(gitMembers);
     }
 
     @CrossOrigin
@@ -43,21 +47,29 @@ public class AuthorityController {
     public ResponseResult addGitMembersByID(@RequestBody JSONObject jsonObject) {
         String projectID = jsonObject.getString("projectID");
         List<String> memberIDs = JSONObject.parseArray(jsonObject.getJSONArray("memberIDs").toJSONString(), String.class);
-        return authorityService.addGitMembersByID(projectID, memberIDs);
+        try {
+            authorityService.addGitMembersByID(projectID, memberIDs);
+        } catch (AchieveitException e) {
+            e.printStackTrace();
+            return ResultGenerator.error(e.getErrorCode());
+        }
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteGitMemberByID")
     public ResponseResult deleteGitMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) {
-        return authorityService.deleteGitMemberByID(projectID, memberID);
+        authorityService.deleteGitMemberByID(projectID, memberID);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getMailMembersByID")
     public ResponseResult<List<AuthorityEntity>> getMailMembersByID(@RequestParam("projectID") String projectID) {
-        return authorityService.getMailMembersByID(projectID);
+        List<AuthorityEntity> mailMembers = authorityService.getMailMembersByID(projectID);
+        return ResultGenerator.success(mailMembers);
     }
 
     @CrossOrigin
@@ -66,21 +78,29 @@ public class AuthorityController {
     public ResponseResult addMailMembersByID(@RequestBody JSONObject jsonObject) {
         String projectID = jsonObject.getString("projectID");
         List<String> memberIDs = JSONObject.parseArray(jsonObject.getJSONArray("memberIDs").toJSONString(), String.class);
-        return authorityService.addMailMembersByID(projectID, memberIDs);
+        try {
+            authorityService.addMailMembersByID(projectID, memberIDs);
+        } catch (AchieveitException e) {
+            e.printStackTrace();
+            return ResultGenerator.error(e.getErrorCode());
+        }
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteMailMemberByID")
     public ResponseResult deleteMailMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) {
-        return authorityService.deleteMailMemberByID(projectID, memberID);
+        authorityService.deleteMailMemberByID(projectID, memberID);
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getFileMembersByID")
     public ResponseResult<List<AuthorityEntity>> getFileMembersByID(@RequestParam("projectID") String projectID) {
-        return authorityService.getFileMembersByID(projectID);
+        List<AuthorityEntity> fileMembers = authorityService.getFileMembersByID(projectID);
+        return ResultGenerator.success(fileMembers);
     }
 
     @CrossOrigin
@@ -89,14 +109,21 @@ public class AuthorityController {
     public ResponseResult addFileMembersByID(@RequestBody JSONObject jsonObject) {
         String projectID = jsonObject.getString("projectID");
         List<String> memberIDs = JSONObject.parseArray(jsonObject.getJSONArray("memberIDs").toJSONString(), String.class);
-        return authorityService.addFileMembersByID(projectID, memberIDs);
+        try {
+            authorityService.addFileMembersByID(projectID, memberIDs);
+        } catch (AchieveitException e) {
+            e.printStackTrace();
+            return ResultGenerator.error(e.getErrorCode());
+        }
+        return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteFileMemberByID")
     public ResponseResult deleteFileMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) {
-        return authorityService.deleteFileMemberByID(projectID, memberID);
+        authorityService.deleteFileMemberByID(projectID, memberID);
+        return ResultGenerator.success();
     }
 
 }

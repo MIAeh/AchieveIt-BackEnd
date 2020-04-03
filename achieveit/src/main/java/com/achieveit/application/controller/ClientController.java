@@ -4,6 +4,7 @@ import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.ClientInfo;
 import com.achieveit.application.service.ClientService;
 import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,6 +26,7 @@ public class ClientController {
     @Logged({"clientID"})
     @GetMapping("/getClientInfoByID")
     public ResponseResult<ClientInfo> getClientInfoByID(@RequestParam("clientID") String clientID) {
-        return clientService.getClientInfoByID(clientID);
+        ClientInfo clientInfo = clientService.getClientInfoByID(clientID);
+        return ResultGenerator.success(clientInfo);
     }
 }

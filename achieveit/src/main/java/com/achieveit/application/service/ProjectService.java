@@ -3,8 +3,6 @@ package com.achieveit.application.service;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.mapper.ProjectMapper;
-import com.achieveit.application.wrapper.ResponseResult;
-import com.achieveit.application.wrapper.ResultGenerator;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,9 +36,8 @@ public class ProjectService {
      * @return Result
      */
     @Logged
-    public ResponseResult<ArrayList<String>> getProjectIDList() {
-        ArrayList<String> projectIDs = projectMapper.getProjectIDList();
-        return ResultGenerator.success(projectIDs);
+    public List<String> getProjectIDList() {
+        return projectMapper.getProjectIDList();
     }
 
     /**
@@ -48,7 +45,7 @@ public class ProjectService {
      * @return Result
      */
     @Logged({"searchCondition", "projectStatus"})
-    public ResponseResult<List<ProjectListItem>> getProjectList(String searchCondition, Integer projectStatus) {
+    public List<ProjectListItem> getProjectList(String searchCondition, Integer projectStatus) {
         ArrayList<ProjectEntity> projectEntities = projectMapper.getProjectList();
         List<ProjectListItem> projectListItemList = new ArrayList<>();
         for (ProjectEntity entity : projectEntities) {
@@ -59,13 +56,13 @@ public class ProjectService {
             }
         }
         logger.info("ProjectInfoList: " + projectListItemList);
-        return ResultGenerator.success(projectListItemList);
+        return projectListItemList;
     }
 
     @Transactional
     @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStatus",
             "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones", "domain"})
-    public ResponseResult createProjectByID(String projectID,
+    public void createProjectByID(String projectID,
                                             String projectName,
                                             String projectManagerID,
                                             String projectMonitorID,
@@ -87,25 +84,24 @@ public class ProjectService {
         projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, "[0]"));
         projectMapper.addGitRepoByID(projectID, "null");
         projectMapper.deleteProjectIDFromProjectIDList(projectID);
-        return ResultGenerator.success();
     }
 
     @Transactional
     @Logged({"projectID"})
-    public ResponseResult<ProjectInfo> getProjectByID(String projectID) {
+    public ProjectInfo getProjectByID(String projectID) {
         ProjectEntity projectEntity = projectMapper.getProjectByID(projectID);
         Integer domain = projectMapper.getDomainByProjectID(projectID);
         projectEntity.setDomain(domain);
         logger.info("ProjectEntity: " + projectEntity);
         ProjectInfo projectInfo = new ProjectInfo(projectEntity);
         logger.info("Cast to ProjectInfo: " + projectInfo);
-        return ResultGenerator.success(projectInfo);
+        return projectInfo;
     }
 
     @Transactional
     @Logged({"projectID", "projectName", "projectStartDate", "projectEndDate", "projectFrameworks",
             "projectLanguages", "projectMilestones", "projectStatus"})
-    public ResponseResult updateProjectByID(String projectID,
+    public void updateProjectByID(String projectID,
                                             String projectName,
                                             Date projectStartDate,
                                             Date projectEndDate,
@@ -120,11 +116,10 @@ public class ProjectService {
         logger.info("ProjectEntity: " + projectEntity.toString());
         projectMapper.updateProjectByID(projectEntity);
         projectMapper.updateDomainByProjectID(projectID, domain);
-        return ResultGenerator.success();
     }
 
     @Logged({"projectID"})
-    public ResponseResult<List<MemberInfo>> getMembersByID(String projectID, Integer memberRole) {
+    public List<MemberInfo> getMembersByID(String projectID, Integer memberRole) {
         List<MemberEntity> memberEntityList = projectMapper.getMembersByID(projectID);
         List<MemberInfo> memberInfoList = new ArrayList<>();
         for (MemberEntity memberEntity: memberEntityList) {
@@ -137,20 +132,19 @@ public class ProjectService {
                 }
             }
         }
-        return ResultGenerator.success(memberInfoList);
+        return memberInfoList;
     }
 
     @Transactional
     @Logged({"projectID", "memberID"})
-    public ResponseResult addMemberByID(String projectID, String memberID) {
+    public void addMemberByID(String projectID, String memberID) {
         String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
         projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[]"));
-        return ResultGenerator.success();
     }
 
     @Transactional
     @Logged({"projectID", "memberID", "memberRole"})
-    public ResponseResult addMemberRoleByID(String projectID, String memberID, Integer memberRole) {
+    public void addMemberRoleByID(String projectID, String memberID, Integer memberRole) {
         MemberEntity memberEntity = projectMapper.getMemberByID(projectID, memberID);
         List<Integer> memberRoles = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
         if (!memberRoles.contains(memberRole)) {
@@ -158,36 +152,31 @@ public class ProjectService {
             Collections.sort(memberRoles);
             projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
         }
-        return ResultGenerator.success();
     }
 
     @Transactional
     @Logged({"projectID", "memberID", "memberRole"})
-    public ResponseResult removeMemberRoleByID(String projectID, String memberID, Integer memberRole) {
+    public void removeMemberRoleByID(String projectID, String memberID, Integer memberRole) {
         MemberEntity memberEntity = projectMapper.getMemberByID(projectID, memberID);
         List<Integer> memberRoles = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
         if (memberRoles.contains(memberRole)) {
             memberRoles.remove(memberRole);
             projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
         }
-        return ResultGenerator.success();
     }
 
     @Logged({"projectID", "memberID", "superiorID"})
-    public ResponseResult updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
+    public void updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
         projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, ""));
-        return ResultGenerator.success();
     }
 
     @Logged({"projectID"})
-    public ResponseResult<String> getGitRepoByID(String projectID) {
-        String gitRepo = projectMapper.getGitRepoByID(projectID);
-        return ResultGenerator.success(gitRepo);
+    public String getGitRepoByID(String projectID) {
+        return projectMapper.getGitRepoByID(projectID);
     }
 
     @Logged({"projectID", "gitRepo"})
-    public ResponseResult updateGitRepoByID(String projectID, String gitRepo) {
+    public void updateGitRepoByID(String projectID, String gitRepo) {
         projectMapper.updateGitRepoByID(projectID, gitRepo);
-        return ResultGenerator.success();
     }
 }

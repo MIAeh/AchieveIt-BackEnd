@@ -26,12 +26,11 @@ public class ClientServiceTest {
     @Test
     public void getClientInfoByIDTest() {
         String testID = "b5d51193-891c-45cc-91eb-1e449fbebbdd";
-        ResponseResult<ClientInfo> result = clientService.getClientInfoByID(testID);
+        ClientInfo clientInfo = clientService.getClientInfoByID(testID);
         ClientInfo expectedClientInfo = new ClientInfo("b5d51193-891c-45cc-91eb-1e449fbebbdd", "test_client", "test_company", "email@test.com", "12345678901", "test_address", 0);
-        ResponseResult<ClientInfo> expectedResult = ResultGenerator.success(expectedClientInfo);
-        LOGGER.info(result.toString());
-        LOGGER.info(expectedResult.toString());
-        Assert.assertEquals(result, expectedResult);
+        LOGGER.info(clientInfo.toString());
+        LOGGER.info(expectedClientInfo.toString());
+        Assert.assertEquals(clientInfo, expectedClientInfo);
     }
 
 }
