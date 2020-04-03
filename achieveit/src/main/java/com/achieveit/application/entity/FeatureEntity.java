@@ -22,6 +22,8 @@ public class FeatureEntity {
 
     private Date createTime;
 
+    private String featureDisplayId;
+
     public String getFeatureId() {
         return featureId;
     }
@@ -90,7 +92,15 @@ public class FeatureEntity {
         this.createTime = createTime;
     }
 
-    public FeatureEntity(int featureLevel, String projectId, String featureName,String featureDescription) {
+    public String getFeatureDisplayId() {
+        return featureDisplayId;
+    }
+
+    public void setFeatureDisplayId(String featureDisplayId) {
+        this.featureDisplayId = featureDisplayId;
+    }
+
+    public FeatureEntity(int featureLevel, String projectId, String featureName, String featureDescription) {
         this.featureId= UUID.randomUUID().toString();
         this.featureLevel = featureLevel;
         this.projectId = projectId;

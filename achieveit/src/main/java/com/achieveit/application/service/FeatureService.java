@@ -50,14 +50,30 @@ public class FeatureService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<FeatureEntity>> getFeaturesInfo(HttpSession session){
         ArrayList<FeatureEntity> allTopFeatures=featureMapper.getAllTopFeatures();
-        for(FeatureEntity entity:allTopFeatures){
-            ArrayList<FeatureEntity> children=featureMapper.getChildrenByFatherId(entity.getFeatureId());
+        for(FeatureEntity entity:allTopFeatures) {
+            ArrayList<FeatureEntity> children = featureMapper.getChildrenByFatherId(entity.getFeatureId());
             entity.setAllChildren(children);
-            for(FeatureEntity entity1:children){
-                ArrayList<FeatureEntity> children2=featureMapper.getChildrenByFatherId(entity1.getFeatureId());
+            for (FeatureEntity entity1 : children) {
+                ArrayList<FeatureEntity> children2 = featureMapper.getChildrenByFatherId(entity1.getFeatureId());
                 entity1.setAllChildren(children2);
             }
         }
+
+        int index=0;
+        for(FeatureEntity topFeature:allTopFeatures){
+            topFeature.setFeatureDisplayId(topFeature.getProjectId()+"-"+String.format("%04d",index));
+            ArrayList<FeatureEntity> data=topFeature.getAllChildren();
+            for(int i=0;i<data.size();i++){
+                FeatureEntity sub=data.get(i);
+                sub.setFeatureDisplayId(sub.getProjectId()+"-"+String.format("%04d",index)+"-"+String.format("%03d",i));
+                for(int j=0;j<sub.getAllChildren().size();j++){
+                    FeatureEntity subSub=sub.getAllChildren().get(i);
+                    subSub.setFeatureDisplayId(subSub.getProjectId()+"-"+String.format("%04d",index)+"-"+String.format("%03d",i)+"-"+String.format("%03d",j));
+                }
+            }
+            index++;
+        }
+
         return ResultGenerator.success(allTopFeatures);
     }
 
