@@ -44,6 +44,18 @@ public class WorkHourService {
         return ResultGenerator.success();
     }
 
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<ArrayList<WorkHourEntity>> getAllWorkHours(){
+        ArrayList<WorkHourEntity> entities=workHourMapper.getAllWorkHours();
+        return ResultGenerator.success(entities);
+    }
+
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHourById(String applyerId) {
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursById(applyerId);
+        return ResultGenerator.success(entities);
+    }
+
     //To Be Done
     @Transactional(rollbackFor =Exception.class)
     public ResponseResult<Boolean> deleteWorkHour(String workHourId){

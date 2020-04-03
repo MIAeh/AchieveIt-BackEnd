@@ -3,6 +3,7 @@ package com.achieveit.application.controller;
 import com.achieveit.application.entity.WorkHourEntity;
 import com.achieveit.application.service.WorkHourService;
 import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,30 @@ public class WorkHourController {
     public ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
                                             @RequestParam(name="approverID")String approverId){
         return workHourService.approveWordHour(workHourId,approverId);
+    }
+
+    @CrossOrigin
+    @GetMapping("getAllWorkHours")
+    public ResponseResult<ArrayList<WorkHourEntity>> getAllWorkHours(){
+        return workHourService.getAllWorkHours();
+    }
+
+    @CrossOrigin
+    @GetMapping("getMyWorkHour")
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHour(@RequestParam(name="myID")String myId){
+        return workHourService.getMyWorkHourById(myId);
+    }
+
+    @CrossOrigin
+    @GetMapping("getMyWorkHoursToApprove")
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApprove(@RequestParam(name="myID")String myId){
+        ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourById(myId);
+        ArrayList<WorkHourEntity> res=new ArrayList<WorkHourEntity>();
+        for(WorkHourEntity entity:entities.getData()) {
+            if (entity.getStatus() == 0) {
+                res.add(entity);
+            }
+        }
+        return ResultGenerator.success(res);
     }
 }

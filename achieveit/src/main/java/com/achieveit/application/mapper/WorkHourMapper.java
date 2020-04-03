@@ -12,13 +12,18 @@ public interface WorkHourMapper {
     int insertWorkHour(WorkHourEntity workHourEntity);
 
     @Update("update workhour set status=#{status} where workhourId=#{workHourId}")
-    int changeWordHourStatus(@Param("wordHourId") String workHourId,@Param("status") int status);
+    int changeWordHourStatus(@Param("workHourId") String workHourId,@Param("status") int status);
 
     @Update("update workhour set approverId=#{approverId} where workhourId=#{workHourId}")
-    int setWorkHourApproverId(@Param("wordHourId") String workHourId,@Param("approverId") String approverId);
+    int setWorkHourApproverId(@Param("workHourId") String workHourId,@Param("approverId") String approverId);
 
     @Select("select * from workhour where status=#{status}")
     ArrayList<WorkHourEntity> getWorkHoursByStatus(@Param("status")int status);
 
+    @Select("select * from workhour")
+    ArrayList<WorkHourEntity> getAllWorkHours();
+
+    @Select("select * from workhour where applyerid=#{applyerId}")
+    ArrayList<WorkHourEntity> getWorkHoursById(@Param("applyerId")String applyerId);
 
 }
