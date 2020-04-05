@@ -57,8 +57,8 @@ public class StatusService {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
         emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                "申请立项已通过，项目已立项。");
+                project.getProjectID() + " " + project.getProjectName() + " 立项驳回",
+                "申请立项被驳回，项目立项驳回。");
     }
 
     @Logged({"projectID"})
@@ -129,8 +129,8 @@ public class StatusService {
         if (projectMembers != null) {
             for (MemberEntity member: projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 进行中",
-                        "项目配置完成已启动，项目进行中。");
+                        project.getProjectID() + " " + project.getProjectName() + " 已交付",
+                        "项目确认交付，项目已交付。");
             }
         }
     }
