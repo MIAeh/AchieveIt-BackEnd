@@ -34,8 +34,9 @@ public class RiskController {
                                     @RequestParam("riskCharger") String riskCharger,@RequestParam("riskLevel") int riskLevel,
                                     @RequestParam("riskInfluence")int riskInfluence,@RequestParam("riskFrequency")int riskFrequency,
                                               @RequestParam(value="riskStrategy",defaultValue = "",required = false)String riskStrategy,
-                                              @RequestParam(value = "riskStatus",required = false,defaultValue = "0") int riskStatus, HttpSession session){
-        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,session);
+                                              @RequestParam(value = "riskStatus",required = false,defaultValue = "0") int riskStatus,
+                                              @RequestParam(value = "projectID",required = false,defaultValue = "")String projectID, HttpSession session){
+        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID,session);
     }
 
     @CrossOrigin
@@ -78,8 +79,8 @@ public class RiskController {
 
     @CrossOrigin
     @GetMapping("getRiskTemplateByProjectID")
-    public ResponseResult<ArrayList<RiskEntity>> getRiskTemplateByProjectID(@RequestParam("projectID")String projectID) {
-        return null;
+    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplateByProjectID(@RequestParam("projectID")String projectID) {
+        return riskService.getRiskTemplatesByProjectID(projectID);
     }
 
 }

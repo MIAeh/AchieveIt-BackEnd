@@ -6,23 +6,25 @@ import java.sql.Date;
 public class RiskEntity {
     private int riskID;
 
-    String riskDescription;
+    private String riskDescription;
 
-    int riskType;
+    private int riskType;
 
-    String riskCharger;
+    private String riskCharger;
 
-    int riskLevel;
+    private int riskLevel;
 
-    int riskInfluence;
+    private int riskInfluence;
 
-    int riskFrequency;
+    private int riskFrequency;
 
-    String riskStrategy;
+    private String riskStrategy;
 
-    int riskStatus;
+    private int riskStatus;
 
-    Date riskLastSendTime;
+    private Date riskLastSendTime;
+
+    private String projectID;
 
     public RiskEntity(){
 
@@ -48,6 +50,18 @@ public class RiskEntity {
         this.riskFrequency=riskFrequency;
         this.riskStrategy=riskStrategy;
         this.riskStatus=riskStatus;
+    }
+
+    public RiskEntity(String riskDescription, int riskType, String riskCharger, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID) {
+        this.riskDescription = riskDescription;
+        this.riskType = riskType;
+        this.riskCharger = riskCharger;
+        this.riskLevel = riskLevel;
+        this.riskInfluence = riskInfluence;
+        this.riskFrequency=riskFrequency;
+        this.riskStrategy=riskStrategy;
+        this.riskStatus=riskStatus;
+        this.projectID=projectID;
     }
 
     public int getRiskID() {
@@ -128,6 +142,14 @@ public class RiskEntity {
 
     public void setRiskLastSendTime(Date riskLastSendTime) {
         this.riskLastSendTime = riskLastSendTime;
+    }
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
     }
 
     @Override

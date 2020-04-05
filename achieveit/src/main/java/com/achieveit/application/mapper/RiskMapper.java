@@ -10,8 +10,8 @@ import java.sql.Date;
 
 @Mapper
 public interface RiskMapper {
-    @Insert("insert into risklist(riskdescription,risktype,riskcharger,risklevel,riskinfluence,riskfrequency,riskstrategy,riskstatus) values"
-    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus})")
+    @Insert("insert into risklist(riskdescription,risktype,riskcharger,risklevel,riskinfluence,riskfrequency,riskstrategy,riskstatus,projectid) values"
+    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus},#{projectID})")
     int insertRisk(RiskEntity risk);
 
     @Select("select * from risklist order by riskid")
@@ -44,5 +44,8 @@ public interface RiskMapper {
 
     @Update("update from risklist set risklastsendtime=#{riskLastSendTime} where riskid=#{riskId}")
     int updateRiskLastSendTime(@Param("riskId")int riskId,@Param("riskLastSendTime")Date riskLastSendTime);
+
+    @Select("select * from risklist where projectid=#{projectID}")
+    ArrayList<RiskEntity> getRisksByProjectID(@Param("projectID")String projectID);
 
 }

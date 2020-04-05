@@ -28,8 +28,12 @@ public class RiskService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<RiskEntity> addRisk(String riskDescription,int riskType,String riskCharger,
-                                           int riskLevel,int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,HttpSession session){
-        RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus);
+                                           int riskLevel,int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID,HttpSession session){
+        RiskEntity riskEntity;
+        if(projectID.equals(""))
+            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus);
+        else
+            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
         int res=riskMapper.insertRisk(riskEntity);
         return ResultGenerator.success(riskEntity);
     }
@@ -84,4 +88,16 @@ public class RiskService {
         int res=riskMapper.addRiskTemplate(riskTemplate);
         return ResultGenerator.success();
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplatesByProjectID(String projectID){
+        ArrayList<RiskEntity> riskEntities=riskMapper.getRisksByProjectID(projectID);
+        ArrayList<RiskTemplate> riskTemplates=new ArrayList<RiskTemplate>();
+        for(RiskEntity entity:riskEntities){
+            RiskTemplate riskTemplate=new RiskTemplate(entity.getRiskDescription(),entity.getRiskType(),entity.getRiskLevel(),entity.getRiskInfluence(),entity.getRiskStrategy());
+            riskTemplates.add(riskTemplate);
+        }
+        return ResultGenerator.success(riskTemplates);
+    }
+
 }
