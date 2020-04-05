@@ -54,7 +54,7 @@ public class StatusService {
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
-        project.setProjectStatus(ProjectStatus.APPROVED.getStatus());
+        project.setProjectStatus(ProjectStatus.REJECTED.getStatus());
         statusMapper.updateProjectStatusByID(project);
         UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
         if (projectManager == null) {
