@@ -56,4 +56,12 @@ public class StatusController {
         statusService.endProject(projectID);
         return ResultGenerator.success();
     }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @PostMapping("/approveArchive")
+    public ResponseResult approveArchive(@RequestParam("projectID") String projectID) throws AchieveitException {
+        statusService.approveArchive(projectID);
+        return ResultGenerator.success();
+    }
 }

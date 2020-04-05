@@ -159,4 +159,29 @@ public class StatusService {
             }
         }
     }
+
+    @Logged({"projectID"})
+    public void approveArchive(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        // update status
+        project.setProjectStatus(ProjectStatus.ARCHIVED.getStatus());
+        statusMapper.updateProjectStatusByID(project);
+
+        // send mail
+        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+        if (projectMembers != null) {
+            for (MemberEntity member: projectMembers) {
+                emailUtil.sendTextEmail(member.getMemberMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已归档",
+                        "归档审批通过，项目已归档。");
+            }
+        }
+    }
 }
