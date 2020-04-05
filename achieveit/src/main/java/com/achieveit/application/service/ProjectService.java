@@ -2,7 +2,11 @@ package com.achieveit.application.service;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
+import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.ProjectMapper;
+import com.achieveit.application.mapper.UserMapper;
+import com.achieveit.application.utils.EmailUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +26,14 @@ public class ProjectService {
 
     private final ProjectMapper projectMapper;
 
-    public ProjectService(ProjectMapper projectMapper) {
+    private final UserMapper userMapper;
+
+    private final EmailUtil emailUtil;
+
+    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, EmailUtil emailUtil) {
         this.projectMapper = projectMapper;
+        this.userMapper = userMapper;
+        this.emailUtil = emailUtil;
     }
 
     /**
@@ -73,7 +83,12 @@ public class ProjectService {
                                             String projectFrameworks,
                                             List<String> projectLanguages,
                                             List<Milestone> projectMilestones,
-                                            Integer domain) {
+                                            Integer domain) throws AchieveitException {
+
+        UserEntity projectMonitor = userMapper.getUserInfoById(projectMonitorID);
+        if (projectMonitor == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
 
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
                 projectStatus, projectStartDate, projectEndDate, projectFrameworks,
@@ -84,6 +99,9 @@ public class ProjectService {
         projectMapper.addMemberByID(new MemberEntity(projectID, projectManagerID, projectManagerID, "[0]"));
         projectMapper.addGitRepoByID(projectID, "null");
         projectMapper.deleteProjectIDFromProjectIDList(projectID);
+        // send mail
+        emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
+                "请进行立项审批。");
     }
 
     @Transactional

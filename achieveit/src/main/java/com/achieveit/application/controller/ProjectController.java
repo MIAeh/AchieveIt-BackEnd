@@ -2,6 +2,7 @@ package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
+import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -57,7 +58,7 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/createProjectByID")
-    public ResponseResult createProjectByID(@RequestBody JSONObject jsonObject) {
+    public ResponseResult createProjectByID(@RequestBody JSONObject jsonObject) throws AchieveitException {
 
         String projectID = jsonObject.getString("projectID");
         String projectName = jsonObject.getString("projectName");
