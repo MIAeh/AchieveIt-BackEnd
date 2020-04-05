@@ -19,7 +19,8 @@ public enum ErrorCode {
     LOGIN_ERROR(400, "Fail to Login"),
     LOGIN_BANNED(401, "Account Banned"),
     LOGOUT_ERROR(402, "Fail to Logout"),
-    UNAUTHORIZED(403, "Access Deny");
+    UNAUTHORIZED(403, "Access Deny"),
+    STATUS_ERROR(1, "Project Status Error");
 
 
     private Integer code;
