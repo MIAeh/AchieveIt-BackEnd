@@ -57,8 +57,8 @@ public class StatusService {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
         emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 立项驳回",
-                "申请立项被驳回，项目立项驳回。");
+                project.getProjectID() + " " + project.getProjectName() + " 已立项",
+                "申请立项已通过，项目已立项。");
     }
 
     @Logged({"projectID"})
@@ -81,8 +81,8 @@ public class StatusService {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
         emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                "申请立项已通过，项目已立项。");
+                project.getProjectID() + " " + project.getProjectName() + " 立项驳回",
+                "申请立项被驳回，项目立项驳回。");
     }
 
     @Logged({"projectID"})
@@ -105,7 +105,7 @@ public class StatusService {
             for (MemberEntity member: projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 进行中",
-                        "项目配置完成已启动，项目进行中。");
+                        "配置完成已启动，项目进行中。");
             }
         }
     }
@@ -130,7 +130,32 @@ public class StatusService {
             for (MemberEntity member: projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已交付",
-                        "项目确认交付，项目已交付。");
+                        "确认交付，项目已交付。");
+            }
+        }
+    }
+
+    @Logged({"projectID"})
+    public void endProject(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        else if (!project.getProjectStatus().equals(ProjectStatus.DELIVERED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        // update status
+        project.setProjectStatus(ProjectStatus.ENDED.getStatus());
+        statusMapper.updateProjectStatusByID(project);
+
+        // send mail
+        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+        if (projectMembers != null) {
+            for (MemberEntity member: projectMembers) {
+                emailUtil.sendTextEmail(member.getMemberMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已结束",
+                        "确认结束，项目已结束。");
             }
         }
     }
