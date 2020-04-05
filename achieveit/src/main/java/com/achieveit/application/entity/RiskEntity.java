@@ -1,6 +1,7 @@
 package com.achieveit.application.entity;
 
 import java.util.Objects;
+import java.sql.Date;
 
 public class RiskEntity {
     private int riskID;
@@ -20,6 +21,8 @@ public class RiskEntity {
     String riskStrategy;
 
     int riskStatus;
+
+    Date riskLastSendTime;
 
     public RiskEntity(){
 
@@ -117,6 +120,14 @@ public class RiskEntity {
 
     public void setRiskStrategy(String riskStrategy) {
         this.riskStrategy = riskStrategy;
+    }
+
+    public Date getRiskLastSendTime() {
+        return riskLastSendTime;
+    }
+
+    public void setRiskLastSendTime(Date riskLastSendTime) {
+        this.riskLastSendTime = riskLastSendTime;
     }
 
     @Override
