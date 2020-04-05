@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.entity.FeatureEntity;
+import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.service.FeatureService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -55,4 +56,11 @@ public class FeatureController {
                                                  @RequestParam(name = "fatherID")String fatherId,@RequestParam(name = "featureDescription")String featureDescription,HttpSession session){
         return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
     }
+
+    @CrossOrigin
+    @PostMapping(value="uploadFeatureList",produces = "application/json;charset=UTF-8")
+    public ResponseResult<Boolean> uploadFeatureList(@RequestBody FeatureUpLoad featureUpLoad){
+        return featureService.uploadFeatureList(featureUpLoad);
+    }
+
 }

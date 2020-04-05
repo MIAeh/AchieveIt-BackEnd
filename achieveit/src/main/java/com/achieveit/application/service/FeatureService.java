@@ -1,6 +1,8 @@
 package com.achieveit.application.service;
 
 import com.achieveit.application.entity.FeatureEntity;
+import com.achieveit.application.entity.FeatureUpLoad;
+import com.achieveit.application.entity.FeatureUpLoadEntity;
 import com.achieveit.application.mapper.FeatureMapper;
 import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.wrapper.ResponseResult;
@@ -136,4 +138,11 @@ public class FeatureService {
         return ResultGenerator.success();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Boolean> uploadFeatureList(FeatureUpLoad featureUpLoad){
+        for(FeatureUpLoadEntity entity:featureUpLoad.getData()){
+
+        }
+        return ResultGenerator.success();
+    }
 }

@@ -25,6 +25,9 @@ public interface FeatureMapper {
     @Select("select * from featurelist where projectid = #{projectId}")
     ArrayList<FeatureEntity> getFeatureByProjectId(@Param("projectId") String projectId);
 
+    @Select("select * from featurelist where featurename = #{featureName}")
+    ArrayList<FeatureEntity> getFeatureByFeatureName(@Param("featureName") String featureName);
+
     @Insert("insert into featurelist(featureid,featurelevel,fatherid,projectid,featurename,featuredescription,createtime)"+
     "values(#{featureId},#{featureLevel},#{fatherId},#{projectId},#{featureName},#{featureDescription},#{createTime})")
     Integer insertFeatures(FeatureEntity featureEntity);
