@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 @Service
 public class FeatureService {
@@ -139,10 +141,29 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> uploadFeatureList(FeatureUpLoad featureUpLoad){
-        for(FeatureUpLoadEntity entity:featureUpLoad.getData()){
+    public ResponseResult<Boolean> uploadFeatureList(FeatureUpLoad featureUpLoad,HttpSession session){
+        Collections.sort(featureUpLoad.getData(), new Comparator<FeatureUpLoadEntity>() {
+            @Override
+            public int compare(FeatureUpLoadEntity o1, FeatureUpLoadEntity o2) {
+                return o1.getFeatureLevel()-o2.getFeatureLevel();
+            }
+        });
 
+        for(FeatureUpLoadEntity entity:featureUpLoad.getData()){
+            ArrayList<FeatureEntity> temp=featureMapper.getFeatureByFeatureName(entity.getFeatureName());
+            if(!(temp==null||temp.size()==0)) continue;
+
+            if(entity.getFeatureLevel()==0){
+                insertTopFeature(entity.getFeatureName(),entity.getProjectID(),entity.getFeatureDescription(),session);
+            }else{
+                String fatherName=entity.getFatherFeatureName();
+                ArrayList<FeatureEntity> featureEntity=featureMapper.getFeatureByFeatureName(fatherName);
+                if(featureEntity==null||featureEntity.size()==0) continue;
+                String fatherId=featureEntity.get(0).getFeatureId();
+                insertSubFeature(entity.getFeatureName(),entity.getProjectID(),fatherId,entity.getFeatureDescription(),session);
+            }
         }
+
         return ResultGenerator.success();
     }
 }

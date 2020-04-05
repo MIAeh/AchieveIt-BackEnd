@@ -59,8 +59,8 @@ public class FeatureController {
 
     @CrossOrigin
     @PostMapping(value="uploadFeatureList",produces = "application/json;charset=UTF-8")
-    public ResponseResult<Boolean> uploadFeatureList(@RequestBody FeatureUpLoad featureUpLoad){
-        return featureService.uploadFeatureList(featureUpLoad);
+    public ResponseResult<Boolean> uploadFeatureList(@RequestBody FeatureUpLoad featureUpLoad,HttpSession session){
+        return featureService.uploadFeatureList(featureUpLoad,session);
     }
 
 }

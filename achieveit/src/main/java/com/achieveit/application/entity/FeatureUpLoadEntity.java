@@ -5,17 +5,19 @@ import java.util.Objects;
 public class FeatureUpLoadEntity {
     private String featureName;
     private String featureDescription;
-    private String featureLevel;
+    private int featureLevel;
     private String fatherFeatureName;
+    private String projectID;
 
     public FeatureUpLoadEntity() {
     }
 
-    public FeatureUpLoadEntity(String featureName, String featureDescription, String featureLevel, String fatherFeatureName) {
+    public FeatureUpLoadEntity(String featureName, String featureDescription, int featureLevel, String fatherFeatureName, String projectID) {
         this.featureName = featureName;
         this.featureDescription = featureDescription;
         this.featureLevel = featureLevel;
         this.fatherFeatureName = fatherFeatureName;
+        this.projectID = projectID;
     }
 
     public String getFeatureName() {
@@ -26,12 +28,16 @@ public class FeatureUpLoadEntity {
         return featureDescription;
     }
 
-    public String getFeatureLevel() {
+    public int getFeatureLevel() {
         return featureLevel;
     }
 
     public String getFatherFeatureName() {
         return fatherFeatureName;
+    }
+
+    public String getProjectID() {
+        return projectID;
     }
 
     public void setFeatureName(String featureName) {
@@ -42,7 +48,7 @@ public class FeatureUpLoadEntity {
         this.featureDescription = featureDescription;
     }
 
-    public void setFeatureLevel(String featureLevel) {
+    public void setFeatureLevel(int featureLevel) {
         this.featureLevel = featureLevel;
     }
 
@@ -50,20 +56,25 @@ public class FeatureUpLoadEntity {
         this.fatherFeatureName = fatherFeatureName;
     }
 
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FeatureUpLoadEntity that = (FeatureUpLoadEntity) o;
-        return Objects.equals(featureName, that.featureName) &&
-                Objects.equals(featureDescription, that.featureDescription) &&
-                Objects.equals(featureLevel, that.featureLevel) &&
-                Objects.equals(fatherFeatureName, that.fatherFeatureName);
+        FeatureUpLoadEntity entity = (FeatureUpLoadEntity) o;
+        return Objects.equals(featureName, entity.featureName) &&
+                Objects.equals(featureDescription, entity.featureDescription) &&
+                Objects.equals(featureLevel, entity.featureLevel) &&
+                Objects.equals(fatherFeatureName, entity.fatherFeatureName) &&
+                Objects.equals(projectID, entity.projectID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(featureName, featureDescription, featureLevel, fatherFeatureName);
+        return Objects.hash(featureName, featureDescription, featureLevel, fatherFeatureName, projectID);
     }
 
     @Override
@@ -73,6 +84,7 @@ public class FeatureUpLoadEntity {
                 ", featureDescription='" + featureDescription + '\'' +
                 ", featureLevel='" + featureLevel + '\'' +
                 ", fatherFeatureName='" + fatherFeatureName + '\'' +
+                ", projectID='" + projectID + '\'' +
                 '}';
     }
 }
