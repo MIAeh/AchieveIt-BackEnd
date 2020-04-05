@@ -4,7 +4,7 @@ package com.achieveit.application.exception;
 
         import java.util.Objects;
 
-public class AchieveitException extends Exception {
+public class AchieveitException extends RuntimeException {
 
     private ErrorCode errorCode;
 
