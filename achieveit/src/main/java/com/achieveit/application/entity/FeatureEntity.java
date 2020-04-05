@@ -12,6 +12,8 @@ public class FeatureEntity {
 
     private String fatherId;
 
+    private String fatherName;
+
     private String projectId;
 
     private String featureName;
@@ -98,6 +100,14 @@ public class FeatureEntity {
 
     public void setFeatureDisplayId(String featureDisplayId) {
         this.featureDisplayId = featureDisplayId;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
     public FeatureEntity(int featureLevel, String projectId, String featureName, String featureDescription) {

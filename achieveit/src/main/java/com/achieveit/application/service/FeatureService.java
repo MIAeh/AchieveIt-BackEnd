@@ -38,7 +38,9 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<FeatureEntity>> getAllTopFeatures(HttpSession session){
-        return ResultGenerator.success(featureMapper.getAllTopFeatures());
+        ArrayList<FeatureEntity> entities=featureMapper.getAllTopFeatures();
+        addFatherNameFromFeatures(entities);
+        return ResultGenerator.success(entities);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -54,6 +56,7 @@ public class FeatureService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<FeatureEntity>> getFeaturesInfo(HttpSession session){
         ArrayList<FeatureEntity> allTopFeatures=featureMapper.getAllTopFeatures();
+
         for(FeatureEntity entity:allTopFeatures) {
             ArrayList<FeatureEntity> children = featureMapper.getChildrenByFatherId(entity.getFeatureId());
             entity.setAllChildren(children);
@@ -107,6 +110,8 @@ public class FeatureService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<FeatureEntity>> getFeaturesByProjectID(String projectID){
         ArrayList<FeatureEntity> entities=featureMapper.getFeatureByProjectId(projectID);
+        addFatherNameFromFeatures(entities);
+
         if(entities==null){
             return ResultGenerator.error("no feature by this project id!");
         }else if(entities.size()==0){
@@ -131,6 +136,18 @@ public class FeatureService {
             }
             topEntity.setAllChildren(subEntities);
             return ResultGenerator.success(entities);
+        }
+    }
+
+    private void addFatherNameFromFeatures(ArrayList<FeatureEntity> entities) {
+        for(FeatureEntity entity:entities){
+            if(entity.getFeatureLevel()>0) {
+                if(entity.getFatherId()!=null&&!entity.getFatherId().equals("")){
+                    FeatureEntity fatherEntity=featureMapper.getFeatureById(entity.getFatherId());
+                    if(fatherEntity==null) continue;
+                    entity.setFatherName(fatherEntity.getFatherName());
+                }
+            }
         }
     }
 
