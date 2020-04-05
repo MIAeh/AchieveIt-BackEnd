@@ -33,4 +33,19 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @CrossOrigin
+    @Logged({"projectID"})
+    @PostMapping("/launchProject")
+    public ResponseResult launchProject(@RequestParam("projectID") String projectID) throws AchieveitException {
+        statusService.launchProject(projectID);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @PostMapping("/launchProject")
+    public ResponseResult deliverProject(@RequestParam("projectID") String projectID) throws AchieveitException {
+        statusService.deliverProject(projectID);
+        return ResultGenerator.success();
+    }
 }

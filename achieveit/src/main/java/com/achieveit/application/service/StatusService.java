@@ -84,4 +84,54 @@ public class StatusService {
                 project.getProjectID() + " " + project.getProjectName() + " 已立项",
                 "申请立项已通过，项目已立项。");
     }
+
+    @Logged({"projectID"})
+    public void launchProject(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        else if (!project.getProjectStatus().equals(ProjectStatus.APPROVED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        // update status
+        project.setProjectStatus(ProjectStatus.IN_PROGRESS.getStatus());
+        statusMapper.updateProjectStatusByID(project);
+
+        // send mail
+        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+        if (projectMembers != null) {
+            for (MemberEntity member: projectMembers) {
+                emailUtil.sendTextEmail(member.getMemberMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 进行中",
+                        "项目配置完成已启动，项目进行中。");
+            }
+        }
+    }
+
+    @Logged({"projectID"})
+    public void deliverProject(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        else if (!project.getProjectStatus().equals(ProjectStatus.IN_PROGRESS.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        // update status
+        project.setProjectStatus(ProjectStatus.DELIVERED.getStatus());
+        statusMapper.updateProjectStatusByID(project);
+
+        // send mail
+        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+        if (projectMembers != null) {
+            for (MemberEntity member: projectMembers) {
+                emailUtil.sendTextEmail(member.getMemberMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 进行中",
+                        "项目配置完成已启动，项目进行中。");
+            }
+        }
+    }
 }
