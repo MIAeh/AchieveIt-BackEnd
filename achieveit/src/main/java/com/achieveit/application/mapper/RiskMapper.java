@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 @Mapper
 public interface RiskMapper {
@@ -37,4 +38,11 @@ public interface RiskMapper {
     @Insert("insert into risktemplates(riskdescription,risktype,risklevel,riskinfluence,riskstrategy) values" +
             "(#{riskDescription},#{riskType},#{riskLevel},#{riskInfluence},#{riskStrategy})")
     int addRiskTemplate(RiskTemplate riskTemplate);
+
+    @Select("select risklastsendtime from risklist where riskid=#{riskId}")
+    Date getRiskLastSendTimeFromRiskId(@Param("riskId")int riskId);
+
+    @Update("update from risklist set risklastsendtime=#{riskLastSendTime} where riskid=#{riskId}")
+    int updateRiskLastSendTime(@Param("riskId")int riskId,@Param("riskLastSendTime")Date riskLastSendTime);
+
 }
