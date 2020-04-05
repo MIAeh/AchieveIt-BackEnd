@@ -1,6 +1,7 @@
 package com.achieveit.application.mapper;
 
 import com.achieveit.application.entity.RiskEntity;
+import com.achieveit.application.entity.RiskTemplate;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,10 @@ public interface RiskMapper {
     @Select("select riskholder from riskholders where riskid=#{riskId}")
     ArrayList<String> getAllRiskHolderByRiskId(@Param("riskId")int riskId);
 
+    @Select("select * from risktemplates")
+    ArrayList<RiskTemplate> getRiskTemplates();
+
+    @Insert("insert into risktemplates(riskdescription,risktype,risklevel,riskinfluence,riskstrategy) values" +
+            "(#{riskDescription},#{riskType},#{riskLevel},#{riskInfluence},#{riskStrategy})")
+    int addRiskTemplate(RiskTemplate riskTemplate);
 }

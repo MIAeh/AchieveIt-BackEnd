@@ -1,6 +1,7 @@
 package com.achieveit.application.service;
 
 import com.achieveit.application.entity.RiskEntity;
+import com.achieveit.application.entity.RiskTemplate;
 import com.achieveit.application.mapper.RiskMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -70,4 +71,17 @@ public class RiskService {
         return ResultGenerator.success();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplates(){
+        ArrayList<RiskTemplate> riskTemplates=riskMapper.getRiskTemplates();
+        return ResultGenerator.success(riskTemplates);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Boolean> addRiskTemplate(String riskDescription,int riskType,
+                                                   int riskLevel,int riskInfluence,String riskStrategy){
+        RiskTemplate riskTemplate=new RiskTemplate(riskDescription,riskType,riskLevel,riskInfluence,riskStrategy);
+        int res=riskMapper.addRiskTemplate(riskTemplate);
+        return ResultGenerator.success();
+    }
 }

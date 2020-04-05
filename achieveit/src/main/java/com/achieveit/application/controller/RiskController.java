@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.entity.RiskEntity;
+import com.achieveit.application.entity.RiskTemplate;
 import com.achieveit.application.service.RiskService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -59,6 +60,26 @@ public class RiskController {
     @PostMapping("addRiskHoldersByRiskID")
     public ResponseResult<Boolean> addRiskHoldersByRiskId(@RequestParam("riskID")int riskId,@RequestParam("riskHolder")String riskHolder){
         return riskService.addRiskHoldersByRiskId(riskId,riskHolder);
+    }
+
+    @CrossOrigin
+    @PostMapping("addRiskTemplate")
+    public ResponseResult<Boolean> addRiskTemplate(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType")int riskType,
+                                                   @RequestParam("riskLevel")int riskLevel,@RequestParam("riskInfluence")int riskInfluence,
+                                                   @RequestParam("riskStrategy")String riskStrategy){
+        return riskService.addRiskTemplate(riskDescription,riskType,riskLevel,riskInfluence,riskStrategy);
+    }
+
+    @CrossOrigin
+    @GetMapping("getRiskTemplates")
+    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplates(){
+        return riskService.getRiskTemplates();
+    }
+
+    @CrossOrigin
+    @GetMapping("getRiskTemplateByProjectID")
+    public ResponseResult<ArrayList<RiskEntity>> getRiskTemplateByProjectID(@RequestParam("projectID")String projectID) {
+        return null;
     }
 
 }
