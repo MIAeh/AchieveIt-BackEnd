@@ -66,4 +66,22 @@ public class RiskServiceTest {
         riskService.getRiskHoldersByRiskId(riskId);
         Assert.assertTrue(true);
     }
+
+    @Test
+    public void testFAddRiskTemplate(){
+        riskService.addRiskTemplate("testDescription",0,0,0,"waitToDie");
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testGGetRiskTemplate(){
+        riskService.getRiskTemplates();
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testHGetRiskTemplatesByProjectID(){
+        riskService.getRiskTemplatesByProjectID("none");
+        Assert.assertTrue(true);
+    }
 }

@@ -55,4 +55,15 @@ public class WorkHourServiceTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testGetWorkHourByStatus(){
+        workHourService.getWorkHourByStatus(0);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testGetMyWorkHourById(){
+        workHourService.getMyWorkHourById("none");
+        Assert.assertTrue(true);
+    }
 }

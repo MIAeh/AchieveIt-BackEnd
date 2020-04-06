@@ -40,19 +40,26 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testBLogin(){
+    public void testBLoginByUserMail(){
         ResponseResult<UserEntity> res=userService.loginByMail("one_how@163.com","123",session);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testCChangeUserRole(){
-        ResponseResult<UserEntity> entity=userService.loginByMail("one_how@163.com","123",session);
-        ResponseResult<Boolean> res;
-        if(entity!=null) {
-            if(entity.getData()!=null)
-                res = userService.setUserRoleById(entity.getData().getUserId(), 1, session);
-        }
+    public void testCLoginByPhone(){
+        userService.loginByPhone("110","123456",session);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testDChangeUserRole(){
+        ResponseResult<Boolean> entity=userService.setUserRoleById("one_how@163.com",0,session);
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testELoginByUserId(){
+        userService.loginByUserId("b6703879-e1e2-499c-8ffe-d8b29f71f156","123456",session);
         Assert.assertTrue(true);
     }
 }
