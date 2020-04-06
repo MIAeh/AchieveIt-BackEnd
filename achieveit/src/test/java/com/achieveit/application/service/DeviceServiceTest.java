@@ -46,21 +46,21 @@ public class DeviceServiceTest {
 
     @Test
     public void registerDeviceTest() throws ParseException {
-//        String projectID = "2019-0000-D-01";
-//        String userID = "0001";
-//        String deviceID = "PC-20190202-0003";
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date dueDate = dateFormat.parse("2020-3-30");
-//        deviceService.registerDevice(projectID, userID, deviceID, dueDate);
+        String projectID = "2019-0000-D-01";
+        String userID = "0001";
+        String deviceID = "PC-20190202-0003";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dueDate = dateFormat.parse("2020-3-30");
+        deviceService.registerDevice(projectID, userID, deviceID, dueDate);
         Assert.assertTrue(true);
     }
 
     @Test
     public void returnDeviceTest() {
-//        String projectID = "2019-0000-D-01";
-//        String userID = "0001";
-//        String deviceID = "PC-20190202-0003";
-//        deviceService.returnDevice(projectID, userID, deviceID);
+        String projectID = "2019-0000-D-01";
+        String userID = "0001";
+        String deviceID = "PC-20190202-0003";
+        deviceService.returnDevice(projectID, userID, deviceID);
         Assert.assertTrue(true);
     }
 }
