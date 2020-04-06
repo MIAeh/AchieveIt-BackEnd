@@ -1,5 +1,7 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.WorkHourEntity;
+import com.achieveit.application.wrapper.ResponseResult;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -12,19 +14,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.sql.Date;
 import javax.servlet.http.HttpSession;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 @MapperScan("com.achieveit.application.mapper")
+@Transactional
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WorkHourServiceTest {
     @Autowired
     private WorkHourService workHourService;
 
     private HttpSession session;
+
+    private String workHourId;
 
     @Before
     public void setSession(){
@@ -33,16 +37,21 @@ public class WorkHourServiceTest {
 
     @Test
     public void testAddWorkHour(){
+        ResponseResult<WorkHourEntity> res=workHourService.applyWordHour("none","testFeature","testActivity",new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()+1000000));
+        if(res!=null&&res.getData()!=null)
+            workHourId=res.getData().getWorkHourId();
         Assert.assertTrue(true);
     }
 
     @Test
     public void testApproveWorkHour(){
+        workHourService.approveWordHour(workHourId,"none");
         Assert.assertTrue(true);
     }
 
     @Test
     public void testGetAllWorkHours(){
+        workHourService.getAllWorkHours();
         Assert.assertTrue(true);
     }
 
