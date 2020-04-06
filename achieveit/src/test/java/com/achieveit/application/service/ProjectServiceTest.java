@@ -50,7 +50,7 @@ public class ProjectServiceTest {
 
     @Test
     public void createProjectByIDTest() throws ParseException {
-        String projectID = "2019-0000-D-01";
+        String projectID = "2018-0005-M-05";
         String projectName = "test project 1";
         String projectManagerID = "48fb8377-664f-4a9b-b13f-6729b00a9e22";
         String projectMonitorID = "b6703879-e1e2-499c-8ffe-d8b29f71f156";
@@ -81,8 +81,8 @@ public class ProjectServiceTest {
 
     @Test
     public void updateProjectByIDTest() throws ParseException {
-        String projectID = "2019-0000-D-01";
-        String projectName = "test project 1";
+        String projectID = "2018-0005-M-05";
+        String projectName = "unit test project";
         Integer projectStatus = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date projectStartDate = dateFormat.parse("2019-11-11");
@@ -102,7 +102,7 @@ public class ProjectServiceTest {
 
     @Test
     public void getMembersByIDTest() {
-        String projectID = "2019-0000-D-01";
+        String projectID = "2018-0005-M-05";
         Integer memberRole = 0;
         List<MemberInfo> memberInfos = projectService.getMembersByID(projectID, memberRole);
         Assert.assertNotNull(memberInfos);
@@ -111,7 +111,7 @@ public class ProjectServiceTest {
     @Test
     public void addMemberByIDTest() {
         String projectID = "2019-0000-D-01";
-        String memberID = "0001";
+        String memberID = "0005";
         projectService.addMemberByID(projectID, memberID);
         Assert.assertTrue(true);
     }
@@ -136,7 +136,7 @@ public class ProjectServiceTest {
 
     @Test
     public void updateMemberSuperiorByIDTest() {
-        String projectID = "2019-0000-D-01";
+        String projectID = "2018-0005-M-05";
         String memberID = "0001";
         String superiorID = "48fb8377-664f-4a9b-b13f-6729b00a9e22";
         projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);

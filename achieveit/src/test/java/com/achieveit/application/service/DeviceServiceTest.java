@@ -59,7 +59,7 @@ public class DeviceServiceTest {
     public void returnDeviceTest() {
         String projectID = "2019-0000-D-01";
         String userID = "0001";
-        String deviceID = "PC-20190202-0003";
+        String deviceID = "PC-20190202-0002";
         deviceService.returnDevice(projectID, userID, deviceID);
         Assert.assertTrue(true);
     }
