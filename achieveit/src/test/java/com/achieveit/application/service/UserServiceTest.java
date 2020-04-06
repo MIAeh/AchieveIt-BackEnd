@@ -20,4 +20,13 @@ public class UserServiceTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testLogin(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testChangeUserRole(){
+        Assert.assertTrue(true);
+    }
 }

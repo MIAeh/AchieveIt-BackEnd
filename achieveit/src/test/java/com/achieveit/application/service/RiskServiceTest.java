@@ -20,5 +20,24 @@ public class RiskServiceTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testGetRisks(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testChangeRiskStatus(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testAddRiskHolders(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testGetRiskHolders(){
+        Assert.assertTrue(true);
+    }
 
 }

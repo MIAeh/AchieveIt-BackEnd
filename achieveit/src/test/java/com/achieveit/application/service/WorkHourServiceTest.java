@@ -20,4 +20,14 @@ public class WorkHourServiceTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testApproveWorkHour(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testGetAllWorkHours(){
+        Assert.assertTrue(true);
+    }
+
 }

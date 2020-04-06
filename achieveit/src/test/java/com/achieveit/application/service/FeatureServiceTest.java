@@ -16,7 +16,22 @@ public class FeatureServiceTest {
     private FeatureService featureService;
 
     @Test
-    public void testAddFeature(){
+    public void testAddTopFeature(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testAddSubFeature(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testGetFeatureByProjectID(){
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void getFeaturesInfo(){
         Assert.assertTrue(true);
     }
 
