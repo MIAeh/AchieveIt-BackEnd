@@ -37,7 +37,7 @@ public interface UserMapper {
      * @param userPhone 所要获取的用户的userPhone
      * @return User
      */
-    @Select("select * from \"users\" where userphone = #{userPhone}")
+    @Select("select * from users where userphone = #{userPhone}")
     @Results({
             @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
             @Result(property = "userMail", column = "usermail"),
@@ -54,7 +54,7 @@ public interface UserMapper {
      * @param userMail 所要获取的用户的userMail
      * @return User
      */
-    @Select("select * from \"users\" where usermail = #{userMail}")
+    @Select("select * from users where usermail = #{userMail}")
     @Results({
             @Result(property = "userId", column = "userid", jdbcType = VARCHAR, javaType = java.lang.String.class),
             @Result(property = "userMail", column = "usermail"),
@@ -70,7 +70,7 @@ public interface UserMapper {
      * 插入（注册）一位新的用户
      * @param userEntity 所要注册的user
      */
-    @Insert("insert into \"users\"(userid,usermail,username,userpassword,userdepartment,userrole)" +
+    @Insert("insert into users(userid,usermail,username,userpassword,userdepartment,userrole)" +
             " values(#{userId}, #{userMail},#{userName},#{userPassword},#{userDepartment},#{userRole})")
     void insertUser(UserEntity userEntity);
 
@@ -79,12 +79,12 @@ public interface UserMapper {
      * @param userRole 所要获取的users
      * @return affectedRows
      */
-    @Select("select * from \"users\" where userrole = #{userRole}")
+    @Select("select * from users where userrole = #{userRole}")
     ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
 
     @Update("update users set userrole=#{userRole} where userid=#{userId}")
     void setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
 
-    @Select("select * from \"users\" ")
+    @Select("select * from users")
     ArrayList<UserEntity> getAllUserInfo();
 }

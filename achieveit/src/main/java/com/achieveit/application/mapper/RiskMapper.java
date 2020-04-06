@@ -42,7 +42,7 @@ public interface RiskMapper {
     @Select("select risklastsendtime from risklist where riskid=#{riskId}")
     Date getRiskLastSendTimeFromRiskId(@Param("riskId")int riskId);
 
-    @Update("update from risklist set risklastsendtime=#{riskLastSendTime} where riskid=#{riskId}")
+    @Update("update risklist set risklastsendtime=#{riskLastSendTime} where riskid=#{riskId}")
     int updateRiskLastSendTime(@Param("riskId")int riskId,@Param("riskLastSendTime")Date riskLastSendTime);
 
     @Select("select * from risklist where projectid=#{projectID}")
