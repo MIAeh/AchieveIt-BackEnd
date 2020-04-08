@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,6 +31,28 @@ public class FeatureService {
      * Logger
      */
     private final Logger logger = LoggerFactory.getLogger(FeatureService.class);
+
+    private String getFeatureId(FeatureEntity entity){
+        int level=entity.getFeatureLevel();
+        if(level==0){
+            String featureId=entity.getProjectId();
+            int index=featureMapper.getFeatureSizeByLevelAndProjectId(entity.getProjectId(),0);
+            featureId+="-";
+            featureId+= String.format("%04d",index+1);
+            return featureId;
+        }else if(level==1||level==2){
+            FeatureEntity fatherEntity=featureMapper.getFeatureById(entity.getFatherId());
+            if(fatherEntity==null) return null;
+            String fatherFeatureId=fatherEntity.getFeatureId();
+            ArrayList<FeatureEntity> entities=featureMapper.getChildrenByFatherId(fatherFeatureId);
+            int thisIndex=entities.size()+1;
+            String featureId=fatherFeatureId;
+            featureId+="-";
+            featureId+=String.format("%03d",thisIndex);
+            return featureId;
+        }
+        return null;
+    }
 
     @Autowired
     public FeatureService(FeatureMapper featureMapper) {
@@ -66,27 +89,13 @@ public class FeatureService {
             }
         }
 
-        int index=0;
-        for(FeatureEntity topFeature:allTopFeatures){
-            topFeature.setFeatureDisplayId(topFeature.getProjectId()+"-"+String.format("%04d",index));
-            ArrayList<FeatureEntity> data=topFeature.getAllChildren();
-            for(int i=0;i<data.size();i++){
-                FeatureEntity sub=data.get(i);
-                sub.setFeatureDisplayId(sub.getProjectId()+"-"+String.format("%04d",index)+"-"+String.format("%03d",i));
-                for(int j=0;j<sub.getAllChildren().size();j++){
-                    FeatureEntity subSub=sub.getAllChildren().get(i);
-                    subSub.setFeatureDisplayId(subSub.getProjectId()+"-"+String.format("%04d",index)+"-"+String.format("%03d",i)+"-"+String.format("%03d",j));
-                }
-            }
-            index++;
-        }
-
         return ResultGenerator.success(allTopFeatures);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<String> insertTopFeature(String featureName, String projectId,String featureDescription, HttpSession session){
         FeatureEntity entity=new FeatureEntity(0,projectId,featureName,featureDescription);
+        entity.setFeatureId(getFeatureId(entity));
         featureMapper.insertFeatures(entity);
         return ResultGenerator.success(entity.getFatherId());
     }
@@ -100,6 +109,8 @@ public class FeatureService {
         }
         int myLevel=fatherEntity.getFeatureLevel()+1;
         FeatureEntity myEntity=new FeatureEntity(myLevel,fatherId,projectId,featureName,featureDescription);
+        myEntity.setFeatureId(getFeatureId(myEntity));
+
         int res=featureMapper.insertFeatures(myEntity);
         if(res==0)
             return ResultGenerator.error("insert failed!");
@@ -118,6 +129,8 @@ public class FeatureService {
             return ResultGenerator.error("no feature by this project id!");
         }else{
             FeatureEntity topEntity=new FeatureEntity();
+            topEntity.setFeatureId(getFeatureId(topEntity));
+
             ArrayList<FeatureEntity> subEntities=new ArrayList<>();
             for(FeatureEntity entity:entities)
                 if(entity.getFeatureLevel()==0)

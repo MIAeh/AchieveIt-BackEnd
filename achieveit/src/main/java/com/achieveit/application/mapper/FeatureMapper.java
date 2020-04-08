@@ -20,7 +20,7 @@ public interface FeatureMapper {
     ArrayList<FeatureEntity> getChildrenByFatherId(@Param("fatherId") String fatherId);
 
     @Select("select * from featurelist where featureid = #{featureId}")
-    FeatureEntity getFeatureById(@Param("featureId") String fatherId);
+    FeatureEntity getFeatureById(@Param("featureId") String featureId);
 
     @Select("select * from featurelist where projectid = #{projectId}")
     ArrayList<FeatureEntity> getFeatureByProjectId(@Param("projectId") String projectId);
@@ -34,4 +34,7 @@ public interface FeatureMapper {
 
     @Delete("delete from featurelist where featureid=#{featureId}")
     Integer deleteFeatureByFeatureId(@Param("featureId")String featureId);
+
+    @Select("select SUM(featurename) from featurelist where featurelevel=#{featureLevel} and projectid=#{projectId}")
+    Integer getFeatureSizeByLevelAndProjectId(@Param("projectdi")String projectId,@Param("featureLevel")int featureLevel);
 }
