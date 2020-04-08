@@ -37,7 +37,7 @@ public class FeatureServiceTest {
 
     @Test
     public void testAAddTopFeature(){
-        ResponseResult<String> res=featureService.insertTopFeature("testFeature","2020-001-002-D","test",session);
+        ResponseResult<FeatureEntity> res=featureService.insertTopFeature("testFeature","2020-001-002-D","test",session);
         Assert.assertTrue(true);
     }
 

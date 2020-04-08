@@ -4,7 +4,6 @@ import com.achieveit.application.entity.FeatureEntity;
 import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.entity.FeatureUpLoadEntity;
 import com.achieveit.application.mapper.FeatureMapper;
-import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -93,15 +90,15 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<String> insertTopFeature(String featureName, String projectId,String featureDescription, HttpSession session){
+    public ResponseResult<FeatureEntity> insertTopFeature(String featureName, String projectId,String featureDescription, HttpSession session){
         FeatureEntity entity=new FeatureEntity(0,projectId,featureName,featureDescription);
         entity.setFeatureId(getFeatureId(entity));
         featureMapper.insertFeatures(entity);
-        return ResultGenerator.success(entity.getFatherId());
+        return ResultGenerator.success(entity);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<String> insertSubFeature(String featureName, String projectId, String fatherId,String featureDescription,HttpSession session){
+    public ResponseResult<FeatureEntity> insertSubFeature(String featureName, String projectId, String fatherId,String featureDescription,HttpSession session){
         FeatureEntity fatherEntity=featureMapper.getFeatureById(fatherId);
         if(fatherEntity==null) return ResultGenerator.error("no father");
         if(fatherEntity.getFeatureLevel()==2){
@@ -115,7 +112,7 @@ public class FeatureService {
         if(res==0)
             return ResultGenerator.error("insert failed!");
         else
-            return ResultGenerator.success(myEntity.getFeatureId());
+            return ResultGenerator.success(myEntity);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -123,9 +120,7 @@ public class FeatureService {
         ArrayList<FeatureEntity> entities=featureMapper.getFeatureByProjectId(projectID);
         addFatherNameFromFeatures(entities);
 
-        if(entities==null){
-            return ResultGenerator.error("no feature by this project id!");
-        }else if(entities.size()==0){
+        if(entities.size()==0){
             return ResultGenerator.error("no feature by this project id!");
         }else{
             FeatureEntity topEntity=new FeatureEntity();

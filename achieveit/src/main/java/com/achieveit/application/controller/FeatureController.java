@@ -45,14 +45,14 @@ public class FeatureController {
 
     @CrossOrigin
     @PostMapping("addTopFeature")
-    public ResponseResult<String> addTopFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID") String projectId,
+    public ResponseResult<FeatureEntity> addTopFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID") String projectId,
                                                 @RequestParam(name = "featureDescription")String featureDescription, HttpSession session){
         return featureService.insertTopFeature(featureName,projectId,featureDescription,session);
     }
 
     @CrossOrigin
     @PostMapping("addSubFeature")
-    public ResponseResult<String> addSubFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID")String projectId,
+    public ResponseResult<FeatureEntity> addSubFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID")String projectId,
                                                  @RequestParam(name = "fatherID")String fatherId,@RequestParam(name = "featureDescription")String featureDescription,HttpSession session){
         return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
     }

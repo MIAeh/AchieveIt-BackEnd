@@ -35,6 +35,6 @@ public interface FeatureMapper {
     @Delete("delete from featurelist where featureid=#{featureId}")
     Integer deleteFeatureByFeatureId(@Param("featureId")String featureId);
 
-    @Select("select SUM(featurename) from featurelist where featurelevel=#{featureLevel} and projectid=#{projectId}")
-    Integer getFeatureSizeByLevelAndProjectId(@Param("projectdi")String projectId,@Param("featureLevel")int featureLevel);
+    @Select("select COUNT(featurename) from featurelist where featurelevel=#{featureLevel} and projectid=#{projectId}")
+    Integer getFeatureSizeByLevelAndProjectId(@Param("projectId")String projectId,@Param("featureLevel")int featureLevel);
 }
