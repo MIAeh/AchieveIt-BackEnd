@@ -170,4 +170,12 @@ public class ProjectController {
         projectService.updateGitRepoByID(projectID, gitRepo);
         return ResultGenerator.success();
     }
+
+    @CrossOrigin
+    @Logged
+    @GetMapping("/getDomainList")
+    public ResponseResult<List<DomainEntity>> getDomainList() {
+        List<DomainEntity> domainEntities = projectService.getDomainList();
+        return ResultGenerator.success(domainEntities);
+    }
 }

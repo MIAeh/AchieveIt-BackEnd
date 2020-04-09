@@ -200,4 +200,9 @@ public class ProjectService {
     public void updateGitRepoByID(String projectID, String gitRepo) {
         projectMapper.updateGitRepoByID(projectID, gitRepo);
     }
+
+    @Logged
+    public List<DomainEntity> getDomainList() {
+        return projectMapper.getDomainList();
+    }
 }

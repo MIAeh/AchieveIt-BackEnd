@@ -1,5 +1,6 @@
 package com.achieveit.application.mapper;
 
+import com.achieveit.application.entity.DomainEntity;
 import com.achieveit.application.entity.MemberEntity;
 import com.achieveit.application.entity.ProjectEntity;
 import org.apache.ibatis.annotations.*;
@@ -76,4 +77,6 @@ public interface ProjectMapper {
     @Select("SELECT gitrepo FROM gitrepos WHERE (projectid = #{projectID});")
     String getGitRepoByID(String projectID);
 
+    @Select("SELECT * FROM domainlist;")
+    ArrayList<DomainEntity> getDomainList();
 }
