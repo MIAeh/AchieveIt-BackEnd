@@ -4,11 +4,11 @@ public enum ProjectStatus {
 
     APPLY_FOR_APPROVAL(0),
     APPROVED(1),
-    REJECTED(2),
-    IN_PROGRESS(3),
-    DELIVERED(4),
-    ENDED(5),
-    ARCHIVED(6);
+    IN_PROGRESS(2),
+    DELIVERED(3),
+    ENDED(4),
+    ARCHIVED(5),
+    REJECTED(6);
 
     private Integer status;
 
