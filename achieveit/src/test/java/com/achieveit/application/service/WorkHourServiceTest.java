@@ -35,35 +35,35 @@ public class WorkHourServiceTest {
         session = new MockHttpSession();
     }
 
-    @Test
-    public void testAddWorkHour(){
-        ResponseResult<WorkHourEntity> res=workHourService.applyWordHour("none","testFeature","testActivity",new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()+1000000));
-        if(res!=null&&res.getData()!=null)
-            workHourId=res.getData().getWorkHourId();
-        Assert.assertTrue(true);
-    }
-
-    @Test
-    public void testApproveWorkHour(){
-        workHourService.approveWordHour(workHourId,"none");
-        Assert.assertTrue(true);
-    }
-
-    @Test
-    public void testGetAllWorkHours(){
-        workHourService.getAllWorkHours();
-        Assert.assertTrue(true);
-    }
-
-    @Test
-    public void testGetWorkHourByStatus(){
-        workHourService.getWorkHourByStatus(0);
-        Assert.assertTrue(true);
-    }
-
-    @Test
-    public void testGetMyWorkHourById(){
-        workHourService.getMyWorkHourById("none");
-        Assert.assertTrue(true);
-    }
+//    @Test
+//    public void testAddWorkHour(){
+//        ResponseResult<WorkHourEntity> res=workHourService.applyWordHour("none","testFeature","testActivity",new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()+1000000));
+//        if(res!=null&&res.getData()!=null)
+//            workHourId=res.getData().getWorkHourId();
+//        Assert.assertTrue(true);
+//    }
+//
+//    @Test
+//    public void testApproveWorkHour(){
+//        workHourService.approveWordHour(workHourId,"none");
+//        Assert.assertTrue(true);
+//    }
+//
+//    @Test
+//    public void testGetAllWorkHours(){
+//        workHourService.getAllWorkHours();
+//        Assert.assertTrue(true);
+//    }
+//
+//    @Test
+//    public void testGetWorkHourByStatus(){
+//        workHourService.getWorkHourByStatus(0);
+//        Assert.assertTrue(true);
+//    }
+//
+//    @Test
+//    public void testGetMyWorkHourById(){
+//        workHourService.getMyWorkHourById("none");
+//        Assert.assertTrue(true);
+//    }
 }
