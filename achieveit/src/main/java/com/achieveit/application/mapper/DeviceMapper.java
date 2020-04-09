@@ -18,7 +18,7 @@ public interface DeviceMapper {
     @Select("SELECT devices.*, users.username FROM devices, users WHERE (devices.projectid=#{projectID} AND devices.userid=users.userid)")
     ArrayList<DeviceEntity> getDeviceList(String projectID);
 
-    @Insert("INSERT INTO devices(deviceid, userid, projectid, duedate, returned) VALUES (#{deviceID}, #{userID}, #{projectID}, #{dueDate}, false);")
+    @Insert("INSERT INTO devices(deviceregisteruuid, deviceid, userid, projectid, duedate, returned) VALUES ((select uuid_in(md5(random()::text || clock_timestamp()::text)::cstring)), #{deviceID}, #{userID}, #{projectID}, #{dueDate}, false);")
     void registerDevice(String projectID, String userID, String deviceID, Date dueDate);
 
     @Update("UPDATE devices SET returned=true WHERE (deviceid=#{deviceID} AND projectid=#{projectID} AND userid=#{userID});")

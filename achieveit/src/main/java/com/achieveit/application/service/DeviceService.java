@@ -49,10 +49,10 @@ public class DeviceService {
         deviceMapper.registerDevice(projectID, userID, deviceID, dueDate);
     }
 
+    @Transactional
     @Logged({"projectID", "userID", "deviceID"})
     public void returnDevice(String projectID, String userID, String deviceID) {
         deviceMapper.updateDeviceIDList(deviceID, false);
         deviceMapper.returnDevice(projectID, userID, deviceID);
     }
-
 }
