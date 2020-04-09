@@ -68,7 +68,7 @@ public class ProjectServiceTest {
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
         Integer domain = 0;
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
         Assert.assertTrue(true);
     }
 
@@ -96,7 +96,7 @@ public class ProjectServiceTest {
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
         Integer domain = 0;
-        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
         Assert.assertTrue(true);
     }
 
