@@ -1,6 +1,7 @@
 package com.achieveit.application.entity;
 
 import java.sql.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 public class WorkHourEntity {
@@ -10,20 +11,21 @@ public class WorkHourEntity {
     private String approverId;
     private String featureName;
     private String activityName;
+    private String projectId;
     private Date startTime;
     private Date endTime;
     int status;
-
     public WorkHourEntity(){
 
     }
 
-    public WorkHourEntity(String applyerId, String featureName, String activityName, Date startTime, Date endTime) {
+    public WorkHourEntity(String applyerId, String featureName, String activityName, String projectId,Date startTime, Date endTime) {
         this.workHourId= UUID.randomUUID().toString();
         this.applyTime=new Date(System.currentTimeMillis());
         this.applyerId = applyerId;
         this.featureName = featureName;
         this.activityName = activityName;
+        this.projectId=projectId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.approverId="";
@@ -100,5 +102,51 @@ public class WorkHourEntity {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkHourEntity entity = (WorkHourEntity) o;
+        return status == entity.status &&
+                Objects.equals(workHourId, entity.workHourId) &&
+                Objects.equals(applyTime, entity.applyTime) &&
+                Objects.equals(applyerId, entity.applyerId) &&
+                Objects.equals(approverId, entity.approverId) &&
+                Objects.equals(featureName, entity.featureName) &&
+                Objects.equals(activityName, entity.activityName) &&
+                Objects.equals(projectId, entity.projectId) &&
+                Objects.equals(startTime, entity.startTime) &&
+                Objects.equals(endTime, entity.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workHourId, applyTime, applyerId, approverId, featureName, activityName, projectId, startTime, endTime, status);
+    }
+
+    @Override
+    public String toString() {
+        return "WorkHourEntity{" +
+                "workHourId='" + workHourId + '\'' +
+                ", applyTime=" + applyTime +
+                ", applyerId='" + applyerId + '\'' +
+                ", approverId='" + approverId + '\'' +
+                ", featureName='" + featureName + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", status=" + status +
+                '}';
     }
 }

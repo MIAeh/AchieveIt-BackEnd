@@ -5,7 +5,6 @@ import com.achieveit.application.service.WorkHourService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -27,17 +26,18 @@ public class WorkHourController {
     public ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID") String applyerId,
                                                  @RequestParam(name="featureName")String featureName,
                                                  @RequestParam(name="activityName")String activityName,
+                                                 @RequestParam(name="projectID")String projectId,
                                                  @RequestParam(name="startTime") String startTime,
                                                  @RequestParam(name="endTime") String endTime){
         Date startTimeL=new Date(Long.parseLong(startTime));
         Date endTimeL=new Date(Long.parseLong(endTime));
-       return workHourService.applyWordHour(applyerId,featureName,activityName,startTimeL,endTimeL);
+       return workHourService.applyWordHour(applyerId,featureName,activityName,projectId,startTimeL,endTimeL);
     }
 
     @CrossOrigin
-    @GetMapping("getWorkHoursByStatus")
-    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatus(@RequestParam(name = "status")int status){
-        return workHourService.getWorkHourByStatus(status);
+    @GetMapping("getWorkHoursByStatusAndProjectID")
+    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatusAndProjectID(@RequestParam(name = "status",defaultValue = "0")int status,@RequestParam("projectID")String projectId){
+        return workHourService.getWorkHoursByStatusAndProjectId(status,projectId);
     }
 
     @CrossOrigin
@@ -54,15 +54,15 @@ public class WorkHourController {
     }
 
     @CrossOrigin
-    @GetMapping("getMyWorkHour")
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHour(@RequestParam(name="myID")String myId){
-        return workHourService.getMyWorkHourById(myId);
+    @GetMapping("getMyWorkHoursByProjectID")
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursByProjectID(@RequestParam(name="myID")String myId,@RequestParam("projectID")String projectId){
+        return workHourService.getMyWorkHourByProjectID(myId,projectId);
     }
 
     @CrossOrigin
     @GetMapping("getMyWorkHoursToApprove")
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApprove(@RequestParam(name="myID")String myId){
-        ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourById(myId);
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(@RequestParam(name="myID")String myId,@RequestParam("projectID")String projectId){
+        ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourByProjectID(myId,projectId);
         ArrayList<WorkHourEntity> res=new ArrayList<WorkHourEntity>();
         for(WorkHourEntity entity:entities.getData()) {
             if (entity.getStatus() == 0) {
@@ -70,5 +70,11 @@ public class WorkHourController {
             }
         }
         return ResultGenerator.success(res);
+    }
+
+    @CrossOrigin
+    @GetMapping("getWorkHoursByProjectID")
+    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByProjectID(@RequestParam("projectID")String projectId){
+        return workHourService.getWorkHoursByProjectID(projectId);
     }
 }

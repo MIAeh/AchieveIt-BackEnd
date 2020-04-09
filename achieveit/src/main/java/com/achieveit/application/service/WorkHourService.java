@@ -25,15 +25,15 @@ public class WorkHourService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName, Date startTime, Date endTime){
-        WorkHourEntity entity=new WorkHourEntity(applyerId,featureName,activityName,startTime,endTime);
+    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName,String projectId, Date startTime, Date endTime){
+        WorkHourEntity entity=new WorkHourEntity(applyerId,featureName,activityName,projectId,startTime,endTime);
         int res=workHourMapper.insertWorkHour(entity);
         return ResultGenerator.success(entity);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHourByStatus(int status){
-        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByStatus(status);
+    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByStatusAndProjectId(int status,String projectId){
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByStatusAndProjectId(status,projectId);
         return ResultGenerator.success(entities);
     }
 
@@ -51,8 +51,14 @@ public class WorkHourService {
     }
 
     @Transactional(rollbackFor =Exception.class)
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHourById(String applyerId) {
-        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursById(applyerId);
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHourByProjectID(String applyerId,String projectId) {
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByIdAndProjectID(applyerId,projectId);
+        return ResultGenerator.success(entities);
+    }
+
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByProjectID(String projectId) {
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByProjectID(projectId);
         return ResultGenerator.success(entities);
     }
 
