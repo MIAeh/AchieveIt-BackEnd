@@ -100,4 +100,10 @@ public class RiskService {
         return ResultGenerator.success(riskTemplates);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<ArrayList<RiskEntity>> getRisksByProjectID(String projectID){
+        ArrayList<RiskEntity> riskEntities=riskMapper.getRisksByProjectID(projectID);
+        return ResultGenerator.success(riskEntities);
+    }
+
 }

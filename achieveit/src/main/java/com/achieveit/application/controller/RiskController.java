@@ -78,9 +78,14 @@ public class RiskController {
     }
 
     @CrossOrigin
-    @GetMapping("getRiskTemplateByProjectID")
-    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplateByProjectID(@RequestParam("projectID")String projectID) {
+    @GetMapping("getRiskTemplatesByProjectID")
+    public ResponseResult<ArrayList<RiskTemplate>> getRiskTemplatesByProjectID(@RequestParam("projectID")String projectID) {
         return riskService.getRiskTemplatesByProjectID(projectID);
     }
 
+    @CrossOrigin
+    @GetMapping("getRisksByProjectID")
+    public ResponseResult<ArrayList<RiskEntity>> getRisksByProjectID(@RequestParam("projectID")String projectID) {
+        return riskService.getRisksByProjectID(projectID);
+    }
 }

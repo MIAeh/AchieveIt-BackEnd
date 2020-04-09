@@ -60,7 +60,7 @@ public class WorkHourController {
     }
 
     @CrossOrigin
-    @GetMapping("getMyWorkHoursToApprove")
+    @GetMapping("getMyWorkHoursToApproveByProjectID")
     public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(@RequestParam(name="myID")String myId,@RequestParam("projectID")String projectId){
         ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourByProjectID(myId,projectId);
         ArrayList<WorkHourEntity> res=new ArrayList<WorkHourEntity>();
