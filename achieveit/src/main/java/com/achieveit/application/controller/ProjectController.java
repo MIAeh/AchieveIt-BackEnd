@@ -65,7 +65,6 @@ public class ProjectController {
         String projectManagerID = jsonObject.getString("projectManagerID");
         String projectMonitorID = jsonObject.getString("projectMonitorID");
         String projectClientID = jsonObject.getString("projectClientID");
-        Integer projectStatus = jsonObject.getInteger("projectStatus");
         Date projectStartDate = jsonObject.getDate("projectStartDate");
         Date projectEndDate = jsonObject.getDate("projectEndDate");
         String projectFrameworks = jsonObject.getString("projectFrameworks");
@@ -79,7 +78,7 @@ public class ProjectController {
         }
         Integer domain = jsonObject.getInteger("domain");
 
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStatus, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
         return ResultGenerator.success();
     }
 
@@ -109,10 +108,9 @@ public class ProjectController {
             Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
             projectMilestones.add(milestone);
         }
-        Integer projectStatus = jsonObject.getInteger("projectStatus");
         Integer domain = jsonObject.getInteger("domain");
 
-        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, projectStatus, domain);
+        projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
         return ResultGenerator.success();
     }
 

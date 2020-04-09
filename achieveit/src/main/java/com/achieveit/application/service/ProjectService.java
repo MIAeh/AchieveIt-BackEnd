@@ -3,6 +3,7 @@ package com.achieveit.application.service;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.mapper.UserMapper;
@@ -70,14 +71,12 @@ public class ProjectService {
     }
 
     @Transactional
-    @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStatus",
-            "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones", "domain"})
+    @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones", "domain"})
     public void createProjectByID(String projectID,
                                             String projectName,
                                             String projectManagerID,
                                             String projectMonitorID,
                                             String projectClientID,
-                                            Integer projectStatus,
                                             Date projectStartDate,
                                             Date projectEndDate,
                                             String projectFrameworks,
@@ -91,7 +90,7 @@ public class ProjectService {
         }
 
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectManagerID, projectMonitorID, projectClientID,
-                projectStatus, projectStartDate, projectEndDate, projectFrameworks,
+                ProjectStatus.APPLY_FOR_APPROVAL.getStatus(), projectStartDate, projectEndDate, projectFrameworks,
                 JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
         logger.info("ProjectEntity: " + projectEntity.toString());
         projectMapper.createProjectByID(projectEntity);
@@ -118,7 +117,7 @@ public class ProjectService {
 
     @Transactional
     @Logged({"projectID", "projectName", "projectStartDate", "projectEndDate", "projectFrameworks",
-            "projectLanguages", "projectMilestones", "projectStatus"})
+            "projectLanguages", "projectMilestones"})
     public void updateProjectByID(String projectID,
                                             String projectName,
                                             Date projectStartDate,
@@ -126,9 +125,13 @@ public class ProjectService {
                                             String projectFrameworks,
                                             List<String> projectLanguages,
                                             List<Milestone> projectMilestones,
-                                            Integer projectStatus,
                                             Integer domain) {
 
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        Integer projectStatus = project.getProjectStatus();
+        if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
+            projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+        }
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectStatus, projectStartDate, projectEndDate,
                 projectFrameworks, JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
         logger.info("ProjectEntity: " + projectEntity.toString());
