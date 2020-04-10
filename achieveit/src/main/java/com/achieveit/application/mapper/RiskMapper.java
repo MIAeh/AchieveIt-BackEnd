@@ -48,4 +48,5 @@ public interface RiskMapper {
     @Select("select * from risklist where projectid=#{projectID}")
     ArrayList<RiskEntity> getRisksByProjectID(@Param("projectID")String projectID);
 
+
 }

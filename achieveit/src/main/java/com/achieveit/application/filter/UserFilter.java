@@ -5,6 +5,8 @@ import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.sf.json.JSONObject;
+import org.springframework.core.annotation.Order;
+
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import java.util.Arrays;
  * Filter for User
  * @author Alevery, Felix
  */
+@Order(1)
 @WebFilter(filterName = "userFilter", urlPatterns = {"/*"})
 public class UserFilter extends BaseFilter {
     /**
@@ -31,7 +34,7 @@ public class UserFilter extends BaseFilter {
     private static final String IS_LOGIN = "isLogin";
     private static final String TRUE = "true";
 
-    UserFilter() {
+    public UserFilter() {
         super(new ArrayList<>(Arrays.asList("/user/userLoginByID","/user/userLoginByPhone","/user/userLoginByMail","/user/register", "/user/islogin", "/user/logout")));
     }
 
