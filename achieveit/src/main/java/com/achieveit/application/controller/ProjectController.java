@@ -145,6 +145,27 @@ public class ProjectController {
     }
 
     @CrossOrigin
+    @Logged({"jsonObject"})
+    @PostMapping("/addQAMembersByID")
+    public ResponseResult addQAMembersByID(@RequestBody JSONObject jsonObject) {
+        String projectID = jsonObject.getString("projectID");
+        List<String> memberIDs = JSONObject.parseArray(jsonObject.getJSONArray("memberIDs").toJSONString(), String.class);
+        projectService.addQAMembersByID(projectID, memberIDs);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"jsonObject"})
+    @PostMapping("/addEPGMembersByID")
+    public ResponseResult addEPGMembersByID(@RequestBody JSONObject jsonObject) {
+        String projectID = jsonObject.getString("projectID");
+        List<String> memberIDs = JSONObject.parseArray(jsonObject.getJSONArray("memberIDs").toJSONString(), String.class);
+        projectService.addEPGMembersByID(projectID, memberIDs);
+        return ResultGenerator.success();
+    }
+
+
+    @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/addMemberRoleByID")
         public ResponseResult addMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
