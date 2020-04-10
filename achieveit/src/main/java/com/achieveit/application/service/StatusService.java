@@ -4,6 +4,7 @@ import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.ProjectStatus;
+import com.achieveit.application.enums.UserRoles;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.AuthorityMapper;
 import com.achieveit.application.mapper.ProjectMapper;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class StatusService {
@@ -75,7 +75,7 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.APPROVED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
+        // send mail to project manager
         UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
         if (projectManager == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
@@ -83,6 +83,28 @@ public class StatusService {
         emailUtil.sendTextEmail(projectManager.getUserMail(),
                 project.getProjectID() + " " + project.getProjectName() + " 已立项",
                 "申请立项已通过，项目已立项。");
+        // send mail to EPG Leader/QA Leader/System Configuration Manager
+        List<UserEntity> userEntities = userMapper.getAllUserInfo();
+        if (userEntities == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        for (UserEntity user : userEntities) {
+            if (user.getUserRole() == UserRoles.EPG_LEADER.getRole()) {
+                emailUtil.sendTextEmail(user.getUserMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+                        "申请立项已通过，项目已立项，请分配EPG。");
+            }
+            else if (user.getUserRole() == UserRoles.QA_MANAGER.getRole()) {
+                emailUtil.sendTextEmail(user.getUserMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+                        "申请立项已通过，项目已立项，请分配QA。");
+            }
+            else if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+                emailUtil.sendTextEmail(user.getUserMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+                        "申请立项已通过，项目已立项，请确认配置完成。");
+            }
+        }
     }
 
     @Transactional
@@ -209,6 +231,19 @@ public class StatusService {
 
         statusMapper.updateArchiveLink(projectID, archiveLink);
         statusMapper.updateArchived(projectID, true);
+
+        // send mail to System Configuration Manager
+        List<UserEntity> userEntities = userMapper.getAllUserInfo();
+        if (userEntities == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        for (UserEntity user : userEntities) {
+            if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+                emailUtil.sendTextEmail(user.getUserMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已提交归档申请",
+                        "项目已结束并提交归档申请，请审批归档。");
+            }
+        }
     }
 
     @Transactional
@@ -236,6 +271,15 @@ public class StatusService {
 
         statusMapper.updateArchiveLink(projectID, "null");
         statusMapper.updateArchived(projectID, false);
+
+        // send mail to project manager
+        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
+        if (projectManager == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        emailUtil.sendTextEmail(projectManager.getUserMail(),
+                project.getProjectID() + " " + project.getProjectName() + " 项目归档申请被驳回",
+                "归档审批被驳回，请重新提交项目归档。");
     }
 
     @Transactional
@@ -249,7 +293,7 @@ public class StatusService {
         else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
-        else if (archiveEntity.getArchived().equals(false) || Objects.equals(archiveEntity.getArchiveLink(), "null")) {
+        else if (archiveEntity.getArchived().equals(false) || archiveEntity.getArchiveLink().equals("null")) {
             throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 

@@ -15,6 +15,9 @@ public abstract class BaseFilter implements Filter {
      */
     protected List<String> includeUrls;
 
+    public BaseFilter() {
+    }
+
     BaseFilter(List<String> includeUrls) {
         this.includeUrls = includeUrls;
     }
@@ -48,9 +51,6 @@ public abstract class BaseFilter implements Filter {
      * @return isNeedFilter
      */
     protected boolean isNeedFilter(String uri) {
-        if (this.includeUrls != null && this.includeUrls.contains(uri)) {
-            return false;
-        }
-        return true;
+        return this.includeUrls == null || !this.includeUrls.contains(uri);
     }
 }
