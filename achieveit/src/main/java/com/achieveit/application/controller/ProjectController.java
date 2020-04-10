@@ -10,6 +10,7 @@ import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -61,6 +62,7 @@ public class ProjectController {
      * @param jsonObject 通过Body获取的JsonObject
      * @return Result
      */
+    @Transactional
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/createProjectByID")
@@ -78,16 +80,31 @@ public class ProjectController {
         Date projectStartDate = jsonObject.getDate("projectStartDate");
         Date projectEndDate = jsonObject.getDate("projectEndDate");
         String projectFrameworks = jsonObject.getString("projectFrameworks");
-        List<String> projectLanguages = JSONObject.parseArray(jsonObject.getJSONArray("projectLanguages").toJSONString(), String.class);
+
+        List<String> projectLanguages = new ArrayList<>();
+        JSONArray projectLanguagesJsonArray= jsonObject.getJSONArray("projectLanguages");
+        if (projectLanguagesJsonArray != null) {
+            projectLanguages = JSONObject.parseArray(jsonObject.getJSONArray("projectLanguages").toJSONString(), String.class);
+        }
+
         List<Milestone> projectMilestones = new ArrayList<>();
         JSONArray projectMilestonesJsonArray = jsonObject.getJSONArray("projectMilestones");
-        for(int i = 0; i < projectMilestonesJsonArray.size(); i++) {
-            JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
-            Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
-            projectMilestones.add(milestone);
+        if (projectMilestonesJsonArray != null) {
+            for (int i = 0; i < projectMilestonesJsonArray.size(); i++) {
+                JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
+                Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
+                projectMilestones.add(milestone);
+            }
         }
+
         Integer domain = jsonObject.getInteger("domain");
-        ArrayList<FeatureUpLoadEntity> projectFunctions = (ArrayList<FeatureUpLoadEntity>) JSONObject.parseArray(jsonObject.getJSONArray("projectFunctions").toJSONString(), FeatureUpLoadEntity.class);
+
+        ArrayList<FeatureUpLoadEntity> projectFunctions = new ArrayList<>();
+        JSONArray projectFunctionsJsonArray = jsonObject.getJSONArray("projectFunctions");
+        if (projectFunctionsJsonArray != null) {
+            projectFunctions = (ArrayList<FeatureUpLoadEntity>) JSONObject.parseArray(projectFunctionsJsonArray.toJSONString(), FeatureUpLoadEntity.class);
+
+        }
         FeatureUpLoad featureUpLoad = new FeatureUpLoad(projectFunctions);
 
         projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
@@ -114,14 +131,23 @@ public class ProjectController {
         Date projectStartDate = jsonObject.getDate("projectStartDate");
         Date projectEndDate = jsonObject.getDate("projectEndDate");
         String projectFrameworks = jsonObject.getString("projectFrameworks");
-        List<String> projectLanguages = JSONObject.parseArray(jsonObject.getJSONArray("projectLanguages").toJSONString(), String.class);
+
+        List<String> projectLanguages = new ArrayList<>();
+        JSONArray projectLanguagesJsonArray= jsonObject.getJSONArray("projectLanguages");
+        if (projectLanguagesJsonArray != null) {
+            projectLanguages = JSONObject.parseArray(jsonObject.getJSONArray("projectLanguages").toJSONString(), String.class);
+        }
+
         List<Milestone> projectMilestones = new ArrayList<>();
         JSONArray projectMilestonesJsonArray = jsonObject.getJSONArray("projectMilestones");
-        for(int i = 0; i < projectMilestonesJsonArray.size(); i++) {
-            JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
-            Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
-            projectMilestones.add(milestone);
+        if (projectMilestonesJsonArray != null) {
+            for (int i = 0; i < projectMilestonesJsonArray.size(); i++) {
+                JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
+                Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
+                projectMilestones.add(milestone);
+            }
         }
+
         Integer domain = jsonObject.getInteger("domain");
 
         projectService.updateProjectByID(projectID, projectName, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
@@ -187,6 +213,14 @@ public class ProjectController {
     @PostMapping("/updateMemberSuperiorByID")
     public ResponseResult updateMemberSuperiorByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("superiorID") String superiorID) {
         projectService.updateMemberSuperiorByID(projectID, memberID, superiorID);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID", "memberID"})
+    @PostMapping("/removeMemberByID")
+    public ResponseResult removeMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
+        projectService.removeMemberRoleByID(projectID, memberID, memberRole);
         return ResultGenerator.success();
     }
 
