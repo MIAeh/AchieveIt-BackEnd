@@ -116,11 +116,10 @@ public class ProjectService {
         projectMapper.deleteProjectIDFromProjectIDList(projectID);
         projectMapper.initArchive(projectID);
         projectMapper.initSubStatus(projectID);
-
+        // add feature list
         if(featureUpLoad!=null){
             featureService.uploadFeatureList(featureUpLoad,session);
         }
-
         // send mail
         emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
                 "请进行立项审批。");
@@ -151,9 +150,20 @@ public class ProjectService {
                                             Integer domain) {
 
         ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        // status update
         Integer projectStatus = project.getProjectStatus();
         if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
             projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+            UserEntity projectMonitor = userMapper.getUserInfoById(project.getProjectMonitorID());
+            if (projectMonitor == null) {
+                throw new AchieveitException(ErrorCode.QUERY_ERROR);
+            }
+            // send mail
+            emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
+                    "请进行立项审批。");
         }
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectStatus, projectStartDate, projectEndDate,
                 projectFrameworks, JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));
@@ -253,10 +263,10 @@ public class ProjectService {
         authorityMapper.deleteGitMemberByID(projectID, memberID);
         authorityMapper.deleteMailMemberByID(projectID, memberID);
         authorityMapper.deleteFileMemberByID(projectID, memberID);
-
+        // delete all work hours
         workHourMapper.deleteWorkHoursByApplyerId(memberID);
 
-
+        // TODO: 风险中，若该成员为责任人，责任人默认置为项目经理；若该成员为相关人，从相关人中移除
 
         // delete from member table
         projectMapper.deleteMemberByID(projectID, memberID);
