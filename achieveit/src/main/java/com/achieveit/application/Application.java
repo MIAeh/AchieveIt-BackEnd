@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAspectJAutoProxy
 @MapperScan("com.achieveit.application.mapper")
-@ServletComponentScan
+//@ServletComponentScan
 public class Application {
 
 	public static void main(String[] args) {

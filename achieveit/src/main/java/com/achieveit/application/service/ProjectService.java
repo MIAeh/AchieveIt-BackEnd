@@ -9,6 +9,7 @@ import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.AuthorityMapper;
 import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.mapper.UserMapper;
+import com.achieveit.application.mapper.WorkHourMapper;
 import com.achieveit.application.utils.EmailUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -35,10 +37,16 @@ public class ProjectService {
 
     private final EmailUtil emailUtil;
 
-    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, AuthorityMapper authorityMapper, EmailUtil emailUtil) {
+    private final FeatureService featureService;
+
+    private final WorkHourMapper workHourMapper;
+
+    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, AuthorityMapper authorityMapper, FeatureService featureService,WorkHourMapper workHourMapper,EmailUtil emailUtil) {
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
         this.authorityMapper = authorityMapper;
+        this.featureService=featureService;
+        this.workHourMapper=workHourMapper;
         this.emailUtil = emailUtil;
     }
 
@@ -78,17 +86,18 @@ public class ProjectService {
     @Transactional
     @Logged({"projectID", "projectName", "projectManagerID", "projectMonitorID", "projectClientID", "projectStartDate", "projectEndDate", "projectFrameworks", "projectLanguages", "projectMilestones", "domain"})
     public void createProjectByID(String projectID,
-                                            String projectName,
-                                            String projectManagerID,
-                                            String projectMonitorID,
-                                            String projectClientID,
-                                            Date projectStartDate,
-                                            Date projectEndDate,
-                                            String projectFrameworks,
-                                            List<String> projectLanguages,
-                                            List<Milestone> projectMilestones,
-                                            Integer domain,
-                                            FeatureUpLoad featureUpLoad) throws AchieveitException {
+                                  String projectName,
+                                  String projectManagerID,
+                                  String projectMonitorID,
+                                  String projectClientID,
+                                  Date projectStartDate,
+                                  Date projectEndDate,
+                                  String projectFrameworks,
+                                  List<String> projectLanguages,
+                                  List<Milestone> projectMilestones,
+                                  Integer domain,
+                                  FeatureUpLoad featureUpLoad,
+                                  HttpSession session) throws AchieveitException {
 
         UserEntity projectMonitor = userMapper.getUserInfoById(projectMonitorID);
         if (projectMonitor == null) {
@@ -107,7 +116,10 @@ public class ProjectService {
         projectMapper.deleteProjectIDFromProjectIDList(projectID);
         projectMapper.initArchive(projectID);
         projectMapper.initSubStatus(projectID);
-        // TODO: 添加功能列表
+
+        if(featureUpLoad!=null){
+            featureService.uploadFeatureList(featureUpLoad,session);
+        }
 
         // send mail
         emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
@@ -241,9 +253,10 @@ public class ProjectService {
         authorityMapper.deleteGitMemberByID(projectID, memberID);
         authorityMapper.deleteMailMemberByID(projectID, memberID);
         authorityMapper.deleteFileMemberByID(projectID, memberID);
-        // TODO: delete all WorkHour Applications
 
-        // TODO: delete related risk
+        workHourMapper.deleteWorkHoursByApplyerId(memberID);
+
+
 
         // delete from member table
         projectMapper.deleteMemberByID(projectID, memberID);

@@ -106,7 +106,7 @@ public class ProjectController {
         }
         FeatureUpLoad featureUpLoad = new FeatureUpLoad(projectFunctions);
 
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain, featureUpLoad);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain, featureUpLoad,session);
 
         return ResultGenerator.success();
     }

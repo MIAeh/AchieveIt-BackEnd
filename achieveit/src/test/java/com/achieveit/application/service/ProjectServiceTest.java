@@ -5,6 +5,7 @@ import com.achieveit.application.entity.Milestone;
 import com.achieveit.application.entity.ProjectInfo;
 import com.achieveit.application.entity.ProjectListItem;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +34,13 @@ import java.util.List;
 public class ProjectServiceTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectServiceTest.class);
+
+    private HttpSession session;
+
+    @Before
+    public void setSession(){
+        session = new MockHttpSession();
+    }
 
     @Autowired
     private ProjectService projectService;
@@ -68,7 +78,7 @@ public class ProjectServiceTest {
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
         Integer domain = 0;
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain,null,session);
         Assert.assertTrue(true);
     }
 
