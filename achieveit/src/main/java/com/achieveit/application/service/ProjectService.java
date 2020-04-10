@@ -3,6 +3,7 @@ package com.achieveit.application.service;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.enums.MemberRoles;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.ProjectMapper;
@@ -163,6 +164,25 @@ public class ProjectService {
         String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
         projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[]"));
     }
+
+    @Transactional
+    @Logged({"projectID", "memberIDs"})
+    public void addQAMembersByID(String projectID, List<String> memberIDs) {
+        String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
+        for (String memberID : memberIDs) {
+            projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.QA.getRole() + "]"));
+        }
+    }
+
+    @Transactional
+    @Logged({"projectID", "memberIDs"})
+    public void addEPGMembersByID(String projectID, List<String> memberIDs) {
+        String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
+        for (String memberID : memberIDs) {
+            projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.EPG.getRole() + "]"));
+        }
+    }
+
 
     @Transactional
     @Logged({"projectID", "memberID", "memberRole"})

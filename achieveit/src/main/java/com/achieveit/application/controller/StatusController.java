@@ -1,6 +1,9 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.entity.ArchiveEntity;
+import com.achieveit.application.entity.ProjectStatusEntity;
+import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.StatusService;
 import com.achieveit.application.wrapper.ResponseResult;
@@ -19,6 +22,14 @@ public class StatusController {
 
     @CrossOrigin
     @Logged({"projectID"})
+    @GetMapping("/getProjectStatus")
+    public ResponseResult<ProjectStatusEntity> getProjectStatus(@RequestParam("projectID") String projectID) throws AchieveitException {
+        ProjectStatusEntity projectStatus = statusService.getProjectStatus(projectID);
+        return ResultGenerator.success(projectStatus);
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
     @PostMapping("/approveApplication")
     public ResponseResult approveApplication(@RequestParam("projectID") String projectID) throws AchieveitException {
         statusService.approveApplication(projectID);
@@ -30,6 +41,14 @@ public class StatusController {
     @PostMapping("/rejectApplication")
     public ResponseResult rejectApplication(@RequestParam("projectID") String projectID) throws AchieveitException {
         statusService.rejectApplication(projectID);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @PostMapping("/confirmConfigurationCompleted")
+    public ResponseResult confirmConfigurationCompleted(@RequestParam("projectID") String projectID) throws AchieveitException {
+        statusService.confirmConfigurationCompleted(projectID);
         return ResultGenerator.success();
     }
 
@@ -63,6 +82,14 @@ public class StatusController {
     public ResponseResult updateArchive(@RequestParam("projectID") String projectID, @RequestParam("archiveLink") String archiveLink) throws AchieveitException {
         statusService.updateArchive(projectID, archiveLink);
         return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @GetMapping("/getArchiveLink")
+    public ResponseResult getArchiveLink(@RequestParam("projectID") String projectID) throws AchieveitException {
+        ArchiveEntity archiveEntity = statusService.getArchiveLink(projectID);
+        return ResultGenerator.success(archiveEntity);
     }
 
     @CrossOrigin
