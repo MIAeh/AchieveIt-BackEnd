@@ -9,10 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 
 @RestController
-@RequestMapping("/version/")
+@RequestMapping("/debug/")
 public class VersionController {
-    @GetMapping("updateTime")
-    public ResponseResult<Date> getUpdateTime(){
-        return ResultGenerator.success("version",new Date(System.currentTimeMillis()));
+    @GetMapping("getSystem")
+    public ResponseResult<Date> getSystemTime(){
+        return ResultGenerator.success("system",new Date(System.currentTimeMillis()));
     }
+
+    @GetMapping("getUpdateTime")
+    public ResponseResult<String> getUpdateTime(){
+        return ResultGenerator.success("last_update","4-10-19:20");
+    }
+
 }

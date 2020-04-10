@@ -30,6 +30,9 @@ public class WorkHourService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName,String projectId, Date startTime, Date endTime){
+        if(startTime.getTime()>endTime.getTime()){
+            return ResultGenerator.error("end_time must bigger than start_time");
+        }
         UserEntity applyerEntity=userMapper.getUserInfoById(applyerId);
         if(applyerEntity==null) return ResultGenerator.error("applyer doesn't exist!");
         WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
