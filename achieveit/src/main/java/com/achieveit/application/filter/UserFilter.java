@@ -55,6 +55,9 @@ public class UserFilter extends BaseFilter {
             if (session != null && session.getAttribute(IS_LOGIN) != null && TRUE.equals(session.getAttribute(IS_LOGIN))) {
                 filterChain.doFilter(request, response);
             } else {
+                if(session!=null&& session.getAttribute(IS_LOGIN) != null){
+                    logger.info("no login!");
+                }
                 logger.info("access deny");
                 response.getWriter().write(JSONObject.fromObject(ResultGenerator.error(400, "Should Login!")).toString());
                 response.setContentType("application/json;charset=UTF-8");

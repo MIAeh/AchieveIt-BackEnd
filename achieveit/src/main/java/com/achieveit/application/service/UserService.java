@@ -105,7 +105,7 @@ public class UserService {
         Integer role=userEntity.getUserRole();
         if(role==null) role=-1;
 
-        session.setAttribute(IS_LOGIN, true);
+        session.setAttribute(IS_LOGIN, "true");
         session.setAttribute("userName", userEntity.getUserName());
         session.setAttribute("userId", userEntity.getUserId());
         session.setAttribute("userRole",role);

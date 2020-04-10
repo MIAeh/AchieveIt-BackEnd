@@ -49,7 +49,7 @@ public class UserController {
      * @param session http会话
      * @return 是否成功登录的Response消息
      */
-    @PostMapping("userLoginById")
+    @PostMapping("userLoginByID")
     public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userID") String userId,
                                                     @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
         return this.userService.loginByUserId(userId, userPassword, session);
@@ -123,7 +123,7 @@ public class UserController {
     }
 
     @CrossOrigin
-    @GetMapping("getUserInfoById")
+    @GetMapping("getUserInfoByID")
     public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userID")String userId,HttpSession session) {
         return userService.getUserInfoById(userId,session);
     }
