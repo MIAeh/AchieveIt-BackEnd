@@ -1,10 +1,7 @@
 package com.achieveit.application.service;
 
 import com.achieveit.application.annotation.Logged;
-import com.achieveit.application.entity.ArchiveEntity;
-import com.achieveit.application.entity.MemberEntity;
-import com.achieveit.application.entity.ProjectEntity;
-import com.achieveit.application.entity.UserEntity;
+import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
@@ -14,6 +11,7 @@ import com.achieveit.application.mapper.StatusMapper;
 import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.utils.EmailUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +37,30 @@ public class StatusService {
         this.emailUtil = emailUtil;
     }
 
+    @Transactional
+    @Logged({"projectID"})
+    public ProjectStatusEntity getProjectStatus(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        Integer projectStatus = project.getProjectStatus();
+        ProjectStatusEntity projectStatusEntity = null;
+        if (projectStatus.equals(ProjectStatus.APPROVED.getStatus())) {
+            ProjectSubStatus projectSubStatus = statusMapper.getProjectSubStatusByID(projectID);
+            projectStatusEntity = new ProjectStatusEntity(projectStatus, projectSubStatus);
+        }
+        else if (projectStatus.equals(ProjectStatus.ENDED.getStatus())) {
+            ArchiveEntity archiveEntity = statusMapper.getArchiveByID(projectID);
+            projectStatusEntity = new ProjectStatusEntity(projectStatus, archiveEntity.getArchived());
+        }
+        else {
+            projectStatusEntity = new ProjectStatusEntity(projectStatus);
+        }
+        return projectStatusEntity;
+    }
+
+    @Transactional
     @Logged({"projectID"})
     public void approveApplication(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -63,6 +85,7 @@ public class StatusService {
                 "申请立项已通过，项目已立项。");
     }
 
+    @Transactional
     @Logged({"projectID"})
     public void rejectApplication(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -88,12 +111,22 @@ public class StatusService {
     }
 
     @Logged({"projectID"})
+    public void confirmConfigurationCompleted(String projectID) {
+        statusMapper.confirmProjectSubStatusConfigurationCompletedByID(projectID);
+    }
+
+    @Transactional
+    @Logged({"projectID"})
     public void launchProject(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
+        ProjectSubStatus projectSubStatus = statusMapper.getProjectSubStatusByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
         else if (!project.getProjectStatus().equals(ProjectStatus.APPROVED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+        else if (projectSubStatus.getConfigurationCompleted() && projectSubStatus.getAllocatedEPG() && projectSubStatus.getAllocatedQA()) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -112,6 +145,7 @@ public class StatusService {
         }
     }
 
+    @Transactional
     @Logged({"projectID"})
     public void deliverProject(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -137,6 +171,7 @@ public class StatusService {
         }
     }
 
+    @Transactional
     @Logged({"projectID"})
     public void endProject(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -162,6 +197,7 @@ public class StatusService {
         }
     }
 
+    @Transactional
     @Logged({"projectID", "archiveLink"})
     public void updateArchive(String projectID, String archiveLink) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -175,6 +211,20 @@ public class StatusService {
         statusMapper.updateArchived(projectID, true);
     }
 
+    @Transactional
+    @Logged({"projectID"})
+    public ArchiveEntity getArchiveLink(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        } else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+        return statusMapper.getArchiveByID(projectID);
+    }
+
+
+    @Transactional
     @Logged({"projectID"})
     public void rejectArchive(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
@@ -188,6 +238,7 @@ public class StatusService {
         statusMapper.updateArchived(projectID, false);
     }
 
+    @Transactional
     @Logged({"projectID"})
     public void approveArchive(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
