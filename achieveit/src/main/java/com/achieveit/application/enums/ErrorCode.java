@@ -16,12 +16,12 @@ public enum ErrorCode {
     UPDATE_ERROR(101, "Fail to Update"),
     DELETION_ERROR(102, "Fail to Delete"),
     QUERY_ERROR(103, "Fail to Query"),
-    LOGIN_ERROR(400, "Fail to Login"),
     LOGIN_BANNED(401, "Account Banned"),
     LOGOUT_ERROR(402, "Fail to Logout"),
     UNAUTHORIZED(403, "Access Deny"),
     STATUS_ERROR(1, "Project Status Error"),
-    ARCHIVE_ERROR(2, "Project No Archive Error");
+    ROLE_ERROR(2, "Unauthorized User Role"),
+    ARCHIVE_ERROR(3, "Project No Archive Error");
 
 
     private Integer code;
