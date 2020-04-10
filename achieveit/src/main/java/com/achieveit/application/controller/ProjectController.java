@@ -68,7 +68,7 @@ public class ProjectController {
         String projectName = jsonObject.getString("projectName");
         String projectManagerID = (String) session.getAttribute("userId");
         if (projectManagerID == null || projectManagerID.isEmpty()) {
-            throw new AchieveitException(ErrorCode.UNAUTHORIZED);
+            throw new AchieveitException(ErrorCode.SESSION_ERROR);
         }
         String projectMonitorID = jsonObject.getString("projectMonitorID");
         String projectClientID = jsonObject.getString("projectClientID");
