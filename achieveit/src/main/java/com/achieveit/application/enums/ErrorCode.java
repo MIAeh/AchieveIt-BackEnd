@@ -12,7 +12,8 @@ public enum ErrorCode {
     UNAUTHORIZED(402, "Access Deny"),
     STATUS_ERROR(1, "Project Status Error"),
     ROLE_ERROR(2, "Unauthorized User Role"),
-    ARCHIVE_ERROR(3, "Project No Archive Error");
+    ARCHIVE_ERROR(3, "Project No Archive Error"),
+    SYSTEM_ERROR(500,"System Error!");
 
     private Integer code;
 

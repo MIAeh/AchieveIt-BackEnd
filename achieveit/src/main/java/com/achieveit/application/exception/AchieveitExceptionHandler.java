@@ -1,5 +1,6 @@
 package com.achieveit.application.exception;
 
+import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
@@ -25,19 +26,16 @@ public class AchieveitExceptionHandler {
      * @return ResponseResult
      */
     @ExceptionHandler(Exception.class)
-    public ResponseResult<Integer> handlerException(Exception e) {
-        /*
-            如果是自定义的异常，返回对应的错误信息
-         */
+    public ResponseResult<Integer> handlerException(Exception e){
         if (e instanceof AchieveitException) {
+            //如果是自定义的异常，返回对应的错误信息
             logger.info(e.getMessage());
             return ResultGenerator.error(((AchieveitException) e).getErrorCode().getCode(), e.getMessage());
         } else {
-            /*
-                如果不是已知异常，返回系统异常
-             */
+            //如果是系统异常 返回异常信息
             logger.info(e.getMessage());
-            return ResultGenerator.error(200, "System Error!");
+            return ResultGenerator.error(ErrorCode.SYSTEM_ERROR.getCode(),e.getMessage());
         }
     }
 }
+
