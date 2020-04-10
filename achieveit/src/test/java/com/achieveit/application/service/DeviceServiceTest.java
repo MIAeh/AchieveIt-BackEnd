@@ -2,6 +2,7 @@ package com.achieveit.application.service;
 
 import com.achieveit.application.entity.DeviceInfo;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +30,13 @@ import java.util.List;
 public class DeviceServiceTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DeviceServiceTest.class);
+
+    private HttpSession session;
+
+    @Before
+    public void setSession(){
+        session = new MockHttpSession();
+    }
 
     @Autowired
     private DeviceService deviceService;
@@ -51,7 +61,7 @@ public class DeviceServiceTest {
         String deviceID = "PC-20190202-0003";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dueDate = dateFormat.parse("2020-3-30");
-        deviceService.registerDevice(projectID, userID, deviceID, dueDate);
+        deviceService.registerDevice(projectID, userID, deviceID, dueDate,session);
         Assert.assertTrue(true);
     }
 
@@ -60,7 +70,7 @@ public class DeviceServiceTest {
         String projectID = "2019-0000-D-01";
         String userID = "0001";
         String deviceID = "PC-20190202-0002";
-        deviceService.returnDevice(projectID, userID, deviceID);
+        deviceService.returnDevice(projectID, userID, deviceID,session);
         Assert.assertTrue(true);
     }
 }
