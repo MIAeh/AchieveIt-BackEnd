@@ -231,6 +231,19 @@ public class StatusService {
 
         statusMapper.updateArchiveLink(projectID, archiveLink);
         statusMapper.updateArchived(projectID, true);
+
+        // send mail to System Configuration Manager
+        List<UserEntity> userEntities = userMapper.getAllUserInfo();
+        if (userEntities == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        for (UserEntity user : userEntities) {
+            if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+                emailUtil.sendTextEmail(user.getUserMail(),
+                        project.getProjectID() + " " + project.getProjectName() + " 已提交归档申请",
+                        "项目已结束并提交归档申请，请审批归档。");
+            }
+        }
     }
 
     @Transactional
@@ -258,6 +271,15 @@ public class StatusService {
 
         statusMapper.updateArchiveLink(projectID, "null");
         statusMapper.updateArchived(projectID, false);
+
+        // send mail to project manager
+        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
+        if (projectManager == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        emailUtil.sendTextEmail(projectManager.getUserMail(),
+                project.getProjectID() + " " + project.getProjectName() + " 项目归档申请被驳回",
+                "归档审批被驳回，请重新提交项目归档。");
     }
 
     @Transactional
