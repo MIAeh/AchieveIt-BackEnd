@@ -48,12 +48,8 @@ public abstract class BaseFilter implements Filter {
      * @return isNeedFilter
      */
     protected boolean isNeedFilter(String uri) {
-        if (includeUrls != null) {
-            for (String includeUrl : includeUrls) {
-                if (includeUrl.equals(uri)) {
-                    return false;
-                }
-            }
+        if (this.includeUrls != null && this.includeUrls.contains(uri)) {
+            return false;
         }
         return true;
     }
