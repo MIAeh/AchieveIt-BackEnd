@@ -31,7 +31,7 @@ public class UserFilter extends BaseFilter {
     private static final String TRUE = "true";
 
     UserFilter() {
-        super(new ArrayList<>(Arrays.asList("/user/login", "/user/register", "/user/islogin", "/user/logout")));
+        super(new ArrayList<>(Arrays.asList("/user/userLoginByID","/user/userLoginByPhone","/user/userLoginByMail","/user/register", "/user/islogin", "/user/logout")));
     }
 
     /**
