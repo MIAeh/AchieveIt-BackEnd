@@ -8,7 +8,9 @@ public class WorkHourEntity {
     private String workHourId;
     private Date applyTime;
     private String applyerId;
+    private String applyerName;
     private String approverId;
+    private String approverName;
     private String featureName;
     private String activityName;
     private String projectId;
@@ -19,10 +21,11 @@ public class WorkHourEntity {
 
     }
 
-    public WorkHourEntity(String applyerId, String featureName, String activityName, String projectId,Date startTime, Date endTime) {
+    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Date startTime, Date endTime) {
         this.workHourId= UUID.randomUUID().toString();
         this.applyTime=new Date(System.currentTimeMillis());
         this.applyerId = applyerId;
+        this.applyerName=applyerName;
         this.featureName = featureName;
         this.activityName = activityName;
         this.projectId=projectId;
@@ -112,6 +115,22 @@ public class WorkHourEntity {
         this.projectId = projectId;
     }
 
+    public String getApplyerName() {
+        return applyerName;
+    }
+
+    public void setApplyerName(String applyerName) {
+        this.applyerName = applyerName;
+    }
+
+    public String getApproverName() {
+        return approverName;
+    }
+
+    public void setApproverName(String approverName) {
+        this.approverName = approverName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,7 +140,9 @@ public class WorkHourEntity {
                 Objects.equals(workHourId, entity.workHourId) &&
                 Objects.equals(applyTime, entity.applyTime) &&
                 Objects.equals(applyerId, entity.applyerId) &&
+                Objects.equals(applyerName, entity.applyerName) &&
                 Objects.equals(approverId, entity.approverId) &&
+                Objects.equals(approverName, entity.approverName) &&
                 Objects.equals(featureName, entity.featureName) &&
                 Objects.equals(activityName, entity.activityName) &&
                 Objects.equals(projectId, entity.projectId) &&
@@ -131,7 +152,7 @@ public class WorkHourEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(workHourId, applyTime, applyerId, approverId, featureName, activityName, projectId, startTime, endTime, status);
+        return Objects.hash(workHourId, applyTime, applyerId, applyerName, approverId, approverName, featureName, activityName, projectId, startTime, endTime, status);
     }
 
     @Override
@@ -140,7 +161,9 @@ public class WorkHourEntity {
                 "workHourId='" + workHourId + '\'' +
                 ", applyTime=" + applyTime +
                 ", applyerId='" + applyerId + '\'' +
+                ", applyerName='" + applyerName + '\'' +
                 ", approverId='" + approverId + '\'' +
+                ", approverName='" + approverName + '\'' +
                 ", featureName='" + featureName + '\'' +
                 ", activityName='" + activityName + '\'' +
                 ", projectId='" + projectId + '\'' +

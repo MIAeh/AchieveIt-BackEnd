@@ -1,6 +1,8 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.entity.WorkHourEntity;
+import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.mapper.WorkHourMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -16,17 +18,21 @@ import java.util.ArrayList;
 @Service
 public class WorkHourService {
     private  final WorkHourMapper workHourMapper;
+    private  final UserMapper userMapper;
 
     @Autowired
-    public WorkHourService(WorkHourMapper workHourMapper){
+    public WorkHourService(WorkHourMapper workHourMapper,UserMapper userMapper){
         this.workHourMapper=workHourMapper;
+        this.userMapper=userMapper;
     }
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName,String projectId, Date startTime, Date endTime){
-        WorkHourEntity entity=new WorkHourEntity(applyerId,featureName,activityName,projectId,startTime,endTime);
+        UserEntity applyerEntity=userMapper.getUserInfoById(applyerId);
+        if(applyerEntity==null) return ResultGenerator.error("applyer doesn't exist!");
+        WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
         int res=workHourMapper.insertWorkHour(entity);
         return ResultGenerator.success(entity);
     }
@@ -39,7 +45,9 @@ public class WorkHourService {
 
     @Transactional(rollbackFor =Exception.class)
     public ResponseResult<Integer> approveWordHour(String wordHourId,String approverId){
-        workHourMapper.setWorkHourApproverId(wordHourId,approverId);
+        UserEntity approverEntity=userMapper.getUserInfoById(approverId);
+        if(approverEntity==null) return ResultGenerator.error("approver doesn't exist!");
+        workHourMapper.setWorkHourApproverIdAndName(wordHourId,approverId,approverEntity.getUserName());
         workHourMapper.changeWordHourStatus(wordHourId,1);
         return ResultGenerator.success();
     }
@@ -59,7 +67,10 @@ public class WorkHourService {
     @Transactional(rollbackFor =Exception.class)
     public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByProjectID(String projectId) {
         ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByProjectID(projectId);
-        return ResultGenerator.success(entities);
+        if(entities.size()>0)
+            return ResultGenerator.success(entities);
+        else
+            return ResultGenerator.error("no records find!");
     }
 
     //To Be Done

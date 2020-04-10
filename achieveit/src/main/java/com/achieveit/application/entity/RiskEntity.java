@@ -12,6 +12,8 @@ public class RiskEntity {
 
     private String riskCharger;
 
+    private String riskChargerName;
+
     private int riskLevel;
 
     private int riskInfluence;
@@ -30,7 +32,7 @@ public class RiskEntity {
 
     }
 
-    public RiskEntity(String riskDescription, int riskType, String riskCharger, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy) {
+    public RiskEntity(String riskDescription, int riskType, String riskCharger, String riskChargerName,int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;
         this.riskCharger = riskCharger;
@@ -41,7 +43,7 @@ public class RiskEntity {
         this.riskStatus=0;
     }
 
-    public RiskEntity(String riskDescription, int riskType, String riskCharger, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus) {
+    public RiskEntity(String riskDescription, int riskType, String riskCharger, String riskChargerName,int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;
         this.riskCharger = riskCharger;
@@ -52,7 +54,7 @@ public class RiskEntity {
         this.riskStatus=riskStatus;
     }
 
-    public RiskEntity(String riskDescription, int riskType, String riskCharger, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID) {
+    public RiskEntity(String riskDescription, int riskType, String riskCharger,String riskChargerName, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;
         this.riskCharger = riskCharger;
@@ -152,6 +154,14 @@ public class RiskEntity {
         this.projectID = projectID;
     }
 
+    public String getRiskChargerName() {
+        return riskChargerName;
+    }
+
+    public void setRiskChargerName(String riskChargerName) {
+        this.riskChargerName = riskChargerName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -165,12 +175,15 @@ public class RiskEntity {
                 riskStatus == that.riskStatus &&
                 Objects.equals(riskDescription, that.riskDescription) &&
                 Objects.equals(riskCharger, that.riskCharger) &&
-                Objects.equals(riskStrategy, that.riskStrategy);
+                Objects.equals(riskChargerName, that.riskChargerName) &&
+                Objects.equals(riskStrategy, that.riskStrategy) &&
+                Objects.equals(riskLastSendTime, that.riskLastSendTime) &&
+                Objects.equals(projectID, that.projectID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(riskID, riskDescription, riskType, riskCharger, riskLevel, riskInfluence, riskFrequency, riskStrategy, riskStatus);
+        return Objects.hash(riskID, riskDescription, riskType, riskCharger, riskChargerName, riskLevel, riskInfluence, riskFrequency, riskStrategy, riskStatus, riskLastSendTime, projectID);
     }
 
     @Override
@@ -180,11 +193,14 @@ public class RiskEntity {
                 ", riskDescription='" + riskDescription + '\'' +
                 ", riskType=" + riskType +
                 ", riskCharger='" + riskCharger + '\'' +
+                ", riskChargerName='" + riskChargerName + '\'' +
                 ", riskLevel=" + riskLevel +
                 ", riskInfluence=" + riskInfluence +
                 ", riskFrequency=" + riskFrequency +
                 ", riskStrategy='" + riskStrategy + '\'' +
                 ", riskStatus=" + riskStatus +
+                ", riskLastSendTime=" + riskLastSendTime +
+                ", projectID='" + projectID + '\'' +
                 '}';
     }
 }

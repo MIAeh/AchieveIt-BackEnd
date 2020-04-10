@@ -10,8 +10,8 @@ import java.sql.Date;
 
 @Mapper
 public interface RiskMapper {
-    @Insert("insert into risklist(riskdescription,risktype,riskcharger,risklevel,riskinfluence,riskfrequency,riskstrategy,riskstatus,projectid) values"
-    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus},#{projectID})")
+    @Insert("insert into risklist(riskdescription,risktype,riskcharger,riskchargername,risklevel,riskinfluence,riskfrequency,riskstrategy,riskstatus,projectid) values"
+    +"(#{riskDescription},#{riskType},#{riskCharger},#{riskChargerName},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus},#{projectID})")
     int insertRisk(RiskEntity risk);
 
     @Select("select * from risklist order by riskid")
