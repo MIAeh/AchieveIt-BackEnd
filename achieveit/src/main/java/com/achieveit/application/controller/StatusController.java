@@ -22,7 +22,7 @@ public class StatusController {
 
     @CrossOrigin
     @Logged({"projectID"})
-    @PostMapping("/getProjectStatus")
+    @GetMapping("/getProjectStatus")
     public ResponseResult<ProjectStatusEntity> getProjectStatus(@RequestParam("projectID") String projectID) throws AchieveitException {
         ProjectStatusEntity projectStatus = statusService.getProjectStatus(projectID);
         return ResultGenerator.success(projectStatus);
