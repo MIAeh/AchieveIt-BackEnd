@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 @Mapper
 public interface WorkHourMapper {
-    @Insert("insert into workhour(workhourid,applytime,applyerid,approverid,featurename,activityname,starttime,endtime,status,projectid)"+
-            " values(#{workHourId},#{applyTime},#{applyerId},#{approverId},#{featureName},#{activityName},#{startTime},#{endTime},#{status},#{projectId})")
-    int insertWorkHour(WorkHourEntity workHourEntity);
+    @Insert("insert into workhour(workhourid,applytime,applyerid,approverid,featurename,activityname,starttime,endtime,status,projectid,applyername,approvername)"+
+            " values(#{workHourId},#{applyTime},#{applyerId},#{approverId},#{featureName},#{activityName},#{startTime},#{endTime},#{status},#{projectId},#{applyerName},#{approverName})")
+    Integer insertWorkHour(WorkHourEntity workHourEntity);
 
     @Update("update workhour set status=#{status} where workhourId=#{workHourId}")
-    int changeWordHourStatus(@Param("workHourId") String workHourId,@Param("status") int status);
+    Integer changeWordHourStatus(@Param("workHourId") String workHourId,@Param("status") int status);
 
-    @Update("update workhour set approverId=#{approverId} where workhourId=#{workHourId}")
-    int setWorkHourApproverId(@Param("workHourId") String workHourId,@Param("approverId") String approverId);
+    @Update("update workhour set approverId=#{approverId},approvername=#{approverName} where workhourId=#{workHourId}")
+    Integer setWorkHourApproverIdAndName(@Param("workHourId") String workHourId,@Param("approverId") String approverId,@Param("approverName")String approverName);
 
     @Select("select * from workhour where status=#{status}")
     ArrayList<WorkHourEntity> getWorkHoursByStatus(@Param("status")int status);

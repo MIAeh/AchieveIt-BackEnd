@@ -2,7 +2,9 @@ package com.achieveit.application.service;
 
 import com.achieveit.application.entity.RiskEntity;
 import com.achieveit.application.entity.RiskTemplate;
+import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.mapper.RiskMapper;
+import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
@@ -18,10 +20,12 @@ import java.util.ArrayList;
 @Service
 public class RiskService {
     private final RiskMapper riskMapper;
+    private  final UserMapper userMapper;
 
     @Autowired
-    public RiskService(RiskMapper riskMapper){
+    public RiskService(RiskMapper riskMapper,UserMapper userMapper){
         this.riskMapper=riskMapper;
+        this.userMapper=userMapper;
     }
 
     private final Logger logger = LoggerFactory.getLogger(RiskService.class);
@@ -29,11 +33,13 @@ public class RiskService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<RiskEntity> addRisk(String riskDescription,int riskType,String riskCharger,
                                            int riskLevel,int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID,HttpSession session){
+        UserEntity riskChargerEntity=userMapper.getUserInfoById(riskCharger);
+        if(riskChargerEntity==null) return ResultGenerator.error("riskCharger doesn't exist!");
         RiskEntity riskEntity;
         if(projectID.equals(""))
-            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus);
+            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskChargerEntity.getUserName(),riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus);
         else
-            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
+            riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskChargerEntity.getUserName(),riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
         int res=riskMapper.insertRisk(riskEntity);
         return ResultGenerator.success(riskEntity);
     }
