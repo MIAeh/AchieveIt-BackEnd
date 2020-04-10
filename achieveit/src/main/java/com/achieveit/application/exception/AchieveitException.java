@@ -1,15 +1,28 @@
 package com.achieveit.application.exception;
 
-        import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.enums.ErrorCode;
 
-        import java.util.Objects;
+import static com.achieveit.application.enums.ErrorCode.UNKNOWN_ERROR;
+
 
 public class AchieveitException extends RuntimeException {
 
     private ErrorCode errorCode;
 
+    private String message;
+
     public AchieveitException(ErrorCode errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public AchieveitException(String message){
+        this.errorCode=UNKNOWN_ERROR;
+        this.message=message;
+    }
+
+    public AchieveitException(ErrorCode errorCode,String message){
+        this.errorCode=errorCode;
+        this.message=message;
     }
 
     public ErrorCode getErrorCode() {
@@ -18,6 +31,15 @@ public class AchieveitException extends RuntimeException {
 
     public void setErrorCode(ErrorCode errorCode) {
         this.errorCode = errorCode;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override

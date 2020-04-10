@@ -254,9 +254,9 @@ public class ProjectService {
         authorityMapper.deleteMailMemberByID(projectID, memberID);
         authorityMapper.deleteFileMemberByID(projectID, memberID);
 
+        //delete From workHour and Risks
         workHourMapper.deleteWorkHoursByApplyerId(memberID);
-
-
+        //ToDo: delete From Risks （太晚了先睡了）
 
         // delete from member table
         projectMapper.deleteMemberByID(projectID, memberID);

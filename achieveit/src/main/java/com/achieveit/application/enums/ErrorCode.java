@@ -23,7 +23,6 @@ public enum ErrorCode {
     STATUS_ERROR(1, "Project Status Error"),
     ARCHIVE_ERROR(2, "Project No Archive Error");
 
-
     private Integer code;
 
     private String msg;

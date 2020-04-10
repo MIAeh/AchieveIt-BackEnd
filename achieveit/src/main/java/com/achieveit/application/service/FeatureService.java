@@ -3,7 +3,9 @@ package com.achieveit.application.service;
 import com.achieveit.application.entity.FeatureEntity;
 import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.entity.FeatureUpLoadEntity;
+import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.FeatureMapper;
+import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
@@ -24,6 +26,7 @@ public class FeatureService {
      * Mapper for feature
      */
     private final FeatureMapper featureMapper;
+    private final ProjectMapper projectMapper;
 
     /**
      * Logger
@@ -31,6 +34,13 @@ public class FeatureService {
     private final Logger logger = LoggerFactory.getLogger(FeatureService.class);
 
     private String getFeatureId(FeatureEntity entity){
+        if(entity.getProjectId()==null||entity.getProjectId().equals("")){
+            throw new AchieveitException("projectId is null!");
+        }
+        if(projectMapper.getProjectByID(entity.getProjectId())==null){
+            throw new AchieveitException("projectId is inValid!");
+        }
+
         int level=entity.getFeatureLevel();
         if(level==0){
             String featureId=entity.getProjectId();
@@ -53,8 +63,9 @@ public class FeatureService {
     }
 
     @Autowired
-    public FeatureService(FeatureMapper featureMapper) {
+    public FeatureService(FeatureMapper featureMapper,ProjectMapper projectMapper) {
         this.featureMapper=featureMapper;
+        this.projectMapper=projectMapper;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -199,6 +210,7 @@ public class FeatureService {
 
         for(FeatureUpLoadEntity entity:featureUpLoad.getData()){
             ArrayList<FeatureEntity> temp=featureMapper.getFeatureByFeatureName(entity.getFeatureName());
+            //如果已经有了就不做处理
             if(!(temp==null||temp.size()==0)) continue;
 
             if(entity.getFeatureLevel()==0){
