@@ -263,15 +263,12 @@ public class ProjectService {
         authorityMapper.deleteGitMemberByID(projectID, memberID);
         authorityMapper.deleteMailMemberByID(projectID, memberID);
         authorityMapper.deleteFileMemberByID(projectID, memberID);
-<<<<<<< HEAD
+
         //delete From workHour and Risks
         workHourMapper.deleteWorkHoursByApplyerId(memberID);
-=======
-        // delete all work hours
-        workHourMapper.deleteWorkHoursByApplyerId(memberID);
+
 
         // TODO: 风险中，若该成员为责任人，责任人默认置为项目经理；若该成员为相关人，从相关人中移除
->>>>>>> 5aefedb9e638e8b8d73edd501e12e0537385d9ba
 
         // delete from member table
         projectMapper.deleteMemberByID(projectID, memberID);
