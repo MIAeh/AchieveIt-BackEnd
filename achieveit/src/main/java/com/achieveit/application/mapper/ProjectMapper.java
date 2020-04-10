@@ -82,4 +82,7 @@ public interface ProjectMapper {
 
     @Insert("INSERT INTO archives(projectid, archivelink, archived) VALUES (#{projectID}, 'null', false);")
     void initArchive(String projectID);
+
+    @Insert("INSERT INTO projectsubstatus(projectid, configurationcompleted, allocatedqa, allocatedepg) VALUES (#{projectID}, false, false, false);")
+    void initSubStatus(String projectID);
 }

@@ -24,11 +24,9 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    private final FeatureService featureService;
 
     public ProjectController(ProjectService projectService, FeatureService featureService) {
         this.projectService = projectService;
-        this.featureService = featureService;
     }
 
     /**
@@ -99,6 +97,7 @@ public class ProjectController {
 
         Integer domain = jsonObject.getInteger("domain");
 
+        // TODO: 检查FeatureUpLoad读取是否正确
         ArrayList<FeatureUpLoadEntity> projectFunctions = new ArrayList<>();
         JSONArray projectFunctionsJsonArray = jsonObject.getJSONArray("projectFunctions");
         if (projectFunctionsJsonArray != null) {
@@ -107,8 +106,7 @@ public class ProjectController {
         }
         FeatureUpLoad featureUpLoad = new FeatureUpLoad(projectFunctions);
 
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
-        featureService.uploadFeatureList(featureUpLoad, session);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain, featureUpLoad);
 
         return ResultGenerator.success();
     }
