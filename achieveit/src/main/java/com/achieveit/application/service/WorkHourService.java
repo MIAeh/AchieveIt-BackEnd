@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @Service
@@ -29,7 +30,7 @@ public class WorkHourService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName,String projectId, Date startTime, Date endTime){
+    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName, String projectId, Timestamp startTime, Timestamp endTime){
         if(startTime.getTime()>endTime.getTime()){
             return ResultGenerator.error("end_time must bigger than start_time");
         }

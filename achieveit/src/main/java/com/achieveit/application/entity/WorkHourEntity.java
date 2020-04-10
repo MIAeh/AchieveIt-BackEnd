@@ -1,12 +1,13 @@
 package com.achieveit.application.entity;
 
-import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
 public class WorkHourEntity {
     private String workHourId;
-    private Date applyTime;
+    private Timestamp applyTime;
     private String applyerId;
     private String applyerName;
     private String approverId;
@@ -14,16 +15,16 @@ public class WorkHourEntity {
     private String featureName;
     private String activityName;
     private String projectId;
-    private Date startTime;
-    private Date endTime;
+    private Timestamp startTime;
+    private Timestamp endTime;
     int status;
     public WorkHourEntity(){
 
     }
 
-    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Date startTime, Date endTime) {
+    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Timestamp startTime, Timestamp endTime) {
         this.workHourId= UUID.randomUUID().toString();
-        this.applyTime=new Date(System.currentTimeMillis());
+        this.applyTime=new Timestamp(System.currentTimeMillis());
         this.applyerId = applyerId;
         this.applyerName=applyerName;
         this.featureName = featureName;
@@ -39,7 +40,7 @@ public class WorkHourEntity {
         return workHourId;
     }
 
-    public Date getApplyTime() {
+    public Timestamp getApplyTime() {
         return applyTime;
     }
 
@@ -59,11 +60,11 @@ public class WorkHourEntity {
         return activityName;
     }
 
-    public Date getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public Date getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
@@ -75,7 +76,7 @@ public class WorkHourEntity {
         this.workHourId = workHourId;
     }
 
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(Timestamp applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -95,11 +96,11 @@ public class WorkHourEntity {
         this.activityName = activityName;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @RestController
@@ -38,8 +38,8 @@ public class WorkHourController {
             }
             applyerId=userId;
         }
-        Date startTimeL=new Date(Long.parseLong(startTime));
-        Date endTimeL=new Date(Long.parseLong(endTime));
+        Timestamp startTimeL=new Timestamp(Long.parseLong(startTime));
+        Timestamp endTimeL=new Timestamp(Long.parseLong(endTime));
        return workHourService.applyWordHour(applyerId,featureName,activityName,projectId,startTimeL,endTimeL);
     }
 
