@@ -1,24 +1,15 @@
 package com.achieveit.application.enums;
 
-/**
- * @Title: ErrorCode
- * @Description: 自定义异常
- * @Author: Felix
- * @Date: 5/31/2018 14:06
- * @Version: 1.0
- **/
-
 public enum ErrorCode {
 
-    UNKNOWN_ERROR(-1, "Unknown Error"), //  未知错误
+    UNKNOWN_ERROR(-1, "Unknown Error"),
     SUCCESS(0, "Success"),
     INSERTION_ERROR(100, "Fail to Insert"),
     UPDATE_ERROR(101, "Fail to Update"),
     DELETION_ERROR(102, "Fail to Delete"),
     QUERY_ERROR(103, "Fail to Query"),
-    LOGIN_BANNED(401, "Account Banned"),
-    LOGOUT_ERROR(402, "Fail to Logout"),
-    UNAUTHORIZED(403, "Access Deny"),
+    SESSION_ERROR(401, "Login Without UserID Session Attribute"),
+    UNAUTHORIZED(402, "Access Deny"),
     STATUS_ERROR(1, "Project Status Error"),
     ROLE_ERROR(2, "Unauthorized User Role"),
     ARCHIVE_ERROR(3, "Project No Archive Error");
