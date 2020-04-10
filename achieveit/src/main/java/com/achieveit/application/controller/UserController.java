@@ -50,8 +50,8 @@ public class UserController {
      * @return 是否成功登录的Response消息
      */
     @PostMapping("userLoginById")
-    public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userid") String userId,
-                                                    @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
+    public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userID") String userId,
+                                                    @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
         return this.userService.loginByUserId(userId, userPassword, session);
     }
 
@@ -64,8 +64,8 @@ public class UserController {
      */
     @CrossOrigin
     @PostMapping("userLoginByMail")
-    public ResponseResult<UserEntity> userLoginByMail(@RequestParam(name = "usermail") String userMail,
-                                            @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
+    public ResponseResult<UserEntity> userLoginByMail(@RequestParam(name = "userMail") String userMail,
+                                            @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
         return this.userService.loginByMail(userMail, userPassword, session);
     }
 
@@ -78,8 +78,8 @@ public class UserController {
      */
     @CrossOrigin
     @PostMapping("userLoginByPhone")
-    public ResponseResult<UserEntity> userLoginByPhone(@RequestParam(name = "userphone") String userPhone,
-                                            @RequestParam(name = "userpassword") String userPassword, HttpSession session) {
+    public ResponseResult<UserEntity> userLoginByPhone(@RequestParam(name = "userPhone") String userPhone,
+                                            @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
         return this.userService.loginByPhone(userPhone, userPassword, session);
     }
 
@@ -112,19 +112,19 @@ public class UserController {
      */
     @CrossOrigin
     @GetMapping("getUsersByRole")
-    public ResponseResult<ArrayList<UserEntity>> getUsersByRole(@RequestParam(name = "userrole") int userRole,HttpSession session){
+    public ResponseResult<ArrayList<UserEntity>> getUsersByRole(@RequestParam(name = "userRole") int userRole,HttpSession session){
         return userService.getUsersByRole(userRole,session);
     }
 
     @CrossOrigin
     @GetMapping("setUserRoleById")
-    public ResponseResult<Boolean> setUserRoleById(@RequestParam(name = "userid")String userId,@RequestParam(name = "userrole") int userRole,HttpSession session) {
+    public ResponseResult<Boolean> setUserRoleById(@RequestParam(name = "userID")String userId,@RequestParam(name = "userRole") int userRole,HttpSession session) {
         return userService.setUserRoleById(userId,userRole, session);
     }
 
     @CrossOrigin
     @GetMapping("getUserInfoById")
-    public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userid")String userId,HttpSession session) {
+    public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userID")String userId,HttpSession session) {
         return userService.getUserInfoById(userId,session);
     }
 
