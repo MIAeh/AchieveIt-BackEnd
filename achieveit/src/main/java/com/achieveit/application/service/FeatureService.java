@@ -162,7 +162,7 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Boolean> deleteFeatureByFeatureID(String featureId){
-        FeatureEntity thisFeature=featureMapper.getFeatureById(featureId)==null
+        FeatureEntity thisFeature=featureMapper.getFeatureById(featureId);
         if(thisFeature==null)
             return ResultGenerator.error("invalid feature!");
 
