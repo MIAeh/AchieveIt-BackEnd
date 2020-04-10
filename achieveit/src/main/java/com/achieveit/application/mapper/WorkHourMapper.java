@@ -31,4 +31,10 @@ public interface WorkHourMapper {
 
     @Select("select * from workhour where projectid=#{projectId}")
     ArrayList<WorkHourEntity> getWorkHoursByProjectID(@Param("projectId")String projectId);
+
+    @Delete("delete from workhour where applyerid=#{applyerId}")
+    Integer deleteWorkHoursByApplyerId(@Param("applyerId")String applyerId);
+
+    @Delete("delete from workhour where approverid=#{approverId}")
+    Integer deleteWorkHoursByApproverId(@Param("approver")String approverId);
 }
