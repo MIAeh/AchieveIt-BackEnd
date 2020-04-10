@@ -56,16 +56,16 @@ public interface ProjectMapper {
     @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.memberid = #{memberID} AND members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
     MemberEntity getMemberByID(String projectID, String memberID);
 
-    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime, deleted) VALUES (#{projectID}, #{memberID}, #{superiorID}, '[]', current_date, false);")
+    @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime) VALUES (#{projectID}, #{memberID}, #{superiorID}, '[]', current_date);")
     void addMemberByID(MemberEntity memberEntity);
 
-    @Update("UPDATE members SET memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    @Update("UPDATE members SET memberrole=#{memberRole} WHERE (projectid=#{projectID} AND memberid=#{memberID});")
     void updateMemberRoleByID(MemberEntity memberEntity);
 
-    @Update("UPDATE members SET superiorid=#{superiorID} WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    @Update("UPDATE members SET superiorid=#{superiorID} WHERE (projectid=#{projectID} AND memberid=#{memberID});")
     void updateMemberSuperiorByID(MemberEntity memberEntity);
 
-    @Update("UPDATE members SET deleted=true WHERE (projectid=#{projectID} AND memberid=#{memberID} AND deleted=false);")
+    @Delete("DELETE FROM members WHERE (projectid=#{projectID} AND memberid=#{memberID});")
     void deleteMemberByID(String projectID, String memberID);
 
     @Insert("INSERT INTO gitrepos(projectid, gitrepo) VALUES (#{projectID}, #{gitRepo});")

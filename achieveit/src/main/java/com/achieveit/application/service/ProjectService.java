@@ -6,6 +6,7 @@ import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.MemberRoles;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
+import com.achieveit.application.mapper.AuthorityMapper;
 import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.utils.EmailUtil;
@@ -30,11 +31,14 @@ public class ProjectService {
 
     private final UserMapper userMapper;
 
+    private final AuthorityMapper authorityMapper;
+
     private final EmailUtil emailUtil;
 
-    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, EmailUtil emailUtil) {
+    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, AuthorityMapper authorityMapper, EmailUtil emailUtil) {
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
+        this.authorityMapper = authorityMapper;
         this.emailUtil = emailUtil;
     }
 
@@ -183,7 +187,6 @@ public class ProjectService {
         }
     }
 
-
     @Transactional
     @Logged({"projectID", "memberID", "memberRole"})
     public void addMemberRoleByID(String projectID, String memberID, Integer memberRole) {
@@ -203,13 +206,42 @@ public class ProjectService {
         List<Integer> memberRoles = JSONObject.parseArray(memberEntity.getMemberRole(), Integer.class);
         if (memberRoles.contains(memberRole)) {
             memberRoles.remove(memberRole);
-            projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, "", JSONObject.toJSONString(memberRoles)));
+            projectMapper.updateMemberRoleByID(new MemberEntity(projectID, memberID, null, JSONObject.toJSONString(memberRoles)));
         }
     }
 
     @Logged({"projectID", "memberID", "superiorID"})
     public void updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
-        projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, ""));
+        projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, null));
+    }
+
+    @Transactional
+    @Logged({"projectID", "memberID"})
+    public void deleteMemberByID(String projectID, String memberID) throws AchieveitException {
+        List<MemberEntity> memberEntities = projectMapper.getMembersByID(projectID);
+        ProjectEntity projectEntity = projectMapper.getProjectByID(projectID);
+        if (memberEntities == null || projectEntity == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        else if (memberID.equals(projectEntity.getProjectManagerID())) {
+            throw new AchieveitException(ErrorCode.DELETION_ERROR);
+        }
+        // update current superior (to be deleted) with project manager
+        for (MemberEntity memberEntity : memberEntities) {
+            if (memberID.equals(memberEntity.getSuperiorID())) {
+                projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, projectEntity.getProjectManagerID(), null));
+            }
+        }
+        // delete all authorities
+        authorityMapper.deleteGitMemberByID(projectID, memberID);
+        authorityMapper.deleteMailMemberByID(projectID, memberID);
+        authorityMapper.deleteFileMemberByID(projectID, memberID);
+        // TODO: delete all WorkHour Applications
+
+        // TODO: delete related risk
+
+        // delete from member table
+        projectMapper.deleteMemberByID(projectID, memberID);
     }
 
     @Logged({"projectID"})

@@ -190,7 +190,6 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
-
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/addMemberRoleByID")
@@ -202,7 +201,7 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/removeMemberRoleByID")
-    public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
+    public ResponseResult deleteMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
         projectService.removeMemberRoleByID(projectID, memberID, memberRole);
         return ResultGenerator.success();
     }
@@ -218,9 +217,9 @@ public class ProjectController {
 
     @CrossOrigin
     @Logged({"projectID", "memberID"})
-    @PostMapping("/removeMemberByID")
-    public ResponseResult removeMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
-        projectService.removeMemberRoleByID(projectID, memberID, memberRole);
+    @PostMapping("/deleteMemberByID")
+    public ResponseResult deleteMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID) throws AchieveitException {
+        projectService.deleteMemberByID(projectID, memberID);
         return ResultGenerator.success();
     }
 
