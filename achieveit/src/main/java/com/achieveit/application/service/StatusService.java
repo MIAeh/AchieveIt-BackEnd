@@ -1,6 +1,7 @@
 package com.achieveit.application.service;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.entity.ArchiveEntity;
 import com.achieveit.application.entity.MemberEntity;
 import com.achieveit.application.entity.ProjectEntity;
 import com.achieveit.application.entity.UserEntity;
@@ -15,6 +16,7 @@ import com.achieveit.application.utils.EmailUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StatusService {
@@ -160,14 +162,44 @@ public class StatusService {
         }
     }
 
+    @Logged({"projectID", "archiveLink"})
+    public void updateArchive(String projectID, String archiveLink) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        } else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        statusMapper.updateArchiveLink(projectID, archiveLink);
+        statusMapper.updateArchived(projectID, true);
+    }
+
+    @Logged({"projectID"})
+    public void rejectArchive(String projectID) throws AchieveitException {
+        ProjectEntity project = projectMapper.getProjectByID(projectID);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        } else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
+            throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+
+        statusMapper.updateArchiveLink(projectID, "null");
+        statusMapper.updateArchived(projectID, false);
+    }
+
     @Logged({"projectID"})
     public void approveArchive(String projectID) throws AchieveitException {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
+        ArchiveEntity archiveEntity = statusMapper.getArchiveByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
         else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
+        }
+        else if (archiveEntity.getArchived().equals(false) || Objects.equals(archiveEntity.getArchiveLink(), "null")) {
+            throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 
         // update status

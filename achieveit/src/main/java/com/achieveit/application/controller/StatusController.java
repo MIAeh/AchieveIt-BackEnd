@@ -58,6 +58,22 @@ public class StatusController {
     }
 
     @CrossOrigin
+    @Logged({"projectID", "archiveLink"})
+    @PostMapping("/updateArchive")
+    public ResponseResult updateArchive(@RequestParam("projectID") String projectID, @RequestParam("archiveLink") String archiveLink) throws AchieveitException {
+        statusService.updateArchive(projectID, archiveLink);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @PostMapping("/rejectArchive")
+    public ResponseResult rejectArchive(@RequestParam("projectID") String projectID) throws AchieveitException {
+        statusService.rejectArchive(projectID);
+        return ResultGenerator.success();
+    }
+
+    @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/approveArchive")
     public ResponseResult approveArchive(@RequestParam("projectID") String projectID) throws AchieveitException {
