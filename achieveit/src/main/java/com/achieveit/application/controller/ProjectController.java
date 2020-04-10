@@ -10,7 +10,6 @@ import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -67,11 +66,10 @@ public class ProjectController {
 
         String projectID = jsonObject.getString("projectID");
         String projectName = jsonObject.getString("projectName");
-        String projectManagerID = "0000";
-//        String projectManagerID = (String) session.getAttribute("userId");
-//        if (projectManagerID == null || projectManagerID.isEmpty()) {
-//            throw new AchieveitException(ErrorCode.UNAUTHORIZED);
-//        }
+        String projectManagerID = (String) session.getAttribute("userId");
+        if (projectManagerID == null || projectManagerID.isEmpty()) {
+            throw new AchieveitException(ErrorCode.UNAUTHORIZED);
+        }
         String projectMonitorID = jsonObject.getString("projectMonitorID");
         String projectClientID = jsonObject.getString("projectClientID");
         Date projectStartDate = jsonObject.getDate("projectStartDate");
@@ -198,7 +196,7 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/removeMemberRoleByID")
-    public ResponseResult deleteMemberByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
+    public ResponseResult removeMemberRoleByID(@RequestParam("projectID") String projectID, @RequestParam("memberID") String memberID, @RequestParam("memberRole") Integer memberRole) {
         projectService.removeMemberRoleByID(projectID, memberID, memberRole);
         return ResultGenerator.success();
     }
