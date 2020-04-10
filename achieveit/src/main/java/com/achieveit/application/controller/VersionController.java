@@ -11,7 +11,7 @@ import java.sql.Date;
 @RestController
 @RequestMapping("/debug/")
 public class VersionController {
-    @GetMapping("getSystem")
+    @GetMapping("getSystemTime")
     public ResponseResult<Date> getSystemTime(){
         return ResultGenerator.success("system",new Date(System.currentTimeMillis()));
     }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -161,7 +162,29 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Boolean> deleteFeatureByFeatureID(String featureId){
-        featureMapper.deleteFeatureByFeatureId(featureId);
+        FeatureEntity thisFeature=featureMapper.getFeatureById(featureId)==null
+        if(thisFeature==null)
+            return ResultGenerator.error("invalid feature!");
+
+        if(thisFeature.getFeatureLevel()==2){
+            featureMapper.deleteFeatureByFeatureId(featureId);
+            return ResultGenerator.success();
+        }
+
+        ArrayList<String> allSubFeatures=new ArrayList<>();
+        ArrayList<FeatureEntity> subFeatures=featureMapper.getChildrenByFatherId(featureId);
+        for(FeatureEntity entity:subFeatures){
+            allSubFeatures.add(entity.getFeatureId());
+            if(entity.getFeatureLevel()==1) {
+                ArrayList<FeatureEntity> subSubFeatures = featureMapper.getChildrenByFatherId(entity.getFeatureId());
+                for (FeatureEntity subEntity : subSubFeatures) {
+                    allSubFeatures.add(subEntity.getFeatureId());
+                }
+            }
+        }
+        for(String id:allSubFeatures){
+            featureMapper.deleteFeatureByFeatureId(id);
+        }
         return ResultGenerator.success();
     }
 

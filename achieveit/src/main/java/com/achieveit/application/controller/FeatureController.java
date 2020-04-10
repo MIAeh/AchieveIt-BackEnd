@@ -4,7 +4,6 @@ import com.achieveit.application.entity.FeatureEntity;
 import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.service.FeatureService;
 import com.achieveit.application.wrapper.ResponseResult;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +54,12 @@ public class FeatureController {
     public ResponseResult<FeatureEntity> addSubFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID")String projectId,
                                                  @RequestParam(name = "fatherID")String fatherId,@RequestParam(name = "featureDescription")String featureDescription,HttpSession session){
         return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
+    }
+
+    @CrossOrigin
+    @PostMapping("deleteFeatureByFeatureID")
+    public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam(name = "featureID")String featureID){
+        return featureService.deleteFeatureByFeatureID(featureID);
     }
 
     @CrossOrigin
