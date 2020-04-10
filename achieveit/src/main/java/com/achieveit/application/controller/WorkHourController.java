@@ -7,6 +7,7 @@ import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -23,12 +24,20 @@ public class WorkHourController {
 
     @CrossOrigin
     @PostMapping("applyWorkHour")
-    public ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID") String applyerId,
-                                                 @RequestParam(name="featureName")String featureName,
-                                                 @RequestParam(name="activityName")String activityName,
-                                                 @RequestParam(name="projectID")String projectId,
-                                                 @RequestParam(name="startTime") String startTime,
-                                                 @RequestParam(name="endTime") String endTime){
+    public ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID",required = false,defaultValue = "") String applyerId,
+                                                        @RequestParam(name="featureName")String featureName,
+                                                        @RequestParam(name="activityName")String activityName,
+                                                        @RequestParam(name="projectID")String projectId,
+                                                        @RequestParam(name="startTime") String startTime,
+                                                        @RequestParam(name="endTime") String endTime,
+                                                        HttpSession session){
+        if(applyerId.equals("")){
+            String userId=(String)session.getAttribute("userId");
+            if(userId==null||userId.equals("")){
+                return ResultGenerator.error("unknown error!");
+            }
+            applyerId=userId;
+        }
         Date startTimeL=new Date(Long.parseLong(startTime));
         Date endTimeL=new Date(Long.parseLong(endTime));
        return workHourService.applyWordHour(applyerId,featureName,activityName,projectId,startTimeL,endTimeL);
@@ -55,13 +64,27 @@ public class WorkHourController {
 
     @CrossOrigin
     @GetMapping("getMyWorkHoursByProjectID")
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursByProjectID(@RequestParam(name="myID")String myId,@RequestParam("projectID")String projectId){
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursByProjectID(@RequestParam(name="myID",defaultValue = "",required = false)String myId,@RequestParam("projectID")String projectId,HttpSession session){
+        if(myId.equals("")){
+            String userId=(String)session.getAttribute("myId");
+            if(userId==null||userId.equals("")){
+                return ResultGenerator.error("unknown error!");
+            }
+            myId=userId;
+        }
         return workHourService.getMyWorkHourByProjectID(myId,projectId);
     }
 
     @CrossOrigin
     @GetMapping("getMyWorkHoursToApproveByProjectID")
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(@RequestParam(name="myID")String myId,@RequestParam("projectID")String projectId){
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(@RequestParam(name="myID",required = false,defaultValue = "")String myId,@RequestParam("projectID")String projectId,HttpSession session){
+        if(myId.equals("")){
+            String userId=(String)session.getAttribute("myId");
+            if(userId==null||userId.equals("")){
+                return ResultGenerator.error("unknown error!");
+            }
+            myId=userId;
+        }
         ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourByProjectID(myId,projectId);
         ArrayList<WorkHourEntity> res=new ArrayList<WorkHourEntity>();
         for(WorkHourEntity entity:entities.getData()) {

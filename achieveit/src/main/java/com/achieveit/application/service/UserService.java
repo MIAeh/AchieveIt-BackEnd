@@ -7,7 +7,6 @@ import com.achieveit.application.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -103,9 +102,13 @@ public class UserService {
         if (!userEntity.getUserPassword().equals(userPassword)) {
             return ResultGenerator.error(400, "password wrong!");
         }
+        Integer role=userEntity.getUserRole();
+        if(role==null) role=-1;
+
         session.setAttribute(IS_LOGIN, true);
         session.setAttribute("userName", userEntity.getUserName());
         session.setAttribute("userId", userEntity.getUserId());
+        session.setAttribute("userRole",role);
 
         return ResultGenerator.success(userEntity);
     }
