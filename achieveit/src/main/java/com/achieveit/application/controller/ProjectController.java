@@ -60,7 +60,6 @@ public class ProjectController {
      * @param jsonObject 通过Body获取的JsonObject
      * @return Result
      */
-    @Transactional
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/createProjectByID")
