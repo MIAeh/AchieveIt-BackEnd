@@ -249,7 +249,7 @@ public class StatusService {
         else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
-        else if (archiveEntity.getArchived().equals(false) || Objects.equals(archiveEntity.getArchiveLink(), "null")) {
+        else if (archiveEntity.getArchived().equals(false) || archiveEntity.getArchiveLink().equals("null")) {
             throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 
