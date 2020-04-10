@@ -33,7 +33,6 @@ public interface AuthorityMapper {
     @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail FROM members, users, filepermission WHERE (members.memberid = filepermission.memberid AND users.userid = members.memberid AND members.projectid = #{projectID} AND members.deleted=false);")
     ArrayList<MemberEntity> getFileMembersByID(String projectID);
 
-
     @Insert("INSERT INTO filepermission(projectid, memberid) VALUES (#{projectID}, #{memberID});")
     void addFileMemberByID(String projectID, String memberID);
 

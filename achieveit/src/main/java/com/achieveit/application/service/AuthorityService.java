@@ -44,13 +44,12 @@ public class AuthorityService {
         for (MemberEntity memberEntity: mailMemberEntityList) {
             mailAuthorityEntities.add(new AuthorityEntity(memberEntity));
         }
-        List<MemberEntity> fileMemberEntityList = authorityMapper.getMailMembersByID(projectID);
+        List<MemberEntity> fileMemberEntityList = authorityMapper.getFileMembersByID(projectID);
         List<AuthorityEntity> fileAuthorityEntities = new ArrayList<>();
         for (MemberEntity memberEntity: fileMemberEntityList) {
             fileAuthorityEntities.add(new AuthorityEntity(memberEntity));
         }
-        AuthorityList authorityList = new AuthorityList(gitAuthorityEntities, mailAuthorityEntities, fileAuthorityEntities);
-        return authorityList;
+        return new AuthorityList(gitAuthorityEntities, mailAuthorityEntities, fileAuthorityEntities);
     }
 
     @Logged({"projectID"})
