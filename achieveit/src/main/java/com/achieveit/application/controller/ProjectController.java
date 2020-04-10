@@ -2,7 +2,9 @@ package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
+import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.exception.AchieveitException;
+import com.achieveit.application.service.FeatureService;
 import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
@@ -10,6 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +23,11 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    public ProjectController(ProjectService projectService) {
+    private final FeatureService featureService;
+
+    public ProjectController(ProjectService projectService, FeatureService featureService) {
         this.projectService = projectService;
+        this.featureService = featureService;
     }
 
     /**
@@ -58,11 +64,15 @@ public class ProjectController {
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/createProjectByID")
-    public ResponseResult createProjectByID(@RequestBody JSONObject jsonObject) throws AchieveitException {
+    public ResponseResult createProjectByID(@RequestBody JSONObject jsonObject, HttpSession session) throws AchieveitException {
 
         String projectID = jsonObject.getString("projectID");
         String projectName = jsonObject.getString("projectName");
-        String projectManagerID = jsonObject.getString("projectManagerID");
+        String projectManagerID = "0000";
+//        String projectManagerID = (String) session.getAttribute("userId");
+//        if (projectManagerID == null || projectManagerID.isEmpty()) {
+//            throw new AchieveitException(ErrorCode.UNAUTHORIZED);
+//        }
         String projectMonitorID = jsonObject.getString("projectMonitorID");
         String projectClientID = jsonObject.getString("projectClientID");
         Date projectStartDate = jsonObject.getDate("projectStartDate");
@@ -77,8 +87,12 @@ public class ProjectController {
             projectMilestones.add(milestone);
         }
         Integer domain = jsonObject.getInteger("domain");
+        ArrayList<FeatureUpLoadEntity> projectFunctions = (ArrayList<FeatureUpLoadEntity>) JSONObject.parseArray(jsonObject.getJSONArray("projectFunctions").toJSONString(), FeatureUpLoadEntity.class);
+        FeatureUpLoad featureUpLoad = new FeatureUpLoad(projectFunctions);
 
         projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain);
+        featureService.uploadFeatureList(featureUpLoad, session);
+
         return ResultGenerator.success();
     }
 
