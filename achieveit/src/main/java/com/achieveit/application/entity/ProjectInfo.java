@@ -88,13 +88,20 @@ public class ProjectInfo implements Serializable {
         this.projectEndDate = projectEntity.getProjectEndDate();
         this.projectFrameworks = projectEntity.getProjectFrameworks();
         this.domain = projectEntity.getDomain();
-        this.projectLanguages = JSONObject.parseArray(projectEntity.getProjectLanguages(), String.class);
+        if (projectEntity.getProjectLanguages() != null) {
+            this.projectLanguages = JSONObject.parseArray(projectEntity.getProjectLanguages(), String.class);
+        }
+        else {
+            this.projectLanguages = new ArrayList<>();
+        }
         this.projectMilestones = new ArrayList<>();
-        JSONArray projectMilestonesJsonArray = JSONArray.parseArray(projectEntity.getProjectMilestones());
-        for(int i = 0; i < projectMilestonesJsonArray.size(); i++) {
-            JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
-            Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
-            this.projectMilestones.add(milestone);
+        if (projectEntity.getProjectMilestones() != null) {
+            JSONArray projectMilestonesJsonArray = JSONArray.parseArray(projectEntity.getProjectMilestones());
+            for (int i = 0; i < projectMilestonesJsonArray.size(); i++) {
+                JSONObject milestoneJson = projectMilestonesJsonArray.getJSONObject(i);
+                Milestone milestone = new Milestone(milestoneJson.getDate("milestoneDate"), milestoneJson.getString("milestoneContent"));
+                this.projectMilestones.add(milestone);
+            }
         }
     }
 
