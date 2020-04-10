@@ -1,5 +1,6 @@
 package com.achieveit.application.filter;
 
+import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,10 +57,10 @@ public class UserFilter extends BaseFilter {
                 filterChain.doFilter(request, response);
             } else {
                 if(session!=null&& session.getAttribute(IS_LOGIN) != null){
-                    logger.info("no login!");
+                    logger.info("No login!");
                 }
-                logger.info("access deny");
-                response.getWriter().write(JSONObject.fromObject(ResultGenerator.error(400, "Should Login!")).toString());
+                logger.info("Access deny");
+                response.getWriter().write(JSONObject.fromObject(ResultGenerator.error(ErrorCode.UNAUTHORIZED)).toString());
                 response.setContentType("application/json;charset=UTF-8");
             }
         }
