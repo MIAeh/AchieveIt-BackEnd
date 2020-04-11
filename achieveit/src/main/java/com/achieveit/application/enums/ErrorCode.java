@@ -9,7 +9,7 @@ public enum ErrorCode {
     DELETION_ERROR(102, "Fail to Delete"),
     QUERY_ERROR(103, "Fail to Query"),
     SESSION_ERROR(401, "Login Without UserID Session Attribute"),
-    UNAUTHORIZED(402, "Access Deny"),
+    UNAUTHORIZED(402, "Access Deny,Login First"),
     STATUS_ERROR(1, "Project Status Error"),
     ROLE_ERROR(2, "Unauthorized User Role"),
     ARCHIVE_ERROR(3, "Project No Archive Error"),

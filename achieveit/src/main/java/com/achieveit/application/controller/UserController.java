@@ -50,6 +50,12 @@ public class UserController {
      * @return 是否成功登录的Response消息
      */
     @PostMapping("userLoginByID")
+    public ResponseResult<UserEntity> userLoginByID(@RequestParam(name = "userID") String userId,
+                                                    @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
+        return this.userService.loginByUserId(userId, userPassword, session);
+    }
+
+    @PostMapping("userLoginById")
     public ResponseResult<UserEntity> userLoginById(@RequestParam(name = "userID") String userId,
                                                     @RequestParam(name = "userPassword") String userPassword, HttpSession session) {
         return this.userService.loginByUserId(userId, userPassword, session);

@@ -63,7 +63,7 @@ public class UserFilter extends BaseFilter {
                 if(session!=null&& session.getAttribute(IS_LOGIN) != null){
                     logger.info("No login!");
                 }
-                logger.info("Access deny");
+                logger.info("Access Deny,Please Login First!");
                 response.getWriter().write(JSONObject.fromObject(ResultGenerator.error(ErrorCode.UNAUTHORIZED)).toString());
                 response.setContentType("application/json;charset=UTF-8");
             }
