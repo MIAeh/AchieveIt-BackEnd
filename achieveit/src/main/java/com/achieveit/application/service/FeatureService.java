@@ -186,6 +186,7 @@ public class FeatureService {
         }
 
         ArrayList<String> allSubFeatures=new ArrayList<>();
+        allSubFeatures.add(featureId);
         ArrayList<FeatureEntity> subFeatures=featureMapper.getChildrenByFatherId(featureId);
         for(FeatureEntity entity:subFeatures){
             allSubFeatures.add(entity.getFeatureId());
