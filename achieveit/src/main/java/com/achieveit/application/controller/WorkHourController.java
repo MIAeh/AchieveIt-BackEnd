@@ -68,7 +68,7 @@ public class WorkHourController {
         if(myId.equals("")){
             String userId=(String)session.getAttribute("myId");
             if(userId==null||userId.equals("")){
-                return ResultGenerator.error("unknown error!");
+                return ResultGenerator.error("can't get userId from session!");
             }
             myId=userId;
         }
