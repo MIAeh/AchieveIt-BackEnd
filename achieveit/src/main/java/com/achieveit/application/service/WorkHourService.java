@@ -75,7 +75,7 @@ public class WorkHourService {
         if(entities.size()>0)
             return ResultGenerator.success(entities);
         else
-            return ResultGenerator.error("no records find!");
+            return ResultGenerator.success("no records find!");
     }
 
     //To Be Done
