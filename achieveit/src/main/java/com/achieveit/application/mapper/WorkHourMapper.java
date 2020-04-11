@@ -14,7 +14,7 @@ public interface WorkHourMapper {
     @Update("update workhour set status=#{status} where workhourId=#{workHourId}")
     Integer changeWordHourStatus(@Param("workHourId") String workHourId,@Param("status") int status);
 
-    @Update("update workhour set approverId=#{approverId},approvername=#{approverName} where workhourId=#{workHourId}")
+    @Update("update workhour set approverid=#{approverId},approvername=#{approverName} where workhourId=#{workHourId}")
     Integer setWorkHourApproverIdAndName(@Param("workHourId") String workHourId,@Param("approverId") String approverId,@Param("approverName")String approverName);
 
     @Select("select * from workhour where status=#{status}")
