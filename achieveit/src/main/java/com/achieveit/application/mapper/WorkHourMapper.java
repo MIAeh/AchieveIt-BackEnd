@@ -40,4 +40,7 @@ public interface WorkHourMapper {
 
     @Delete("delete from workhour where approverid=#{approverId}")
     Integer deleteWorkHoursByApproverId(@Param("approver")String approverId);
+
+    @Delete("delete from workhour where workhourid=#{workHourId}")
+    Integer deleteWorkHourById(@Param("workHourId")String workHourId);
 }

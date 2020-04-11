@@ -88,4 +88,9 @@ public class RiskController {
     public ResponseResult<ArrayList<RiskEntity>> getRisksByProjectID(@RequestParam("projectID")String projectID) {
         return riskService.getRisksByProjectID(projectID);
     }
+
+    //@CrossOrigin
+    //@PostMapping()
+    //public ResponseResult
+
 }
