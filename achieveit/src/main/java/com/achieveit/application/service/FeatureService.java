@@ -135,7 +135,8 @@ public class FeatureService {
         if(entities.size()==0){
             return ResultGenerator.success("no feature by this project id!");
         }else{
-            FeatureEntity topEntity;
+            FeatureEntity topEntity=new FeatureEntity();
+
             ArrayList<FeatureEntity> subEntities=new ArrayList<>();
             for(FeatureEntity entity:entities)
                 if(entity.getFeatureLevel()==0)
@@ -152,7 +153,8 @@ public class FeatureService {
                     entity.setAllChildren(subSubEntities);
                 }
             }
-            topEntity.setAllChildren(subEntities);
+            if(topEntity!=null)
+                topEntity.setAllChildren(subEntities);
             return ResultGenerator.success(entities);
         }
     }
