@@ -43,4 +43,7 @@ public interface WorkHourMapper {
 
     @Delete("delete from workhour where workhourid=#{workHourId}")
     Integer deleteWorkHourById(@Param("workHourId")String workHourId);
+
+    @Select("select COUNT(workhourid) from workhour where projectid=#{projectId}")
+    int getWorkHourSizeByProjectId(@Param("projectId")String projectId);
 }

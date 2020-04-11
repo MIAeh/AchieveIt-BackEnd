@@ -38,6 +38,10 @@ public class WorkHourService {
         UserEntity applyerEntity=userMapper.getUserInfoById(applyerId);
         if(applyerEntity==null) return ResultGenerator.error("applyer doesn't exist!");
         WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
+        int size=workHourMapper.getWorkHourSizeByProjectId(projectId);
+        size++;
+        String workHourId=projectId+"-"+String.format("%4d",size);
+        entity.setWorkHourId(workHourId);
         int res=workHourMapper.insertWorkHour(entity);
         return ResultGenerator.success(entity);
     }

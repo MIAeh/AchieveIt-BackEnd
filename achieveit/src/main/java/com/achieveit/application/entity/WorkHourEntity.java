@@ -31,7 +31,7 @@ public class WorkHourEntity {
     }
 
     public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Timestamp startTimeStamp, Timestamp endTimeStamp) {
-        this.workHourId= UUID.randomUUID().toString();
+        //this.workHourId= UUID.randomUUID().toString();
         this.applyTime=new Timestamp(System.currentTimeMillis());
         this.applyerId = applyerId;
         this.applyerName=applyerName;
