@@ -129,34 +129,37 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<FeatureEntity>> getFeaturesByProjectID(String projectID){
-        ArrayList<FeatureEntity> entities=featureMapper.getFeatureByProjectId(projectID);
-        addFatherNameFromFeatures(entities);
+        ArrayList<FeatureEntity> allEntities=featureMapper.getFeatureByProjectId(projectID);
+        addFatherNameFromFeatures(allEntities);
 
-        if(entities.size()==0){
+        if(allEntities.size()==0){
             return ResultGenerator.success("no feature by this project id!");
-        }else{
-            FeatureEntity topEntity=new FeatureEntity();
+        }
 
+        ArrayList<FeatureEntity> topEntities=new ArrayList<>();
+        for(FeatureEntity entity:allEntities){
+            if(entity.getFeatureLevel()==0)
+                topEntities.add(entity);
+        }
+
+        for(FeatureEntity topEntity:topEntities){
             ArrayList<FeatureEntity> subEntities=new ArrayList<>();
-            for(FeatureEntity entity:entities)
-                if(entity.getFeatureLevel()==0)
-                    topEntity=entity;
-            for(FeatureEntity entity:entities) {
-                if (entity.getFeatureLevel() == 1) {
-                    subEntities.add(entity);
-                    ArrayList<FeatureEntity> subSubEntities = new ArrayList<>();
-                    for (FeatureEntity entity1 : entities) {
-                        if (entity1.getFeatureLevel() == 2 && entity1.getFatherId().equals(entity.getFeatureId())) {
+            for(FeatureEntity entity:allEntities){
+                if(entity.getFeatureLevel()==1&&entity.getFatherId().equals(topEntity.getFeatureId())) {
+                    ArrayList<FeatureEntity> subSubEntities=new ArrayList<>();
+                    for(FeatureEntity entity1:allEntities){
+                        if(entity1.getFeatureLevel()==2&&entity1.getFatherId().equals(entity.getFeatureId())){
                             subSubEntities.add(entity1);
                         }
                     }
                     entity.setAllChildren(subSubEntities);
+                    subEntities.add(entity);
                 }
             }
-            if(topEntity!=null)
-                topEntity.setAllChildren(subEntities);
-            return ResultGenerator.success(entities);
+            topEntity.setAllChildren(subEntities);
         }
+
+        return ResultGenerator.success(topEntities);
     }
 
     private void addFatherNameFromFeatures(ArrayList<FeatureEntity> entities) {
