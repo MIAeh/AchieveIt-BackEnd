@@ -47,7 +47,7 @@ public class DeviceController {
     @CrossOrigin
     @Logged({"projectID", "userID", "deviceID", "dueDate", "session"})
     @PostMapping("/registerDevice")
-    public ResponseResult registerDevice(@RequestParam("projectID") String projectID, @RequestParam(value = "userID",required = false,defaultValue = "") String userID, @RequestParam("deviceID") String deviceID, @RequestParam("dueDate") String dueDate, HttpSession session) {
+    public ResponseResult registerDevice(@RequestParam("projectID") String projectID, @RequestParam("userID") String userID, @RequestParam("deviceID") String deviceID, @RequestParam("dueDate") String dueDate, HttpSession session) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             deviceService.registerDevice(projectID, userID, deviceID, dateFormat.parse(dueDate), session);
