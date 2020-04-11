@@ -133,11 +133,9 @@ public class FeatureService {
         addFatherNameFromFeatures(entities);
 
         if(entities.size()==0){
-            return ResultGenerator.error("no feature by this project id!");
+            return ResultGenerator.success("no feature by this project id!");
         }else{
-            FeatureEntity topEntity=new FeatureEntity();
-            topEntity.setFeatureId(getFeatureId(topEntity));
-
+            FeatureEntity topEntity;
             ArrayList<FeatureEntity> subEntities=new ArrayList<>();
             for(FeatureEntity entity:entities)
                 if(entity.getFeatureLevel()==0)
