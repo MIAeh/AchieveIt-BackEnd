@@ -13,6 +13,7 @@ public class AchieveitException extends RuntimeException {
 
     public AchieveitException(ErrorCode errorCode) {
         this.errorCode = errorCode;
+        this.message=this.errorCode.getMsg();
     }
 
     public AchieveitException(String message){
