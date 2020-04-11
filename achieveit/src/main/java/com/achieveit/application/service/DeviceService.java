@@ -54,8 +54,11 @@ public class DeviceService {
     public void registerDevice(String projectID, String userID, String deviceID, Date dueDate, HttpSession session) {
         // member role authorization
         String loginUserID = (String) session.getAttribute("userId");
-        if (loginUserID == null) {
+        if (loginUserID == null||loginUserID.equals("")) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
+        }
+        if(userID==null||userID.equals("")){
+            userID=loginUserID;
         }
         MemberEntity memberEntity = projectMapper.getMemberByID(projectID, loginUserID);
         if (memberEntity == null) {
