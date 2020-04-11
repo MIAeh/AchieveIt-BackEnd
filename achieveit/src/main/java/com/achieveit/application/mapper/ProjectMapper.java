@@ -50,10 +50,10 @@ public interface ProjectMapper {
     @Update("UPDATE project SET projectname=#{projectName}, projectstatus=#{projectStatus}, projectstartdate=#{projectStartDate}, projectenddate=#{projectEndDate}, projectframeworks=#{projectFrameworks}, projectlanguages=#{projectLanguages}, projectmilestones=#{projectMilestones} WHERE projectid=#{projectID};")
     void updateProjectByID(ProjectEntity projectEntity);
 
-    @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
+    @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid);")
     ArrayList<MemberEntity> getMembersByID(String projectID);
 
-    @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.memberid = #{memberID} AND members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid  AND members.deleted=false);")
+    @Select("SELECT members.*, users.username AS membername, users.usermail AS membermail, superior.username AS superiorname FROM members, users, users superior WHERE (members.memberid = #{memberID} AND members.projectid = #{projectID} AND users.userid = members.memberid AND superior.userid = members.superiorid);")
     MemberEntity getMemberByID(String projectID, String memberID);
 
     @Insert("INSERT INTO members(projectid, memberid, superiorid, memberrole, createtime) VALUES (#{projectID}, #{memberID}, #{superiorID}, '[]', current_date);")
