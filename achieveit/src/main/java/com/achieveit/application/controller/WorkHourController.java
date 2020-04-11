@@ -72,7 +72,7 @@ public class WorkHourController {
             }
             myId=userId;
         }
-        return workHourService.getMyWorkHourByProjectID(myId,projectId);
+        return workHourService.getMyWorkHoursByProjectID(myId,projectId);
     }
 
     @CrossOrigin
@@ -85,7 +85,7 @@ public class WorkHourController {
             }
             myId=userId;
         }
-        ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHourByProjectID(myId,projectId);
+        ResponseResult<ArrayList<WorkHourEntity>> entities=workHourService.getMyWorkHoursToApproveByProjectID(myId,projectId);
         ArrayList<WorkHourEntity> res=new ArrayList<WorkHourEntity>();
         for(WorkHourEntity entity:entities.getData()) {
             if (entity.getStatus() == 0) {

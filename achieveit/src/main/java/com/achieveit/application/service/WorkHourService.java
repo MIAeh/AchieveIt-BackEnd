@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class WorkHourService {
         WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
         int size=workHourMapper.getWorkHourSizeByProjectId(projectId);
         size++;
-        String workHourId=projectId+"-"+String.format("%4d",size);
+        String workHourId=projectId+"-"+String.format("%04d",size);
         entity.setWorkHourId(workHourId);
         int res=workHourMapper.insertWorkHour(entity);
         return ResultGenerator.success(entity);
@@ -68,8 +67,14 @@ public class WorkHourService {
     }
 
     @Transactional(rollbackFor =Exception.class)
-    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHourByProjectID(String applyerId,String projectId) {
-        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByIdAndProjectID(applyerId,projectId);
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursByProjectID(String applyerId,String projectId) {
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByApplyerIdAndProjectID(applyerId,projectId);
+        return ResultGenerator.success(entities);
+    }
+
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(String approveId,String projectId) {
+        ArrayList<WorkHourEntity> entities=workHourMapper.getWorkHoursByApproverIdAndProjectID(approveId,projectId);
         return ResultGenerator.success(entities);
     }
 

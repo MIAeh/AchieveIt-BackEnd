@@ -27,7 +27,10 @@ public interface WorkHourMapper {
     ArrayList<WorkHourEntity> getAllWorkHours();
 
     @Select("select * from workhour where applyerid=#{applyerId} and projectid=#{projectId}")
-    ArrayList<WorkHourEntity> getWorkHoursByIdAndProjectID(@Param("applyerId")String applyerId,@Param("projectId")String projectId);
+    ArrayList<WorkHourEntity> getWorkHoursByApplyerIdAndProjectID(@Param("applyerId")String applyerId, @Param("projectId")String projectId);
+
+    @Select("select * from workhour where approver=#{approverId} and projectid=#{projectId}")
+    ArrayList<WorkHourEntity> getWorkHoursByApproverIdAndProjectID(@Param("approverId")String approverId, @Param("projectId")String projectId);
 
     @Select("select * from workhour where projectid=#{projectId}")
     ArrayList<WorkHourEntity> getWorkHoursByProjectID(@Param("projectId")String projectId);
