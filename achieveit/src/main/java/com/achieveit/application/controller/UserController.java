@@ -118,13 +118,13 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("setUserRoleById")
-    public ResponseResult<Boolean> setUserRoleById(@RequestParam(name = "userID")String userId,@RequestParam(name = "userRole") int userRole,HttpSession session) {
+    public ResponseResult<Boolean> setUserRoleByID(@RequestParam(name = "userID")String userId,@RequestParam(name = "userRole") int userRole,HttpSession session) {
         return userService.setUserRoleById(userId,userRole, session);
     }
 
     @CrossOrigin
     @GetMapping("getUserInfoByID")
-    public ResponseResult<UserEntity> getUserInfoById(@RequestParam(name = "userID")String userId,HttpSession session) {
+    public ResponseResult<UserEntity> getUserInfoByID(@RequestParam(name = "userID")String userId,HttpSession session) {
         return userService.getUserInfoById(userId,session);
     }
 
