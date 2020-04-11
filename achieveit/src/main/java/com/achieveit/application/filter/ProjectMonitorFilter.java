@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@Order(2)
-//@WebFilter(
-//        filterName = "ProjectMonitorFilter",
-//        urlPatterns = {
-//                "/status/approveApplication",
-//                "/status/rejectApplication",
-//        })
+@Order(2)
+@WebFilter(
+        filterName = "ProjectMonitorFilter",
+        urlPatterns = {
+                "/status/approveApplication",
+                "/status/rejectApplication",
+        })
 public class ProjectMonitorFilter extends BaseFilter {
     public ProjectMonitorFilter(){ super();}
 
