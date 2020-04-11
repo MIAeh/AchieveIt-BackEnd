@@ -17,29 +17,29 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@Order(2)
-@WebFilter(
-        filterName = "projectManagerFilter",
-        urlPatterns = {
-                "/project/createProjectByID",
-                "/project/updateProjectByID",
-                "/project/addMemberByID",
-                "/project/addMemberRoleByID",
-                "/project/removeMemberRoleByID",
-                "/project/updateMemberSuperiorByID",
-                "/project/deleteMemberByID",
-                "/project/updateGitRepoByID",
-                "/authority/addGitMembersByID",
-                "/authority/deleteGitMemberByID",
-                "/authority/addMailMembersByID",
-                "/authority/deleteMailMemberByID",
-                "/authority/deleteFileMemberByID",
-                // TODO: 风险管理
-                // TODO: 功能列表
-                "/status/launchProject",
-                "/status/deliverProject",
-                "/status/endProject",
-                "/status/updateArchive"})
+//@Order(2)
+//@WebFilter(
+//        filterName = "projectManagerFilter",
+//        urlPatterns = {
+//                "/project/createProjectByID",
+//                "/project/updateProjectByID",
+//                "/project/addMemberByID",
+//                "/project/addMemberRoleByID",
+//                "/project/removeMemberRoleByID",
+//                "/project/updateMemberSuperiorByID",
+//                "/project/deleteMemberByID",
+//                "/project/updateGitRepoByID",
+//                "/authority/addGitMembersByID",
+//                "/authority/deleteGitMemberByID",
+//                "/authority/addMailMembersByID",
+//                "/authority/deleteMailMemberByID",
+//                "/authority/deleteFileMemberByID",
+//                // TODO: 风险管理
+//                // TODO: 功能列表
+//                "/status/launchProject",
+//                "/status/deliverProject",
+//                "/status/endProject",
+//                "/status/updateArchive"})
 public class ProjectManagerFilter extends BaseFilter {
     public ProjectManagerFilter(){ super();}
 
