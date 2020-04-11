@@ -35,7 +35,8 @@ public class UserFilter extends BaseFilter {
     private static final String TRUE = "true";
 
     public UserFilter() {
-        super(new ArrayList<>(Arrays.asList("/achieveit-backend/user/userLoginByID","/user/userLoginByPhone","/user/userLoginByMail","/user/register", "/user/islogin", "/user/logout")));
+        super(new ArrayList<>(Arrays.asList("/achieveit-backend/user/userLoginByID","/user/userLoginByID","/achieveit-backend/user/userLoginByPhone","/achieveit-backend/user/userLoginByMail","/user/userLoginByMail",
+                "/achieveit-backend/user/register", "/achieveit-backend/user/isLogin", "/achieveit-backend/user/logout","/user/register","/user/isLogin")));
     }
 
     /**
