@@ -10,6 +10,8 @@ import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/status")
 public class StatusController {
@@ -31,16 +33,16 @@ public class StatusController {
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/approveApplication")
-    public ResponseResult approveApplication(@RequestParam("projectID") String projectID) throws AchieveitException {
-        statusService.approveApplication(projectID);
+    public ResponseResult approveApplication(@RequestParam("projectID") String projectID, HttpSession session) throws AchieveitException {
+        statusService.approveApplication(projectID, session);
         return ResultGenerator.success();
     }
 
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/rejectApplication")
-    public ResponseResult rejectApplication(@RequestParam("projectID") String projectID) throws AchieveitException {
-        statusService.rejectApplication(projectID);
+    public ResponseResult rejectApplication(@RequestParam("projectID") String projectID, HttpSession session) throws AchieveitException {
+        statusService.rejectApplication(projectID, session);
         return ResultGenerator.success();
     }
 
