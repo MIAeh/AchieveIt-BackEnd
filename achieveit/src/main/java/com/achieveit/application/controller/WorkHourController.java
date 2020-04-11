@@ -79,9 +79,9 @@ public class WorkHourController {
     @GetMapping("getMyWorkHoursToApproveByProjectID")
     public ResponseResult<ArrayList<WorkHourEntity>> getMyWorkHoursToApproveByProjectID(@RequestParam(name="myID",required = false,defaultValue = "")String myId,@RequestParam("projectID")String projectId,HttpSession session){
         if(myId.equals("")){
-            String userId=(String)session.getAttribute("myId");
+            String userId=(String)session.getAttribute("userId");
             if(userId==null||userId.equals("")){
-                return ResultGenerator.error("unknown error!");
+                return ResultGenerator.error("can't get userId from session!");
             }
             myId=userId;
         }
