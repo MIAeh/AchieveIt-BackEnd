@@ -100,4 +100,20 @@ public class WorkHourController {
     public ResponseResult<ArrayList<WorkHourEntity>> getWorkHoursByProjectID(@RequestParam("projectID")String projectId){
         return workHourService.getWorkHoursByProjectID(projectId);
     }
+
+    @CrossOrigin
+    @PostMapping("rejectWorkHour")
+    public ResponseResult<Boolean> rejectWorkHour(@RequestParam("workHourID")String workHourID,@RequestParam(value = "approverID",defaultValue = "",required = false) String approverID,HttpSession session){
+        return workHourService.rejectWorkHour(workHourID,approverID,session);
+    }
+
+    @CrossOrigin
+    @PostMapping("updateWorkHour")
+    public ResponseResult<Boolean> updateWorkHour(@RequestParam(value = "workHourID")String workHourID,
+                                                  @RequestParam(value = "featureName",defaultValue = "",required = false)String featureName,
+                                                  @RequestParam(value = "activityName",defaultValue = "",required = false)String activityName,
+                                                  @RequestParam(value = "startTime",defaultValue = "",required = false)String startTime,
+                                                  @RequestParam(value = "endTime",defaultValue = "",required = false)String endTime){
+        return workHourService.updateWorkHour(workHourID,featureName,activityName,startTime,endTime);
+    }
 }

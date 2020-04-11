@@ -1,6 +1,7 @@
 package com.achieveit.application.entity;
 
-import java.sql.Time;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
@@ -15,14 +16,21 @@ public class WorkHourEntity {
     private String featureName;
     private String activityName;
     private String projectId;
-    private Timestamp startTime;
-    private Timestamp endTime;
+
+    @JsonIgnore
+    private Timestamp startTimeStamp;
+    @JsonIgnore
+    private Timestamp endTimeStamp;
+
+    private String startTime;
+    private String endTime;
+
     int status;
     public WorkHourEntity(){
 
     }
 
-    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Timestamp startTime, Timestamp endTime) {
+    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Timestamp startTimeStamp, Timestamp endTimeStamp) {
         this.workHourId= UUID.randomUUID().toString();
         this.applyTime=new Timestamp(System.currentTimeMillis());
         this.applyerId = applyerId;
@@ -30,8 +38,10 @@ public class WorkHourEntity {
         this.featureName = featureName;
         this.activityName = activityName;
         this.projectId=projectId;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTimeStamp = startTimeStamp;
+        this.startTime =String.valueOf(startTimeStamp.getTime());
+        this.endTimeStamp = endTimeStamp;
+        this.endTime =String.valueOf(endTimeStamp.getTime());
         this.approverId="";
         this.status=0;
     }
@@ -60,12 +70,12 @@ public class WorkHourEntity {
         return activityName;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
+    public Timestamp getStartTimeStamp() {
+        return startTimeStamp;
     }
 
-    public Timestamp getEndTime() {
-        return endTime;
+    public Timestamp getEndTimeStamp() {
+        return endTimeStamp;
     }
 
     public int getStatus() {
@@ -96,12 +106,14 @@ public class WorkHourEntity {
         this.activityName = activityName;
     }
 
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
+    public void setStartTimeStamp(Timestamp startTimeStamp) {
+        this.startTimeStamp = startTimeStamp;
+        this.startTime =String.valueOf(startTimeStamp.getTime());
     }
 
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
+    public void setEndTimeStamp(Timestamp endTimeStamp) {
+        this.endTimeStamp = endTimeStamp;
+        this.endTime =String.valueOf(endTimeStamp.getTime());
     }
 
     public void setStatus(int status) {
@@ -132,6 +144,22 @@ public class WorkHourEntity {
         this.approverName = approverName;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,13 +175,13 @@ public class WorkHourEntity {
                 Objects.equals(featureName, entity.featureName) &&
                 Objects.equals(activityName, entity.activityName) &&
                 Objects.equals(projectId, entity.projectId) &&
-                Objects.equals(startTime, entity.startTime) &&
-                Objects.equals(endTime, entity.endTime);
+                Objects.equals(startTimeStamp, entity.startTimeStamp) &&
+                Objects.equals(endTimeStamp, entity.endTimeStamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(workHourId, applyTime, applyerId, applyerName, approverId, approverName, featureName, activityName, projectId, startTime, endTime, status);
+        return Objects.hash(workHourId, applyTime, applyerId, applyerName, approverId, approverName, featureName, activityName, projectId, startTimeStamp, endTimeStamp, status);
     }
 
     @Override
@@ -168,8 +196,8 @@ public class WorkHourEntity {
                 ", featureName='" + featureName + '\'' +
                 ", activityName='" + activityName + '\'' +
                 ", projectId='" + projectId + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                ", startTime=" + startTimeStamp +
+                ", endTime=" + endTimeStamp +
                 ", status=" + status +
                 '}';
     }

@@ -65,7 +65,7 @@ public class RiskController {
 
     @CrossOrigin
     @PostMapping("addRiskTemplate")
-    public ResponseResult<Boolean> addRiskTemplate(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType")int riskType,
+    public ResponseResult<Boolean> addRiskTemplate(@RequestParam(value = "riskDescription",defaultValue = "",required = false)String riskDescription,@RequestParam("riskType")int riskType,
                                                    @RequestParam("riskLevel")int riskLevel,@RequestParam("riskInfluence")int riskInfluence,
                                                    @RequestParam("riskStrategy")String riskStrategy){
         return riskService.addRiskTemplate(riskDescription,riskType,riskLevel,riskInfluence,riskStrategy);

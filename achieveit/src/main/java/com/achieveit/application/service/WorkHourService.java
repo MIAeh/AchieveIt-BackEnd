@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -82,4 +84,29 @@ public class WorkHourService {
     public ResponseResult<Boolean> deleteWorkHour(String workHourId){
         return ResultGenerator.success();
     }
+
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<Boolean> rejectWorkHour(String workHourID, String approverID, HttpSession session){
+        WorkHourEntity workHourEntity=workHourMapper.getWorkHourByID(workHourID);
+        if(workHourEntity==null) return ResultGenerator.error("invalid workHourID!");
+
+        if(approverID.equals("")){
+            if(session.getAttribute("userId")!=null&&session.getAttribute("userId").equals(workHourEntity.getApproverId())){
+                approverID=workHourEntity.getApproverId();
+            }
+        }
+        if(!approverID.equals(workHourEntity.getApproverId())){
+            return ResultGenerator.error("approver may not valid!");
+        }
+
+        workHourMapper.changeWordHourStatus(workHourID,0);
+        return ResultGenerator.success();
+    }
+
+    @Transactional(rollbackFor =Exception.class)
+    public ResponseResult<Boolean> updateWorkHour(String workHourID,String featureName,String activityName,
+                                                  String startTime,String endTime){
+        return ResultGenerator.error("has not developed yet!");
+    }
+
 }
