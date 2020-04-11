@@ -18,7 +18,7 @@ public class VersionController {
 
     @GetMapping("getUpdateTime")
     public ResponseResult<String> getUpdateTime(){
-        return ResultGenerator.success("last_update","4-10-19:20");
+        return ResultGenerator.success("last_update","4-11-15:11");
     }
 
 }
