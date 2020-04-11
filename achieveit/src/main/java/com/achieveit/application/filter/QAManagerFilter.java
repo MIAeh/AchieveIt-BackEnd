@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Order(2)
-@WebFilter(
-        filterName = "QAManagerFilter",
-        urlPatterns = {
-                "/project/addQAMembersByID"
-        })
+//@Order(2)
+//@WebFilter(
+//        filterName = "QAManagerFilter",
+//        urlPatterns = {
+//                "/project/addQAMembersByID"
+//        })
 public class QAManagerFilter extends BaseFilter {
     public QAManagerFilter(){ super();}
 

@@ -20,8 +20,8 @@ import java.util.Arrays;
  * Filter for User
  * @author Alevery, Felix
  */
-@Order(1)
-@WebFilter(filterName = "userFilter", urlPatterns = {"/*"})
+//@Order(1)
+//@WebFilter(filterName = "userFilter", urlPatterns = {"/*"})
 public class UserFilter extends BaseFilter {
     /**
      * Logger
