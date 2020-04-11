@@ -93,14 +93,13 @@ public class ProjectController {
 
         Integer domain = jsonObject.getInteger("domain");
 
-        // TODO: 检查FeatureUpLoad读取是否正确
+        FeatureUpLoad featureUpLoad = null;
         ArrayList<FeatureUpLoadEntity> projectFunctions = new ArrayList<>();
         JSONArray projectFunctionsJsonArray = jsonObject.getJSONArray("projectFunctions");
         if (projectFunctionsJsonArray != null) {
             projectFunctions = (ArrayList<FeatureUpLoadEntity>) JSONObject.parseArray(projectFunctionsJsonArray.toJSONString(), FeatureUpLoadEntity.class);
-
+            featureUpLoad = new FeatureUpLoad(projectFunctions);
         }
-        FeatureUpLoad featureUpLoad = new FeatureUpLoad(projectFunctions);
 
         projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain, featureUpLoad,session);
 

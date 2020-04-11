@@ -65,7 +65,6 @@ public class ProjectServiceTest {
         String projectManagerID = "48fb8377-664f-4a9b-b13f-6729b00a9e22";
         String projectMonitorID = "b6703879-e1e2-499c-8ffe-d8b29f71f156";
         String projectClientID = "0000";
-        Integer projectStatus = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date projectStartDate = dateFormat.parse("2019-11-11");
         Date projectEndDate = dateFormat.parse("2020-11-11");
@@ -78,7 +77,7 @@ public class ProjectServiceTest {
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
         Integer domain = 0;
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain,null,session);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain,null, session);
         Assert.assertTrue(true);
     }
 

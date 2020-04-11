@@ -117,7 +117,7 @@ public class ProjectService {
         projectMapper.initArchive(projectID);
         projectMapper.initSubStatus(projectID);
         // add feature list
-        if(featureUpLoad!=null){
+        if (featureUpLoad != null) {
             featureService.uploadFeatureList(featureUpLoad,session);
         }
         // send mail
