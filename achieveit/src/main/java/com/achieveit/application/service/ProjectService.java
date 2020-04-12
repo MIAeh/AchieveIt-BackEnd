@@ -5,6 +5,7 @@ import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.MemberRoles;
 import com.achieveit.application.enums.ProjectStatus;
+import com.achieveit.application.enums.WorkHourStatus;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.*;
 import com.achieveit.application.utils.EmailUtil;
@@ -239,8 +240,19 @@ public class ProjectService {
         }
     }
 
+    @Transactional
     @Logged({"projectID", "memberID", "superiorID"})
     public void updateMemberSuperiorByID(String projectID, String memberID, String superiorID) {
+        ArrayList<WorkHourEntity> workHourEntities = workHourMapper.getWorkHoursByApplyerIdAndProjectID(memberID, projectID);
+        if (workHourEntities != null) {
+            for (WorkHourEntity workHourEntity : workHourEntities) {
+                Integer status = workHourEntity.getStatus();
+                if (!status.equals(WorkHourStatus.WORK_HOUR_APPROVED.getStatus())) {
+                    // reject superior update
+                    throw new AchieveitException(ErrorCode.UPDATE_ERROR);
+                }
+            }
+        }
         projectMapper.updateMemberSuperiorByID(new MemberEntity(projectID, memberID, superiorID, null));
     }
 
