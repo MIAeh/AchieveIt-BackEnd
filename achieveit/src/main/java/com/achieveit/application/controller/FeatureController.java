@@ -68,4 +68,11 @@ public class FeatureController {
         return featureService.uploadFeatureList(featureUpLoad,session);
     }
 
+    @CrossOrigin
+    @PostMapping("updateFeatureByFeatureID")
+    public ResponseResult<Boolean> updateFeatureByFeatureID(@RequestParam("featureID")String featureID,
+                                                            @RequestParam(name = "featureName",required = false,defaultValue = "")String featureName,
+                                                            @RequestParam(name="featureDescription",required = false,defaultValue = "")String featureDescription){
+        return featureService.updateFeatureByFeatureID(featureID,featureName,featureDescription);
+    }
 }

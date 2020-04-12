@@ -230,4 +230,20 @@ public class FeatureService {
 
         return ResultGenerator.success();
     }
+
+    public ResponseResult<Boolean> updateFeatureByFeatureID(String featureId,String featureName,String featureDescription){
+        FeatureEntity featureEntity=featureMapper.getFeatureById(featureId);
+        if(featureEntity==null)
+            return ResultGenerator.error("invalid featureId!");
+
+        if(featureName!=null&&!featureName.equals("")){
+            featureEntity.setFatherName(featureName);
+        }
+        if(featureDescription!=null&&!featureDescription.equals("")){
+            featureEntity.setFeatureDescription(featureDescription);
+        }
+        featureMapper.updateFeature(featureEntity);
+        return ResultGenerator.success();
+    }
+
 }

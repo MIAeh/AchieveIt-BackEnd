@@ -34,19 +34,27 @@ public class WorkHourService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId, String featureName, String activityName, String projectId, Timestamp startTime, Timestamp endTime){
+    public ResponseResult<WorkHourEntity> applyWordHour(String applyerId,
+                                                        String featureName,
+                                                        String activityName,
+                                                        String projectId,
+                                                        Timestamp startTime,
+                                                        Timestamp endTime){
         if(startTime.getTime()>endTime.getTime()){
             return ResultGenerator.error("end_time must bigger than start_time");
         }
         UserEntity applyerEntity=userMapper.getUserInfoById(applyerId);
         if(applyerEntity==null) return ResultGenerator.error("applyer doesn't exist!");
+
+        WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
+
         ProjectEntity projectEntity=projectMapper.getProjectByID(projectId);
         if(projectEntity==null)
             return ResultGenerator.error("invalid projectId!");
+
         String approverId=projectEntity.getProjectMonitorID();
         String approverName=projectEntity.getProjectMonitorName();
 
-        WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
         entity.setApproverId(approverId);
         entity.setApproverName(approverName);
 

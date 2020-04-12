@@ -8,7 +8,8 @@ import java.util.ArrayList;
 @Mapper
 public interface WorkHourMapper {
     @Insert("insert into workhour(workhourid,applytime,applyerid,approverid,featurename,activityname,starttimestamp,endtimestamp,status,projectid,applyername,approvername)"+
-            " values(#{workHourId},#{applyTime},#{applyerId},#{approverId},#{featureName},#{activityName},#{startTimeStamp},#{endTimeStamp},#{status},#{projectId},#{applyerName},#{approverName})")
+            " values(#{workHourId},#{applyTime},#{applyerId},#{approverId},#{featureName}," +
+            "#{activityName},#{startTimeStamp},#{endTimeStamp},#{status},#{projectId},#{applyerName},#{approverName})")
     Integer insertWorkHour(WorkHourEntity workHourEntity);
 
     @Update("update workhour set status=#{status} where workhourId=#{workHourId}")
