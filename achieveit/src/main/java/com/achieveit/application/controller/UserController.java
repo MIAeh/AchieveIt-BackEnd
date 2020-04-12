@@ -1,7 +1,9 @@
 package com.achieveit.application.controller;
+import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.service.UserService;
 import com.achieveit.application.wrapper.ResponseResult;
+import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for User
@@ -138,5 +141,13 @@ public class UserController {
     @GetMapping("getAllUserInfo")
     public ResponseResult<ArrayList<UserEntity>> getAllUserInfo(HttpSession session){
         return userService.getAllUserInfo();
+    }
+
+    @CrossOrigin
+    @Logged({"projectID"})
+    @GetMapping("getAvailableUserInfoByID")
+    public ResponseResult<List<UserEntity>> getAvailableUserInfoByID(@RequestParam("projectID") String projectID){
+        List<UserEntity> userEntities = userService.getAvailableUserInfoByID(projectID);
+        return ResultGenerator.success(userEntities);
     }
 }

@@ -1,5 +1,8 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.entity.MemberEntity;
+import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import com.achieveit.application.entity.UserEntity;
@@ -12,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -21,14 +25,17 @@ public class UserService {
      */
     private final UserMapper userMapper;
 
+    private final ProjectMapper projectMapper;
+
     /**
      * Logger
      */
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    public UserService(UserMapper userMapper) {
+    public UserService(UserMapper userMapper, ProjectMapper projectMapper) {
         this.userMapper = userMapper;
+        this.projectMapper = projectMapper;
     }
 
     /**
@@ -168,5 +175,21 @@ public class UserService {
     public ResponseResult<ArrayList<UserEntity>> getAllUserInfo(){
         ArrayList<UserEntity> allEntities=userMapper.getAllUserInfo();
         return ResultGenerator.success(allEntities);
+    }
+
+    @Transactional
+    public List<UserEntity> getAvailableUserInfoByID(String projectID){
+        List<UserEntity> users  = userMapper.getAllUserInfo();
+        if (users == null) {
+            return null;
+        }
+        List<MemberEntity> members = projectMapper.getMembersByID(projectID);
+        if (members != null) {
+            for (MemberEntity member : members) {
+                users.removeIf(user -> member.getMemberID().equals(user.getUserId()));
+            }
+        }
+        return users;
+
     }
 }
