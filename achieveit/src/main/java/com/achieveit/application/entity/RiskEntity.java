@@ -49,6 +49,7 @@ public class RiskEntity {
         this.riskStrategy=riskStrategy;
         this.riskStatus=riskStatus;
         this.projectID=projectID;
+        this.riskHolders=new ArrayList<>();
     }
 
     public int getRiskID() {
@@ -156,6 +157,7 @@ public class RiskEntity {
     }
 
     public void setRiskHolders(String[] riskHolders){
+        if(riskHolders==null) return;
         for(String riskHolder:riskHolders)
             this.riskHolders.add(riskHolder);
     }

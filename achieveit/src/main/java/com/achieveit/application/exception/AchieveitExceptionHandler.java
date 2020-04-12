@@ -27,14 +27,20 @@ public class AchieveitExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseResult<Integer> handlerException(Exception e){
+        if(e==null)
+            return ResultGenerator.error("fatal error!!!");
         if (e instanceof AchieveitException) {
             //如果是自定义的异常，返回对应的错误信息
             logger.info(e.getMessage());
             return ResultGenerator.error(((AchieveitException) e).getErrorCode().getCode(), e.getMessage());
         } else {
             //如果是系统异常 返回异常信息
-            logger.info(e.getMessage());
-            return ResultGenerator.error(ErrorCode.SYSTEM_ERROR.getCode(),e.getMessage());
+            String errorMessage=e.getMessage();
+            StackTraceElement[] elements=e.getStackTrace();
+            if(e.getMessage().equals(""))
+                errorMessage=elements.toString();
+            logger.info(errorMessage);
+            return ResultGenerator.error(ErrorCode.SYSTEM_ERROR.getCode(),errorMessage);
         }
     }
 }
