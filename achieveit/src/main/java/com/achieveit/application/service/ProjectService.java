@@ -207,7 +207,10 @@ public class ProjectService {
     public void addQAMembersByID(String projectID, List<String> memberIDs) {
         String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
         for (String memberID : memberIDs) {
-            projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.QA.getRole().toString() + "]"));
+            MemberEntity member = new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.QA.getRole() + "]");
+            projectMapper.addMemberByID(member);
+            projectMapper.updateMemberRoleByID(member);
+            logger.info("Add QA member: " + member.toString());
         }
         statusMapper.confirmProjectSubStatusAllocatedQAByID(projectID);
     }
@@ -217,8 +220,10 @@ public class ProjectService {
     public void addEPGMembersByID(String projectID, List<String> memberIDs) {
         String superiorID = projectMapper.getProjectByID(projectID).getProjectManagerID();
         for (String memberID : memberIDs) {
-            projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.EPG.getRole().toString() + "]"));
-        }
+            MemberEntity member = new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.EPG.getRole() + "]");
+            projectMapper.addMemberByID(member);
+            projectMapper.updateMemberRoleByID(member);
+            logger.info("Add QA member: " + member.toString());        }
         statusMapper.confirmProjectSubStatusAllocatedEPGByID(projectID);
     }
 
