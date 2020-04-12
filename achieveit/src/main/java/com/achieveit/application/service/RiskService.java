@@ -120,7 +120,7 @@ public class RiskService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> updateRiskByRiskID(String riskId,
+    public ResponseResult<RiskEntity> updateRiskByRiskID(String riskId,
                                                       String riskDescription,
                                                       int riskInfluence,
                                                       int riskType,
@@ -134,7 +134,7 @@ public class RiskService {
         if(riskDescription!=null&&!riskDescription.equals("")){
             riskEntity.setRiskDescription(riskDescription);
         }
-        if(riskInfluence>=0&&riskInfluence<3){
+        if(riskInfluence>=0){
             riskEntity.setRiskFrequency(riskInfluence);
         }
         if(riskType>=0){
@@ -144,7 +144,7 @@ public class RiskService {
             riskEntity.setRiskLevel(riskLevel);
         }
         if(riskFrequency>=0){
-            riskEntity.setRiskInfluence(riskInfluence);
+            riskEntity.setRiskInfluence(riskFrequency);
         }
         if(riskCharger!=null&&!riskCharger.equals("")){
             riskEntity.setRiskCharger(riskCharger);
@@ -158,9 +158,7 @@ public class RiskService {
                 riskMapper.addRiskHolder(Integer.parseInt(riskId),holder);
             }
         }
-
-        riskMapper.deleteRiskByRiskId(Integer.parseInt(riskId));
-        riskMapper.insertRisk(riskEntity);
-        return ResultGenerator.success();
+        riskMapper.updateRiskByRiskId(riskEntity,Integer.parseInt(riskId));
+        return ResultGenerator.success(riskEntity);
     }
 }

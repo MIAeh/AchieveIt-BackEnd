@@ -14,6 +14,10 @@ public interface RiskMapper {
     +"(#{riskDescription},#{riskType},#{riskCharger},#{riskChargerName},#{riskLevel},#{riskInfluence},#{riskFrequency},#{riskStrategy},#{riskStatus},#{projectID})")
     int insertRisk(RiskEntity risk);
 
+    @Update("update risklist set riskdescription=#{riskEntity.riskDescription},risktype=#{riskEntity.riskType},riskcharger=#{riskEntity.riskCharger},riskchargername=#{riskEntity.riskChargerName}" +
+            ",risklevel=#{riskEntity.riskLevel},riskinfluence=#{riskEntity.riskInfluence},riskfrequency=#{riskEntity.riskFrequency},riskstrategy=#{riskEntity.riskStrategy} where riskid=#{riskId}")
+    int updateRiskByRiskId(RiskEntity riskEntity,@Param("riskId")int riskId);
+
     @Select("select * from risklist order by riskid")
     ArrayList<RiskEntity> getAllRisks();
 

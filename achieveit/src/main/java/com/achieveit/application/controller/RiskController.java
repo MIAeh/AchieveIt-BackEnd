@@ -47,9 +47,9 @@ public class RiskController {
 
     @CrossOrigin
     @PostMapping("updateRiskByRiskID")
-    public ResponseResult<Boolean> updateRiskByRiskID(@RequestParam("riskID")String riskId,
+    public ResponseResult<RiskEntity> updateRiskByRiskID(@RequestParam("riskID")String riskId,
                                                       @RequestParam(value = "riskDescription",required = false,defaultValue = "")String riskDescription,
-                                                      @RequestParam(value="riskInfluence",required = false,defaultValue = "")int riskInfluence,
+                                                      @RequestParam(value="riskInfluence",required = false,defaultValue = "-1")int riskInfluence,
                                                       @RequestParam(value = "riskType",required = false,defaultValue = "-1") int riskType,
                                                       @RequestParam(value = "riskLevel",required = false,defaultValue = "-1") int riskLevel,
                                                       @RequestParam(value = "riskFrequency",required = false,defaultValue = "-1")int riskFrequency,
