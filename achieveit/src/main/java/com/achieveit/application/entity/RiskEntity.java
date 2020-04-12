@@ -32,28 +32,6 @@ public class RiskEntity {
 
     }
 
-    public RiskEntity(String riskDescription, int riskType, String riskCharger, String riskChargerName,int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy) {
-        this.riskDescription = riskDescription;
-        this.riskType = riskType;
-        this.riskCharger = riskCharger;
-        this.riskLevel = riskLevel;
-        this.riskInfluence = riskInfluence;
-        this.riskFrequency=riskFrequency;
-        this.riskStrategy=riskStrategy;
-        this.riskStatus=0;
-    }
-
-    public RiskEntity(String riskDescription, int riskType, String riskCharger, String riskChargerName,int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus) {
-        this.riskDescription = riskDescription;
-        this.riskType = riskType;
-        this.riskCharger = riskCharger;
-        this.riskLevel = riskLevel;
-        this.riskInfluence = riskInfluence;
-        this.riskFrequency=riskFrequency;
-        this.riskStrategy=riskStrategy;
-        this.riskStatus=riskStatus;
-    }
-
     public RiskEntity(String riskDescription, int riskType, String riskCharger,String riskChargerName, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;

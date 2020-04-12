@@ -36,7 +36,9 @@ public class RiskService {
                                               int riskStatus,String projectID,String[] riskHolders,HttpSession session){
         UserEntity riskChargerEntity=userMapper.getUserInfoById(riskCharger);
         if(riskChargerEntity==null) return ResultGenerator.error("riskCharger doesn't exist!");
-        RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,riskChargerEntity.getUserName(),riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
+        String chargerName=riskChargerEntity.getUserName();
+        //logger.info(chargerName);
+        RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,chargerName,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
         int res=riskMapper.insertRisk(riskEntity);
         for(String holder:riskHolders){
             addRiskHoldersByRiskId(riskEntity.getRiskID(),holder);

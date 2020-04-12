@@ -109,7 +109,7 @@ public class WorkHourController {
 
     @CrossOrigin
     @PostMapping("updateWorkHour")
-    public ResponseResult<Boolean> updateWorkHour(@RequestParam(value = "workHourID")String workHourID,
+    public ResponseResult<WorkHourEntity> updateWorkHour(@RequestParam(value = "workHourID")String workHourID,
                                                   @RequestParam(value = "featureName",defaultValue = "",required = false)String featureName,
                                                   @RequestParam(value = "activityName",defaultValue = "",required = false)String activityName,
                                                   @RequestParam(value = "startTime",defaultValue = "",required = false)String startTime,

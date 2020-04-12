@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -124,7 +125,7 @@ public class WorkHourService {
     }
 
     @Transactional(rollbackFor =Exception.class)
-    public ResponseResult<Boolean> updateWorkHour(String workHourID,String featureName,String activityName,
+    public ResponseResult<WorkHourEntity> updateWorkHour(String workHourID,String featureName,String activityName,
                                                   String startTime,String endTime){
         WorkHourEntity workHourEntity=workHourMapper.getWorkHourByID(workHourID);
         if(workHourEntity==null)
@@ -136,12 +137,14 @@ public class WorkHourService {
             workHourEntity.setActivityName(activityName);
         }
         if(startTime!=null&&!startTime.equals("")){
+            workHourEntity.setStartTimeStamp(new Timestamp(Long.parseLong(startTime)));
             workHourEntity.setStartTime(startTime);
         }
         if(endTime!=null&&!endTime.equals("")){
+            workHourEntity.setEndTimeStamp(new Timestamp(Long.parseLong(endTime)));
             workHourEntity.setEndTime(endTime);
         }
         workHourMapper.updateWorkHourByWorkHourId(workHourEntity,workHourID);
-        return ResultGenerator.success();
+        return ResultGenerator.success(workHourEntity);
     }
 }
