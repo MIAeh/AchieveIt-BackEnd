@@ -111,13 +111,13 @@ public class WorkHourService {
         WorkHourEntity workHourEntity=workHourMapper.getWorkHourByID(workHourID);
         if(workHourEntity==null) return ResultGenerator.error("invalid workHourID!");
 
-        if(approverID.equals("")){
+        if(approverID==null||approverID.equals("")){
             if(session.getAttribute("userId")!=null&&session.getAttribute("userId").equals(workHourEntity.getApproverId())){
                 approverID=workHourEntity.getApproverId();
             }
         }
-        if(!approverID.equals(workHourEntity.getApproverId())){
-            return ResultGenerator.error("approver may not valid!");
+        if(approverID==null||approverID.equals("")||!approverID.equals(workHourEntity.getApproverId())){
+            return ResultGenerator.error("approver is invalid!");
         }
 
         workHourMapper.changeWordHourStatus(workHourID,0);

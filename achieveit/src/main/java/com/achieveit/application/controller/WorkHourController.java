@@ -51,8 +51,15 @@ public class WorkHourController {
 
     @CrossOrigin
     @PostMapping("approveWorkHour")
-    public ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
-                                            @RequestParam(name="approverID")String approverId){
+    public ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID",defaultValue = "",required = false)String workHourId,
+                                            @RequestParam(name="approverID")String approverId,HttpSession session){
+        if(approverId.equals("")){
+            String userId=(String)session.getAttribute("userId");
+            if(userId==null||userId.equals("")){
+                return ResultGenerator.error("can't judge who you are");
+            }
+            approverId=userId;
+        }
         return workHourService.approveWordHour(workHourId,approverId);
     }
 
