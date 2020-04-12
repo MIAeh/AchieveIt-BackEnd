@@ -9,9 +9,17 @@ spring:
     url: jdbc:postgresql://101.37.205.16:5432/achievelt
     username: postgres
     password: wh123456
+    type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      maxLifetime: 1765000  #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
-      maximumPoolSize: 15   #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      max-lifetime: 1800000  #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      connection-timeout: 30000
+      idle-timeout: 30000
+      maximumPoolSize: 100   #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      minimum-idle: 10
+      auto-commit: true
+      connection-test-query: SELECT 1
+      pool-name: AchieveItHikariCP
+
   http:
       encoding:
         charset: UTF-8
@@ -33,6 +41,8 @@ mybatis:
   type-aliases-package: com.achieveit.application.entity
   # 配置为 classpath 路径下 mapper 包下，* 代表会扫描所有 xml 文件
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    default-statement-timeout: 1000
 
 logging:
   path: ./logs
