@@ -40,7 +40,7 @@ public class RiskController {
                                               @RequestParam(value="riskStrategy",required = false,defaultValue = "")String riskStrategy,
                                               @RequestParam(value = "riskStatus",required = false,defaultValue = "0") int riskStatus,
                                               @RequestParam("projectID")String projectID,
-                                              @RequestParam("riskHolders[]")String[] riskHolders,
+                                              @RequestParam("riskHolders")String[] riskHolders,
                                               HttpSession session){
         return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID,riskHolders,session);
     }
