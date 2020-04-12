@@ -1,7 +1,9 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.ProjectEntity;
 import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.entity.WorkHourEntity;
+import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.mapper.WorkHourMapper;
 import com.achieveit.application.wrapper.ResponseResult;
@@ -20,11 +22,12 @@ import java.util.ArrayList;
 public class WorkHourService {
     private  final WorkHourMapper workHourMapper;
     private  final UserMapper userMapper;
-
+    private  final ProjectMapper projectMapper;
     @Autowired
-    public WorkHourService(WorkHourMapper workHourMapper,UserMapper userMapper){
+    public WorkHourService(WorkHourMapper workHourMapper,UserMapper userMapper,ProjectMapper projectMapper){
         this.workHourMapper=workHourMapper;
         this.userMapper=userMapper;
+        this.projectMapper=projectMapper;
     }
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -36,7 +39,16 @@ public class WorkHourService {
         }
         UserEntity applyerEntity=userMapper.getUserInfoById(applyerId);
         if(applyerEntity==null) return ResultGenerator.error("applyer doesn't exist!");
+        ProjectEntity projectEntity=projectMapper.getProjectByID(projectId);
+        if(projectEntity==null)
+            return ResultGenerator.error("invalid projectId!");
+        String approverId=projectEntity.getProjectMonitorID();
+        String approverName=projectEntity.getProjectMonitorName();
+
         WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
+        entity.setApproverId(approverId);
+        entity.setApproverName(approverName);
+
         int size=workHourMapper.getWorkHourSizeByProjectId(projectId);
         size++;
         String workHourId=projectId+"-"+String.format("%04d",size);
