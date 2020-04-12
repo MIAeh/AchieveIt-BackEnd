@@ -156,7 +156,7 @@ public class RiskService {
             riskEntity.setRiskStrategy(riskStrategy);
         }
         if(riskHolders!=null&&riskHolders.length>0){
-            riskMapper.deleteRiskByRiskId(Integer.parseInt(riskId));
+            riskMapper.deleteAllRiskHoldersByRiskId(Integer.parseInt(riskId));
             for(String holder:riskHolders){
                 riskMapper.addRiskHolder(Integer.parseInt(riskId),holder);
             }
