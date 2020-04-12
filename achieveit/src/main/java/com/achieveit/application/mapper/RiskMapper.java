@@ -18,7 +18,7 @@ public interface RiskMapper {
     ArrayList<RiskEntity> getAllRisks();
 
     @Delete("delete from risklist where riskid=#{riskId}")
-    int deleteRisk(@Param("riskId")int riskId);
+    int deleteRiskByRiskId(@Param("riskId")int riskId);
 
     @Update("update risklist set riskstatus=#{riskStatus} where riskid=#{riskId}")
     int changeRiskStatus(@Param("riskId")int riskId,@Param("riskStatus")int riskStatus);
@@ -31,6 +31,9 @@ public interface RiskMapper {
 
     @Select("select riskholder from riskholders where riskid=#{riskId}")
     ArrayList<String> getAllRiskHolderByRiskId(@Param("riskId")int riskId);
+
+    @Delete("delete from riskholder where riskid=#{riskId}")
+    int deleteAllRiskHoldersByRiskId(@Param("riskId")int riskId);
 
     @Select("select * from risktemplates")
     ArrayList<RiskTemplate> getRiskTemplates();

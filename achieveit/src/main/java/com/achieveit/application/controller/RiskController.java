@@ -5,6 +5,7 @@ import com.achieveit.application.entity.RiskTemplate;
 import com.achieveit.application.service.RiskService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,32 @@ public class RiskController {
 
     @CrossOrigin
     @PostMapping("addRisk")
-    public ResponseResult<RiskEntity> addRisk(@RequestParam("riskDescription")String riskDescription,@RequestParam("riskType") int riskType,
-                                    @RequestParam("riskCharger") String riskCharger,@RequestParam("riskLevel") int riskLevel,
-                                    @RequestParam("riskInfluence")int riskInfluence,@RequestParam("riskFrequency")int riskFrequency,
-                                              @RequestParam(value="riskStrategy",defaultValue = "",required = false)String riskStrategy,
+    public ResponseResult<RiskEntity> addRisk(@RequestParam("riskDescription")String riskDescription,
+                                              @RequestParam("riskType") int riskType,
+                                              @RequestParam("riskCharger") String riskCharger,
+                                              @RequestParam("riskLevel") int riskLevel,
+                                              @RequestParam("riskInfluence")int riskInfluence,
+                                              @RequestParam("riskFrequency")int riskFrequency,
+                                              @RequestParam(value="riskStrategy",required = false,defaultValue = "")String riskStrategy,
                                               @RequestParam(value = "riskStatus",required = false,defaultValue = "0") int riskStatus,
-                                              @RequestParam(value = "projectID",required = false,defaultValue = "")String projectID, HttpSession session){
-        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID,session);
+                                              @RequestParam("projectID")String projectID,
+                                              @RequestParam("riskHolders")String[] riskHolders,
+                                              HttpSession session){
+        return riskService.addRisk(riskDescription,riskType,riskCharger,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID,riskHolders,session);
+    }
+
+    @CrossOrigin
+    @PostMapping("updateRiskByRiskID")
+    public ResponseResult<Boolean> updateRiskByRiskID(@RequestParam("riskID")String riskId,
+                                                      @RequestParam(value = "riskDescription",required = false,defaultValue = "")String riskDescription,
+                                                      @RequestParam(value="riskInfluence",required = false,defaultValue = "")int riskInfluence,
+                                                      @RequestParam(value = "riskType",required = false,defaultValue = "-1") int riskType,
+                                                      @RequestParam(value = "riskLevel",required = false,defaultValue = "-1") int riskLevel,
+                                                      @RequestParam(value = "riskFrequency",required = false,defaultValue = "-1")int riskFrequency,
+                                                      @RequestParam(value = "riskCharger",required = false,defaultValue = "-1") String riskCharger,
+                                                      @RequestParam(value="riskHolders",required = false,defaultValue = "")String[] riskHolders,
+                                                      @RequestParam(value="riskStrategy",defaultValue = "",required = false)String riskStrategy){
+        return riskService.updateRiskByRiskID(riskId,riskDescription,riskInfluence,riskType,riskLevel,riskFrequency,riskCharger,riskHolders,riskStrategy);
     }
 
     @CrossOrigin
@@ -89,8 +109,10 @@ public class RiskController {
         return riskService.getRisksByProjectID(projectID);
     }
 
-    //@CrossOrigin
-    //@PostMapping()
-    //public ResponseResult
+    @CrossOrigin
+    @PostMapping("solveRisk")
+    public ResponseResult<Boolean> solveRisk(@RequestParam("riskID")String riskId){
+        return riskService.solveRisk(riskId);
+    }
 
 }

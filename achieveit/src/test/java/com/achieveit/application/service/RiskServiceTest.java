@@ -37,7 +37,7 @@ public class RiskServiceTest {
 
     @Test
     public void testAAddRisk(){
-        ResponseResult<RiskEntity> risk=riskService.addRisk("test",0,"none",0,0,0,"none",0,"none",session);
+        ResponseResult<RiskEntity> risk=riskService.addRisk("test",0,"none",0,0,0,"none",0,"none",null,session);
         if(risk!=null&&risk.getData()!=null)
             riskId=risk.getData().getRiskID();
         Assert.assertTrue(true);
