@@ -47,6 +47,7 @@ public class RiskService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Boolean> deleteRisk(int riskId){
         int res=riskMapper.deleteRiskByRiskId(riskId);
+        riskMapper.deleteAllRiskHoldersByRiskId(riskId);
         return ResultGenerator.success();
     }
 
