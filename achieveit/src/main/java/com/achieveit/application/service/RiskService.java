@@ -135,7 +135,7 @@ public class RiskService {
             riskEntity.setRiskDescription(riskDescription);
         }
         if(riskInfluence>=0){
-            riskEntity.setRiskFrequency(riskInfluence);
+            riskEntity.setRiskInfluence(riskInfluence);
         }
         if(riskType>=0){
             riskEntity.setRiskType(riskType);
@@ -144,7 +144,7 @@ public class RiskService {
             riskEntity.setRiskLevel(riskLevel);
         }
         if(riskFrequency>=0){
-            riskEntity.setRiskInfluence(riskFrequency);
+            riskEntity.setRiskFrequency(riskFrequency);
         }
         if(riskCharger!=null&&!riskCharger.equals("")){
             riskEntity.setRiskCharger(riskCharger);
