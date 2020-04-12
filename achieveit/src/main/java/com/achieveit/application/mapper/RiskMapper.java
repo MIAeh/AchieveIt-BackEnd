@@ -32,7 +32,7 @@ public interface RiskMapper {
     @Select("select riskholder from riskholders where riskid=#{riskId}")
     ArrayList<String> getAllRiskHolderByRiskId(@Param("riskId")int riskId);
 
-    @Delete("delete from riskholder where riskid=#{riskId}")
+    @Delete("delete from riskholders where riskid=#{riskId}")
     int deleteAllRiskHoldersByRiskId(@Param("riskId")int riskId);
 
     @Select("select * from risktemplates")
@@ -51,5 +51,6 @@ public interface RiskMapper {
     @Select("select * from risklist where projectid=#{projectID}")
     ArrayList<RiskEntity> getRisksByProjectID(@Param("projectID")String projectID);
 
-
+    @Delete("delete from riskholders where riskid=#{riskId} and riskholder=#{riskHolder}}")
+    int deleteFromRiskHolderByRiskIdAndHolderId(@Param("riskId")String riskId,@Param("riskHolder")String riskHolder);
 }

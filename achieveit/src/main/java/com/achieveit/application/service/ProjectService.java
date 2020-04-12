@@ -6,10 +6,7 @@ import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.MemberRoles;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
-import com.achieveit.application.mapper.AuthorityMapper;
-import com.achieveit.application.mapper.ProjectMapper;
-import com.achieveit.application.mapper.UserMapper;
-import com.achieveit.application.mapper.WorkHourMapper;
+import com.achieveit.application.mapper.*;
 import com.achieveit.application.utils.EmailUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -41,12 +38,17 @@ public class ProjectService {
 
     private final WorkHourMapper workHourMapper;
 
-    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper, AuthorityMapper authorityMapper, FeatureService featureService,WorkHourMapper workHourMapper,EmailUtil emailUtil) {
+    private final RiskMapper riskMapper;
+
+    public ProjectService(ProjectMapper projectMapper, UserMapper userMapper,
+                          AuthorityMapper authorityMapper, FeatureService featureService,
+                          WorkHourMapper workHourMapper,RiskMapper riskMapper,EmailUtil emailUtil) {
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
         this.authorityMapper = authorityMapper;
         this.featureService=featureService;
         this.workHourMapper=workHourMapper;
+        this.riskMapper=riskMapper;
         this.emailUtil = emailUtil;
     }
 
@@ -267,9 +269,23 @@ public class ProjectService {
         //delete From workHour and Risks
         workHourMapper.deleteWorkHoursByApplyerId(memberID);
 
-
-        // TODO: 风险中，若该成员为责任人，责任人默认置为项目经理；若该成员为相关人，从相关人中移除
-
+        ArrayList<RiskEntity> riskEntities=riskMapper.getRisksByProjectID(projectID);
+        for(RiskEntity riskEntity:riskEntities){
+            //if member is riskCharger
+            if(riskEntity.getRiskCharger().equals(memberID)){
+                riskEntity.setRiskCharger(projectEntity.getProjectManagerID());
+                riskEntity.setRiskChargerName(projectEntity.getProjectMonitorName());
+                riskMapper.deleteRiskByRiskId(riskEntity.getRiskID());
+                riskMapper.insertRisk(riskEntity);
+            }
+            //if member is riskHolders
+            ArrayList<String> holders=riskMapper.getAllRiskHolderByRiskId(riskEntity.getRiskID());
+            for(String holder:holders){
+                if(holder.equals(memberID)){
+                    riskMapper.deleteFromRiskHolderByRiskIdAndHolderId(String.valueOf(riskEntity.getRiskID()),holder);
+                }
+            }
+        }
         // delete from member table
         projectMapper.deleteMemberByID(projectID, memberID);
     }
