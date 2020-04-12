@@ -37,11 +37,11 @@ public class RiskService {
         UserEntity riskChargerEntity=userMapper.getUserInfoById(riskCharger);
         if(riskChargerEntity==null) return ResultGenerator.error("riskCharger doesn't exist!");
         String chargerName=riskChargerEntity.getUserName();
-        //logger.info(chargerName);
         RiskEntity riskEntity=new RiskEntity(riskDescription,riskType,riskCharger,chargerName,riskLevel,riskInfluence,riskFrequency,riskStrategy,riskStatus,projectID);
         int res=riskMapper.insertRisk(riskEntity);
+        int riskId=riskMapper.getMaxRiskIdFromRiskList();
         for(String holder:riskHolders){
-            addRiskHoldersByRiskId(riskEntity.getRiskID(),holder);
+            addRiskHoldersByRiskId(riskId,holder);
         }
         return ResultGenerator.success(riskEntity);
     }

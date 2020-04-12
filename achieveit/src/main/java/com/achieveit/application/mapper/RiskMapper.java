@@ -57,4 +57,7 @@ public interface RiskMapper {
 
     @Delete("delete from riskholders where riskid=#{riskId} and riskholder=#{riskHolder}}")
     int deleteFromRiskHolderByRiskIdAndHolderId(@Param("riskId")String riskId,@Param("riskHolder")String riskHolder);
+
+    @Select("select MAX(riskid) from risklist")
+    int getMaxRiskIdFromRiskList();
 }

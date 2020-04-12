@@ -1,5 +1,7 @@
 package com.achieveit.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 import java.sql.Date;
 
@@ -24,6 +26,7 @@ public class RiskEntity {
 
     private int riskStatus;
 
+    @JsonIgnore
     private Date riskLastSendTime;
 
     private String projectID;
