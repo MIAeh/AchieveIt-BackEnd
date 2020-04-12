@@ -164,7 +164,7 @@ public class StatusService {
         else if (!project.getProjectStatus().equals(ProjectStatus.APPROVED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
-        else if (projectSubStatus.getConfigurationCompleted() && projectSubStatus.getAllocatedEPG() && projectSubStatus.getAllocatedQA()) {
+        else if (!projectSubStatus.getConfigurationCompleted() || !projectSubStatus.getAllocatedEPG() || !projectSubStatus.getAllocatedQA()) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -285,7 +285,7 @@ public class StatusService {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
-        statusMapper.updateArchiveLink(projectID, "null");
+        statusMapper.updateArchiveLink(projectID, "");
         statusMapper.updateArchived(projectID, false);
 
         // send mail to project manager
@@ -309,7 +309,7 @@ public class StatusService {
         else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
-        else if (archiveEntity.getArchived().equals(false) || archiveEntity.getArchiveLink().equals("null")) {
+        else if (!archiveEntity.getArchived() || archiveEntity.getArchiveLink().equals("")) {
             throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 

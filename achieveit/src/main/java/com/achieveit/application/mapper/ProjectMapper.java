@@ -80,7 +80,7 @@ public interface ProjectMapper {
     @Select("SELECT * FROM domainlist;")
     ArrayList<DomainEntity> getDomainList();
 
-    @Insert("INSERT INTO archives(projectid, archivelink, archived) VALUES (#{projectID}, 'null', false);")
+    @Insert("INSERT INTO archives(projectid, archivelink, archived) VALUES (#{projectID}, '', false);")
     void initArchive(String projectID);
 
     @Insert("INSERT INTO projectsubstatus(projectid, configurationcompleted, allocatedqa, allocatedepg) VALUES (#{projectID}, false, false, false);")
