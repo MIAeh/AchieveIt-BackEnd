@@ -120,7 +120,7 @@ public class WorkHourService {
             return ResultGenerator.error("approver is invalid!");
         }
 
-        workHourMapper.changeWordHourStatus(workHourID,0);
+        workHourMapper.changeWordHourStatus(workHourID,2);
         return ResultGenerator.success();
     }
 
