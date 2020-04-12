@@ -43,6 +43,7 @@ public class RiskService {
         for(String holder:riskHolders){
             addRiskHoldersByRiskId(riskId,holder);
         }
+        riskEntity.setRiskHolders(riskHolders);
         return ResultGenerator.success(riskEntity);
     }
 
@@ -112,6 +113,12 @@ public class RiskService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<ArrayList<RiskEntity>> getRisksByProjectID(String projectID){
         ArrayList<RiskEntity> riskEntities=riskMapper.getRisksByProjectID(projectID);
+        for(RiskEntity entity:riskEntities){
+            ResponseResult<ArrayList<String>> res=getRiskHoldersByRiskId(entity.getRiskID());
+            if(res.getData()!=null){
+                entity.setRiskHolders(res.getData());
+            }
+        }
         return ResultGenerator.success(riskEntities);
     }
 

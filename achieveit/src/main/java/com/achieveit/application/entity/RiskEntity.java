@@ -2,6 +2,7 @@ package com.achieveit.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.sql.Date;
 
@@ -31,6 +32,8 @@ public class RiskEntity {
 
     private String projectID;
 
+    private ArrayList<String> riskHolders;
+
     public RiskEntity(){
 
     }
@@ -39,6 +42,7 @@ public class RiskEntity {
         this.riskDescription = riskDescription;
         this.riskType = riskType;
         this.riskCharger = riskCharger;
+        this.riskChargerName=riskChargerName;
         this.riskLevel = riskLevel;
         this.riskInfluence = riskInfluence;
         this.riskFrequency=riskFrequency;
@@ -141,6 +145,19 @@ public class RiskEntity {
 
     public void setRiskChargerName(String riskChargerName) {
         this.riskChargerName = riskChargerName;
+    }
+
+    public ArrayList<String> getRiskHolders() {
+        return riskHolders;
+    }
+
+    public void setRiskHolders(ArrayList<String> riskHolders) {
+        this.riskHolders = riskHolders;
+    }
+
+    public void setRiskHolders(String[] riskHolders){
+        for(String riskHolder:riskHolders)
+            this.riskHolders.add(riskHolder);
     }
 
     @Override
