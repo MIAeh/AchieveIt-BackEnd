@@ -73,7 +73,7 @@ public class StatusService {
         else if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
         }
-        else if (project.getProjectMonitorID().equals(loginUserID)) {
+        else if (!project.getProjectMonitorID().equals(loginUserID)) {
             throw new AchieveitException(ErrorCode.ROLE_ERROR);
         }
         else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
@@ -127,7 +127,7 @@ public class StatusService {
         else if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
         }
-        else if (project.getProjectMonitorID().equals(loginUserID)) {
+        else if (!project.getProjectMonitorID().equals(loginUserID)) {
             throw new AchieveitException(ErrorCode.ROLE_ERROR);
         }
         else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
