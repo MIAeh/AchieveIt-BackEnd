@@ -141,8 +141,7 @@ public class WorkHourService {
         if(endTime!=null&&!endTime.equals("")){
             workHourEntity.setEndTime(endTime);
         }
-        workHourMapper.deleteWorkHourById(workHourEntity.getWorkHourId());
-        workHourMapper.insertWorkHour(workHourEntity);
+        workHourMapper.updateWorkHourByWorkHourId(workHourEntity,workHourID);
         return ResultGenerator.success();
     }
 }

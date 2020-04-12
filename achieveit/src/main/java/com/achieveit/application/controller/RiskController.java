@@ -54,9 +54,14 @@ public class RiskController {
                                                       @RequestParam(value = "riskLevel",required = false,defaultValue = "-1") int riskLevel,
                                                       @RequestParam(value = "riskFrequency",required = false,defaultValue = "-1")int riskFrequency,
                                                       @RequestParam(value = "riskCharger",required = false,defaultValue = "-1") String riskCharger,
-                                                      @RequestParam(value="riskHolders[]",required = false,defaultValue = "")String[] riskHolders,
+                                                      @RequestParam(value="riskHolders",required = false,defaultValue = "")String riskHolders,
                                                       @RequestParam(value="riskStrategy",defaultValue = "",required = false)String riskStrategy){
-        return riskService.updateRiskByRiskID(riskId,riskDescription,riskInfluence,riskType,riskLevel,riskFrequency,riskCharger,riskHolders,riskStrategy);
+        String[] riskHolderList=new String[0];
+        if(!riskHolders.equals("")){
+            riskHolderList =riskHolders.split(",");
+        }
+
+        return riskService.updateRiskByRiskID(riskId,riskDescription,riskInfluence,riskType,riskLevel,riskFrequency,riskCharger,riskHolderList,riskStrategy);
     }
 
     @CrossOrigin

@@ -50,9 +50,9 @@ public interface WorkHourMapper {
     @Select("select COUNT(workhourid) from workhour where projectid=#{projectId}")
     int getWorkHourSizeByProjectId(@Param("projectId")String projectId);
 
-    @Update("update workhour set applytime=#{applyTime},applyerid=#{applyerId},approverid=#{approverId},featurename=#{featureName}" +
-            ",activityname=#{activityName},starttimestamp=#{startTimeStamp},endtimestamp=#{endTimeStamp}," +
-            "status=#{status},projectid=#{projectId},applyername={applyerName}," +
-            "approvername=#{approverName} where workhourid=#{workHourId}")
+    @Update("update workhour set applytime=#{workHourEntity.applyTime},applyerid=#{workHourEntity.applyerId},approverid=#{workHourEntity.approverId},featurename=#{workHourEntity.featureName}" +
+            ",activityname=#{workHourEntity.activityName},starttimestamp=#{workHourEntity.startTimeStamp},endtimestamp=#{workHourEntity.endTimeStamp}," +
+            "status=#{workHourEntity.status},projectid=#{workHourEntity.projectId},applyername={workHourEntity.applyerName}," +
+            "approvername=#{workHourEntity.approverName} where workhourid=#{workHourId}")
     int updateWorkHourByWorkHourId(WorkHourEntity workHourEntity,@Param("workHourId")String workHourId);
 }
