@@ -275,8 +275,7 @@ public class ProjectService {
             if(riskEntity.getRiskCharger().equals(memberID)){
                 riskEntity.setRiskCharger(projectEntity.getProjectManagerID());
                 riskEntity.setRiskChargerName(projectEntity.getProjectMonitorName());
-                riskMapper.deleteRiskByRiskId(riskEntity.getRiskID());
-                riskMapper.insertRisk(riskEntity);
+                riskMapper.updateRiskByRiskId(riskEntity,riskEntity.getRiskID());
             }
             //if member is riskHolders
             ArrayList<String> holders=riskMapper.getAllRiskHolderByRiskId(riskEntity.getRiskID());
