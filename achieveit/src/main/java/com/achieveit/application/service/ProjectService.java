@@ -33,20 +33,23 @@ public class ProjectService {
 
     private final AuthorityMapper authorityMapper;
 
-    private final EmailUtil emailUtil;
-
-    private final FeatureService featureService;
-
     private final WorkHourMapper workHourMapper;
 
     private final RiskMapper riskMapper;
 
+    private final StatusMapper statusMapper;
+
+    private final FeatureService featureService;
+
+    private final EmailUtil emailUtil;
+
     public ProjectService(ProjectMapper projectMapper, UserMapper userMapper,
-                          AuthorityMapper authorityMapper, FeatureService featureService,
-                          WorkHourMapper workHourMapper,RiskMapper riskMapper,EmailUtil emailUtil) {
+                          AuthorityMapper authorityMapper, StatusMapper statusMapper, FeatureService featureService,
+                          WorkHourMapper workHourMapper, RiskMapper riskMapper, EmailUtil emailUtil) {
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
         this.authorityMapper = authorityMapper;
+        this.statusMapper = statusMapper;
         this.featureService=featureService;
         this.workHourMapper=workHourMapper;
         this.riskMapper=riskMapper;
@@ -206,6 +209,7 @@ public class ProjectService {
         for (String memberID : memberIDs) {
             projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.QA.getRole() + "]"));
         }
+        statusMapper.confirmProjectSubStatusAllocatedQAByID(projectID);
     }
 
     @Transactional
@@ -215,6 +219,7 @@ public class ProjectService {
         for (String memberID : memberIDs) {
             projectMapper.addMemberByID(new MemberEntity(projectID, memberID, superiorID, "[" + MemberRoles.EPG.getRole() + "]"));
         }
+        statusMapper.confirmProjectSubStatusAllocatedEPGByID(projectID);
     }
 
     @Transactional

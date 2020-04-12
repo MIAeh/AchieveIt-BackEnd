@@ -22,8 +22,11 @@ public interface StatusMapper {
     @Update("UPDATE projectsubstatus SET configurationcompleted=true WHERE projectid=#{projectID};")
     void confirmProjectSubStatusConfigurationCompletedByID(String projectID);
 
-    @Update("UPDATE projectsubstatus SET configurationcompleted=true WHERE projectid=#{projectID};")
-    void updateProjectSubStatusConfigurationCompletedByID(String projectID);
+    @Update("UPDATE projectsubstatus SET allocatedQA=true WHERE projectid=#{projectID};")
+    void confirmProjectSubStatusAllocatedQAByID(String projectID);
+
+    @Update("UPDATE projectsubstatus SET allocatedEPG=true WHERE projectid=#{projectID};")
+    void confirmProjectSubStatusAllocatedEPGByID(String projectID);
 
     @Update("UPDATE archives SET archivelink=#{archiveLink} WHERE projectid=#{projectID};")
     void updateArchiveLink(String projectID, String archiveLink);
