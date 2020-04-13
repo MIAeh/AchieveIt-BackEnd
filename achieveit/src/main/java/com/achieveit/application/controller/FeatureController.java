@@ -37,12 +37,6 @@ public class FeatureController {
         return featureService.getFeaturesByProjectID(projectId);
     }
 
-    @CrossOrigin
-    @GetMapping("deleteFeatureByFeatureID")
-    public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam("featureID")String featureId,HttpSession session){
-        return featureService.deleteFeatureByFeatureID(featureId);
-    }
-
     @PostControl(1)
     @CrossOrigin
     @PostMapping("addTopFeature")
@@ -63,7 +57,7 @@ public class FeatureController {
     @CrossOrigin
     @PostMapping("deleteFeatureByFeatureID")
     public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam(name = "featureID")String featureID, @RequestParam(name = "projectID") String projectID){
-        return featureService.deleteFeatureByFeatureID(featureID);
+        return featureService.deleteFeatureByFeatureID(featureID, projectID);
     }
 
     @PostControl
@@ -73,11 +67,13 @@ public class FeatureController {
         return featureService.uploadFeatureList(featureUpLoad,session);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("updateFeatureByFeatureID")
     public ResponseResult<FeatureEntity> updateFeatureByFeatureID(@RequestParam("featureID")String featureID,
+                                                                  @RequestParam(name = "projectID")String projectId,
                                                             @RequestParam(name = "featureName",required = false,defaultValue = "")String featureName,
                                                             @RequestParam(name="featureDescription",required = false,defaultValue = "")String featureDescription){
-        return featureService.updateFeatureByFeatureID(featureID,featureName,featureDescription);
+        return featureService.updateFeatureByFeatureID(featureID,featureName,featureDescription, projectId);
     }
 }
