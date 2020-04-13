@@ -46,7 +46,7 @@ public class LoggerAspect {
     @After("(servicePointcut() || controllerPointcut()) && @annotation(logged)")
     public void logAfter(JoinPoint joinPoint, Logged logged) {
         String signature = joinPoint.getSignature().toLongString(); // 获取目标方法签名
-        String  parameterValues = Arrays.toString(joinPoint.getArgs());// 获取目标方法体参数
+        String parameterValues = Arrays.toString(joinPoint.getArgs());// 获取目标方法体参数
         String parameterNames = Arrays.toString(logged.value());
         logger.info("==== After  Execute ====");
         logger.info("Method Signature: " + signature);
