@@ -231,19 +231,19 @@ public class FeatureService {
         return ResultGenerator.success();
     }
 
-    public ResponseResult<Boolean> updateFeatureByFeatureID(String featureId,String featureName,String featureDescription){
+    public ResponseResult<FeatureEntity> updateFeatureByFeatureID(String featureId,String featureName,String featureDescription){
         FeatureEntity featureEntity=featureMapper.getFeatureById(featureId);
         if(featureEntity==null)
             return ResultGenerator.error("invalid featureId!");
-
+        logger.info("featureid:"+featureEntity.getFeatureId());
         if(featureName!=null&&!featureName.equals("")){
-            featureEntity.setFatherName(featureName);
+            featureEntity.setFeatureName(featureName);
         }
         if(featureDescription!=null&&!featureDescription.equals("")){
             featureEntity.setFeatureDescription(featureDescription);
         }
         featureMapper.updateFeature(featureEntity);
-        return ResultGenerator.success();
+        return ResultGenerator.success(featureEntity);
     }
 
 }
