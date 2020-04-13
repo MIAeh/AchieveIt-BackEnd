@@ -116,6 +116,7 @@ public class FeatureEntity {
         this.projectId = projectId;
         this.featureName = featureName;
         this.featureDescription=featureDescription;
+        this.createTime=new Date(System.currentTimeMillis());
     }
 
     @Override
