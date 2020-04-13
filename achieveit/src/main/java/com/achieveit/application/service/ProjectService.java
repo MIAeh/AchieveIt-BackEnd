@@ -129,8 +129,8 @@ public class ProjectService {
             featureService.uploadFeatureList(featureUpLoad,session);
         }
         // send mail
-//        emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
-//                "请进行立项审批。");
+        emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
+                "请进行立项审批。");
     }
 
     @Transactional
