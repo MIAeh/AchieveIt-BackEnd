@@ -32,13 +32,15 @@ public class EmailUtil {
      * @param content 内容
      */
     public void sendTextEmail(String to, String subject, String content){
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(content);
-        message.setSentDate(new Date());
-        sender.send(message);
+//        if (to != null && !to.isEmpty() && subject != null && !subject.isEmpty() && content != null && !content.isEmpty()) {
+//            SimpleMailMessage message = new SimpleMailMessage();
+//            message.setFrom(from);
+//            message.setTo(to);
+//            message.setSubject(subject);
+//            message.setText(content);
+//            message.setSentDate(new Date());
+//            sender.send(message);
+//        }
     }
 
 }

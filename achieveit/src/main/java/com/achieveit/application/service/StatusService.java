@@ -54,6 +54,9 @@ public class StatusService {
         }
         else if (projectStatus.equals(ProjectStatus.ENDED.getStatus())) {
             ArchiveEntity archiveEntity = statusMapper.getArchiveByID(projectID);
+            if(archiveEntity == null) {
+                throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
+            }
             projectStatusEntity = new ProjectStatusEntity(projectStatus, archiveEntity.getArchived());
         }
         else {
@@ -309,7 +312,7 @@ public class StatusService {
         else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
-        else if (!archiveEntity.getArchived() || archiveEntity.getArchiveLink().equals("")) {
+        else if (archiveEntity == null || !archiveEntity.getArchived() || archiveEntity.getArchiveLink() == null || archiveEntity.getArchiveLink().equals("")) {
             throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 
