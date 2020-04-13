@@ -1,11 +1,11 @@
 package com.achieveit.application.service;
 
-import com.achieveit.application.entity.FeatureEntity;
-import com.achieveit.application.entity.FeatureUpLoad;
-import com.achieveit.application.entity.FeatureUpLoadEntity;
+import com.achieveit.application.entity.*;
+import com.achieveit.application.enums.ErrorCode;
+import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
-import com.achieveit.application.mapper.FeatureMapper;
-import com.achieveit.application.mapper.ProjectMapper;
+import com.achieveit.application.mapper.*;
+import com.achieveit.application.utils.EmailUtil;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.slf4j.Logger;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +26,8 @@ public class FeatureService {
      */
     private final FeatureMapper featureMapper;
     private final ProjectMapper projectMapper;
-
+    private final UserMapper userMapper;
+    private final EmailUtil emailUtil;
     /**
      * Logger
      */
@@ -63,9 +63,11 @@ public class FeatureService {
     }
 
     @Autowired
-    public FeatureService(FeatureMapper featureMapper,ProjectMapper projectMapper) {
+    public FeatureService(FeatureMapper featureMapper, ProjectMapper projectMapper, UserMapper userMapper, EmailUtil emailUtil) {
         this.featureMapper=featureMapper;
         this.projectMapper=projectMapper;
+        this.userMapper = userMapper;
+        this.emailUtil = emailUtil;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -103,6 +105,24 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<FeatureEntity> insertTopFeature(String featureName, String projectId,String featureDescription, HttpSession session){
+
+        ProjectEntity project = projectMapper.getProjectByID(projectId);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        // status update
+        Integer projectStatus = project.getProjectStatus();
+        if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
+            projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+            UserEntity projectMonitor = userMapper.getUserInfoById(project.getProjectMonitorID());
+            if (projectMonitor == null) {
+                throw new AchieveitException(ErrorCode.QUERY_ERROR);
+            }
+            // send mail
+            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+                    "请进行立项审批。");
+        }
+
         FeatureEntity entity=new FeatureEntity(0,projectId,featureName,featureDescription);
         entity.setFeatureId(getFeatureId(entity));
         featureMapper.insertFeatures(entity);
@@ -111,6 +131,24 @@ public class FeatureService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<FeatureEntity> insertSubFeature(String featureName, String projectId, String fatherId,String featureDescription,HttpSession session){
+
+        ProjectEntity project = projectMapper.getProjectByID(projectId);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        // status update
+        Integer projectStatus = project.getProjectStatus();
+        if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
+            projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+            UserEntity projectMonitor = userMapper.getUserInfoById(project.getProjectMonitorID());
+            if (projectMonitor == null) {
+                throw new AchieveitException(ErrorCode.QUERY_ERROR);
+            }
+            // send mail
+            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+                    "请进行立项审批。");
+        }
+
         FeatureEntity fatherEntity=featureMapper.getFeatureById(fatherId);
         if(fatherEntity==null) return ResultGenerator.error("no father");
         if(fatherEntity.getFeatureLevel()==2){
@@ -175,7 +213,25 @@ public class FeatureService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult<Boolean> deleteFeatureByFeatureID(String featureId){
+    public ResponseResult<Boolean> deleteFeatureByFeatureID(String featureId, String projectId){
+
+        ProjectEntity project = projectMapper.getProjectByID(projectId);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        // status update
+        Integer projectStatus = project.getProjectStatus();
+        if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
+            projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+            UserEntity projectMonitor = userMapper.getUserInfoById(project.getProjectMonitorID());
+            if (projectMonitor == null) {
+                throw new AchieveitException(ErrorCode.QUERY_ERROR);
+            }
+            // send mail
+            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+                    "请进行立项审批。");
+        }
+
         FeatureEntity thisFeature=featureMapper.getFeatureById(featureId);
         if(thisFeature==null)
             return ResultGenerator.error("invalid feature!");
@@ -231,7 +287,25 @@ public class FeatureService {
         return ResultGenerator.success();
     }
 
-    public ResponseResult<FeatureEntity> updateFeatureByFeatureID(String featureId,String featureName,String featureDescription){
+    public ResponseResult<FeatureEntity> updateFeatureByFeatureID(String featureId,String featureName,String featureDescription, String projectId){
+
+        ProjectEntity project = projectMapper.getProjectByID(projectId);
+        if (project == null) {
+            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+        }
+        // status update
+        Integer projectStatus = project.getProjectStatus();
+        if (projectStatus.equals(ProjectStatus.REJECTED.getStatus())) {
+            projectStatus = ProjectStatus.APPLY_FOR_APPROVAL.getStatus();
+            UserEntity projectMonitor = userMapper.getUserInfoById(project.getProjectMonitorID());
+            if (projectMonitor == null) {
+                throw new AchieveitException(ErrorCode.QUERY_ERROR);
+            }
+            // send mail
+            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+                    "请进行立项审批。");
+        }
+
         FeatureEntity featureEntity=featureMapper.getFeatureById(featureId);
         if(featureEntity==null)
             return ResultGenerator.error("invalid featureId!");
