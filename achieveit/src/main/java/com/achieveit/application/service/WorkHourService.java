@@ -151,7 +151,7 @@ public class WorkHourService {
             workHourEntity.setEndTime(endTime);
         }
         if(workHourEntity.getStatus()==2)
-            workHourEntity.setStatus(2);
+            workHourEntity.setStatus(0);
         workHourMapper.updateWorkHourByWorkHourId(workHourEntity);
         return ResultGenerator.success(workHourEntity);
     }
