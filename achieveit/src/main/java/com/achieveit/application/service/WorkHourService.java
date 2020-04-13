@@ -150,6 +150,8 @@ public class WorkHourService {
             workHourEntity.setEndTimeStamp(new Timestamp(Long.parseLong(endTime)));
             workHourEntity.setEndTime(endTime);
         }
+        if(workHourEntity.getStatus()==2)
+            workHourEntity.setStatus(2);
         workHourMapper.updateWorkHourByWorkHourId(workHourEntity);
         return ResultGenerator.success(workHourEntity);
     }
