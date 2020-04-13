@@ -261,7 +261,7 @@ public class ProjectService {
                 Integer status = workHourEntity.getStatus();
                 if (!status.equals(WorkHourStatus.WORK_HOUR_APPROVED.getStatus())) {
                     // reject superior update
-                    throw new AchieveitException(ErrorCode.UPDATE_ERROR);
+                    throw new AchieveitException(ErrorCode.UPDATE_ERROR, "Fail to update because there is related task under processing");
                 }
             }
         }

@@ -47,6 +47,7 @@ public class AchieveitException extends RuntimeException {
     public String toString() {
         return "AchieveitException{" +
                 "errorCode=" + errorCode +
+                ", message='" + message + '\'' +
                 '}';
     }
 }
