@@ -305,7 +305,7 @@ public class ProjectService {
             ArrayList<String> holders=riskMapper.getAllRiskHolderByRiskId(riskEntity.getRiskID());
             for(String holder:holders){
                 if(holder.equals(memberID)){
-                    riskMapper.deleteFromRiskHolderByRiskIdAndHolderId(String.valueOf(riskEntity.getRiskID()),holder);
+                    riskMapper.deleteFromRiskHolderByRiskIdAndHolderId(riskEntity.getRiskID(),holder);
                 }
             }
         }
