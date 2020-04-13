@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.exception.AchieveitException;
@@ -114,6 +115,7 @@ public class ProjectController {
         return ResultGenerator.success(projectInfo);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/updateProjectByID")
@@ -155,6 +157,7 @@ public class ProjectController {
         return ResultGenerator.success(memberInfos);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/addMemberByID")
@@ -163,6 +166,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/addQAMembersByID")
@@ -173,6 +177,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/addEPGMembersByID")
@@ -183,6 +188,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/addMemberRoleByID")
@@ -191,6 +197,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID", "memberRole"})
     @PostMapping("/removeMemberRoleByID")
@@ -199,7 +206,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
-
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID", "superiorID"})
     @PostMapping("/updateMemberSuperiorByID")
@@ -208,6 +215,7 @@ public class ProjectController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteMemberByID")
@@ -224,6 +232,7 @@ public class ProjectController {
         return ResultGenerator.success(gitRepo);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "gitRepo"})
     @PostMapping("/updateGitRepoByID")

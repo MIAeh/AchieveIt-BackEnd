@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.DeviceEntity;
 import com.achieveit.application.entity.DeviceInfo;
 import com.achieveit.application.enums.ErrorCode;
@@ -44,6 +45,7 @@ public class DeviceController {
         return ResultGenerator.success(deviceInfos);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "userID", "deviceID", "dueDate", "session"})
     @PostMapping("/registerDevice")
@@ -58,6 +60,7 @@ public class DeviceController {
         }
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "userID", "deviceID", "session"})
     @PostMapping("/returnDevice")

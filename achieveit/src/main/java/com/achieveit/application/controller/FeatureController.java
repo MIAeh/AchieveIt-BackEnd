@@ -1,5 +1,6 @@
 package com.achieveit.application.controller;
 
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.FeatureEntity;
 import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.service.FeatureService;
@@ -42,6 +43,7 @@ public class FeatureController {
         return featureService.deleteFeatureByFeatureID(featureId);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("addTopFeature")
     public ResponseResult<FeatureEntity> addTopFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID") String projectId,
@@ -49,6 +51,7 @@ public class FeatureController {
         return featureService.insertTopFeature(featureName,projectId,featureDescription,session);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("addSubFeature")
     public ResponseResult<FeatureEntity> addSubFeature(@RequestParam(name = "featureName")String featureName,@RequestParam(name = "projectID")String projectId,
@@ -56,12 +59,14 @@ public class FeatureController {
         return featureService.insertSubFeature(featureName,projectId,fatherId,featureDescription,session);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("deleteFeatureByFeatureID")
-    public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam(name = "featureID")String featureID){
+    public ResponseResult<Boolean> deleteFeatureByFeatureID(@RequestParam(name = "featureID")String featureID, @RequestParam(name = "projectID") String projectID){
         return featureService.deleteFeatureByFeatureID(featureID);
     }
 
+    @PostControl
     @CrossOrigin
     @PostMapping(value="uploadFeatureList",produces = "application/json;charset=UTF-8")
     public ResponseResult<Boolean> uploadFeatureList(@RequestBody FeatureUpLoad featureUpLoad,HttpSession session){

@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.ArchiveEntity;
 import com.achieveit.application.entity.ProjectStatusEntity;
 import com.achieveit.application.enums.ProjectStatus;
@@ -30,6 +31,7 @@ public class StatusController {
         return ResultGenerator.success(projectStatus);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/approveApplication")
@@ -38,6 +40,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/rejectApplication")
@@ -46,6 +49,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/confirmConfigurationCompleted")
@@ -54,6 +58,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/launchProject")
@@ -62,6 +67,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/deliverProject")
@@ -70,6 +76,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/endProject")
@@ -78,6 +85,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "archiveLink"})
     @PostMapping("/updateArchive")
@@ -94,6 +102,7 @@ public class StatusController {
         return ResultGenerator.success(archiveEntity);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/rejectArchive")
@@ -102,6 +111,7 @@ public class StatusController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID"})
     @PostMapping("/approveArchive")

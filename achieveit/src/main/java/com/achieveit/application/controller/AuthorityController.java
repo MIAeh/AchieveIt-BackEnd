@@ -1,6 +1,7 @@
 package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.AuthorityService;
@@ -41,6 +42,7 @@ public class AuthorityController {
         return ResultGenerator.success(gitMembers);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/addGitMembersByID")
@@ -56,6 +58,7 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteGitMemberByID")
@@ -72,6 +75,7 @@ public class AuthorityController {
         return ResultGenerator.success(mailMembers);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/addMailMembersByID")
@@ -87,6 +91,7 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteMailMemberByID")
@@ -103,6 +108,7 @@ public class AuthorityController {
         return ResultGenerator.success(fileMembers);
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
     @PostMapping("/addFileMembersByID")
@@ -118,6 +124,7 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
     @PostMapping("/deleteFileMemberByID")

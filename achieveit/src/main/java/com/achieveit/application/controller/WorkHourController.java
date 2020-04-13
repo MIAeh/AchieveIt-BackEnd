@@ -1,5 +1,6 @@
 package com.achieveit.application.controller;
 
+import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.WorkHourEntity;
 import com.achieveit.application.service.WorkHourService;
 import com.achieveit.application.wrapper.ResponseResult;
@@ -22,6 +23,7 @@ public class WorkHourController {
         this.workHourService=workHourService;
     }
 
+    @PostControl(3)
     @CrossOrigin
     @PostMapping("applyWorkHour")
     public ResponseResult<WorkHourEntity> applyWorkHour(@RequestParam(name="applyerID",required = false,defaultValue = "") String applyerId,
@@ -49,10 +51,12 @@ public class WorkHourController {
         return workHourService.getWorkHoursByStatusAndProjectId(status,projectId);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("approveWorkHour")
     public ResponseResult<Integer> approveWorkHour(@RequestParam(name="workHourID")String workHourId,
-                                            @RequestParam(name="approverID",defaultValue = "",required = false)String approverId,HttpSession session){
+                                                   @RequestParam("projectID") String projectID,
+                                                   @RequestParam(name="approverID",defaultValue = "",required = false)String approverId,HttpSession session){
         if(approverId.equals("")){
             String userId=(String)session.getAttribute("userId");
             if(userId==null||userId.equals("")){
@@ -108,16 +112,21 @@ public class WorkHourController {
         return workHourService.getWorkHoursByProjectID(projectId);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("rejectWorkHour")
-    public ResponseResult<Boolean> rejectWorkHour(@RequestParam("workHourID")String workHourID,@RequestParam(value = "approverID",defaultValue = "",required = false) String approverID,HttpSession session){
+    public ResponseResult<Boolean> rejectWorkHour(@RequestParam("workHourID")String workHourID,
+                                                  @RequestParam("projectID") String projectID,
+                                                  @RequestParam(value = "approverID",defaultValue = "",required = false) String approverID,HttpSession session){
         return workHourService.rejectWorkHour(workHourID,approverID,session);
     }
 
+    @PostControl(1)
     @CrossOrigin
     @PostMapping("updateWorkHour")
     public ResponseResult<WorkHourEntity> updateWorkHour(@RequestParam(value = "workHourID")String workHourID,
-                                                  @RequestParam(value = "featureName",defaultValue = "",required = false)String featureName,
+                                                         @RequestParam("projectID") String projectID,
+                                                         @RequestParam(value = "featureName",defaultValue = "",required = false)String featureName,
                                                   @RequestParam(value = "activityName",defaultValue = "",required = false)String activityName,
                                                   @RequestParam(value = "startTime",defaultValue = "",required = false)String startTime,
                                                   @RequestParam(value = "endTime",defaultValue = "",required = false)String endTime){
