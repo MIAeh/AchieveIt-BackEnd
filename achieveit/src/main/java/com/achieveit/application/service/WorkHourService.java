@@ -1,5 +1,6 @@
 package com.achieveit.application.service;
 
+import com.achieveit.application.entity.MemberEntity;
 import com.achieveit.application.entity.ProjectEntity;
 import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.entity.WorkHourEntity;
@@ -48,12 +49,9 @@ public class WorkHourService {
 
         WorkHourEntity entity=new WorkHourEntity(applyerId,applyerEntity.getUserName(),featureName,activityName,projectId,startTime,endTime);
 
-        ProjectEntity projectEntity=projectMapper.getProjectByID(projectId);
-        if(projectEntity==null)
-            return ResultGenerator.error("invalid projectId!");
-
-        String approverId=projectEntity.getProjectMonitorID();
-        String approverName=projectEntity.getProjectMonitorName();
+        MemberEntity applyerMember=projectMapper.getMemberByID(projectId,applyerId);
+        String approverId=applyerMember.getSuperiorID();
+        String approverName=applyerMember.getSuperiorName();
 
         entity.setApproverId(approverId);
         entity.setApproverName(approverName);

@@ -235,7 +235,7 @@ public class FeatureService {
         FeatureEntity featureEntity=featureMapper.getFeatureById(featureId);
         if(featureEntity==null)
             return ResultGenerator.error("invalid featureId!");
-        logger.info("featureid:"+featureEntity.getFeatureId());
+        //logger.info("featureid:"+featureEntity.getFeatureId());
         if(featureName!=null&&!featureName.equals("")){
             featureEntity.setFeatureName(featureName);
         }
