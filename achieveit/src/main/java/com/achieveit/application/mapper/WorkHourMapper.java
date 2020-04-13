@@ -53,7 +53,7 @@ public interface WorkHourMapper {
 
     @Update("update workhour set applytime=#{applyTime},applyerid=#{applyerId},approverid=#{approverId},featurename=#{featureName}" +
             ",activityname=#{activityName},starttimestamp=#{startTimeStamp},endtimestamp=#{endTimeStamp}," +
-            "status=#{status},projectid=#{projectId},applyername=#{applyerName}," +
+            "projectid=#{projectId},applyername=#{applyerName}," +
             "approvername=#{approverName} where workhourid=#{workHourId}")
     int updateWorkHourByWorkHourId(WorkHourEntity workHourEntity);
 }
