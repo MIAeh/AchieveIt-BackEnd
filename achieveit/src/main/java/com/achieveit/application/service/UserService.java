@@ -1,12 +1,11 @@
 package com.achieveit.application.service;
 
-import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.MemberEntity;
+import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.mapper.ProjectMapper;
+import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
-import com.achieveit.application.entity.UserEntity;
-import com.achieveit.application.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +45,9 @@ public class UserService {
 
     /**
      * 用户注册
-     * @param userMail 邮箱
-     * @param userName 用户名
+     *
+     * @param userMail     邮箱
+     * @param userName     用户名
      * @param userPassword 密码
      * @return 是否成功注册的Response消息
      */
@@ -65,9 +65,10 @@ public class UserService {
 
     /**
      * 用户ID登录
-     * @param userId ID
+     *
+     * @param userId       ID
      * @param userPassword 密码
-     * @param session http会话
+     * @param session      http会话
      * @return 是否成功登录的Response消息
      */
     @Transactional(rollbackFor = Exception.class)
@@ -78,9 +79,10 @@ public class UserService {
 
     /**
      * 用户邮箱登录
-     * @param userMail 邮箱
+     *
+     * @param userMail     邮箱
      * @param userPassword 密码
-     * @param session http会话
+     * @param session      http会话
      * @return 是否成功登录的Response消息
      */
     @Transactional(rollbackFor = Exception.class)
@@ -91,9 +93,10 @@ public class UserService {
 
     /**
      * 用户手机登录
-     * @param userPhone 邮箱
+     *
+     * @param userPhone    邮箱
      * @param userPassword 密码
-     * @param session http会话
+     * @param session      http会话
      * @return 是否成功登录的Response消息
      */
     @Transactional(rollbackFor = Exception.class)
@@ -109,19 +112,20 @@ public class UserService {
         if (!userEntity.getUserPassword().equals(userPassword)) {
             return ResultGenerator.error(400, "password wrong!");
         }
-        Integer role=userEntity.getUserRole();
-        if(role==null) role=-1;
+        Integer role = userEntity.getUserRole();
+        if (role == null) role = -1;
 
         session.setAttribute(IS_LOGIN, "true");
         session.setAttribute("userName", userEntity.getUserName());
         session.setAttribute("userId", userEntity.getUserId());
-        session.setAttribute("userRole",role);
+        session.setAttribute("userRole", role);
 
         return ResultGenerator.success(userEntity);
     }
 
     /**
      * 用户注销
+     *
      * @param session http会话
      * @return 是否成功注销的Response消息
      */
@@ -137,6 +141,7 @@ public class UserService {
 
     /**
      * 检查用户是否处于登录状态
+     *
      * @param session http会话
      * @return 用户是否处于登录状态的Response消息
      */
@@ -151,35 +156,36 @@ public class UserService {
 
     /**
      * 返回所有特定用户角色的用户
+     *
      * @param userRole 用户角色
      * @return 所有这一用户角色的用户
      */
-    public ResponseResult<ArrayList<UserEntity>> getUsersByRole(int userRole,HttpSession session){
-        ArrayList<UserEntity> res=userMapper.getUsesByRole(userRole);
+    public ResponseResult<ArrayList<UserEntity>> getUsersByRole(int userRole, HttpSession session) {
+        ArrayList<UserEntity> res = userMapper.getUsesByRole(userRole);
         return ResultGenerator.success(res);
     }
 
-    public ResponseResult<Boolean> setUserRoleById(String userId,int userRole,HttpSession session){
-        userMapper.setUserRoleById(userId,userRole);
+    public ResponseResult<Boolean> setUserRoleById(String userId, int userRole, HttpSession session) {
+        userMapper.setUserRoleById(userId, userRole);
         return ResultGenerator.success();
     }
 
-    public ResponseResult<UserEntity> getUserInfoById(String userId,HttpSession session){
-        UserEntity entity=userMapper.getUserInfoById(userId);
-        if(entity==null)
+    public ResponseResult<UserEntity> getUserInfoById(String userId, HttpSession session) {
+        UserEntity entity = userMapper.getUserInfoById(userId);
+        if (entity == null)
             return ResultGenerator.error("no such id");
         else
             return ResultGenerator.success(entity);
     }
 
-    public ResponseResult<ArrayList<UserEntity>> getAllUserInfo(){
-        ArrayList<UserEntity> allEntities=userMapper.getAllUserInfo();
+    public ResponseResult<ArrayList<UserEntity>> getAllUserInfo() {
+        ArrayList<UserEntity> allEntities = userMapper.getAllUserInfo();
         return ResultGenerator.success(allEntities);
     }
 
     @Transactional
-    public List<UserEntity> getAvailableUserInfoByID(String projectID){
-        List<UserEntity> users  = userMapper.getAllUserInfo();
+    public List<UserEntity> getAvailableUserInfoByID(String projectID) {
+        List<UserEntity> users = userMapper.getAllUserInfo();
         if (users == null) {
             return null;
         }

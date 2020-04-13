@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @MapperScan("com.achieveit.application.mapper")
 public class ApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }

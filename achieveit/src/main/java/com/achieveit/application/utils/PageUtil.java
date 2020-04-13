@@ -86,7 +86,7 @@ public class PageUtil implements Serializable {
      * @return
      */
     public boolean isHasFirst() {
-        return (pageNow == 1) ? false : true;
+        return pageNow != 1;
     }
 
     public void setHasFirst(boolean hasFirst) {
@@ -100,7 +100,7 @@ public class PageUtil implements Serializable {
      */
     public boolean isHasPre() {
         // 如果有首页就有前一页，因为有首页就不是第一页
-        return isHasFirst() ? true : false;
+        return isHasFirst();
     }
 
     public void setHasPre(boolean hasPre) {
@@ -114,7 +114,7 @@ public class PageUtil implements Serializable {
      */
     public boolean isHasNext() {
         // 如果有尾页就有下一页，因为有尾页表明不是最后一页
-        return isHasLast() ? true : false;
+        return isHasLast();
     }
 
     public void setHasNext(boolean hasNext) {
@@ -128,7 +128,7 @@ public class PageUtil implements Serializable {
      */
     public boolean isHasLast() {
         // 如果不是最后一页就有尾页
-        return (pageNow == getTotalCount()) ? false : true;
+        return pageNow != getTotalCount();
     }
 
     public void setHasLast(boolean hasLast) {

@@ -22,39 +22,6 @@ public class DeviceInfo implements Serializable {
 
     private String deviceStatus;
 
-    private String parseDeviceType(String deviceID) {
-        if (deviceID == null) {
-            return "NULL";
-        }
-        else if (deviceID.contains("PC")) {
-            return "PC";
-        }
-        else if (deviceID.contains("PAD")) {
-            return "PAD";
-        }
-        else if (deviceID.contains("PHONE")) {
-            return "PHONE";
-        }
-        else if (deviceID.contains("STORAGE")) {
-            return "STORAGE";
-        }
-        else {
-            return "UNKNOWN";
-        }
-    }
-
-    private String parseDeviceStatus(Date dueDate, Boolean returned) {
-        if (returned) {
-            return "Returned";
-        }
-        else if (dueDate.before(new Date())){
-            return "Overdue";
-        }
-        else {
-            return "Using";
-        }
-    }
-
     public DeviceInfo() {
     }
 
@@ -76,6 +43,32 @@ public class DeviceInfo implements Serializable {
         this.dueDate = deviceEntity.getDueDate();
         this.deviceType = parseDeviceType(deviceEntity.getDeviceID());
         this.deviceStatus = parseDeviceStatus(deviceEntity.getDueDate(), deviceEntity.getReturned());
+    }
+
+    private String parseDeviceType(String deviceID) {
+        if (deviceID == null) {
+            return "NULL";
+        } else if (deviceID.contains("PC")) {
+            return "PC";
+        } else if (deviceID.contains("PAD")) {
+            return "PAD";
+        } else if (deviceID.contains("PHONE")) {
+            return "PHONE";
+        } else if (deviceID.contains("STORAGE")) {
+            return "STORAGE";
+        } else {
+            return "UNKNOWN";
+        }
+    }
+
+    private String parseDeviceStatus(Date dueDate, Boolean returned) {
+        if (returned) {
+            return "Returned";
+        } else if (dueDate.before(new Date())) {
+            return "Overdue";
+        } else {
+            return "Using";
+        }
     }
 
     public String getDeviceID() {

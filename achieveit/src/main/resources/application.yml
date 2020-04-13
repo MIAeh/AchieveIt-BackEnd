@@ -3,9 +3,9 @@ spring:
     active: dev
   datasource:
     driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://116.62.181.135/achievelt
-#    username: softdev
-#    password: postgres
+    #    url: jdbc:postgresql://116.62.181.135/achievelt
+    #    username: softdev
+    #    password: postgres
     url: jdbc:postgresql://101.37.205.16:5432/achievelt
     username: postgres
     password: wh123456
@@ -21,10 +21,10 @@ spring:
       pool-name: AchieveItHikariCP
 
   http:
-      encoding:
-        charset: UTF-8
-#        enable: true
-        force: true
+    encoding:
+      charset: UTF-8
+      #        enable: true
+      force: true
   jackson:
     default-property-inclusion: ALWAYS
     time-zone: GMT+8

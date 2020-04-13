@@ -34,7 +34,7 @@ public class LoggerAspect {
     @Before("(servicePointcut() || controllerPointcut()) && @annotation(logged)")
     public void logBefore(JoinPoint joinPoint, Logged logged) {
         String signature = joinPoint.getSignature().toLongString(); // 获取目标方法签名
-        String  parameterValues = Arrays.toString(joinPoint.getArgs());// 获取目标方法体参数
+        String parameterValues = Arrays.toString(joinPoint.getArgs());// 获取目标方法体参数
         String parameterNames = Arrays.toString(logged.value());
         logger.info("==== Before Execute ====");
         logger.info("Method Signature: " + signature);
@@ -54,7 +54,7 @@ public class LoggerAspect {
 
     @AfterReturning(pointcut = "(servicePointcut() || controllerPointcut()) && @annotation(logged)", returning = "returnValue")
     public void logAfterReturning(JoinPoint joinPoint, Logged logged, Object returnValue) {
-        if(null != returnValue) {
+        if (null != returnValue) {
             logger.info("Returns: " + returnValue.getClass().toString() + " " + returnValue.toString());
         }
         logger.info("=== Execute  Success ===");

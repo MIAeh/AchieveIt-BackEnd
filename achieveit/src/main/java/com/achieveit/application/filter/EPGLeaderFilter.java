@@ -23,7 +23,9 @@ import java.io.IOException;
                 "/project/addEPGMembersByID"
         })
 public class EPGLeaderFilter extends BaseFilter {
-    public EPGLeaderFilter(){ super();}
+    public EPGLeaderFilter() {
+        super();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

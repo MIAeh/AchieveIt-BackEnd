@@ -2,7 +2,7 @@ package com.achieveit.application.entity;
 
 import java.util.Objects;
 
-public class RiskTemplate{
+public class RiskTemplate {
     String riskDescription;
 
     int riskType;
@@ -13,7 +13,7 @@ public class RiskTemplate{
 
     String riskStrategy;
 
-    public RiskTemplate(){
+    public RiskTemplate() {
 
     }
 
@@ -29,36 +29,36 @@ public class RiskTemplate{
         return riskDescription;
     }
 
-    public int getRiskType() {
-        return riskType;
-    }
-
-    public int getRiskLevel() {
-        return riskLevel;
-    }
-
-    public int getRiskInfluence() {
-        return riskInfluence;
-    }
-
-    public String getRiskStrategy() {
-        return riskStrategy;
-    }
-
     public void setRiskDescription(String riskDescription) {
         this.riskDescription = riskDescription;
+    }
+
+    public int getRiskType() {
+        return riskType;
     }
 
     public void setRiskType(int riskType) {
         this.riskType = riskType;
     }
 
+    public int getRiskLevel() {
+        return riskLevel;
+    }
+
     public void setRiskLevel(int riskLevel) {
         this.riskLevel = riskLevel;
     }
 
+    public int getRiskInfluence() {
+        return riskInfluence;
+    }
+
     public void setRiskInfluence(int riskInfluence) {
         this.riskInfluence = riskInfluence;
+    }
+
+    public String getRiskStrategy() {
+        return riskStrategy;
     }
 
     public void setRiskStrategy(String riskStrategy) {

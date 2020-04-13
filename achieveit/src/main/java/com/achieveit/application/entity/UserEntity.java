@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * Entity for User
+ *
  * @author Alevery, Felix
  */
 public class UserEntity {
@@ -19,25 +20,25 @@ public class UserEntity {
 
     private String userId;
 
-    private String userName="";
+    private String userName = "";
 
-    private String userMail="";
+    private String userMail = "";
 
-    private String userPhone="";
+    private String userPhone = "";
 
-    private int userDepartment=0;
+    private int userDepartment = 0;
 
-    private int userRole=0;
+    private int userRole = 0;
 
     @JsonIgnore
-    private String userPassword="";
+    private String userPassword = "";
 
     public UserEntity() {
-       this.userId= UUID.randomUUID().toString();
+        this.userId = UUID.randomUUID().toString();
     }
 
     public UserEntity(String userName, String userMail, String userPassword) {
-        this.userId= UUID.randomUUID().toString();
+        this.userId = UUID.randomUUID().toString();
         this.userName = userName;
         this.userMail = userMail;
         this.userPassword = userPassword;

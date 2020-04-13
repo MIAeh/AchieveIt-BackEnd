@@ -3,6 +3,7 @@ package com.achieveit.application.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class TaskPoolConfig {
 
     @Bean("taskExecutor")
-    public Executor taskExecutor () {
+    public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         // 核心线程数10：线程池创建时候初始化的线程数
         executor.setCorePoolSize(10);

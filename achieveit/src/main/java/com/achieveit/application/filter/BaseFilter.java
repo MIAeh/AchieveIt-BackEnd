@@ -1,11 +1,15 @@
 package com.achieveit.application.filter;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
  * Base Filter
+ *
  * @author Alevery, Felix
  */
 public abstract class BaseFilter implements Filter {
@@ -22,16 +26,17 @@ public abstract class BaseFilter implements Filter {
         this.includeUrls = includeUrls;
     }
 
-    public void init(FilterConfig var1) throws ServletException{
+    public void init(FilterConfig var1) throws ServletException {
 
     }
 
-    public void destroy(){
+    public void destroy() {
 
     }
 
     /**
      * 避免调试时报错，对HttpServletResponse进行初始化
+     *
      * @param servletResponse 要初始化的servletResponse
      * @return 初始化后的HttpServletResponse
      */
@@ -47,6 +52,7 @@ public abstract class BaseFilter implements Filter {
 
     /**
      * 判断请求的URL是否是需要过滤的URL
+     *
      * @param uri 请求的URL
      * @return isNeedFilter
      */

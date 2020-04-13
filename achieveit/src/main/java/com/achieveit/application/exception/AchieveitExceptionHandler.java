@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Exception manager for Timeline
+ *
  * @author Alevery, Felix
  */
 @RestControllerAdvice
@@ -22,12 +23,13 @@ public class AchieveitExceptionHandler {
 
     /**
      * Exception handler
+     *
      * @param e 需要处理的异常
      * @return ResponseResult
      */
     @ExceptionHandler(Exception.class)
-    public ResponseResult<Integer> handlerException(Exception e){
-        if(e==null)
+    public ResponseResult<Integer> handlerException(Exception e) {
+        if (e == null)
             return ResultGenerator.error("fatal error!!!");
         if (e instanceof AchieveitException) {
             //如果是自定义的异常，返回对应的错误信息
@@ -35,12 +37,12 @@ public class AchieveitExceptionHandler {
             return ResultGenerator.error(((AchieveitException) e).getErrorCode().getCode(), e.getMessage());
         } else {
             //如果是系统异常 返回异常信息
-            String errorMessage=e.getMessage();
-            StackTraceElement[] elements=e.getStackTrace();
-            if(e.getMessage().equals(""))
-                errorMessage=elements.toString();
+            String errorMessage = e.getMessage();
+            StackTraceElement[] elements = e.getStackTrace();
+            if (e.getMessage().equals(""))
+                errorMessage = elements.toString();
             logger.info(errorMessage);
-            return ResultGenerator.error(ErrorCode.SYSTEM_ERROR.getCode(),errorMessage);
+            return ResultGenerator.error(ErrorCode.SYSTEM_ERROR.getCode(), errorMessage);
         }
     }
 }

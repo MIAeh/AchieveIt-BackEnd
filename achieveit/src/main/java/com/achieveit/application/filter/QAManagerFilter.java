@@ -23,7 +23,9 @@ import java.io.IOException;
                 "/project/addQAMembersByID"
         })
 public class QAManagerFilter extends BaseFilter {
-    public QAManagerFilter(){ super();}
+    public QAManagerFilter() {
+        super();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

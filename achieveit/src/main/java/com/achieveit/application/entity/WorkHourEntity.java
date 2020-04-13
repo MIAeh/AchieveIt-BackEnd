@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.UUID;
 
 public class WorkHourEntity {
+    int status;
     private String workHourId;
     private Timestamp applyTime;
     private String applyerId;
@@ -16,104 +16,101 @@ public class WorkHourEntity {
     private String featureName;
     private String activityName;
     private String projectId;
-
     @JsonIgnore
     private Timestamp startTimeStamp;
     @JsonIgnore
     private Timestamp endTimeStamp;
-
     private String startTime;
     private String endTime;
 
-    int status;
-    public WorkHourEntity(){
+    public WorkHourEntity() {
 
     }
 
-    public WorkHourEntity(String applyerId,String applyerName, String featureName, String activityName, String projectId,Timestamp startTimeStamp, Timestamp endTimeStamp) {
+    public WorkHourEntity(String applyerId, String applyerName, String featureName, String activityName, String projectId, Timestamp startTimeStamp, Timestamp endTimeStamp) {
         //this.workHourId= UUID.randomUUID().toString();
-        this.applyTime=new Timestamp(System.currentTimeMillis());
+        this.applyTime = new Timestamp(System.currentTimeMillis());
         this.applyerId = applyerId;
-        this.applyerName=applyerName;
+        this.applyerName = applyerName;
         this.featureName = featureName;
         this.activityName = activityName;
-        this.projectId=projectId;
+        this.projectId = projectId;
         this.startTimeStamp = startTimeStamp;
-        this.startTime =String.valueOf(startTimeStamp.getTime());
+        this.startTime = String.valueOf(startTimeStamp.getTime());
         this.endTimeStamp = endTimeStamp;
-        this.endTime =String.valueOf(endTimeStamp.getTime());
-        this.approverId="";
-        this.status=0;
+        this.endTime = String.valueOf(endTimeStamp.getTime());
+        this.approverId = "";
+        this.status = 0;
     }
 
     public String getWorkHourId() {
         return workHourId;
     }
 
-    public Timestamp getApplyTime() {
-        return applyTime;
-    }
-
-    public String getApplyerId() {
-        return applyerId;
-    }
-
-    public String getApproverId() {
-        return approverId;
-    }
-
-    public String getFeatureName() {
-        return featureName;
-    }
-
-    public String getActivityName() {
-        return activityName;
-    }
-
-    public Timestamp getStartTimeStamp() {
-        return startTimeStamp;
-    }
-
-    public Timestamp getEndTimeStamp() {
-        return endTimeStamp;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
     public void setWorkHourId(String workHourId) {
         this.workHourId = workHourId;
+    }
+
+    public Timestamp getApplyTime() {
+        return applyTime;
     }
 
     public void setApplyTime(Timestamp applyTime) {
         this.applyTime = applyTime;
     }
 
+    public String getApplyerId() {
+        return applyerId;
+    }
+
     public void setApplyerId(String applyerId) {
         this.applyerId = applyerId;
+    }
+
+    public String getApproverId() {
+        return approverId;
     }
 
     public void setApproverId(String approverId) {
         this.approverId = approverId;
     }
 
+    public String getFeatureName() {
+        return featureName;
+    }
+
     public void setFeatureName(String featureName) {
         this.featureName = featureName;
+    }
+
+    public String getActivityName() {
+        return activityName;
     }
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
     }
 
+    public Timestamp getStartTimeStamp() {
+        return startTimeStamp;
+    }
+
     public void setStartTimeStamp(Timestamp startTimeStamp) {
         this.startTimeStamp = startTimeStamp;
-        this.startTime =String.valueOf(startTimeStamp.getTime());
+        this.startTime = String.valueOf(startTimeStamp.getTime());
+    }
+
+    public Timestamp getEndTimeStamp() {
+        return endTimeStamp;
     }
 
     public void setEndTimeStamp(Timestamp endTimeStamp) {
         this.endTimeStamp = endTimeStamp;
-        this.endTime =String.valueOf(endTimeStamp.getTime());
+        this.endTime = String.valueOf(endTimeStamp.getTime());
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public void setStatus(int status) {

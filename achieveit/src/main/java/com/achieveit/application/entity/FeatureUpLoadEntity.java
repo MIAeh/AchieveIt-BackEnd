@@ -24,36 +24,36 @@ public class FeatureUpLoadEntity {
         return featureName;
     }
 
-    public String getFeatureDescription() {
-        return featureDescription;
-    }
-
-    public int getFeatureLevel() {
-        return featureLevel;
-    }
-
-    public String getFatherFeatureName() {
-        return fatherFeatureName;
-    }
-
-    public String getProjectID() {
-        return projectID;
-    }
-
     public void setFeatureName(String featureName) {
         this.featureName = featureName;
+    }
+
+    public String getFeatureDescription() {
+        return featureDescription;
     }
 
     public void setFeatureDescription(String featureDescription) {
         this.featureDescription = featureDescription;
     }
 
+    public int getFeatureLevel() {
+        return featureLevel;
+    }
+
     public void setFeatureLevel(int featureLevel) {
         this.featureLevel = featureLevel;
     }
 
+    public String getFatherFeatureName() {
+        return fatherFeatureName;
+    }
+
     public void setFatherFeatureName(String fatherFeatureName) {
         this.fatherFeatureName = fatherFeatureName;
+    }
+
+    public String getProjectID() {
+        return projectID;
     }
 
     public void setProjectID(String projectID) {

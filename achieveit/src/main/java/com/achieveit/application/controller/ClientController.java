@@ -19,8 +19,9 @@ public class ClientController {
 
     /**
      * 根据客户ID获取客户信息
+     *
      * @param clientID 客户ID
-     * @return Result
+     * @return 客户信息
      */
     @CrossOrigin
     @Logged({"clientID"})

@@ -2,7 +2,6 @@ package com.achieveit.application.mapper;
 
 import com.achieveit.application.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,7 @@ import static org.apache.ibatis.type.JdbcType.VARCHAR;
 
 /**
  * Mapper for UserEntity
+ *
  * @author Alevery, Felix
  */
 @Mapper
@@ -17,6 +17,7 @@ public interface UserMapper {
 
     /**
      * 根据userID来获取用户信息
+     *
      * @param userId 所要获取的用户的userID
      * @return User
      */
@@ -34,6 +35,7 @@ public interface UserMapper {
 
     /**
      * 根据userPhone来获取用户信息
+     *
      * @param userPhone 所要获取的用户的userPhone
      * @return User
      */
@@ -51,6 +53,7 @@ public interface UserMapper {
 
     /**
      * 根据userMail来获取用户信息
+     *
      * @param userMail 所要获取的用户的userMail
      * @return User
      */
@@ -68,6 +71,7 @@ public interface UserMapper {
 
     /**
      * 插入（注册）一位新的用户
+     *
      * @param userEntity 所要注册的user
      */
     @Insert("insert into users(userid,usermail,username,userpassword,userdepartment,userrole)" +
@@ -76,6 +80,7 @@ public interface UserMapper {
 
     /**
      * 根据Role获取所有用户
+     *
      * @param userRole 所要获取的users
      * @return affectedRows
      */
@@ -83,7 +88,7 @@ public interface UserMapper {
     ArrayList<UserEntity> getUsesByRole(@Param("userRole") int userRole);
 
     @Update("update users set userrole=#{userRole} where userid=#{userId}")
-    void setUserRoleById(@Param("userId")String userId,@Param("userRole")int userRole);
+    void setUserRoleById(@Param("userId") String userId, @Param("userRole") int userRole);
 
     @Select("select * from users")
     ArrayList<UserEntity> getAllUserInfo();

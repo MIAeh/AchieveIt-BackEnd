@@ -32,14 +32,13 @@ public class DeviceServiceTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(DeviceServiceTest.class);
 
     private HttpSession session;
-
-    @Before
-    public void setSession(){
-        session = new MockHttpSession();
-    }
-
     @Autowired
     private DeviceService deviceService;
+
+    @Before
+    public void setSession() {
+        session = new MockHttpSession();
+    }
 
     @Test
     public void getDeviceIDListTest() {
@@ -61,7 +60,7 @@ public class DeviceServiceTest {
         String deviceID = "PC-20190202-0003";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dueDate = dateFormat.parse("2020-3-30");
-        deviceService.registerDevice(projectID, userID, deviceID, dueDate,session);
+        deviceService.registerDevice(projectID, userID, deviceID, dueDate, session);
         Assert.assertTrue(true);
     }
 
@@ -70,7 +69,7 @@ public class DeviceServiceTest {
         String projectID = "2019-0000-D-01";
         String userID = "0001";
         String deviceID = "PC-20190202-0002";
-        deviceService.returnDevice(projectID, userID, deviceID,session);
+        deviceService.returnDevice(projectID, userID, deviceID, session);
         Assert.assertTrue(true);
     }
 }

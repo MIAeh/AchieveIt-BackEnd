@@ -20,7 +20,7 @@ public class MemberEntity implements Serializable {
 
     private String memberRole = "";
 
-    private String memberMail= "";
+    private String memberMail = "";
 
     private Date createTime;
 

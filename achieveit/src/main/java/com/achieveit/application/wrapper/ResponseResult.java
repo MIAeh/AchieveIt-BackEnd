@@ -1,10 +1,12 @@
 package com.achieveit.application.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Objects;
 
 /**
  * 返回的Response消息
+ *
  * @author Alevery, Felix
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

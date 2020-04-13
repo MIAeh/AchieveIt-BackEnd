@@ -42,7 +42,7 @@ public class HttpRequestAspect {
         this.receiveHttpRequest(joinPoint);
     }
 
-    private void receiveHttpRequest(JoinPoint joinPoint){
+    private void receiveHttpRequest(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String signature = joinPoint.getSignature().toLongString(); // 获取目标方法签名
         logger.info("==== Receive Http Request ====");

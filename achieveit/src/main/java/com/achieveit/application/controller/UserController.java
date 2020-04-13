@@ -1,12 +1,10 @@
 package com.achieveit.application.controller;
+
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.UserEntity;
 import com.achieveit.application.service.UserService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

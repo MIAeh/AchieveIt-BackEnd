@@ -12,13 +12,13 @@ import java.sql.Date;
 @RequestMapping("/debug/")
 public class VersionController {
     @GetMapping("getSystemTime")
-    public ResponseResult<Date> getSystemTime(){
-        return ResultGenerator.success("system",new Date(System.currentTimeMillis()));
+    public ResponseResult<Date> getSystemTime() {
+        return ResultGenerator.success("system", new Date(System.currentTimeMillis()));
     }
 
     @GetMapping("getUpdateTime")
-    public ResponseResult<String> getUpdateTime(){
-        return ResultGenerator.success("last_update","4-11-15:11");
+    public ResponseResult<String> getUpdateTime() {
+        return ResultGenerator.success("last_update", "4-11-15:11");
     }
 
 }

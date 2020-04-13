@@ -107,7 +107,7 @@ public class EmailSend {
         String read = "";
         StringBuffer stringBuffer = new StringBuffer();
         try (FileReader fileReader = new FileReader(file);
-             BufferedReader bufread = new BufferedReader(fileReader);) {
+             BufferedReader bufread = new BufferedReader(fileReader)) {
             while ((read = bufread.readLine()) != null) {
                 read.replace("\"", "\\\"")
                         .replace("username", phone);

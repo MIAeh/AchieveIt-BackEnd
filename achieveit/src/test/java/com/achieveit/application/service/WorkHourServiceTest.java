@@ -1,11 +1,7 @@
 package com.achieveit.application.service;
 
-import com.achieveit.application.entity.WorkHourEntity;
-import com.achieveit.application.wrapper.ResponseResult;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import java.sql.Date;
+
 import javax.servlet.http.HttpSession;
 
 @RunWith(SpringRunner.class)
@@ -31,7 +27,7 @@ public class WorkHourServiceTest {
     private String workHourId;
 
     @Before
-    public void setSession(){
+    public void setSession() {
         session = new MockHttpSession();
     }
 

@@ -15,7 +15,7 @@ public enum ErrorCode {
     ARCHIVE_ERROR(3, "Project No Archive Error"),
     POST_CONTROL_AOP_ERROR(4, "Fail to Get Project ID"),
     POST_CONTROL_ERROR(5, "Fail to Post, Project Archived"),
-    SYSTEM_ERROR(500,"System Error!");
+    SYSTEM_ERROR(500, "System Error!");
 
     private Integer code;
 

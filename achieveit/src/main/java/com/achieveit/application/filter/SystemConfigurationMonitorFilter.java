@@ -25,7 +25,9 @@ import java.io.IOException;
                 "/status/rejectArchive"
         })
 public class SystemConfigurationMonitorFilter extends BaseFilter {
-    public SystemConfigurationMonitorFilter(){ super();}
+    public SystemConfigurationMonitorFilter() {
+        super();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

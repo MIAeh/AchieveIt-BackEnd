@@ -1,31 +1,26 @@
 package com.achieveit.application.utils;
 
-import com.achieveit.application.service.StatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.MimeMessage;
-import java.io.File;
 import java.util.Date;
-import java.util.Properties;
 
 @Component
 public class EmailUtil {
 
+    private final Logger logger = LoggerFactory.getLogger(EmailUtil.class);
+    private final JavaMailSender sender;
     @Value("${spring.mail.username}")
     private String from;
+
+    public EmailUtil(JavaMailSender sender) {
+        this.sender = sender;
+    }
 
     public String getFrom() {
         return from;
@@ -35,18 +30,10 @@ public class EmailUtil {
         this.from = from;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(EmailUtil.class);
-
-
-    private final JavaMailSender sender;
-
-    public EmailUtil(JavaMailSender sender) {
-        this.sender = sender;
-    }
-
     /**
      * 发送一般文本邮件
-     * @param to 收件人
+     *
+     * @param to      收件人
      * @param subject 主题
      * @param content 内容
      */

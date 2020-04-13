@@ -49,16 +49,16 @@ public class ProjectListItem implements Serializable {
         this.projectEndDate = projectEndDate;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getProjectID() {
         return projectID;
     }
 
     public void setProjectID(String projectID) {
         this.projectID = projectID;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getProjectName() {

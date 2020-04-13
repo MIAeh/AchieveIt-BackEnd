@@ -1,9 +1,10 @@
 package com.achieveit.application.wrapper;
 
 import com.achieveit.application.enums.ErrorCode;
-import com.achieveit.application.wrapper.ResponseResult;
+
 /**
  * 用于构造ResponseResult
+ *
  * @author Alevery, Felix
  */
 
@@ -15,6 +16,7 @@ public class ResultGenerator {
 
     /**
      * construct success Response Result without data
+     *
      * @param <T> 任意类型
      * @return 类型为T的Response消息
      */
@@ -24,8 +26,9 @@ public class ResultGenerator {
 
     /**
      * construct success Response Result with string message
+     *
      * @param message 传入的消息
-     * @param <T> 任意类型
+     * @param <T>     任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> success(String message) {
@@ -34,8 +37,9 @@ public class ResultGenerator {
 
     /**
      * construct success Response Result with data
+     *
      * @param data 传入的数据
-     * @param <T> 任意类型
+     * @param <T>  任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> success(T data) {
@@ -44,9 +48,10 @@ public class ResultGenerator {
 
     /**
      * construct success Response Result with string message and data
-     * @param data 传入的数据
+     *
+     * @param data    传入的数据
      * @param message 传入的消息
-     * @param <T> 任意类型
+     * @param <T>     任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> success(String message, T data) {
@@ -55,9 +60,10 @@ public class ResultGenerator {
 
     /**
      * construct error Response Result with error code and string message
+     *
      * @param errorCode 错误码
-     * @param message 传入的消息
-     * @param <T> 任意类型
+     * @param message   传入的消息
+     * @param <T>       任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> error(int errorCode, String message) {
@@ -66,8 +72,9 @@ public class ResultGenerator {
 
     /**
      * construct error Response Result with string message
+     *
      * @param message 传入的消息
-     * @param <T> 任意类型
+     * @param <T>     任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> error(String message) {
@@ -76,8 +83,9 @@ public class ResultGenerator {
 
     /**
      * construct error Response Result with error code
+     *
      * @param errorCode 错误码
-     * @param <T> 任意类型
+     * @param <T>       任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> error(int errorCode) {
@@ -86,8 +94,9 @@ public class ResultGenerator {
 
     /**
      * construct error Response Result with error code
+     *
      * @param errorCode 错误码
-     * @param <T> 任意类型
+     * @param <T>       任意类型
      * @return 类型为T的Response消息
      */
     public static <T> ResponseResult<T> error(ErrorCode errorCode) {

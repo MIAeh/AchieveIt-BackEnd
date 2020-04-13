@@ -33,11 +33,22 @@ public class DeviceService {
         this.projectMapper = projectMapper;
     }
 
+    /**
+     * 获取（未占用）设备列表
+     *
+     * @return （未占用）设备列表
+     */
     @Logged
     public List<String> getDeviceIDList() {
         return deviceMapper.getDeviceIDList();
     }
 
+    /**
+     * 通过项目ID获取设备使用情况列表
+     *
+     * @param projectID 项目ID
+     * @return 设备使用情况列表
+     */
     @Logged({"projectID"})
     public List<DeviceInfo> getDeviceList(String projectID) {
         List<DeviceEntity> deviceEntities = deviceMapper.getDeviceList(projectID);
@@ -49,9 +60,31 @@ public class DeviceService {
         return deviceInfos;
     }
 
+    /**
+     * 登记设备使用
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param userID    设备使用者ID
+     * @param deviceID  设备ID
+     * @param dueDate   归还日期
+     * @param session   会话
+     * @return success/error
+     */
+
+    /**
+     * 登记设备使用
+     *
+     * @param projectID 项目ID
+     * @param userID    设备使用者ID
+     * @param deviceID  设备ID
+     * @param dueDate   归还日期
+     * @param session   会话
+     * @throws AchieveitException 获取不到loginUserID导致SESSION_ERROR/成员存在导致QUERY_ERROR/成员角色权限错误导致ROLE_ERROR
+     */
     @Transactional
     @Logged({"projectID", "userID", "deviceID", "dueDate", "session"})
-    public void registerDevice(String projectID, String userID, String deviceID, Date dueDate, HttpSession session) {
+    public void registerDevice(String projectID, String userID, String deviceID, Date dueDate, HttpSession session) throws AchieveitException {
         // member role authorization
         String loginUserID = (String) session.getAttribute("userId");
         if (loginUserID == null) {
@@ -70,6 +103,15 @@ public class DeviceService {
         deviceMapper.registerDevice(projectID, userID, deviceID, dueDate);
     }
 
+    /**
+     * 归还设备
+     *
+     * @param projectID 项目ID
+     * @param userID    设备使用者ID
+     * @param deviceID  设备ID
+     * @param session   会话
+     * @throws AchieveitException 获取不到loginUserID导致SESSION_ERROR/成员存在导致QUERY_ERROR/成员角色权限错误导致ROLE_ERROR
+     */
     @Transactional
     @Logged({"projectID", "userID", "deviceID", "session"})
     public void returnDevice(String projectID, String userID, String deviceID, HttpSession session) {

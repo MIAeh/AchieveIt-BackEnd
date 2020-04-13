@@ -90,8 +90,7 @@ public class ProjectInfo implements Serializable {
         this.domain = projectEntity.getDomain();
         if (projectEntity.getProjectLanguages() != null) {
             this.projectLanguages = JSONObject.parseArray(projectEntity.getProjectLanguages(), String.class);
-        }
-        else {
+        } else {
             this.projectLanguages = new ArrayList<>();
         }
         this.projectMilestones = new ArrayList<>();

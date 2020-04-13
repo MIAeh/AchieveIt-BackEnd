@@ -3,14 +3,15 @@ package com.achieveit.application.aspect;
 import com.achieveit.application.annotation.PostControl;
 import com.achieveit.application.entity.FeatureUpLoad;
 import com.achieveit.application.entity.ProjectEntity;
-import com.achieveit.application.entity.ProjectSubStatus;
 import com.achieveit.application.enums.ErrorCode;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.mapper.ProjectMapper;
 import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -64,15 +65,12 @@ public class ProjectArchivedPostControlAspect {
     private String parseProjectID(Object object) {
         if (object instanceof String) {
             return (String) object;
-        }
-        else if (object instanceof JSONObject) {
+        } else if (object instanceof JSONObject) {
             return ((JSONObject) object).getString("projectID");
-        }
-        else if (object instanceof FeatureUpLoad) {
+        } else if (object instanceof FeatureUpLoad) {
             // assert all project id in FeatureUpLoad list is the same
             return ((FeatureUpLoad) object).getData().get(0).getProjectID();
-        }
-        else {
+        } else {
             throw new AchieveitException(ErrorCode.POST_CONTROL_AOP_ERROR);
         }
     }

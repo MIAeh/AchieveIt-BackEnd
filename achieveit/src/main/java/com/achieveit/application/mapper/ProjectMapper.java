@@ -6,7 +6,6 @@ import com.achieveit.application.entity.ProjectEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Client Mapper
@@ -16,6 +15,7 @@ public interface ProjectMapper {
 
     /**
      * 获取项目ID列表
+     *
      * @return ArrayList of ProjectIDs
      */
     @Select("SELECT * FROM projectidlist")
@@ -23,6 +23,7 @@ public interface ProjectMapper {
 
     /**
      * 获取项目列表
+     *
      * @return ArrayList of Projects
      */
     @Select("SELECT project.*, manager.username AS projectmanagername, monitor.username AS projectmonitorname, client.clientcontactname AS projectclientcontactname, client,clientcompany AS projectclientcompany FROM project, users manager, users monitor, client WHERE (manager.userid = project.projectmanagerid AND monitor.userid = project.projectmonitorid AND client.clientid = project.projectclientid);")

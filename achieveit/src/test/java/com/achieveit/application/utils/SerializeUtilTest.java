@@ -1,18 +1,13 @@
 package com.achieveit.application.utils;
 
 import com.achieveit.application.entity.ClientInfo;
-import com.achieveit.application.service.ProjectServiceTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class SerializeUtilTest {
 
@@ -24,7 +19,7 @@ public class SerializeUtilTest {
         String serializedClientInfo = SerializeUtil.serialize(clientInfo);
         LOGGER.info(serializedClientInfo);
         Assert.assertNotNull(serializedClientInfo);
-        ClientInfo unserializedClientInfo = (ClientInfo)SerializeUtil.unserialize(serializedClientInfo);
+        ClientInfo unserializedClientInfo = (ClientInfo) SerializeUtil.unserialize(serializedClientInfo);
         Assert.assertEquals(clientInfo, unserializedClientInfo);
 
         ArrayList<ClientInfo> clientInfoArrayList = new ArrayList<>();
@@ -32,7 +27,7 @@ public class SerializeUtilTest {
         String serializedClientInfoArrayList = SerializeUtil.serialize(clientInfoArrayList);
         LOGGER.info(serializedClientInfoArrayList);
         Assert.assertNotNull(serializedClientInfoArrayList);
-        ArrayList<ClientInfo> unserializedClientInfoArrayList = (ArrayList<ClientInfo>)SerializeUtil.unserialize(serializedClientInfoArrayList);
+        ArrayList<ClientInfo> unserializedClientInfoArrayList = (ArrayList<ClientInfo>) SerializeUtil.unserialize(serializedClientInfoArrayList);
         Assert.assertEquals(clientInfoArrayList, unserializedClientInfoArrayList);
 
     }

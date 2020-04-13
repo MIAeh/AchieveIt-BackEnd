@@ -36,15 +36,13 @@ public class ProjectServiceTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectServiceTest.class);
 
     private HttpSession session;
-
-    @Before
-    public void setSession(){
-        session = new MockHttpSession();
-    }
-
     @Autowired
     private ProjectService projectService;
 
+    @Before
+    public void setSession() {
+        session = new MockHttpSession();
+    }
 
     @Test
     public void getProjectIDListTest() {
@@ -77,7 +75,7 @@ public class ProjectServiceTest {
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-15"), "milestone 2"));
         projectMilestones.add(new Milestone(dateFormat.parse("2019-12-12"), "milestone 3"));
         Integer domain = 0;
-        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain,null, session);
+        projectService.createProjectByID(projectID, projectName, projectManagerID, projectMonitorID, projectClientID, projectStartDate, projectEndDate, projectFrameworks, projectLanguages, projectMilestones, domain, null, session);
         Assert.assertTrue(true);
     }
 

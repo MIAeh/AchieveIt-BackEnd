@@ -1,10 +1,6 @@
 package com.achieveit.application.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class SerializeUtil {
@@ -19,6 +15,7 @@ public class SerializeUtil {
         byteArrayOutputStream.close();
         return string;
     }
+
     public static Object unserialize(String str) throws IOException, ClassNotFoundException {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(str.getBytes(StandardCharsets.ISO_8859_1));
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);

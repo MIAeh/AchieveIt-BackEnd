@@ -2,9 +2,9 @@ package com.achieveit.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.sql.Date;
 
 public class RiskEntity {
     private int riskID;
@@ -34,90 +34,90 @@ public class RiskEntity {
 
     private ArrayList<String> riskHolders;
 
-    public RiskEntity(){
+    public RiskEntity() {
 
     }
 
-    public RiskEntity(String riskDescription, int riskType, String riskCharger,String riskChargerName, int riskLevel, int riskInfluence,int riskFrequency,String riskStrategy,int riskStatus,String projectID) {
+    public RiskEntity(String riskDescription, int riskType, String riskCharger, String riskChargerName, int riskLevel, int riskInfluence, int riskFrequency, String riskStrategy, int riskStatus, String projectID) {
         this.riskDescription = riskDescription;
         this.riskType = riskType;
         this.riskCharger = riskCharger;
-        this.riskChargerName=riskChargerName;
+        this.riskChargerName = riskChargerName;
         this.riskLevel = riskLevel;
         this.riskInfluence = riskInfluence;
-        this.riskFrequency=riskFrequency;
-        this.riskStrategy=riskStrategy;
-        this.riskStatus=riskStatus;
-        this.projectID=projectID;
-        this.riskHolders=new ArrayList<>();
+        this.riskFrequency = riskFrequency;
+        this.riskStrategy = riskStrategy;
+        this.riskStatus = riskStatus;
+        this.projectID = projectID;
+        this.riskHolders = new ArrayList<>();
     }
 
     public int getRiskID() {
         return riskID;
     }
 
-    public String getRiskDescription() {
-        return riskDescription;
-    }
-
-    public int getRiskType() {
-        return riskType;
-    }
-
-    public String getRiskCharger() {
-        return riskCharger;
-    }
-
-    public int getRiskLevel() {
-        return riskLevel;
-    }
-
-    public int getRiskInfluence() {
-        return riskInfluence;
-    }
-
-    public int getRiskStatus() {
-        return riskStatus;
-    }
-
-    public int getRiskFrequency() {
-        return riskFrequency;
-    }
-
-    public String getRiskStrategy() {
-        return riskStrategy;
-    }
-
     public void setRiskID(int riskID) {
         this.riskID = riskID;
+    }
+
+    public String getRiskDescription() {
+        return riskDescription;
     }
 
     public void setRiskDescription(String riskDescription) {
         this.riskDescription = riskDescription;
     }
 
+    public int getRiskType() {
+        return riskType;
+    }
+
     public void setRiskType(int riskType) {
         this.riskType = riskType;
+    }
+
+    public String getRiskCharger() {
+        return riskCharger;
     }
 
     public void setRiskCharger(String riskCharger) {
         this.riskCharger = riskCharger;
     }
 
+    public int getRiskLevel() {
+        return riskLevel;
+    }
+
     public void setRiskLevel(int riskLevel) {
         this.riskLevel = riskLevel;
+    }
+
+    public int getRiskInfluence() {
+        return riskInfluence;
     }
 
     public void setRiskInfluence(int riskInfluence) {
         this.riskInfluence = riskInfluence;
     }
 
+    public int getRiskStatus() {
+        return riskStatus;
+    }
+
     public void setRiskStatus(int riskStatus) {
         this.riskStatus = riskStatus;
     }
 
+    public int getRiskFrequency() {
+        return riskFrequency;
+    }
+
     public void setRiskFrequency(int riskFrequency) {
         this.riskFrequency = riskFrequency;
+    }
+
+    public String getRiskStrategy() {
+        return riskStrategy;
     }
 
     public void setRiskStrategy(String riskStrategy) {
@@ -156,9 +156,9 @@ public class RiskEntity {
         this.riskHolders = riskHolders;
     }
 
-    public void setRiskHolders(String[] riskHolders){
-        if(riskHolders==null) return;
-        for(String riskHolder:riskHolders)
+    public void setRiskHolders(String[] riskHolders) {
+        if (riskHolders == null) return;
+        for (String riskHolder : riskHolders)
             this.riskHolders.add(riskHolder);
     }
 

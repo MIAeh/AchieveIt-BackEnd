@@ -31,56 +31,56 @@ public class RiskServiceTest {
     private int riskId;
 
     @Before
-    public void setSession(){
+    public void setSession() {
         session = new MockHttpSession();
     }
 
     @Test
-    public void testAAddRisk(){
-        ResponseResult<RiskEntity> risk=riskService.addRisk("test",0,"none",0,0,0,"none",0,"none",null,session);
-        if(risk!=null&&risk.getData()!=null)
-            riskId=risk.getData().getRiskID();
+    public void testAAddRisk() {
+        ResponseResult<RiskEntity> risk = riskService.addRisk("test", 0, "none", 0, 0, 0, "none", 0, "none", null, session);
+        if (risk != null && risk.getData() != null)
+            riskId = risk.getData().getRiskID();
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testBGetRisks(){
+    public void testBGetRisks() {
         riskService.getAllRisks(session);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testCChangeRiskStatus(){
-        riskService.changeRiskStatus(riskId,"none");
+    public void testCChangeRiskStatus() {
+        riskService.changeRiskStatus(riskId, "none");
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testDAddRiskHolders(){
-        riskService.addRiskHoldersByRiskId(riskId,"none");
+    public void testDAddRiskHolders() {
+        riskService.addRiskHoldersByRiskId(riskId, "none");
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testEGetRiskHolders(){
+    public void testEGetRiskHolders() {
         riskService.getRiskHoldersByRiskId(riskId);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testFAddRiskTemplate(){
-        riskService.addRiskTemplate("testDescription",0,0,0,"waitToDie");
+    public void testFAddRiskTemplate() {
+        riskService.addRiskTemplate("testDescription", 0, 0, 0, "waitToDie");
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testGGetRiskTemplate(){
+    public void testGGetRiskTemplate() {
         riskService.getRiskTemplates();
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testHGetRiskTemplatesByProjectID(){
+    public void testHGetRiskTemplatesByProjectID() {
         riskService.getRiskTemplatesByProjectID("none");
         Assert.assertTrue(true);
     }

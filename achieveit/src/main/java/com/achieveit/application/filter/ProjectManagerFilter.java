@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @Order(2)
 @WebFilter(
@@ -41,7 +40,9 @@ import java.util.ArrayList;
                 "/status/endProject",
                 "/status/updateArchive"})
 public class ProjectManagerFilter extends BaseFilter {
-    public ProjectManagerFilter(){ super();}
+    public ProjectManagerFilter() {
+        super();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

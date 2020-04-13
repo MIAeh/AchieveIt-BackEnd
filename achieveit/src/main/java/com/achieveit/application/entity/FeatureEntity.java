@@ -1,9 +1,9 @@
 package com.achieveit.application.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
-import java.sql.Date;
 
 public class FeatureEntity {
     private String featureId;
@@ -24,48 +24,67 @@ public class FeatureEntity {
 
     private Date createTime;
 
+    public FeatureEntity() {
+        this.featureId = UUID.randomUUID().toString();
+    }
+
+    public FeatureEntity(int featureLevel, String projectId, String featureName, String featureDescription) {
+        //this.featureId= UUID.randomUUID().toString();
+        this.featureLevel = featureLevel;
+        this.projectId = projectId;
+        this.featureName = featureName;
+        this.featureDescription = featureDescription;
+        this.createTime = new Date(System.currentTimeMillis());
+    }
+
+    public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName, String featureDescription) {
+        //this.featureId= UUID.randomUUID().toString();
+        this.featureLevel = featureLevel;
+        this.fatherId = fatherId;
+        this.projectId = projectId;
+        this.featureName = featureName;
+        this.featureDescription = featureDescription;
+        this.createTime = new Date(System.currentTimeMillis());
+    }
+
     public String getFeatureId() {
         return featureId;
-    }
-
-    public int getFeatureLevel() {
-        return featureLevel;
-    }
-
-    public String getFatherId() {
-        return fatherId;
-    }
-
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public String getFeatureName() {
-        return featureName;
     }
 
     public void setFeatureId(String featureId) {
         this.featureId = featureId;
     }
 
+    public int getFeatureLevel() {
+        return featureLevel;
+    }
+
     public void setFeatureLevel(int featureLevel) {
         this.featureLevel = featureLevel;
+    }
+
+    public String getFatherId() {
+        return fatherId;
     }
 
     public void setFatherId(String fatherId) {
         this.fatherId = fatherId;
     }
 
+    public String getProjectId() {
+        return projectId;
+    }
+
     public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
-    public void setFeatureName(String featureName) {
-        this.featureName = featureName;
+    public String getFeatureName() {
+        return featureName;
     }
 
-    public FeatureEntity() {
-        this.featureId= UUID.randomUUID().toString();
+    public void setFeatureName(String featureName) {
+        this.featureName = featureName;
     }
 
     public ArrayList<FeatureEntity> getAllChildren() {
@@ -100,25 +119,6 @@ public class FeatureEntity {
         this.fatherName = fatherName;
     }
 
-    public FeatureEntity(int featureLevel, String projectId, String featureName, String featureDescription) {
-        //this.featureId= UUID.randomUUID().toString();
-        this.featureLevel = featureLevel;
-        this.projectId = projectId;
-        this.featureName = featureName;
-        this.featureDescription=featureDescription;
-        this.createTime=new Date(System.currentTimeMillis());
-    }
-
-    public FeatureEntity(int featureLevel, String fatherId, String projectId, String featureName,String featureDescription) {
-        //this.featureId= UUID.randomUUID().toString();
-        this.featureLevel = featureLevel;
-        this.fatherId = fatherId;
-        this.projectId = projectId;
-        this.featureName = featureName;
-        this.featureDescription=featureDescription;
-        this.createTime=new Date(System.currentTimeMillis());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,13 +128,13 @@ public class FeatureEntity {
                 Objects.equals(featureId, that.featureId) &&
                 Objects.equals(fatherId, that.fatherId) &&
                 Objects.equals(projectId, that.projectId) &&
-                Objects.equals(featureName, that.featureName)&&
-                Objects.equals(createTime,that.createTime);
+                Objects.equals(featureName, that.featureName) &&
+                Objects.equals(createTime, that.createTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName, featureDescription, allChildren,createTime);
+        return Objects.hash(featureId, featureLevel, fatherId, projectId, featureName, featureDescription, allChildren, createTime);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class FeatureEntity {
                 ", featureName='" + featureName + '\'' +
                 ", featureDescription='" + featureDescription + '\'' +
                 ", allChildren=" + allChildren +
-                ", createTime="+createTime+
+                ", createTime=" + createTime +
                 '}';
     }
 }

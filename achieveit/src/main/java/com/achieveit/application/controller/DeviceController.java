@@ -2,21 +2,15 @@ package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.annotation.PostControl;
-import com.achieveit.application.entity.DeviceEntity;
 import com.achieveit.application.entity.DeviceInfo;
-import com.achieveit.application.enums.ErrorCode;
-import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.DeviceService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,6 +23,11 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
+    /**
+     * 获取（未占用）设备列表
+     *
+     * @return （未占用）设备列表
+     */
     @CrossOrigin
     @Logged
     @GetMapping("/getDeviceIDList")
@@ -37,6 +36,12 @@ public class DeviceController {
         return ResultGenerator.success(deviceIDs);
     }
 
+    /**
+     * 通过项目ID获取设备使用情况列表
+     *
+     * @param projectID 项目ID
+     * @return 设备使用情况列表
+     */
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getDeviceList")
@@ -45,6 +50,17 @@ public class DeviceController {
         return ResultGenerator.success(deviceInfos);
     }
 
+    /**
+     * 登记设备使用
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param userID    设备使用者ID
+     * @param deviceID  设备ID
+     * @param dueDate   归还日期
+     * @param session   会话
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"projectID", "userID", "deviceID", "dueDate", "session"})
@@ -60,6 +76,16 @@ public class DeviceController {
         }
     }
 
+    /**
+     * 归还设备
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param userID    设备使用者ID
+     * @param deviceID  设备ID
+     * @param session   会话
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"projectID", "userID", "deviceID", "session"})

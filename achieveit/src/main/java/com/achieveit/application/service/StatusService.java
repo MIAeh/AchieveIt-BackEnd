@@ -3,7 +3,6 @@ package com.achieveit.application.service;
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.entity.*;
 import com.achieveit.application.enums.ErrorCode;
-import com.achieveit.application.enums.MemberRoles;
 import com.achieveit.application.enums.ProjectStatus;
 import com.achieveit.application.enums.UserRoles;
 import com.achieveit.application.exception.AchieveitException;
@@ -58,15 +57,13 @@ public class StatusService {
         if (projectStatus.equals(ProjectStatus.APPROVED.getStatus())) {
             ProjectSubStatus projectSubStatus = statusMapper.getProjectSubStatusByID(projectID);
             projectStatusEntity = new ProjectStatusEntity(projectStatus, projectSubStatus);
-        }
-        else if (projectStatus.equals(ProjectStatus.ENDED.getStatus())) {
+        } else if (projectStatus.equals(ProjectStatus.ENDED.getStatus())) {
             ArchiveEntity archiveEntity = statusMapper.getArchiveByID(projectID);
-            if(archiveEntity == null) {
+            if (archiveEntity == null) {
                 throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
             }
             projectStatusEntity = new ProjectStatusEntity(projectStatus, archiveEntity.getArchived());
-        }
-        else {
+        } else {
             projectStatusEntity = new ProjectStatusEntity(projectStatus);
         }
         return projectStatusEntity;
@@ -84,11 +81,9 @@ public class StatusService {
         logger.info("Project monitor ID: " + project.getProjectMonitorID());
         if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
-        }
-        else if (!project.getProjectMonitorID().equals(loginUserID)) {
+        } else if (!project.getProjectMonitorID().equals(loginUserID)) {
             throw new AchieveitException(ErrorCode.ROLE_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -114,13 +109,11 @@ public class StatusService {
                 emailUtil.sendTextEmail(user.getUserMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已立项",
                         "申请立项已通过，项目已立项，请分配EPG。");
-            }
-            else if (user.getUserRole() == UserRoles.QA_MANAGER.getRole()) {
+            } else if (user.getUserRole() == UserRoles.QA_MANAGER.getRole()) {
                 emailUtil.sendTextEmail(user.getUserMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已立项",
                         "申请立项已通过，项目已立项，请分配QA。");
-            }
-            else if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+            } else if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
                 emailUtil.sendTextEmail(user.getUserMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已立项",
                         "申请立项已通过，项目已立项，请确认配置完成。");
@@ -140,11 +133,9 @@ public class StatusService {
         logger.info("Project monitor ID: " + project.getProjectMonitorID());
         if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
-        }
-        else if (!project.getProjectMonitorID().equals(loginUserID)) {
+        } else if (!project.getProjectMonitorID().equals(loginUserID)) {
             throw new AchieveitException(ErrorCode.ROLE_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.APPLY_FOR_APPROVAL.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -174,11 +165,9 @@ public class StatusService {
         ProjectSubStatus projectSubStatus = statusMapper.getProjectSubStatusByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.APPROVED.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.APPROVED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
-        }
-        else if (!projectSubStatus.getConfigurationCompleted() || !projectSubStatus.getAllocatedEPG() || !projectSubStatus.getAllocatedQA()) {
+        } else if (!projectSubStatus.getConfigurationCompleted() || !projectSubStatus.getAllocatedEPG() || !projectSubStatus.getAllocatedQA()) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -189,7 +178,7 @@ public class StatusService {
         // send mail
         List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
         if (projectMembers != null) {
-            for (MemberEntity member: projectMembers) {
+            for (MemberEntity member : projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 进行中",
                         "配置完成已启动，项目进行中。");
@@ -203,8 +192,7 @@ public class StatusService {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.IN_PROGRESS.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.IN_PROGRESS.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -215,7 +203,7 @@ public class StatusService {
         // send mail
         List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
         if (projectMembers != null) {
-            for (MemberEntity member: projectMembers) {
+            for (MemberEntity member : projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已交付",
                         "确认交付，项目已交付。");
@@ -229,8 +217,7 @@ public class StatusService {
         ProjectEntity project = projectMapper.getProjectByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.DELIVERED.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.DELIVERED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
         }
 
@@ -241,7 +228,7 @@ public class StatusService {
         // send mail
         List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
         if (projectMembers != null) {
-            for (MemberEntity member: projectMembers) {
+            for (MemberEntity member : projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已结束",
                         "确认结束，项目已结束。");
@@ -319,11 +306,9 @@ public class StatusService {
         ArchiveEntity archiveEntity = statusMapper.getArchiveByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
+        } else if (!project.getProjectStatus().equals(ProjectStatus.ENDED.getStatus())) {
             throw new AchieveitException(ErrorCode.STATUS_ERROR);
-        }
-        else if (archiveEntity == null || !archiveEntity.getArchived() || archiveEntity.getArchiveLink() == null || archiveEntity.getArchiveLink().equals("")) {
+        } else if (archiveEntity == null || !archiveEntity.getArchived() || archiveEntity.getArchiveLink() == null || archiveEntity.getArchiveLink().equals("")) {
             throw new AchieveitException(ErrorCode.ARCHIVE_ERROR);
         }
 
@@ -334,7 +319,7 @@ public class StatusService {
         // send mail
         List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
         if (projectMembers != null) {
-            for (MemberEntity member: projectMembers) {
+            for (MemberEntity member : projectMembers) {
                 emailUtil.sendTextEmail(member.getMemberMail(),
                         project.getProjectID() + " " + project.getProjectName() + " 已归档",
                         "归档审批通过，项目已归档。");

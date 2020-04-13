@@ -2,18 +2,15 @@ package com.achieveit.application.controller;
 
 import com.achieveit.application.annotation.Logged;
 import com.achieveit.application.annotation.PostControl;
-import com.achieveit.application.entity.*;
+import com.achieveit.application.entity.AuthorityEntity;
+import com.achieveit.application.entity.AuthorityList;
 import com.achieveit.application.exception.AchieveitException;
 import com.achieveit.application.service.AuthorityService;
-import com.achieveit.application.service.ProjectService;
 import com.achieveit.application.wrapper.ResponseResult;
 import com.achieveit.application.wrapper.ResultGenerator;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,6 +23,12 @@ public class AuthorityController {
         this.authorityService = authorityService;
     }
 
+    /**
+     * 通过项目ID获取所有成员的Git/Mail/File权限
+     *
+     * @param projectID 项目ID
+     * @return 该项目的所有拥有Git/Mail/File权限的成员
+     */
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getAllMembersByID")
@@ -34,6 +37,12 @@ public class AuthorityController {
         return ResultGenerator.success(authorityList);
     }
 
+    /**
+     * 通过项目ID获取所有成员的Git权限
+     *
+     * @param projectID 项目ID
+     * @return 该项目的所有拥有Git权限的成员
+     */
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getGitMembersByID")
@@ -42,6 +51,13 @@ public class AuthorityController {
         return ResultGenerator.success(gitMembers);
     }
 
+    /**
+     * 添加（多个）拥有Git权限的项目成员
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param jsonObject 含有项目ID和要添加的成员ID(s)的JSON
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
@@ -58,6 +74,14 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    /**
+     * 删除项目成员的Git权限
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param memberID  项目成员ID
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
@@ -67,6 +91,12 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    /**
+     * 通过项目ID获取所有成员的Mail权限
+     *
+     * @param projectID 项目ID
+     * @return 该项目的所有拥有Git权限的成员
+     */
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getMailMembersByID")
@@ -75,6 +105,13 @@ public class AuthorityController {
         return ResultGenerator.success(mailMembers);
     }
 
+    /**
+     * 添加（多个）拥有Mail权限的项目成员
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param jsonObject 含有项目ID和要添加的成员ID(s)的JSON
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
@@ -91,6 +128,14 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    /**
+     * 删除项目成员的Mail权限
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param memberID  项目成员ID
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
@@ -100,6 +145,12 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    /**
+     * 通过项目ID获取所有成员的File权限
+     *
+     * @param projectID 项目ID
+     * @return 该项目的所有拥有Git权限的成员
+     */
     @CrossOrigin
     @Logged({"projectID"})
     @GetMapping("/getFileMembersByID")
@@ -108,6 +159,13 @@ public class AuthorityController {
         return ResultGenerator.success(fileMembers);
     }
 
+    /**
+     * 添加（多个）拥有File权限的项目成员
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param jsonObject 含有项目ID和要添加的成员ID(s)的JSON
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"jsonObject"})
@@ -124,6 +182,14 @@ public class AuthorityController {
         return ResultGenerator.success();
     }
 
+    /**
+     * 删除项目成员的File权限
+     * 需要对已归档的项目进行Post控制
+     *
+     * @param projectID 项目ID
+     * @param memberID  项目成员ID
+     * @return success/error
+     */
     @PostControl
     @CrossOrigin
     @Logged({"projectID", "memberID"})
