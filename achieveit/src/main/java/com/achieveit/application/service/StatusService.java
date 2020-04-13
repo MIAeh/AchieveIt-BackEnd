@@ -12,6 +12,8 @@ import com.achieveit.application.mapper.ProjectMapper;
 import com.achieveit.application.mapper.StatusMapper;
 import com.achieveit.application.mapper.UserMapper;
 import com.achieveit.application.utils.EmailUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,11 @@ public class StatusService {
     private final AuthorityMapper authorityMapper;
 
     private final EmailUtil emailUtil;
+
+    /**
+     * Logger
+     */
+    private final Logger logger = LoggerFactory.getLogger(StatusService.class);
 
     public StatusService(StatusMapper statusMapper, ProjectMapper projectMapper, UserMapper userMapper, AuthorityMapper authorityMapper, EmailUtil emailUtil) {
         this.statusMapper = statusMapper;
@@ -69,11 +76,13 @@ public class StatusService {
     @Logged({"projectID"})
     public void approveApplication(String projectID, HttpSession session) throws AchieveitException {
         String loginUserID = (String) session.getAttribute("userId");
+        logger.info("Login ID: " + loginUserID);
         ProjectEntity project = projectMapper.getProjectByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
-        else if (loginUserID == null) {
+        logger.info("Project monitor ID: " + project.getProjectMonitorID());
+        if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
         }
         else if (!project.getProjectMonitorID().equals(loginUserID)) {
@@ -123,11 +132,13 @@ public class StatusService {
     @Logged({"projectID"})
     public void rejectApplication(String projectID, HttpSession session) throws AchieveitException {
         String loginUserID = (String) session.getAttribute("userId");
+        logger.info("Login ID: " + loginUserID);
         ProjectEntity project = projectMapper.getProjectByID(projectID);
         if (project == null) {
             throw new AchieveitException(ErrorCode.QUERY_ERROR);
         }
-        else if (loginUserID == null) {
+        logger.info("Project monitor ID: " + project.getProjectMonitorID());
+        if (loginUserID == null) {
             throw new AchieveitException(ErrorCode.SESSION_ERROR);
         }
         else if (!project.getProjectMonitorID().equals(loginUserID)) {
