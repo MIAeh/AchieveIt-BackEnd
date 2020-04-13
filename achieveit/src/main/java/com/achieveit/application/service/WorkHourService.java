@@ -152,7 +152,7 @@ public class WorkHourService {
             workHourEntity.setEndTimeStamp(new Timestamp(Long.parseLong(endTime)));
             workHourEntity.setEndTime(endTime);
         }
-        workHourMapper.updateWorkHourByWorkHourId(workHourEntity,workHourID);
+        workHourMapper.updateWorkHourByWorkHourId(workHourEntity);
         return ResultGenerator.success(workHourEntity);
     }
 }

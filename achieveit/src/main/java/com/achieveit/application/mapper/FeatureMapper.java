@@ -38,6 +38,6 @@ public interface FeatureMapper {
     @Select("select COUNT(featurename) from featurelist where featurelevel=#{featureLevel} and projectid=#{projectId}")
     Integer getFeatureSizeByLevelAndProjectId(@Param("projectId")String projectId,@Param("featureLevel")int featureLevel);
 
-    @Update("update featurelist set featurename=#{featureEntity.featureName},featureDescription=#{featureEntity.featureDescription} where featureid=#{featureEntity.featureId}")
+    @Update("update featurelist set featurename=#{featureName},featureDescription=#{featureDescription} where featureid=#{featureId}")
     Integer updateFeature(FeatureEntity featureEntity);
 }
