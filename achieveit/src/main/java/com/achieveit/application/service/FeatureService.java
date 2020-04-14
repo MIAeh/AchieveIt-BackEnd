@@ -274,7 +274,7 @@ public class FeatureService {
     @Logged({"featureUpLoad", "session"})
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Boolean> uploadFeatureList(FeatureUpLoad featureUpLoad, HttpSession session) {
-        Collections.sort(featureUpLoad.getData(), Comparator.comparingInt(FeatureUpLoadEntity::getFeatureLevel));
+        featureUpLoad.getData().sort(Comparator.comparingInt(FeatureUpLoadEntity::getFeatureLevel));
 
         for (FeatureUpLoadEntity entity : featureUpLoad.getData()) {
             if (entity.getFeatureLevel() == 0) {
@@ -286,7 +286,7 @@ public class FeatureService {
                     throw new AchieveitException("invalid fatherName!");
                 String fatherId="";
                 for(FeatureEntity entity1:featureEntities){
-                    if(entity1.getProjectId().equals(entity.getProjectID())&&entity1.getFeatureLevel()<entity.getFeatureLevel()){
+                    if(entity1.getProjectId().equals(entity.getProjectID())&&entity1.getFeatureLevel()+1==entity.getFeatureLevel()){
                         fatherId=entity1.getFeatureId();
                         break;
                     }
