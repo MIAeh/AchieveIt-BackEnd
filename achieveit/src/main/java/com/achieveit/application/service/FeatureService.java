@@ -283,8 +283,6 @@ public class FeatureService {
 
         for (FeatureUpLoadEntity entity : featureUpLoad.getData()) {
             ArrayList<FeatureEntity> temp = featureMapper.getFeatureByFeatureName(entity.getFeatureName());
-            //如果已经有了就不做处理
-            if (!(temp == null || temp.size() == 0)) continue;
 
             if (entity.getFeatureLevel() == 0) {
                 insertTopFeature(entity.getFeatureName(), entity.getProjectID(), entity.getFeatureDescription(), session);
