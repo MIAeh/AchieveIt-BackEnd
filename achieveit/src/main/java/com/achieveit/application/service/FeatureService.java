@@ -274,22 +274,16 @@ public class FeatureService {
     @Logged({"featureUpLoad", "session"})
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Boolean> uploadFeatureList(FeatureUpLoad featureUpLoad, HttpSession session) {
-        Collections.sort(featureUpLoad.getData(), new Comparator<FeatureUpLoadEntity>() {
-            @Override
-            public int compare(FeatureUpLoadEntity o1, FeatureUpLoadEntity o2) {
-                return o1.getFeatureLevel() - o2.getFeatureLevel();
-            }
-        });
+        Collections.sort(featureUpLoad.getData(), Comparator.comparingInt(FeatureUpLoadEntity::getFeatureLevel));
 
         for (FeatureUpLoadEntity entity : featureUpLoad.getData()) {
-            ArrayList<FeatureEntity> temp = featureMapper.getFeatureByFeatureName(entity.getFeatureName());
-
             if (entity.getFeatureLevel() == 0) {
                 insertTopFeature(entity.getFeatureName(), entity.getProjectID(), entity.getFeatureDescription(), session);
             } else {
                 String fatherName = entity.getFatherFeatureName();
                 ArrayList<FeatureEntity> featureEntities = featureMapper.getFeatureByFeatureName(fatherName);
-                if (featureEntities == null || featureEntities.size() == 0) continue;
+                if (featureEntities == null || featureEntities.size() == 0)
+                    throw new AchieveitException("invalid fatherName!");
                 String fatherId="";
                 for(FeatureEntity entity1:featureEntities){
                     if(entity1.getProjectId().equals(entity.getProjectID())&&entity1.getFeatureLevel()<entity.getFeatureLevel()){
