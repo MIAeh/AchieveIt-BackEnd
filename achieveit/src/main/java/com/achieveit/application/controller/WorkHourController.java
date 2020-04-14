@@ -51,11 +51,9 @@ public class WorkHourController {
         return workHourService.getWorkHoursByStatusAndProjectId(status, projectId);
     }
 
-    @PostControl(1)
     @CrossOrigin
     @PostMapping("approveWorkHour")
     public ResponseResult<Integer> approveWorkHour(@RequestParam(name = "workHourID") String workHourId,
-                                                   @RequestParam("projectID") String projectID,
                                                    @RequestParam(name = "approverID", defaultValue = "", required = false) String approverId, HttpSession session) {
         if (approverId.equals("")) {
             String userId = (String) session.getAttribute("userId");
@@ -112,20 +110,16 @@ public class WorkHourController {
         return workHourService.getWorkHoursByProjectID(projectId);
     }
 
-    @PostControl(1)
     @CrossOrigin
     @PostMapping("rejectWorkHour")
     public ResponseResult<Boolean> rejectWorkHour(@RequestParam("workHourID") String workHourID,
-                                                  @RequestParam("projectID") String projectID,
                                                   @RequestParam(value = "approverID", defaultValue = "", required = false) String approverID, HttpSession session) {
         return workHourService.rejectWorkHour(workHourID, approverID, session);
     }
 
-    @PostControl(1)
     @CrossOrigin
     @PostMapping("updateWorkHour")
     public ResponseResult<WorkHourEntity> updateWorkHour(@RequestParam(value = "workHourID") String workHourID,
-                                                         @RequestParam("projectID") String projectID,
                                                          @RequestParam(value = "featureName", defaultValue = "", required = false) String featureName,
                                                          @RequestParam(value = "activityName", defaultValue = "", required = false) String activityName,
                                                          @RequestParam(value = "startTime", defaultValue = "", required = false) String startTime,
