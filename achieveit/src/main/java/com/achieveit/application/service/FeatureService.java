@@ -288,13 +288,20 @@ public class FeatureService {
                 insertTopFeature(entity.getFeatureName(), entity.getProjectID(), entity.getFeatureDescription(), session);
             } else {
                 String fatherName = entity.getFatherFeatureName();
-                ArrayList<FeatureEntity> featureEntity = featureMapper.getFeatureByFeatureName(fatherName);
-                if (featureEntity == null || featureEntity.size() == 0) continue;
-                String fatherId = featureEntity.get(0).getFeatureId();
+                ArrayList<FeatureEntity> featureEntities = featureMapper.getFeatureByFeatureName(fatherName);
+                if (featureEntities == null || featureEntities.size() == 0) continue;
+                String fatherId="";
+                for(FeatureEntity entity1:featureEntities){
+                    if(entity1.getProjectId().equals(entity.getProjectID())&&entity1.getFeatureLevel()<entity.getFeatureLevel()){
+                        fatherId=entity1.getFeatureId();
+                        break;
+                    }
+                }
+                if(fatherId.equals(""))
+                    throw new AchieveitException("invalid Father Name");
                 insertSubFeature(entity.getFeatureName(), entity.getProjectID(), fatherId, entity.getFeatureDescription(), session);
             }
         }
-
         return ResultGenerator.success();
     }
 
