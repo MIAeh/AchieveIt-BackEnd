@@ -82,6 +82,7 @@ public class ProjectService {
     public List<ProjectListItem> getProjectList(String searchCondition, Integer projectStatus) {
         ArrayList<ProjectEntity> projectEntities = projectMapper.getProjectList();
         List<ProjectListItem> projectListItemList = new ArrayList<>();
+        // load project list using search condition and project status
         for (ProjectEntity entity : projectEntities) {
             if (entity.isMatch(searchCondition, projectStatus)) {
                 ProjectListItem projectListItem = new ProjectListItem(entity);
@@ -89,6 +90,8 @@ public class ProjectService {
                 logger.info("ProjectListItem: " + projectListItem);
             }
         }
+        // sort by project start date
+        Collections.sort(projectListItemList);
         logger.info("ProjectInfoList: " + projectListItemList);
         return projectListItemList;
     }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class ProjectListItem implements Serializable {
+public class ProjectListItem implements Serializable, Comparable<ProjectListItem> {
 
     private static final long serialVersionUID = 1L;
 
@@ -149,5 +149,10 @@ public class ProjectListItem implements Serializable {
                 ", projectStartDate=" + projectStartDate +
                 ", projectEndDate=" + projectEndDate +
                 '}';
+    }
+
+    @Override
+    public int compareTo(ProjectListItem o) {
+        return this.projectStartDate.compareTo(o.getProjectStartDate());
     }
 }
