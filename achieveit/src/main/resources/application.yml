@@ -34,6 +34,7 @@ spring:
     username: no_reply_achieveit@163.com
     password: OSMKFYCCOVEHKUOK
     default-encoding: utf-8
+    port: 465
 
 mybatis:
   ## Mybatis 配置
