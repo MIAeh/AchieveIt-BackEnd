@@ -126,9 +126,9 @@ public class FeatureService {
             if (projectMonitor == null) {
                 throw new AchieveitException(ErrorCode.QUERY_ERROR);
             }
-            // send mail
-            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
-                    "请进行立项审批。");
+//            // send mail
+//            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+//                    "请进行立项审批。");
         }
 
         FeatureEntity entity = new FeatureEntity(0, projectId, featureName, featureDescription);
@@ -153,9 +153,9 @@ public class FeatureService {
             if (projectMonitor == null) {
                 throw new AchieveitException(ErrorCode.QUERY_ERROR);
             }
-            // send mail
-            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
-                    "请进行立项审批。");
+//            // send mail
+//            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+//                    "请进行立项审批。");
         }
 
         FeatureEntity fatherEntity = featureMapper.getFeatureById(fatherId);
@@ -239,9 +239,9 @@ public class FeatureService {
             if (projectMonitor == null) {
                 throw new AchieveitException(ErrorCode.QUERY_ERROR);
             }
-            // send mail
-            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
-                    "请进行立项审批。");
+//            // send mail
+//            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+//                    "请进行立项审批。");
         }
 
         FeatureEntity thisFeature = featureMapper.getFeatureById(featureId);
@@ -314,9 +314,9 @@ public class FeatureService {
             if (projectMonitor == null) {
                 throw new AchieveitException(ErrorCode.QUERY_ERROR);
             }
-            // send mail
-            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
-                    "请进行立项审批。");
+//            // send mail
+//            emailUtil.sendTextEmail(projectMonitor.getUserMail(), project.getProjectID() + " " + project.getProjectName() + " 申请立项",
+//                    "请进行立项审批。");
         }
 
         FeatureEntity featureEntity = featureMapper.getFeatureById(featureId);

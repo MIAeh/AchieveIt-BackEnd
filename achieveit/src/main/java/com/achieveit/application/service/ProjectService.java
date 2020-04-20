@@ -153,9 +153,9 @@ public class ProjectService {
         if (featureUpLoad != null) {
             featureService.uploadFeatureList(featureUpLoad, session);
         }
-        // send mail
-        emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
-                "请进行立项审批。");
+//        // send mail
+//        emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
+//                "请进行立项审批。");
     }
 
     /**
@@ -213,9 +213,9 @@ public class ProjectService {
             if (projectMonitor == null) {
                 throw new AchieveitException(ErrorCode.QUERY_ERROR);
             }
-            // send mail
-            emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
-                    "请进行立项审批。");
+//            // send mail
+//            emailUtil.sendTextEmail(projectMonitor.getUserMail(), projectID + " " + projectName + " 申请立项",
+//                    "请进行立项审批。");
         }
         ProjectEntity projectEntity = new ProjectEntity(projectID, projectName, projectStatus, projectStartDate, projectEndDate,
                 projectFrameworks, JSONObject.toJSONString(projectLanguages), JSONObject.toJSONString(projectMilestones));

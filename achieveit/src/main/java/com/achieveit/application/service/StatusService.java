@@ -91,34 +91,34 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.APPROVED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail to project manager
-        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
-        if (projectManager == null) {
-            throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                "申请立项已通过，项目已立项。");
-        // send mail to EPG Leader/QA Leader/System Configuration Manager
-        List<UserEntity> userEntities = userMapper.getAllUserInfo();
-        if (userEntities == null) {
-            throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        for (UserEntity user : userEntities) {
-            if (user.getUserRole() == UserRoles.EPG_LEADER.getRole()) {
-                emailUtil.sendTextEmail(user.getUserMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                        "申请立项已通过，项目已立项，请分配EPG。");
-            } else if (user.getUserRole() == UserRoles.QA_MANAGER.getRole()) {
-                emailUtil.sendTextEmail(user.getUserMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                        "申请立项已通过，项目已立项，请分配QA。");
-            } else if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
-                emailUtil.sendTextEmail(user.getUserMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
-                        "申请立项已通过，项目已立项，请确认配置完成。");
-            }
-        }
+//        // send mail to project manager
+//        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
+//        if (projectManager == null) {
+//            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+//        }
+//        emailUtil.sendTextEmail(projectManager.getUserMail(),
+//                project.getProjectID() + " " + project.getProjectName() + " 已立项",
+//                "申请立项已通过，项目已立项。");
+//        // send mail to EPG Leader/QA Leader/System Configuration Manager
+//        List<UserEntity> userEntities = userMapper.getAllUserInfo();
+//        if (userEntities == null) {
+//            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+//        }
+//        for (UserEntity user : userEntities) {
+//            if (user.getUserRole() == UserRoles.EPG_LEADER.getRole()) {
+//                emailUtil.sendTextEmail(user.getUserMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+//                        "申请立项已通过，项目已立项，请分配EPG。");
+//            } else if (user.getUserRole() == UserRoles.QA_MANAGER.getRole()) {
+//                emailUtil.sendTextEmail(user.getUserMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+//                        "申请立项已通过，项目已立项，请分配QA。");
+//            } else if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+//                emailUtil.sendTextEmail(user.getUserMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已立项",
+//                        "申请立项已通过，项目已立项，请确认配置完成。");
+//            }
+//        }
     }
 
     @Transactional
@@ -143,14 +143,14 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.REJECTED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
-        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
-        if (projectManager == null) {
-            throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 立项驳回",
-                "申请立项被驳回，项目立项驳回。");
+//        // send mail
+//        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
+//        if (projectManager == null) {
+//            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+//        }
+//        emailUtil.sendTextEmail(projectManager.getUserMail(),
+//                project.getProjectID() + " " + project.getProjectName() + " 立项驳回",
+//                "申请立项被驳回，项目立项驳回。");
     }
 
     @Logged({"projectID"})
@@ -175,15 +175,15 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.IN_PROGRESS.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
-        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
-        if (projectMembers != null) {
-            for (MemberEntity member : projectMembers) {
-                emailUtil.sendTextEmail(member.getMemberMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 进行中",
-                        "配置完成已启动，项目进行中。");
-            }
-        }
+//        // send mail
+//        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+//        if (projectMembers != null) {
+//            for (MemberEntity member : projectMembers) {
+//                emailUtil.sendTextEmail(member.getMemberMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 进行中",
+//                        "配置完成已启动，项目进行中。");
+//            }
+//        }
     }
 
     @Transactional
@@ -200,15 +200,15 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.DELIVERED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
-        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
-        if (projectMembers != null) {
-            for (MemberEntity member : projectMembers) {
-                emailUtil.sendTextEmail(member.getMemberMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已交付",
-                        "确认交付，项目已交付。");
-            }
-        }
+//        // send mail
+//        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+//        if (projectMembers != null) {
+//            for (MemberEntity member : projectMembers) {
+//                emailUtil.sendTextEmail(member.getMemberMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已交付",
+//                        "确认交付，项目已交付。");
+//            }
+//        }
     }
 
     @Transactional
@@ -225,15 +225,15 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.ENDED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
-        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
-        if (projectMembers != null) {
-            for (MemberEntity member : projectMembers) {
-                emailUtil.sendTextEmail(member.getMemberMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已结束",
-                        "确认结束，项目已结束。");
-            }
-        }
+//        // send mail
+//        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+//        if (projectMembers != null) {
+//            for (MemberEntity member : projectMembers) {
+//                emailUtil.sendTextEmail(member.getMemberMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已结束",
+//                        "确认结束，项目已结束。");
+//            }
+//        }
     }
 
     @Transactional
@@ -249,18 +249,18 @@ public class StatusService {
         statusMapper.updateArchiveLink(projectID, archiveLink);
         statusMapper.updateArchived(projectID, true);
 
-        // send mail to System Configuration Manager
-        List<UserEntity> userEntities = userMapper.getAllUserInfo();
-        if (userEntities == null) {
-            throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        for (UserEntity user : userEntities) {
-            if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
-                emailUtil.sendTextEmail(user.getUserMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已提交归档申请",
-                        "项目已结束并提交归档申请，请审批归档。");
-            }
-        }
+//        // send mail to System Configuration Manager
+//        List<UserEntity> userEntities = userMapper.getAllUserInfo();
+//        if (userEntities == null) {
+//            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+//        }
+//        for (UserEntity user : userEntities) {
+//            if (user.getUserRole() == UserRoles.SYSTEM_CONFIGURATION_MANAGER.getRole()) {
+//                emailUtil.sendTextEmail(user.getUserMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已提交归档申请",
+//                        "项目已结束并提交归档申请，请审批归档。");
+//            }
+//        }
     }
 
     @Transactional
@@ -289,14 +289,14 @@ public class StatusService {
         statusMapper.updateArchiveLink(projectID, "");
         statusMapper.updateArchived(projectID, false);
 
-        // send mail to project manager
-        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
-        if (projectManager == null) {
-            throw new AchieveitException(ErrorCode.QUERY_ERROR);
-        }
-        emailUtil.sendTextEmail(projectManager.getUserMail(),
-                project.getProjectID() + " " + project.getProjectName() + " 项目归档申请被驳回",
-                "归档审批被驳回，请重新提交项目归档。");
+//        // send mail to project manager
+//        UserEntity projectManager = userMapper.getUserInfoById(project.getProjectManagerID());
+//        if (projectManager == null) {
+//            throw new AchieveitException(ErrorCode.QUERY_ERROR);
+//        }
+//        emailUtil.sendTextEmail(projectManager.getUserMail(),
+//                project.getProjectID() + " " + project.getProjectName() + " 项目归档申请被驳回",
+//                "归档审批被驳回，请重新提交项目归档。");
     }
 
     @Transactional
@@ -316,14 +316,14 @@ public class StatusService {
         project.setProjectStatus(ProjectStatus.ARCHIVED.getStatus());
         statusMapper.updateProjectStatusByID(project);
 
-        // send mail
-        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
-        if (projectMembers != null) {
-            for (MemberEntity member : projectMembers) {
-                emailUtil.sendTextEmail(member.getMemberMail(),
-                        project.getProjectID() + " " + project.getProjectName() + " 已归档",
-                        "归档审批通过，项目已归档。");
-            }
-        }
+//        // send mail
+//        List<MemberEntity> projectMembers = authorityMapper.getMailMembersByID(projectID);
+//        if (projectMembers != null) {
+//            for (MemberEntity member : projectMembers) {
+//                emailUtil.sendTextEmail(member.getMemberMail(),
+//                        project.getProjectID() + " " + project.getProjectName() + " 已归档",
+//                        "归档审批通过，项目已归档。");
+//            }
+//        }
     }
 }
