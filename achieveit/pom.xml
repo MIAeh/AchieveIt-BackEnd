@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.4</version>
+			<version>1.2.83</version>
 		</dependency>
 		<!--包含 spring-aop 和 AspectJ 来支持面向切面编程（AOP）。-->
 		<dependency>
